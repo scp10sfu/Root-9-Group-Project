@@ -2,14 +2,15 @@ name: GitHub Actions Demo with C
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on:
   push:
-    branches: [ $default-branch ]
+    branches: [ main ]
   pull_request:
-    branches: [ $default-branch ]
+    branches: [ main ]
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: actions/checkout@v3
     - name: compile
       run: gcc test.c -o test
     - name: runtest
