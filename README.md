@@ -28,7 +28,7 @@ The project-plan-files folder will have all the files related to milestone 1, wh
 - **Root9_WBS.xlsx** is an excel file with the Work Breakdown Structure.
 - **Root_9 Final Timeline.pdf** is a pdf file with the timeline/schedule of our project.
 - **Root_9 Final Timeline.xlsx** is the excel format of the timeline/schedule of our project.
-- **Milestone_1_AI_Disclosure_Root_9_Taiga_Okuma_301594583.pdf** is a pef file for AI use disclosure.
+- **Milestone_1_AI_Disclosure_Root_9_Taiga_Okuma_301594583.pdf** is a pdf file for AI use disclosure.
   Extra folders in the future will be listed below.
 
 ## Tech stack
