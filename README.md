@@ -9,7 +9,10 @@
 
 ## Description
 Project for CMPT 276 by group Root 9.
-[The description should be here]
+
+Important Links for the project include:
+
+- Our first presentation video link: https://drive.google.com/file/d/1D5xowmShwgpPiy_jJseGULDg8wyn9yxM/view?usp=sharing
 
 ## Explanation of files and folders.
 The main folders for this project thus far are
