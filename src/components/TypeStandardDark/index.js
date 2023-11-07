@@ -1,0 +1,1 @@
+export { TypeStandardDark } from "./TypeStandardDark";

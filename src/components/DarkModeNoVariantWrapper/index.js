@@ -1,0 +1,1 @@
+export { DarkModeNoVariantWrapper } from "./DarkModeNoVariantWrapper";

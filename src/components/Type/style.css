@@ -1,0 +1,32 @@
+.type {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  width: 640px;
+}
+
+.type .eyebrow {
+  align-self: stretch;
+  color: var(--dark-050);
+  font-family: var(--h6-font-family);
+  font-size: var(--h6-font-size);
+  font-style: var(--h6-font-style);
+  font-weight: var(--h6-font-weight);
+  letter-spacing: var(--h6-letter-spacing);
+  line-height: var(--h6-line-height);
+  margin-top: -1px;
+  position: relative;
+}
+
+.type .text-wrapper {
+  align-self: stretch;
+  color: var(--dark-100);
+  font-family: "DM Sans", Helvetica;
+  font-size: 72px;
+  font-weight: 700;
+  letter-spacing: -3.6px;
+  line-height: 72px;
+  position: relative;
+}

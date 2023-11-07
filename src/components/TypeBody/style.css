@@ -1,0 +1,32 @@
+.type-body {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  width: 640px;
+}
+
+.type-body .eyebrow-6 {
+  align-self: stretch;
+  color: var(--dark-050);
+  font-family: "DM Mono", Helvetica;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1.4px;
+  line-height: 14px;
+  margin-top: -1px;
+  position: relative;
+}
+
+.type-body .text-15 {
+  align-self: stretch;
+  color: var(--dark-100);
+  font-family: var(--paragraph-font-family);
+  font-size: var(--paragraph-font-size);
+  font-style: var(--paragraph-font-style);
+  font-weight: var(--paragraph-font-weight);
+  letter-spacing: var(--paragraph-letter-spacing);
+  line-height: var(--paragraph-line-height);
+  position: relative;
+}

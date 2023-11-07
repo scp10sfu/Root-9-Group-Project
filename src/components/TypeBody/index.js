@@ -1,0 +1,1 @@
+export { TypeBody } from "./TypeBody";
