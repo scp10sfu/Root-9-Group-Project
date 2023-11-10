@@ -3,6 +3,7 @@ import ColorThief from 'colorthief';
 import { ReactComponent as UploadIcon } from './images/icon-upload.svg';
 import './App.css';
 
+
 function App() {
   const [image, setImage] = useState(null); // Holds the image URL
   const [colors, setColors] = useState([]); // Stores an array of the extracted colors
@@ -30,7 +31,7 @@ function App() {
       reader.readAsDataURL(file);
     }
   };
-
+  
   // Handle closing the image preview
   const handleClosePreview = () => {
     setImage(null); // Reset the image state to close the preview
@@ -95,7 +96,6 @@ function App() {
           {darkTheme ? 'Switch to Light' : 'Switch to Dark'}
         </button>
       </div>
-
       <main className="app-content">
         {/* Left column */}
         <section className="content-block">
