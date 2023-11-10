@@ -13,16 +13,19 @@
 
 [data-theme="dark"] {
   /* Dark theme colors */
-  --primary-bg-color: #121212;
+  --primary-bg-color: #16131d;
   --primary-text-color: white;
-  --secondary-bg-color: #333c4a;
+  --secondary-bg-color: #1a1b1e;
   --border-color: #666;
   --hover-border-color: lightgray;
   --icon-bg-color: #888;
   --icon-color: white;
   --file-info-color: lightgray;
 }
-
+[data-theme="dark"] .upload-icon {
+  stroke: var(--icon-color); /* This will apply if your SVG uses stroke */
+  fill: var(--icon-color); 
+}
 .App {
   background-color: var(--primary-bg-color);
   color: var(--primary-text-color);
@@ -100,6 +103,8 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 8px;
+  /*stroke: var(--icon-color); /* Apply the icon color variable here */
+  /*fill: var(--icon-color); /* If your SVG uses fill instead of stroke */
 }
 
 .upload-area p {

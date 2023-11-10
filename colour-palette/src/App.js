@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import ColorThief from 'colorthief';
+import { ReactComponent as UploadIcon } from './images/icon-upload.svg';
 import './App.css';
 
 function App() {
@@ -110,15 +111,7 @@ function App() {
               <label htmlFor="fileInput">
               <header className="text_block">
                 <div className="text_block_text">
-                  <img 
-                    src={"/images/upload-icon.svg"}
-                    alt="Upload icon"
-                    style={{ 
-                        width: '30px', 
-                        height: '30px',
-                        strokeWidth: '1.5px',
-                        stroke: 'var(--dark-050, rgba(18, 18, 18, 0.50))'
-                   }}/>
+                <UploadIcon className="upload-icon" style={{ width: '30px', height: '30px' }} />
                   <p>Click or drag file to this area to upload</p>
                 </div>
                 <div className="text_block_subtext">
