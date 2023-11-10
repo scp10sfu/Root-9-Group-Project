@@ -144,10 +144,10 @@
   max-width: 430px;
   min-width: 200px;
   display: inline-block; /* Adjusted display property */
-  border-left: 1px solid gray;
+  /* border-left: 1px solid gray;
   border-right: 1px solid gray;
   border-top: 1px solid gray;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid gray; */
 }
 
 .image-preview img {
@@ -156,6 +156,7 @@
   min-width: 200px;
   width: 100%;
   height: auto;
+  border-radius: 8px;
 }
 
 .close-button {
