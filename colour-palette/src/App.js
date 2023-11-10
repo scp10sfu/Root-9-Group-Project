@@ -57,10 +57,17 @@ function App() {
         <p>Extract wonderful palettes from your image.</p>
       </header>
       <main>
-        <section className="upload-area">
-          <input type="file" accept="image/*" onChange={handleImageChange} />
-          <p>Click or drag file to this area to upload</p>
-        </section>
+      <section className="upload-area">
+  <input type="file" accept="image/*" onChange={handleImageChange} id="fileInput" />
+  <label htmlFor="fileInput">
+    <div className="upload-icon">+</div>
+    <p>Click or drag file to this area to upload</p>
+    <div className="file-size-info">
+      <i className="info-icon">i</i> Max file size: XX MB
+    </div>
+  </label>
+</section>
+
         {image && (
           // Render the image off-screen to extract the colors
           <img
