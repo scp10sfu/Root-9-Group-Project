@@ -1,9 +1,7 @@
-import React, { useState, useRef, useEffect} from 'react';
+import React, { useState, useRef } from 'react';
 import ColorThief from 'colorthief';
-import axios from 'axios';
 import { ReactComponent as UploadIcon } from './images/icon-upload.svg';
 import './App.css';
-
 
 function App() {
   const [image, setImage] = useState(null); // Holds the image URL
@@ -12,7 +10,6 @@ function App() {
   const [isImagePreviewActive, setIsImagePreviewActive] = useState(true);
   const imgRef = useRef(null); // Create a reference to the img tag
   const colorThief = new ColorThief(); 
-  const [colorNames, setColorNames] = useState([]);
   // const [loading, setLoading] = useState(false); // Loading state
 
   const [darkTheme, setDarkTheme] = useState(false); // Stores the current theme
@@ -33,7 +30,7 @@ function App() {
       reader.readAsDataURL(file);
     }
   };
-  
+
   // Handle closing the image preview
   const handleClosePreview = () => {
     setImage(null); // Reset the image state to close the preview
@@ -73,27 +70,7 @@ function App() {
       });
     }
   };
-  // Function to fetch color name from the API
-  const fetchColorName = async (hex) => {
-    try {
-      const response = await axios.get(`https://www.thecolorapi.com/id?hex=${hex.replace('#', '')}`);
-      return response.data.name.value;
-    } catch (error) {
-      console.error('Error fetching the color name:', error);
-      return hex; // Fallback to HEX if the name can't be fetched
-    }
-  };
-  // Use an effect to fetch color names whenever 'colors' changes
-useEffect(() => {
-  const fetchColorNames = async () => {
-    const names = await Promise.all(colors.map(color => fetchColorName(color)));
-    setColorNames(names);
-  };
-
-  if (colors.length > 0) {
-    fetchColorNames();
-  }
-}, [colors]);
+  
   // Handle the number of colors to extract
   const handleNumberChange = (event) => {
     setNumberOfColors(event.target.value);
@@ -118,6 +95,7 @@ useEffect(() => {
           {darkTheme ? 'Switch to Light' : 'Switch to Dark'}
         </button>
       </div>
+
       <main className="app-content">
         {/* Left column */}
         <section className="content-block">
@@ -174,14 +152,13 @@ useEffect(() => {
         </section>
         
         {/* Right column */}
-<section className="color-palette">
-  {colorNames.map((name, index) => (
-    <div key={index} className="color" style={{ backgroundColor: colors[index] }}>
-      <p>{name}</p> {/* Display color name */}
-      <p>{colors[index]}</p> {/* Display HEX code */}
-    </div>
-  ))}
-</section>
+        <section className="color-palette">
+          {colors.map((color, index) => (
+          <div key={index} className="color" style={{ backgroundColor: color }}>
+            <p>{color}</p>
+          </div>
+          ))}
+        </section>
       </main>
     </div>
   );

@@ -197,9 +197,6 @@
   flex-direction: row;
   align-items: center; 
   margin-bottom: 10px;
-  flex-direction: column; /* Stack children vertically */
-  justify-content: center; /* Center children vertically */
-  text-align: center; /* Center text horizontally */
 }
 
 /* .color:nth-child(n+3) {
