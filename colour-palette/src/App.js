@@ -9,6 +9,11 @@ function App() {
   const imgRef = useRef(null); // Create a reference to the img tag
   const colorThief = new ColorThief();
 
+  const [darkTheme, setDarkTheme] = useState(true);
+  const toggleTheme = () => {
+    setDarkTheme(!darkTheme);
+  } ;
+
   const handleImageChange = (event) => {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -51,34 +56,41 @@ function App() {
  
 
   return (
-    <div className="App">
+    <div className="App" data-theme={darkTheme ? 'dark' : 'light'}>
+      {/* Theme switcher button */}
+      <div className="theme-switcher">
+        <button onClick={toggleTheme}>
+          {darkTheme ? 'Switch to Light' : 'Switch to Dark'}
+        </button>
+      </div>
+
       <header className="App-header">
         <h1>Color Picker</h1>
         <p>Extract wonderful palettes from your image.</p>
       </header>
-      <main>
-      <section className="upload-area">
-  <input type="file" accept="image/*" onChange={handleImageChange} id="fileInput" />
-  <label htmlFor="fileInput">
-    <div className="upload-icon">+</div>
-    <p>Click or drag file to this area to upload</p>
-    <div className="file-size-info">
-      <i className="info-icon">i</i> Max file size: XX MB
-    </div>
-  </label>
-</section>
+      <main className="App-content">
+        <section className="upload-area">
+          <input type="file" accept="image/*" onChange={handleImageChange} id="fileInput" />
+          <label htmlFor="fileInput">
+            <div className="upload-icon">+</div>
+            <p>Click or drag file to this area to upload</p>
+            <div className="file-size-info">
+              <i className="info-icon">i</i> Max file size: XX MB
+            </div>
+          </label>
+        </section>
 
         {image && (
-          // Render the image off-screen to extract the colors
           <img
             ref={imgRef}
             src={image}
             alt="To extract colors from"
-            crossOrigin="anonymous" // This is important for CORS if you're loading images from an external URL
-            onLoad={extractColors} // Once the image is loaded, extract the colors
-            style={{ display: 'none' }} // Hide the image element
+            crossOrigin="anonymous"
+            onLoad={extractColors}
+            style={{ display: 'none' }}
           />
         )}
+
         <section className="color-controls">
           <input
             type="range"
@@ -89,6 +101,7 @@ function App() {
           />
           <p>Number of colors: {numberOfColors}</p>
         </section>
+
         <aside className="color-palette">
           {colors.map((color, index) => (
             <div key={index} className="color" style={{ backgroundColor: color }}>

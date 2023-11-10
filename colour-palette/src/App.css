@@ -1,16 +1,44 @@
-.App {
-  text-align: center;
+:root {
+  /* Default is light theme */
+  --primary-bg-color: #f0f0f0;
+  --primary-text-color: #333;
+  --secondary-bg-color: white;
+  --border-color: #ccc;
+  --hover-border-color: rgb(90, 82, 82);
+  --icon-bg-color: #ccc;
+  --icon-color: #666;
+  --file-info-color: #666;
 }
 
+[data-theme="dark"] {
+  /* Dark theme colors */
+  --primary-bg-color: #445d8f;
+  --primary-text-color: white;
+  --secondary-bg-color: #333c4a;
+  --border-color: #666;
+  --hover-border-color: lightgray;
+  --icon-bg-color: #888;
+  --icon-color: white;
+  --file-info-color: lightgray;
+}
+
+.App {
+  text-align: center;
+  background-color: var(--primary-bg-color);
+  color: var(--primary-text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+
 .App-header {
-  background-color: #445d8f;
+  background-color: var(--primary-bg-color);
   min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: var(--primary-text-color);
 }
 
 .upload-area {
@@ -94,9 +122,34 @@
   align-items: center;
 }
 
-/* Add responsive design */
-@media (max-width: 768px) {
-  .color-palette {
-    flex-direction: column;
-  }
+.theme-switcher {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.theme-switcher button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  outline: none;
+  /* You can add more styling for the button here */
+}
+
+.theme-switcher {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.theme-switcher button {
+  background-color: var(--secondary-bg-color);
+  color: var(--primary-text-color);
+  border: none;
+  border-radius: 20px;
+  padding: 5px 10px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s, color 0.3s;
 }
