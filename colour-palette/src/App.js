@@ -45,46 +45,38 @@ function App() {
   }).join('');
   
 
-  // Extract colors from the loaded image using ColorThief, and update the state
-  const extractColors = () => {
-    if (imgRef.current && imgRef.current.complete) {
-      // Ensure the image is loaded and complete
-      try {
-        // It has the following syntax: getPalette(image [, colorCount, quality])
-        const result = colorThief.getPalette(imgRef.current, numberOfColors, 10);
-        // Convert the RGB values to HEX and update the state
-        setColors(result.map(rgb => rgbToHex(...rgb)));
-      } catch (error) {
-        console.error('Error extracting the colors:', error);
-      }
-    } else {
-      imgRef.current.addEventListener('load', function() {
-        // Ensure the image is loaded and complete
-        try {
-          const result = colorThief.getPalette(imgRef.current, numberOfColors, 10);
-          // Convert the RGB values to HEX and update the state
-          setColors(result.map(rgb => rgbToHex(...rgb)));
-        } catch (error) {
-          console.error('Error extracting the colors:', error);
-        }
-      });
+// Extract colors from the loaded image using ColorThief, and update the state
+const extractColors = () => {
+  // Ensure the image is loaded and complete
+  if (imgRef.current && imgRef.current.complete) {
+    try {
+      const result = colorThief.getPalette(imgRef.current, numberOfColors, 10);
+      setColors(result.map(rgb => rgbToHex(...rgb)));
+    } catch (error) {
+      console.error('Error extracting the colors:', error);
+    }
+  }
+};
+
+// useEffect hook to update the colors when numberOfColors changes
+React.useEffect(() => {
+  if (imgRef.current && imgRef.current.complete) {
+    extractColors();
+  }
+  // This function will be called to clean up when the component is unmounted or before the effect runs again
+  return () => {
+    // Clean up the event listener if it was added
+    if (imgRef.current) {
+      imgRef.current.removeEventListener('load', extractColors);
     }
   };
-  
-  // Handle the number of colors to extract
-  const handleNumberChange = (event) => {
-    setNumberOfColors(event.target.value);
-    // That's for handling the case when slider is moved before the image is loaded
-    if (imgRef.current && imgRef.current.complete) {
-      // If the image is already loaded, extract colors
-      extractColors();
-    } else {
-      // If the image is not loaded, wait for it to load and then extract colors
-      imgRef.current.addEventListener('load', function() {
-        extractColors();
-      });
-    }
-  };
+}, [numberOfColors]);
+
+const handleNumberChange = (event) => {
+  const newNumberOfColors = parseInt(event.target.value, 10);
+  setNumberOfColors(newNumberOfColors);
+};
+
 
   // Render the app
   return (
