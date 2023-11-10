@@ -14,7 +14,7 @@ function App() {
   const [colorNames, setColorNames] = useState([]);
   // const [loading, setLoading] = useState(false); // Loading state
 
-  const [darkTheme, setDarkTheme] = useState(true); // Stores the current theme
+  const [darkTheme, setDarkTheme] = useState(false); // Stores the current theme
   const toggleTheme = () => {
     setDarkTheme(!darkTheme);
   } ;
