@@ -3,6 +3,8 @@ import ColorThief from 'colorthief';
 import axios from 'axios';
 import { ReactComponent as UploadIcon } from './images/icon-upload.svg';
 import './App.css';
+import {Routes, Route, useNavigate} from 'react-router-dom';
+import About from './Pages/About';
 
 function App() {
   const [image, setImage] = useState(null); // Holds the image URL
@@ -12,6 +14,13 @@ function App() {
   const imgRef = useRef(null); // Create a reference to the img tag
   const colorThief = new ColorThief(); 
   // const [loading, setLoading] = useState(false); // Loading state
+  const navigate = useNavigate();
+  const navigateToAbout = () => {
+    navigate('/about');
+  };
+  const navigateHome = () => {
+    navigate('/');
+  };
 
   const [darkTheme, setDarkTheme] = useState(false); // Stores the current theme
   const toggleTheme = () => {
@@ -63,6 +72,7 @@ const extractColors = async () => {
     }
   }
 };
+
   // Function to fetch color name from the API
   const fetchColorName = async (hex) => {
     try {
@@ -95,6 +105,7 @@ const handleNumberChange = (event) => {
 
   // Render the app
   return (
+    
     <div className="App" data-theme={darkTheme ? 'dark' : 'light'}>
       {/* Theme switcher button */}
       <div className="theme-switcher">
@@ -102,6 +113,17 @@ const handleNumberChange = (event) => {
           {darkTheme ? 'Switch to Light' : 'Switch to Dark'}
         </button>
       </div>
+      <div>
+              <div>
+                <button onClick={navigateHome}>Home</button>
+                <button onClick={navigateToAbout}>About</button>
+
+                <Routes>
+                  <Route path="/about" element={<About/>}/>
+                  <Route path="/" element={<Home/>} />
+                </Routes>
+              </div>
+            </div>
 
       <main className="app-content">
         {/* Left column */}
@@ -129,6 +151,7 @@ const handleNumberChange = (event) => {
             </section>
             )}
             
+            
             {image && (
               <div className="image-preview">
                 <button className="close-button" onClick={handleClosePreview}>
@@ -144,7 +167,6 @@ const handleNumberChange = (event) => {
                 />
               </div>
             )}
-      
             <section className="color-controls">
               <input
                 type="range"
@@ -172,6 +194,10 @@ const handleNumberChange = (event) => {
     </div>
   );
 }
+function Home() {
+  return <h2></h2>;
+}
+
 
 export default App;
 
