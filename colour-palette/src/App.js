@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import ColorThief from 'colorthief';
+import axios from 'axios';
 import { ReactComponent as UploadIcon } from './images/icon-upload.svg';
 import './App.css';
 
@@ -46,18 +47,32 @@ function App() {
   
 
 // Extract colors from the loaded image using ColorThief, and update the state
-const extractColors = () => {
-  // Ensure the image is loaded and complete
+const extractColors = async () => {
   if (imgRef.current && imgRef.current.complete) {
     try {
       const result = colorThief.getPalette(imgRef.current, numberOfColors, 10);
-      setColors(result.map(rgb => rgbToHex(...rgb)));
+      const colorPromises = result.map(async (rgb) => {
+        const hex = rgbToHex(...rgb);
+        const name = await fetchColorName(hex);
+        return { hex, name }; // Return an object with hex and name
+      });
+      const colorObjects = await Promise.all(colorPromises); // Resolve all promises
+      setColors(colorObjects); // Set the colors state with an array of color objects
     } catch (error) {
       console.error('Error extracting the colors:', error);
     }
   }
 };
-
+  // Function to fetch color name from the API
+  const fetchColorName = async (hex) => {
+    try {
+      const response = await axios.get(`https://www.thecolorapi.com/id?hex=${hex.replace('#', '')}`);
+      return response.data.name.value;
+    } catch (error) {
+      console.error('Error fetching the color name:', error);
+      return hex; // Fallback to HEX if the name can't be fetched
+    }
+  };
 // useEffect hook to update the colors when numberOfColors changes
 React.useEffect(() => {
   if (imgRef.current && imgRef.current.complete) {
@@ -145,12 +160,14 @@ const handleNumberChange = (event) => {
         
         {/* Right column */}
         <section className="color-palette">
-          {colors.map((color, index) => (
-          <div key={index} className="color" style={{ backgroundColor: color }}>
-            <p>{color}</p>
-          </div>
-          ))}
-        </section>
+  {colors.map((colorObj, index) => (
+    <div key={index} className="color" style={{ backgroundColor: colorObj.hex }}>
+      <p className="color-name">{colorObj.name}</p> {/* Color name is displayed first */}
+      <p className="color-hex">{colorObj.hex}</p> {/* Then the HEX code */}
+    </div>
+  ))}
+</section>
+
       </main>
     </div>
   );
