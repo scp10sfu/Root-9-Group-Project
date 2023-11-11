@@ -9,6 +9,7 @@
   --icon-bg-color: #ccc;
   --icon-color: #666;
   --file-info-color: #666;
+  
 }
 
 [data-theme="dark"] {
@@ -26,6 +27,8 @@
   stroke: var(--icon-color); /* This will apply if your SVG uses stroke */
   fill: var(--icon-color); 
 }
+
+
 .App {
   background-color: var(--primary-bg-color);
   color: var(--primary-text-color);
@@ -174,16 +177,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
+
 .color-palette {
-  width: 60%;
-  flex-wrap: wrap;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-top: 32px;
+  flex-wrap: wrap;
+  justify-content: space-around; /* This will evenly space the color divs */
+  gap: 5px; /* This will add space between the color divs */
+  margin: 0 auto; /* This centers your color-palette if it's not full width */
 }
 
 .color {
@@ -191,13 +194,21 @@
   height: 100px; /* Adjust the height as needed */
   background-color: #ccc; /* Set your default color here */
   display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  flex-direction: row;
-  align-items: center; 
-  margin-bottom: 10px;
+  flex-direction: column; /* Stack children vertically */
+  justify-content: center; /* Center children vertically */
+  align-items: center; /* Center children horizontally */
+  text-align: center; /* Center text */
+  margin-bottom: 10px; /* Space at the bottom of each color div */
+  border-radius: 8px; /* Rounded corners for each color div */
 }
+
+.color-name,
+.color-hex {
+  margin: 4px 0; /* Space between the name and HEX code */
+  font-family:monospace; /* Set the font family to Georgia */
+  color: white; /* Set the text color to white */
+}
+
 
 /* .color:nth-child(n+3) {
   width: calc(100% / var(--num-colors));} /* Dynamic width calculation */
@@ -245,6 +256,7 @@
   cursor: pointer;
   outline: none;
   transition: background-color 0.3s, color 0.3s;
+  font-family:Tahoma;
 }
 
 /* Create 2 equal columns that float next to each other */
