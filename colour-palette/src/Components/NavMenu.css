@@ -1,0 +1,52 @@
+/* NavMenu.css */
+.bm-menu-wrap {
+  position: fixed;
+  height: 100%;
+  top: 0;
+  left: 0; /* Start from the left side */
+}
+
+.bm-menu {
+  background: var(--secondary-bg-color);
+  height: 100vh; /* Full height to cover the entire viewport */
+  width: 300px; /* Set a fixed width for the menu */
+  overflow-y: auto; /* Scrollable menu if content is longer than the screen */
+}
+
+.bm-item-list {
+  padding: 0.8em; /* Padding for the menu items */
+}
+
+.bm-item {
+  display: block; /* Each item will be a block */
+  padding: 0.5em; /* Padding for each item */
+  text-decoration: none;
+  color: var(--primary-text-color);
+  transition: background 0.2s;
+}
+
+.bm-item:hover {
+  background-color: var(--hover-border-color); /* Background color on hover */
+}
+
+.bm-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1000; /* Ensure it is below the menu but above other content */
+}
+
+/* When the menu is open, transform the page content to the right */
+.App.is-menu-open #page-wrap {
+  transform: translateX(300px); /* Move content to the right */
+}
+
+/* You might not need this if you're not using a dim overlay */
+/* When the menu is open, show the overlay */
+.bm-burger-button {
+  z-index: 1100; /* Higher than other content but below the overlay when open */
+}
