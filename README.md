@@ -31,6 +31,21 @@ The project-plan-files folder will have all the files related to milestone 1, wh
 - **Milestone_1_AI_Disclosure_Root_9_Taiga_Okuma_301594583.pdf** is a pdf file for AI use disclosure.
   Extra folders in the future will be listed below.
 
+<H3> Project Structure </H3>
+<pre>
+.
+│
+└── colour-palette
+    ├── README.md
+    ├── public
+    │   └── ...
+    ├── src
+    │   ├── images
+    │   └── pages
+    └── docs
+        └── ...
+</pre>
+
 ## Tech stack
 #### Frontend:
   - HTML, CSS, JavaScript

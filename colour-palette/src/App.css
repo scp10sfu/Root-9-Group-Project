@@ -64,16 +64,6 @@
   align-items: center;
 }
 
-/* Navigation bar styles */
-.nav-bar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  align-self: stretch;
-}
-
-/* Upload area styles */
 .upload-area {
   border: 1px dashed;
   border-radius: 10px;
