@@ -30,7 +30,7 @@ export const ColorContext = createContext(); // Create ColorContext
 const App = () => {
 
   // Router
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // gets navigation
   const navigateToHome = () => { navigate('/'); };
   const navigateToAbout = () => { navigate('/About'); };
   const navigateToColourPicker = () => { navigate('/ColourPicker'); };
