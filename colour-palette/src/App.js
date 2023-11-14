@@ -53,7 +53,7 @@ const App = () => {
       <div>
         <div>
           <Routes>
-            <Route path="/About" element={<About />} />
+            <Route path="/About aaaa" element={<About />} />
             <Route path="/" element={<Home />} />
             <Route path="/ColourPicker" element={<ColourPicker />} />
             <Route path="/PaletteGenerator" element={<PaletteGenerator />} />
