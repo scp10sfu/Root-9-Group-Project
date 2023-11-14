@@ -38,17 +38,18 @@ function ColorPicker() {
   * Extracts colors from the loaded image using ColorThief and updates the state.
   * @returns {Promise<void>} A Promise that resolves when the extraction is complete.
   */
-  const extractColors = async () => {
+   const extractColors = async () => {
     if (imgRef.current && imgRef.current.complete) {
       try {
         const result = colorThief.getPalette(imgRef.current, numberOfColors, 10);
         const colorPromises = result.map(async (rgb) => {
           const hex = rgbToHex(...rgb);
+          const cmyk = rgbToCmyk(...rgb);
           const name = await fetchColorName(hex);
-          return { hex, name }; // Return an object with hex and name
+          return { hex, rgb: `(${rgb.join(', ')})`, cmyk: `(${cmyk.join(', ')})`, name };
         });
-        const colorObjects = await Promise.all(colorPromises); // Resolve all promises
-        setColors(colorObjects); // Set the colors state with an array of color objects
+        const colorObjects = await Promise.all(colorPromises);
+        setColors(colorObjects);
       } catch (error) {
         console.error('Error extracting the colors:', error);
       }
@@ -126,7 +127,26 @@ function ColorPicker() {
     setColors([]); // Clear the colors when closing the preview
     setIsImagePreviewActive(true); // Set image preview inactive
   };
-
+  /** 
+   * function to change rgb to cmyk
+   */
+  const rgbToCmyk = (r, g, b) => {
+    let c = 1 - (r / 255);
+    let m = 1 - (g / 255);
+    let y = 1 - (b / 255);
+    let k = Math.min(c, Math.min(m, y));
+  
+    c = ((c - k) / (1 - k)) || 0;
+    m = ((m - k) / (1 - k)) || 0;
+    y = ((y - k) / (1 - k)) || 0;
+  
+    c = Math.round(c * 100);
+    m = Math.round(m * 100);
+    y = Math.round(y * 100);
+    k = Math.round(k * 100);
+  
+    return [c, m, y, k];
+  };
   return (
     <div className="ColorPicker">
       {/* <ColorSwitcher /> */}
@@ -186,14 +206,17 @@ function ColorPicker() {
         </section>
 
         {/* Right column */}
-        <section className="color-palette">
-          {colors.map((colorObj, index) => (
-            <div key={index} className="color" style={{ backgroundColor: colorObj.hex }}>
-              <p className="color-name">{colorObj.name}</p>
-              <p className="color-hex">{colorObj.hex}</p>
-            </div>
-          ))}
-        </section>
+       <section className={`color-palette ${colors.length === 2 ? 'two-colors' : colors.length === 8 ? 'eight-colors' : ''}`}>
+       {colors.map((colorObj, index) => (
+  <div key={index} className="color" style={{ backgroundColor: colorObj.hex }}>
+    <p className="color-name">{colorObj.name}</p>
+    <p className="color-hex">HEX: {colorObj.hex}</p>
+    <p className="color-rgb">RGB: {colorObj.rgb}</p>
+    <p className="color-cmyk">CMYK: {colorObj.cmyk}</p>
+  </div>
+))}
+
+</section>
 
       </main>
     </div>
