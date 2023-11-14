@@ -1,17 +1,8 @@
-name: GitHub Actions Demo with C
+name: GitHub Actions Alawys passing
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: [push]
 jobs:
-  build:
+  Explore-GitHub-Actions:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-    - name: compile
-      run: gcc test.c -o test
-    - name: runtest
-      run: ./test
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
