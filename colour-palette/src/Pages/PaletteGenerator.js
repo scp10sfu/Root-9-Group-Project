@@ -1,14 +1,14 @@
-import React from "react";
+// PaletteGenerator.js
 
-const About = () => {
-    return (
-        <div>
-            <h1>
-                This is a colour extractor.
-            </h1>
-        </div>
-    );
+import React from 'react';
 
+const PaletteGenerator = () => {
+  return (
+    <div>
+      <h1>PaletteGenerator Content</h1>
+      {/* Add your page content here */}
+    </div>
+  );
 };
 
-export default About;
+export default PaletteGenerator;

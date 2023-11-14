@@ -1,14 +1,14 @@
-import React from "react";
+// MoodboardGenerator.js
 
-const About = () => {
-    return (
-        <div>
-            <h1>
-                This is a colour extractor.
-            </h1>
-        </div>
-    );
+import React from 'react';
 
+const MoodboardGenerator = () => {
+  return (
+    <div>
+      <h1>MoodboardGenerator Content</h1>
+      {/* Add your page content here */}
+    </div>
+  );
 };
 
-export default About;
+export default MoodboardGenerator;

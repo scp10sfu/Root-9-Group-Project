@@ -5,24 +5,32 @@ import { ReactComponent as UploadIcon } from './images/icon-upload.svg';
 import './App.css';
 import {Routes, Route, useNavigate} from 'react-router-dom';
 import About from './Pages/About';
+import Home from './Pages/Home';
+import ColourPicker from './Pages/ColourPicker';
+import PaletteGenerator from './Pages/PaletteGenerator';
+import MoodboardGenerator from './Pages/MoodboardGenerator';
+import Header from './Components/Header';
+import Footer from './Components/Footer';
 
 function App() {
-  const [image, setImage] = useState(null); // Holds the image URL
-  const [colors, setColors] = useState([]); // Stores an array of the extracted colors
+  const [image, setImage] = useState(null);                 // Holds the image URL
+  const [colors, setColors] = useState([]);                 // Stores an array of the extracted colors
   const [numberOfColors, setNumberOfColors] = useState(5);  // Number of colors to extract (5 by default)
   const [isImagePreviewActive, setIsImagePreviewActive] = useState(true);
-  const imgRef = useRef(null); // Create a reference to the img tag
+  const imgRef = useRef(null);                              // Create a reference to the img tag
   const colorThief = new ColorThief(); 
-  // const [loading, setLoading] = useState(false); // Loading state
+  // TODO: const [loading, setLoading] = useState(false);   // Loading state
+  
+  // Router
   const navigate = useNavigate();
-  const navigateToAbout = () => {
-    navigate('/about');
-  };
-  const navigateHome = () => {
-    navigate('/');
-  };
+  const navigateToHome = () => { navigate('/'); };
+  const navigateToAbout = () => { navigate('/About'); };
+  const navigateToColourPicker = () => { navigate('/ColourPicker'); };
+  const navigateToPaletteGenerator = () => { navigate('/PaletteGenerator'); };
+  const navigateToMoodboardGenerator = () => { navigate('/MoodboardGenerator'); };
 
-  const [darkTheme, setDarkTheme] = useState(false); // Stores the current theme
+  // Theme switcher
+  const [darkTheme, setDarkTheme] = useState(false);        // Stores the current theme
   const toggleTheme = () => {
     setDarkTheme(!darkTheme);
   } ;
@@ -73,16 +81,17 @@ const extractColors = async () => {
   }
 };
 
-  // Function to fetch color name from the API
-  const fetchColorName = async (hex) => {
-    try {
-      const response = await axios.get(`https://www.thecolorapi.com/id?hex=${hex.replace('#', '')}`);
-      return response.data.name.value;
-    } catch (error) {
-      console.error('Error fetching the color name:', error);
-      return hex; // Fallback to HEX if the name can't be fetched
-    }
-  };
+// Function to fetch color name from the API
+const fetchColorName = async (hex) => {
+  try {
+    const response = await axios.get(`https://www.thecolorapi.com/id?hex=${hex.replace('#', '')}`);
+    return response.data.name.value;
+  } catch (error) {
+    console.error('Error fetching the color name:', error);
+    return hex; // Fallback to HEX if the name can't be fetched
+  }
+};
+
 // useEffect hook to update the colors when numberOfColors changes
 React.useEffect(() => {
   if (imgRef.current && imgRef.current.complete) {
@@ -151,7 +160,6 @@ const handleNumberChange = (event) => {
             </section>
             )}
             
-            
             {image && (
               <div className="image-preview">
                 <button className="close-button" onClick={handleClosePreview}>
@@ -167,6 +175,7 @@ const handleNumberChange = (event) => {
                 />
               </div>
             )}
+            
             <section className="color-controls">
               <input
                 type="range"
@@ -177,27 +186,25 @@ const handleNumberChange = (event) => {
               />
               <p>Number of colors: {numberOfColors}</p>
             </section>
-          {/* </div> */}
         </section>
         
         {/* Right column */}
         <section className="color-palette">
-  {colors.map((colorObj, index) => (
-    <div key={index} className="color" style={{ backgroundColor: colorObj.hex }}>
-      <p className="color-name">{colorObj.name}</p> {/* Color name is displayed first */}
-      <p className="color-hex">{colorObj.hex}</p> {/* Then the HEX code */}
-    </div>
-  ))}
-</section>
+          {colors.map((colorObj, index) => (
+          <div key={index} className="color" style={{ backgroundColor: colorObj.hex }}>
+          <p className="color-name">{colorObj.name}</p> {/* Color name is displayed first */}
+          <p className="color-hex">{colorObj.hex}</p> {/* Then the HEX code */}
+          </div>
+          ))}
+        </section>
 
       </main>
     </div>
   );
 }
-function Home() {
-  return <h2></h2>;
-}
 
+// function Home() {
+//   return <h2></h2>;
+// }
 
 export default App;
-

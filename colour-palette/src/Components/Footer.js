@@ -1,14 +1,14 @@
-import React from "react";
+// Footer.js
 
-const About = () => {
-    return (
-        <div>
-            <h1>
-                This is a colour extractor.
-            </h1>
-        </div>
-    );
+import React from 'react';
 
+const Footer = () => {
+  return (
+    <footer>
+      <p>Your Footer Content</p>
+      {/* Add other footer content as needed */}
+    </footer>
+  );
 };
 
-export default About;
+export default Footer;
