@@ -189,17 +189,34 @@
   background-color: #ccc; /* Placeholder color */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-between; /* Distribute space above and below content */
   align-items: center;
   text-align: center;
   padding: 15px;
   margin-bottom: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  /* Use flex-basis to set the initial size, and allow it to grow and shrink */
   flex: 1 1 auto; /* Grow and shrink as needed */
   height: 200px; /* Fixed height */
-  min-width: 10px; /* Minimum width so text doesn't get too squished */
+  min-width: 150px; /* Minimum width to prevent text squishing */
+}
+
+/* Style for color name at the top */
+.color-name {
+  margin-bottom: auto; /* Pushes everything else to the bottom */
+  font-family: 'Courier New', Courier, monospace;
+  color: white;  font-size: 1.2em; /* Larger font size for color name */
+  font-weight: bold;
+}
+
+/* Style for color codes */
+.color-hex,
+.color-rgb,
+.color-cmyk {
+  margin: 5px 0;
+  font-family: monospace;
+  color: white;  
+  font-size: 0.9em;
 }
 
 /* Specific styling when there are exactly two colors */
@@ -219,18 +236,7 @@
   }
 }
 
-.color-name,
-.color-hex,
-.color-rgb,
-.color-cmyk {
-  margin: 2px 0;
-  font-family: 'Courier New', Courier, monospace;
-  color: white;
-  font-size: 0.9em;
-  font-weight: bold; /* Optional: Make the text bold */
-}
-
-/* Media query for responsive adjustments */
+/* Additional responsive design adjustment for smaller screens */
 @media (max-width: 768px) {
   .color {
     width: calc(100% - 20px); /* Full width on smaller screens */
