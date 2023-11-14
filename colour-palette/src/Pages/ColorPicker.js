@@ -1,13 +1,15 @@
-// ColorPicker.js
-
-// import React, { createContext, useContext, useState, useRef } from 'react';
+/**
+ * ColorPicker component for extracting palettes from images.
+ * ColorPicker.js
+ * @component
+ */
 import React, { useState, useRef } from 'react';
 import ColorThief from 'colorthief';
 import axios from 'axios';
 import { ReactComponent as UploadIcon } from '../images/icon-upload.svg';
 // import ColorSwitcher from '../Components/ColorSwitcher'; 
 // import { ColorContext } from '../App';
-
+// TODO: add theme switcher to nav bar component
 
 function ColorPicker() {
   const [numberOfColors, setNumberOfColors] = useState(5);  // Number of colors to extract (5 by default)
@@ -18,13 +20,18 @@ function ColorPicker() {
   const imgRef = useRef(null);                              // Create a reference to the img tag
   const colorThief = new ColorThief();
 
-  // Convert RGB values to HEX format
+ 
+  /**
+  * Converts RGB values to HEX format.
+  */
   const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
     const hex = x.toString(16);
     return hex.length === 1 ? '0' + hex : hex;
   }).join('');
 
-  // Extract colors from the loaded image using ColorThief, and update the state
+  /**
+  * Extracts colors from the loaded image using ColorThief and updates the state.
+  */
   const extractColors = async () => {
     if (imgRef.current && imgRef.current.complete) {
       try {
@@ -42,7 +49,12 @@ function ColorPicker() {
     }
   };
 
-  // Function to fetch color name from the API
+
+  /**
+  * Fetches color name from the API based on HEX code.
+  * @param {string} hex - HEX color code.
+  * @returns {Promise<string>} Resolves with the color name.
+  */
   const fetchColorName = async (hex) => {
     try {
       const response = await axios.get(`https://www.thecolorapi.com/id?hex=${hex.replace('#', '')}`);
@@ -53,9 +65,14 @@ function ColorPicker() {
     }
   };
 
-  // useEffect hook to update the colors when numberOfColors changes
+  /**
+  * Effect hook to update the colors when numberOfColors changes.
+  * @effect
+  * @param {number} numberOfColors - Number of colors to extract.
+  * @returns {function} Cleanup function.
+  */
   React.useEffect(() => {
-    // Create a variable to hold the current value of imgRef.current
+    // Hold the current value of imgRef.current
     const currentImgRef = imgRef.current;
 
     if (currentImgRef && currentImgRef.complete) {
@@ -70,13 +87,19 @@ function ColorPicker() {
     };
   }, [numberOfColors]);
 
-
+  /**
+  * Handles the change in the number of colors.
+  * @param {object} event - The change event.
+  */
   const handleNumberChange = (event) => {
     const newNumberOfColors = parseInt(event.target.value, 10);
     setNumberOfColors(newNumberOfColors);
   };
 
-  // Handle the file upload
+  /**
+  * Handles the file upload.
+  * @param {object} event - The file change event.
+  */
   const handleImageChange = (event) => {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -90,7 +113,9 @@ function ColorPicker() {
     }
   };
 
-  // Handle closing the image preview
+  /**
+  * Handles closing the image preview.
+  */
   const handleClosePreview = () => {
     setImage(null); // Reset the image state to close the preview
     setColors([]); // Clear the colors when closing the preview
@@ -101,7 +126,7 @@ function ColorPicker() {
     <div className="ColorPicker">
       {/* <ColorSwitcher /> */}
 
-      <main className="content">
+      <main className="app-content">
         {/* Left column */}
         <section className="content-block">
 

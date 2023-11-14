@@ -1,5 +1,8 @@
-// App.js
-
+/**
+ * Main application component.
+ * App.js
+ * @component
+ */
 import React, { createContext, useState } from 'react';
 import './App.css';
 import { Routes, Route, useNavigate } from 'react-router-dom';
@@ -8,12 +11,19 @@ import Home from './Pages/Home';
 import ColourPicker from './Pages/ColorPicker';
 import PaletteGenerator from './Pages/PaletteGenerator';
 import MoodboardGenerator from './Pages/MoodboardGenerator';
-// import NotFoundPage from './Pages/NotFoundPage';
+import NotFoundPage from './Pages/NotFoundPage';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import ColorSwitcher from './Components/ColorSwitcher';
+// TODO: add theme switcher to nav bar component
 
-// Create ColorContext
+/*  navigation bar
+ *  | Home (icon + title) | About | Colour Picker | Palette Generator | Moodboard Generator |
+ *  
+ *  tech menu
+ *  | Color Switcher (icon) | Export (icon) |
+ */
+
 export const ColorContext = createContext(); // Create ColorContext
 
 const App = () => {
@@ -25,13 +35,13 @@ const App = () => {
   const navigateToColourPicker = () => { navigate('/ColourPicker'); };
   const navigateToPaletteGenerator = () => { navigate('/PaletteGenerator'); };
   const navigateToMoodboardGenerator = () => { navigate('/MoodboardGenerator'); };
-  // const navigateToNotFoundPage = () => { navigate('/NotFoundPage'); };
+  const navigateToNotFoundPage = () => { navigate('/NotFoundPage'); };
 
   return (
 
     <div className="App">
       {/* <ColorSwitcher /> */}
-
+      {/* TODO: create nav bar as a component */}
       <Header />
 
       <div>
@@ -56,7 +66,6 @@ const App = () => {
       <main className="app-content">
 
         {/* 
-
         <header className="text_block">
         <h1>Color Picker</h1>
         <p>Extract wonderful palettes from your image.</p>
@@ -65,10 +74,6 @@ const App = () => {
       </main>
     </div>
   );
-}
-
-// function Home() {
-//   return <h2></h2>;
-// }
+};
 
 export default App;
