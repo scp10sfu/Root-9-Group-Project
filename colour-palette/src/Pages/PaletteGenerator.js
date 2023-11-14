@@ -1,6 +1,7 @@
 // PaletteGenerator.js
 
 import React from 'react';
+// import { NavBar } from "./Components/NavBar";
 
 const PaletteGenerator = () => {
   return (

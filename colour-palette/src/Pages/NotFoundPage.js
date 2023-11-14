@@ -1,17 +1,17 @@
-// About.js
+// NotFoundPage.js
 
 import React from "react";
 // import { NavBar } from "./Components/NavBar";
 
-const About = () => {
+const NotFoundPage = () => {
     return (
         <div>
             <h1>
-                About Content.
+            NotFoundPage Content.
             </h1>
         </div>
     );
 
 };
 
-export default About;
+export default NotFoundPage;

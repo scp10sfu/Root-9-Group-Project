@@ -1,11 +1,13 @@
 // Home.js
 
 import React from 'react';
+// import { NavBar } from "./Components/NavBar";
 
 const Home = () => {
-  return (
+
+return (
     <div>
-      <h1>Homepage Content</h1>
+      <h1>Welcome to the Homepage!</h1>
       {/* Add your page content here */}
     </div>
   );
