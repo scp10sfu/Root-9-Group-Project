@@ -15,6 +15,7 @@ import NotFoundPage from './Pages/NotFoundPage';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import ColorSwitcher from './Components/ColorSwitcher';
+import NavigationBar from './Components/NavigationBar';
 // TODO: add theme switcher to nav bar component
 
 /*  navigation bar
@@ -40,19 +41,16 @@ const App = () => {
   return (
 
     <div className="App">
+      {/* Include the NavigationBar component */}
+      <NavigationBar />
+
       {/* <ColorSwitcher /> */}
+
       {/* TODO: create nav bar as a component */}
-      <Header />
+      {/* <Header /> */}
 
       <div>
         <div>
-          {/* <Header /> */}
-          <button onClick={navigateToHome}>Home</button>
-          <button onClick={navigateToAbout}>About</button>
-          <button onClick={navigateToColourPicker}>Colour Picker</button>
-          <button onClick={navigateToPaletteGenerator}>Palette Generator</button>
-          <button onClick={navigateToMoodboardGenerator}>Moodboard Generator</button>
-          {/* <Footer /> */}
           <Routes>
             <Route path="/About" element={<About />} />
             <Route path="/" element={<Home />} />
@@ -61,7 +59,7 @@ const App = () => {
             <Route path="/MoodboardGenerator" element={<MoodboardGenerator />} />
           </Routes>
         </div>
-      </div>
+      </div> 
 
       <main className="app-content">
 

@@ -66,14 +66,6 @@
   align-items: center;
 }
 
-.nav-bar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  align-self: stretch;
-}
-
 .upload-area {
   border: 1px dashed;
   border-radius: 10px;
