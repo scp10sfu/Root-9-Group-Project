@@ -27,7 +27,7 @@ const NavigationBar = () => {
         <button className="title-page" onClick={navigateToHome}>Title</button>
         <div className="links">
           {/* <button onClick={navigateToHome}>Home</button> */}
-          <button onClick={navigateToAbout}>About</button>
+          <button onClick={navigateToAbout}>About b</button>
           <button onClick={navigateToColourPicker}>Colour Pickers</button>
           <button onClick={navigateToPaletteGenerator}>Palette Generator</button>
           <button onClick={navigateToMoodboardGenerator}>Moodboard Generator</button>
