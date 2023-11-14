@@ -10,6 +10,7 @@ import { ReactComponent as UploadIcon } from '../images/icon-upload.svg';
 // import ColorSwitcher from '../Components/ColorSwitcher'; 
 // import { ColorContext } from '../App';
 // TODO: add theme switcher to nav bar component
+// TODO: add SVG icons
 
 function ColorPicker() {
   const [numberOfColors, setNumberOfColors] = useState(5);  // Number of colors to extract (5 by default)
@@ -20,9 +21,13 @@ function ColorPicker() {
   const imgRef = useRef(null);                              // Create a reference to the img tag
   const colorThief = new ColorThief();
 
- 
+
   /**
   * Converts RGB values to HEX format.
+  * @param {number} r - The red value (0 to 255).
+  * @param {number} g - The green value (0 to 255).
+  * @param {number} b - The blue value (0 to 255).
+  * @returns {string} The HEX representation of the RGB values.
   */
   const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
     const hex = x.toString(16);
@@ -31,6 +36,7 @@ function ColorPicker() {
 
   /**
   * Extracts colors from the loaded image using ColorThief and updates the state.
+  * @returns {Promise<void>} A Promise that resolves when the extraction is complete.
   */
   const extractColors = async () => {
     if (imgRef.current && imgRef.current.complete) {
@@ -48,7 +54,6 @@ function ColorPicker() {
       }
     }
   };
-
 
   /**
   * Fetches color name from the API based on HEX code.
