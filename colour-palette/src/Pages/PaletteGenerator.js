@@ -61,14 +61,33 @@ function PaletteGenerator() {
                     </header>
 
                     <section className="color-controls">
-                        <input
+                        {/* <input
                             type="range"
                             min="2"
                             max="10"
                             value={numberOfColors}
                             onChange={handleNumberChange}
                         />
-                        <p>Number of colors: {numberOfColors}</p>
+                       
+                        <p>Number of colors: {numberOfColors}</p> */}
+                        <form action="#" class="my-number-color">
+      <label for="lang">choose a number</label>
+      <div popup id="testtest">
+      <select name="languages" id="lang">
+        <option value="select">Select a number</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
+      </div>
+</form>
                     </section>
                     <button onClick={handleRegenerate}>Generate</button>
                 </section>
