@@ -75,7 +75,7 @@ function MyPaletteGenerator() {
                     onChange={handlePaletteSizeChange}
                 /> */}
                 <form action="#" class="my-number-color">
-                    <label for="user_number">choose a number</label>
+                    
                     <div popup id="testtest">
                     <select name="number" id="num" value={paletteSize} onChange={handlePaletteSizeChange}>
                         <option value="select">Select a number</option>
