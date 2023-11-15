@@ -16,6 +16,7 @@ import Header from './Components/Header';
 import Footer from './Components/Footer';
 import ColorSwitcher from './Components/ColorSwitcher';
 import NavigationBar from './Components/NavigationBar';
+
 // TODO: add theme switcher to nav bar component
 
 /*  navigation bar
