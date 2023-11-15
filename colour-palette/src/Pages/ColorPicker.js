@@ -80,22 +80,27 @@ function ColorPicker() {
   * @returns {function} Cleanup function.
   */
    React.useEffect(() => {
-    const savedImage = localStorage.getItem('savedImage');
-    const savedColors = JSON.parse(localStorage.getItem('extractedColors') || '[]');
+    // const savedImage = localStorage.getItem('savedImage');
+    // const savedColors = JSON.parse(localStorage.getItem('extractedColors') || '[]');
     
-    if (savedImage) {
-      setImage(savedImage);
-      setIsImagePreviewActive(false);
-    }
+    // if (savedImage) {
+    //   setImage(savedImage);
+    //   setIsImagePreviewActive(false);
+    // }
     
-    if (savedColors.length > 0) {
-      setColors(savedColors);
-    }
+    // if (savedColors.length > 0) {
+    //   setColors(savedColors);
+    // }
     
-    if (savedColors.length > 0) {
-    setColors(savedColors);
-    }
+    // if (savedColors.length > 0) {
+    // setColors(savedColors);
+    // }
 
+    //  // Load the saved number of colors
+    // const savedNumberOfColors = localStorage.getItem('savedNumberOfColors');
+    // if (savedNumberOfColors) {
+    // setNumberOfColors(parseInt(savedNumberOfColors, 10));
+    // }
     // Hold the current value of imgRef.current
     const currentImgRef = imgRef.current;
 
@@ -118,6 +123,8 @@ function ColorPicker() {
   const handleNumberChange = (event) => {
     const newNumberOfColors = parseInt(event.target.value, 10);
     setNumberOfColors(newNumberOfColors);
+    localStorage.setItem('savedNumberOfColors', newNumberOfColors); // Save number of colors to local storage
+
   };
 
   /**
