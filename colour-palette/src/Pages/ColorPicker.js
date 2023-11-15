@@ -46,15 +46,17 @@ function ColorPicker() {
           const hex = rgbToHex(...rgb);
           const cmyk = rgbToCmyk(...rgb);
           const name = await fetchColorName(hex);
-          return { hex, rgb: `(${rgb.join(', ')})`, cmyk: `(${cmyk.join(', ')})`, name };
+          return { hex, rgb: `rgb(${rgb.join(', ')})`, cmyk: `cmyk(${cmyk.join(', ')})`, name };
         });
         const colorObjects = await Promise.all(colorPromises);
         setColors(colorObjects);
+        localStorage.setItem('extractedColors', JSON.stringify(colorObjects)); // Correct placement inside the try block
       } catch (error) {
         console.error('Error extracting the colors:', error);
       }
     }
   };
+  
 
   /**
   * Fetches color name from the API based on HEX code.
@@ -77,7 +79,23 @@ function ColorPicker() {
   * @param {number} numberOfColors - Number of colors to extract.
   * @returns {function} Cleanup function.
   */
-  React.useEffect(() => {
+   React.useEffect(() => {
+    const savedImage = localStorage.getItem('savedImage');
+    const savedColors = JSON.parse(localStorage.getItem('extractedColors') || '[]');
+    
+    if (savedImage) {
+      setImage(savedImage);
+      setIsImagePreviewActive(false);
+    }
+    
+    if (savedColors.length > 0) {
+      setColors(savedColors);
+    }
+    
+    if (savedColors.length > 0) {
+    setColors(savedColors);
+    }
+
     // Hold the current value of imgRef.current
     const currentImgRef = imgRef.current;
 
@@ -106,18 +124,20 @@ function ColorPicker() {
   * Handles the file upload.
   * @param {object} event - The file change event.
   */
-  const handleImageChange = (event) => {
-    if (event.target.files && event.target.files.length > 0) {
-      const file = event.target.files[0];
-      const reader = new FileReader();
+// When setting the image after upload
+const handleImageChange = (event) => {
+  if (event.target.files && event.target.files.length > 0) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
 
-      reader.onload = (e) => {
-        setImage(e.target.result); // Set image URL to display it
-        setIsImagePreviewActive(false); // Set image preview active
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+    reader.onload = (e) => {
+      setImage(e.target.result); // Set image URL to display it
+      localStorage.setItem('savedImage', e.target.result); // Save image data to local storage
+      setIsImagePreviewActive(false); // Set image preview active
+    };
+    reader.readAsDataURL(file);
+  }
+};
 
   /**
   * Handles closing the image preview.
