@@ -8,6 +8,7 @@ const Home = () => {
 return (
     <div>
       <h1>Welcome to the Homepage!</h1>
+      <h3>TEST!</h3>
       {/* Add your page content here */}
     </div>
   );

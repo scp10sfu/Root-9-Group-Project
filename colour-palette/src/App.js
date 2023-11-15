@@ -42,6 +42,7 @@ const App = () => {
   return (
 
     <div className="App">
+
       {/* Include the NavigationBar component */}
       <NavigationBar />
 
