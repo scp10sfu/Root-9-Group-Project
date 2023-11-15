@@ -64,16 +64,6 @@
   align-items: center;
 }
 
-/* Navigation bar styles */
-.nav-bar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  align-self: stretch;
-}
-
-/* Upload area styles */
 .upload-area {
   border: 1px dashed;
   border-radius: 10px;
@@ -197,11 +187,23 @@
   border-radius: 8px;
 }
 
-.color-name,
-.color-hex {
-  margin: 4px 0;
+
+/* Style for color name at the top */
+.color-name {
+  margin-bottom: auto; /* Pushes everything else to the bottom */
   font-family: monospace;
-  color: white;
+  color: white;  font-size: 1.0em; /* Larger font size for color name */
+  font-weight: bold;
+}
+
+/* Style for color codes */
+.color-hex,
+.color-rgb,
+.color-cmyk {
+  margin: 5px 0;
+  font-family: monospace;
+  color: white;  
+  font-size: 0.9em;
 }
 
 /* Theme switcher styles */

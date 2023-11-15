@@ -1,0 +1,70 @@
+.nav-bar {
+  z-index: 10000000; /* High value to ensure it's on top */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  display: inline-block;
+  background-color: white;
+  padding: 3px; 
+  border-radius: 0px 0px 20px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* TODO: think about this */
+}
+
+.nav-content {
+  padding-top: 0px;
+  padding-right: 32px;
+  padding-bottom: 0px;
+  padding-left: 32px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px;
+}
+
+.nav-content .title-page {
+font-family: "DMSans-Bold", Helvetica;
+font-size: 40px;
+font-style: normal;
+font-weight: 700;
+letter-spacing: -1px;
+color: #121212;
+position: absolute;
+text-align: left;
+background-color: transparent;
+border: none;
+border-radius: 0;
+}
+
+.title-page:hover {
+  color: #ec4e32;
+}
+
+.nav-content .links{
+text-align: right;
+margin-left: auto;
+}
+
+.links button{
+  background-color: transparent;
+  color: #121212;
+  padding: 10px 15px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+
+  color: #121212;
+  font-family: "DM Sans-Bold", Helvetica;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.48px;
+}
+ 
+.links button:hover {
+  background-color: rgba(18, 18, 18, 0.15);
+  /* background-color: rgba(255, 255, 255, 0.25); */
+  border-radius: 40px;
+}

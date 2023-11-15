@@ -13,6 +13,7 @@ Project for CMPT 276 by group Root 9.
 Important Links for the project include:
 
 - Our first presentation video link: https://drive.google.com/file/d/1D5xowmShwgpPiy_jJseGULDg8wyn9yxM/view?usp=sharing
+- Website Link: https://root9colourpalette.netlify.app/
 
 ## Explanation of files and folders.
 The main folders for this project thus far are
@@ -30,6 +31,21 @@ The project-plan-files folder will have all the files related to milestone 1, wh
 - **Root_9 Final Timeline.xlsx** is the excel format of the timeline/schedule of our project.
 - **Milestone_1_AI_Disclosure_Root_9_Taiga_Okuma_301594583.pdf** is a pdf file for AI use disclosure.
   Extra folders in the future will be listed below.
+
+<H3> Project Structure </H3>
+<pre>
+.
+│
+└── colour-palette
+    ├── README.md
+    ├── public
+    │   └── ...
+    ├── src
+    │   ├── images
+    │   └── pages
+    └── docs
+        └── ...
+</pre>
 
 ## Tech stack
 #### Frontend:
