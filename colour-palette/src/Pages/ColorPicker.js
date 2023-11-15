@@ -229,21 +229,23 @@ const handleImageChange = (event) => {
               onChange={handleNumberChange}
             /> */}
              <form action="#" class="my-number-color">
-      <label for="lang">choose a number</label>
-      <select name="languages" id="lang">
-        <option value="label">Select a number</option>
-        <option value="num1">1</option>
-        <option value="num2">2</option>
-        <option value="num3">3</option>
-        <option value="num4">4</option>
-        <option value="num5">5</option>
-        <option value="num6">6</option>
-        <option value="num7">7</option>
-        <option value="num8">8</option>
-        <option value="num9">9</option>
-        <option value="num10">10</option>
-      </select>
-</form>
+              <label for="lang">choose a number</label>
+              <div popup id="testtest">
+               <select name="languages" id="lang" value={numberOfColors} onChange={handleNumberChange}>
+                  <option value="label">Select a number</option>
+                  <option value="num1">1</option>
+                  <option value="num2">2</option>
+                  <option value="num3">3</option>
+                  <option value="num4">4</option>
+                  <option value="num5">5</option>
+                  <option value="num6">6</option>
+                  <option value="num7">7</option>
+                  <option value="num8">8</option>
+                  <option value="num9">9</option>
+                  <option value="num10">10</option>
+          </select>
+          </div>
+    </form>
            
           </section>
         </section>
