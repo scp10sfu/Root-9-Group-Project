@@ -13,7 +13,7 @@ Project for CMPT 276 by group Root 9.
 Important Links for the project include:
 
 - Our first presentation video link: https://drive.google.com/file/d/1D5xowmShwgpPiy_jJseGULDg8wyn9yxM/view?usp=sharing
-- Website Permanent? Link: https://6553f0d2eb168e1e4b57b649--root9colourpalette.netlify.app/
+- Website Link: [https://6553f0d2eb168e1e4b57b649--root9colourpalette.netlify.app/](https://root9colourpalette.netlify.app/)
 
 ## Explanation of files and folders.
 The main folders for this project thus far are
