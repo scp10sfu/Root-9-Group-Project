@@ -10,7 +10,6 @@ import Home from '../Pages/Home';
 import ColourPicker from '../Pages/ColorPicker';
 import PaletteGenerator from '../Pages/PaletteGenerator';
 import MoodboardGenerator from '../Pages/MoodboardGenerator';
-//import ModeSwitch from '../Pages/MoodboardGenerator'
 
 export const ThemeContext = createContext(null);
 function App(){
