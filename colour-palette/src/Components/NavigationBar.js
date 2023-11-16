@@ -1,6 +1,5 @@
 // NavigationBar.js
 //import "./App.css";
-import Form from "./components/NavigationBar";
 import React from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { createContext, useState } from 'react';
@@ -22,7 +21,6 @@ function App(){
   return(
       <ThemeContext.Provider value = {{theme, setTheme}}>
         <div className= "App" id={theme}>
-        <Form />
         </div>
       </ThemeContext.Provider>
 
