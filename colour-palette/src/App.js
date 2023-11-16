@@ -16,6 +16,7 @@ import Header from './Components/Header';
 import Footer from './Components/Footer';
 import ColorSwitcher from './Components/ColorSwitcher';
 import NavigationBar from './Components/NavigationBar';
+import ModeSwitch from './Components/ModeSwitch';
 
 // TODO: add theme switcher to nav bar component
 
@@ -38,7 +39,8 @@ const App = () => {
   const navigateToPaletteGenerator = () => { navigate('/PaletteGenerator'); };
   const navigateToMoodboardGenerator = () => { navigate('/MoodboardGenerator'); };
   const navigateToNotFoundPage = () => { navigate('/NotFoundPage'); };
-
+  const navigateToModeSwitch = () => { navigate('/ModeSwitch'); };
+  
   return (
 
     <div className="App">
@@ -60,6 +62,7 @@ const App = () => {
             <Route path="/ColourPicker" element={<ColourPicker />} />
             <Route path="/PaletteGenerator" element={<PaletteGenerator />} />
             <Route path="/MoodboardGenerator" element={<MoodboardGenerator />} />
+            <Route path="/ModeSwitch" element={<ModeSwitch/>} />
           </Routes>
         </div>
       </div> 
@@ -76,5 +79,7 @@ const App = () => {
     </div>
   );
 };
+
+
 
 export default App;

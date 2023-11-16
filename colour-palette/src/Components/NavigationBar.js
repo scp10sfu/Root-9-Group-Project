@@ -1,8 +1,9 @@
 // NavigationBar.js
-
+//import "./App.css";
+import Form from "./components/NavigationBar";
 import React from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-
+import { createContext, useState } from 'react';
 import './NavigationBar.css';
 
 import About from '../Pages/About';
@@ -10,7 +11,24 @@ import Home from '../Pages/Home';
 import ColourPicker from '../Pages/ColorPicker';
 import PaletteGenerator from '../Pages/PaletteGenerator';
 import MoodboardGenerator from '../Pages/MoodboardGenerator';
+//import ModeSwitch from '../Pages/MoodboardGenerator'
 
+export const ThemeContext = createContext(null);
+function App(){
+  const[theme, setTheme] = useState("light");
+  const toggleTheme = () => {
+    setTheme((curr) => (curr === "light" ? "dark" : "light"));
+  };
+  return(
+      <ThemeContext.Provider value = {{theme, setTheme}}>
+        <div className= "App" id={theme}>
+        <Form />
+        </div>
+      </ThemeContext.Provider>
+
+  )
+
+}
 const NavigationBar = () => {
   // Router
   const navigate = useNavigate();
