@@ -183,7 +183,7 @@ const handleImageChange = (event) => {
         <section className="content-block">
 
           <header className="text_block">
-            <h1>Color Picker</h1>
+            <h1>Color Extractor</h1>
             <p>Extract wonderful palettes from your image.</p>
           </header>
 
