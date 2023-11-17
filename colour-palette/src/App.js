@@ -43,7 +43,7 @@ const App = () => {
   
   return (
     <div className="App">
-      {/* <NavigationBar /> */}
+      <NavigationBar />
 
       {/* <ColorSwitcher /> */}
       <div>

@@ -203,11 +203,9 @@ function ColourExtractor() {
         ))}
       </div>
       <Layout>
-        {/* <NavigationBar /> */}
         <div class="grid-container general">
           {/* The nav bar */}
-          <div class="logo col-xs-6 col-md-6">Paletä</div>
-          <div class="header col-xs-30 col-md-30"></div>
+          <div class="header col-xs-36 col-md-36"></div>
 
           {/* The main content - left part */}
           <div class="main-section col-xs-36 col-md-12 grid-container nested-grid">
@@ -279,7 +277,7 @@ function ColourExtractor() {
           <div class="wrapper-2-col secondary-section col-xs-36 col-md-24 grid-container nested-grid">
             {/* First dominant colour */}
             <div class="col-xs-36 col-md-18">
-              <div key={0} className="color" style={{ backgroundColor: firstColor.hex }}>
+              <div key={0} className="color-bottom-align" style={{ backgroundColor: firstColor.hex }}>
                 <p className="color-name">{firstColor.name}</p>
                 <p className="color-hex">HEX: {firstColor.hex}</p>
                 <p className="color-rgb">RGB: {firstColor.rgb}</p>
@@ -287,7 +285,8 @@ function ColourExtractor() {
               </div>
             </div>
             {/* Second dominant colour */}
-            <div class="col-xs-36 col-md-18"><div key={1} className="color" style={{ backgroundColor: secondColor.hex }}>
+            <div class="col-xs-36 col-md-18">
+              <div key={1} className="color-bottom-align" style={{ backgroundColor: secondColor.hex }}>
               <p className="color-name">{secondColor.name}</p>
               <p className="color-hex">HEX: {secondColor.hex}</p>
               <p className="color-rgb">RGB: {secondColor.rgb}</p>
@@ -299,7 +298,7 @@ function ColourExtractor() {
           {numberOfColors === 4 &&
             <div class="wrapper-4-col secondary-section col-xs-36 col-md-24 grid-container nested-grid">
               <div class="col-xs-36 col-md-18">
-                <div key={2} className="color" style={{ backgroundColor: thirdColor.hex }}>
+                <div key={2} className="color-top-align" style={{ backgroundColor: thirdColor.hex }}>
                   <p className="color-name">{thirdColor.name}</p>
                   <p className="color-hex">HEX: {thirdColor.hex}</p>
                   <p className="color-rgb">RGB: {thirdColor.rgb}</p>
@@ -307,7 +306,7 @@ function ColourExtractor() {
                 </div>
               </div>
               <div class="col-xs-36 col-md-18">
-                <div key={3} className="color" style={{ backgroundColor: fourthColor.hex }}>
+                <div key={3} className="color-top-align" style={{ backgroundColor: fourthColor.hex }}>
                   <p className="color-name">{fourthColor.name}</p>
                   <p className="color-hex">HEX: {fourthColor.hex}</p>
                   <p className="color-rgb">RGB: {fourthColor.rgb}</p>
@@ -320,7 +319,7 @@ function ColourExtractor() {
           {numberOfColors === 6 &&
             <div class="wrapper-4-col secondary-section col-xs-36 col-md-24 grid-container nested-grid">
               <div class="col-xs-36 col-md-9">
-                <div key={2} className="color" style={{ backgroundColor: thirdColor.hex }}>
+                <div key={2} className="color-top-align" style={{ backgroundColor: thirdColor.hex }}>
                   <p className="color-name">{thirdColor.name}</p>
                   <p className="color-hex">HEX: {thirdColor.hex}</p>
                   <p className="color-rgb">RGB: {thirdColor.rgb}</p>
@@ -328,7 +327,7 @@ function ColourExtractor() {
                 </div>
               </div>
               <div class="col-xs-36 col-md-9">
-                <div key={3} className="color" style={{ backgroundColor: fourthColor.hex }}>
+                <div key={3} className="color-top-align" style={{ backgroundColor: fourthColor.hex }}>
                   <p className="color-name">{fourthColor.name}</p>
                   <p className="color-hex">HEX: {fourthColor.hex}</p>
                   <p className="color-rgb">RGB: {fourthColor.rgb}</p>
@@ -336,7 +335,7 @@ function ColourExtractor() {
                 </div>
               </div>
               <div class="col-xs-36 col-md-9">
-                <div key={4} className="color" style={{ backgroundColor: fifthColor.hex }}>
+                <div key={4} className="color-top-align" style={{ backgroundColor: fifthColor.hex }}>
                   <p className="color-name">{fifthColor.name}</p>
                   <p className="color-hex">HEX: {fifthColor.hex}</p>
                   <p className="color-rgb">RGB: {fifthColor.rgb}</p>
@@ -344,7 +343,7 @@ function ColourExtractor() {
                 </div>
               </div>
               <div class="col-xs-36 col-md-9">
-                <div key={5} className="color" style={{ backgroundColor: sixthColor.hex }}>
+                <div key={5} className="color-top-align" style={{ backgroundColor: sixthColor.hex }}>
                   <p className="color-name">{sixthColor.name}</p>
                   <p className="color-hex">HEX: {sixthColor.hex}</p>
                   <p className="color-rgb">RGB: {sixthColor.rgb}</p>
@@ -357,7 +356,7 @@ function ColourExtractor() {
           {numberOfColors === 8 &&
             <div class="wrapper-4-col secondary-section col-xs-36 col-md-24 grid-container nested-grid">
               <div class="col-xs-36 col-md-6">
-                <div key={2} className="color" style={{ backgroundColor: thirdColor.hex }}>
+                <div key={2} className="color-top-align" style={{ backgroundColor: thirdColor.hex }}>
                   <p className="color-name">{thirdColor.name}</p>
                   <p className="color-hex">HEX: {thirdColor.hex}</p>
                   <p className="color-rgb">RGB: {thirdColor.rgb}</p>
@@ -365,7 +364,7 @@ function ColourExtractor() {
                 </div>
               </div>
               <div class="col-xs-36 col-md-6">
-                <div key={3} className="color" style={{ backgroundColor: fourthColor.hex }}>
+                <div key={3} className="color-top-align" style={{ backgroundColor: fourthColor.hex }}>
                   <p className="color-name">{fourthColor.name}</p>
                   <p className="color-hex">HEX: {fourthColor.hex}</p>
                   <p className="color-rgb">RGB: {fourthColor.rgb}</p>
@@ -373,7 +372,7 @@ function ColourExtractor() {
                 </div>
               </div>
               <div class="col-xs-36 col-md-6">
-                <div key={4} className="color" style={{ backgroundColor: fifthColor.hex }}>
+                <div key={4} className="color-top-align" style={{ backgroundColor: fifthColor.hex }}>
                   <p className="color-name">{fifthColor.name}</p>
                   <p className="color-hex">HEX: {fifthColor.hex}</p>
                   <p className="color-rgb">RGB: {fifthColor.rgb}</p>
@@ -381,7 +380,7 @@ function ColourExtractor() {
                 </div>
               </div>
               <div class="col-xs-36 col-md-6">
-                <div key={5} className="color" style={{ backgroundColor: sixthColor.hex }}>
+                <div key={5} className="color-top-align" style={{ backgroundColor: sixthColor.hex }}>
                   <p className="color-name">{sixthColor.name}</p>
                   <p className="color-hex">HEX: {sixthColor.hex}</p>
                   <p className="color-rgb">RGB: {sixthColor.rgb}</p>
@@ -389,7 +388,7 @@ function ColourExtractor() {
                 </div>
               </div>
               <div class="col-xs-36 col-md-6">
-                <div key={6} className="color" style={{ backgroundColor: seventhColor.hex }}>
+                <div key={6} className="color-top-align" style={{ backgroundColor: seventhColor.hex }}>
                   <p className="color-name">{seventhColor.name}</p>
                   <p className="color-hex">HEX: {seventhColor.hex}</p>
                   <p className="color-rgb">RGB: {seventhColor.rgb}</p>
@@ -397,7 +396,7 @@ function ColourExtractor() {
                 </div>
               </div>
               <div class="col-xs-36 col-md-6">
-                <div key={7} className="color" style={{ backgroundColor: eighthColor.hex }}>
+                <div key={7} className="color-top-align" style={{ backgroundColor: eighthColor.hex }}>
                   <p className="color-name">{eighthColor.name}</p>
                   <p className="color-hex">HEX: {eighthColor.hex}</p>
                   <p className="color-rgb">RGB: {eighthColor.rgb}</p>
@@ -410,7 +409,7 @@ function ColourExtractor() {
           {numberOfColors === 10 &&
             <div class="wrapper-4-col secondary-section col-xs-36 col-md-24 grid-container nested-grid">
               <div class="col-xs-36 col-md-9">
-                <div key={2} className="color" style={{ backgroundColor: thirdColor.hex }}>
+                <div key={2} className="color-top-align" style={{ backgroundColor: thirdColor.hex }}>
                   <p className="color-name">{thirdColor.name}</p>
                   <p className="color-hex">HEX: {thirdColor.hex}</p>
                   <p className="color-rgb">RGB: {thirdColor.rgb}</p>
@@ -418,7 +417,7 @@ function ColourExtractor() {
                 </div>
               </div>
               <div class="col-xs-36 col-md-9">
-                <div key={3} className="color" style={{ backgroundColor: fourthColor.hex }}>
+                <div key={3} className="color-top-align" style={{ backgroundColor: fourthColor.hex }}>
                   <p className="color-name">{fourthColor.name}</p>
                   <p className="color-hex">HEX: {fourthColor.hex}</p>
                   <p className="color-rgb">RGB: {fourthColor.rgb}</p>
@@ -426,7 +425,7 @@ function ColourExtractor() {
                 </div>
               </div>
               <div class="col-xs-36 col-md-9">
-                <div key={4} className="color" style={{ backgroundColor: fifthColor.hex }}>
+                <div key={4} className="color-top-align" style={{ backgroundColor: fifthColor.hex }}>
                   <p className="color-name">{fifthColor.name}</p>
                   <p className="color-hex">HEX: {fifthColor.hex}</p>
                   <p className="color-rgb">RGB: {fifthColor.rgb}</p>
@@ -434,7 +433,7 @@ function ColourExtractor() {
                 </div>
               </div>
               <div class="col-xs-36 col-md-9">
-                <div key={5} className="color" style={{ backgroundColor: sixthColor.hex }}>
+                <div key={5} className="color-top-align" style={{ backgroundColor: sixthColor.hex }}>
                   <p className="color-name">{sixthColor.name}</p>
                   <p className="color-hex">HEX: {sixthColor.hex}</p>
                   <p className="color-rgb">RGB: {sixthColor.rgb}</p>
@@ -442,7 +441,7 @@ function ColourExtractor() {
                 </div>
               </div>
               <div class="col-xs-36 col-md-9">
-                <div key={6} className="color" style={{ backgroundColor: seventhColor.hex }}>
+                <div key={6} className="color-top-align" style={{ backgroundColor: seventhColor.hex }}>
                   <p className="color-name">{seventhColor.name}</p>
                   <p className="color-hex">HEX: {seventhColor.hex}</p>
                   <p className="color-rgb">RGB: {seventhColor.rgb}</p>
@@ -450,7 +449,7 @@ function ColourExtractor() {
                 </div>
               </div>
               <div class="col-xs-36 col-md-9">
-                <div key={7} className="color" style={{ backgroundColor: eighthColor.hex }}>
+                <div key={7} className="color-top-align" style={{ backgroundColor: eighthColor.hex }}>
                   <p className="color-name">{eighthColor.name}</p>
                   <p className="color-hex">HEX: {eighthColor.hex}</p>
                   <p className="color-rgb">RGB: {eighthColor.rgb}</p>
@@ -458,7 +457,7 @@ function ColourExtractor() {
                 </div>
               </div>
               <div class="col-xs-36 col-md-9">
-                <div key={8} className="color" style={{ backgroundColor: ninthColor.hex }}>
+                <div key={8} className="color-top-align" style={{ backgroundColor: ninthColor.hex }}>
                   <p className="color-name">{ninthColor.name}</p>
                   <p className="color-hex">HEX: {ninthColor.hex}</p>
                   <p className="color-rgb">RGB: {ninthColor.rgb}</p>
@@ -466,7 +465,7 @@ function ColourExtractor() {
                 </div>
               </div>
               <div class="col-xs-36 col-md-9">
-                <div key={9} className="color" style={{ backgroundColor: tenthColor.hex }}>
+                <div key={9} className="color-top-align" style={{ backgroundColor: tenthColor.hex }}>
                   <p className="color-name">{tenthColor.name}</p>
                   <p className="color-hex">HEX: {tenthColor.hex}</p>
                   <p className="color-rgb">RGB: {tenthColor.rgb}</p>
@@ -474,7 +473,9 @@ function ColourExtractor() {
                 </div>
               </div>
             </div>}
-        </div>
+
+            <div class="footer col-xs-36 col-md-36"></div>
+        </div>        
       </Layout>
     </div>
 

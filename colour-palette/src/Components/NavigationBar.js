@@ -17,15 +17,15 @@ function App(){
   const toggleTheme = () => {
     setTheme((curr) => (curr === "light" ? "dark" : "light"));
   };
+  
   return(
       <ThemeContext.Provider value = {{theme, setTheme}}>
         <div className= "App" id={theme}>
         </div>
       </ThemeContext.Provider>
-
   )
-
 }
+
 const NavigationBar = () => {
   // Router
   const navigate = useNavigate();
@@ -39,7 +39,7 @@ const NavigationBar = () => {
   return (
     <nav className="nav-bar">
       <div className='nav-content'>
-        <button className="title-page" onClick={navigateToHome}>Title</button>
+        <button className="title-page" onClick={navigateToHome}>Paletä</button>
         <div className="links">
           {/* <button onClick={navigateToHome}>Home</button> */}
           <button onClick={navigateToAbout}>About</button>

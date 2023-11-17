@@ -145,33 +145,35 @@
 
 /* Color palette styles */
 .color-palette {
-  display: flex;
+  display: flex; 
   flex-wrap: wrap;
   justify-content: space-around;
   gap: 5px;
-  margin: 0 auto;
+  /* /* margin: 0 auto; */
 }
 
-/* color-bottom-align */
-.color{
+.color-bottom-align {
   width: 100%;
   height: 100%;
   background-color: #ccc;
-  /* display: flex; */
+  display: flex;
   flex-direction: column;
-  white-space: nowrap;
-
-  padding-left: 15px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-right: 15px;
-
-text-align: center;
-
+  justify-content: flex-end; /* Aligns the content to the bottom */
+  align-items: left;
+  padding: 15px; 
+  white-space: nowrap; 
 }
 
 .color-top-align {
-
+  width: 100%;
+  height: 100%;
+  background-color: #ccc;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Aligns the content to the top */
+  align-items: left;
+  padding: 15px; 
+  white-space: nowrap; 
 }
 
 
@@ -186,6 +188,7 @@ text-align: center;
   /* Larger font size for color name */
   font-weight: bold;
   text-align: left;
+  margin-bottom: 10px;
 }
 
 /* Style for color codes */
