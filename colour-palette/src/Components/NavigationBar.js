@@ -36,10 +36,9 @@ const NavigationBar = () => {
 
   return (
     <nav className="nav-bar">
-      <div className="nav-content">
-        <button className="title-page" onClick={navigateToHome}>
-          Title
-        </button>
+
+      <div className='nav-content'>
+        <button className="title-page" onClick={navigateToHome}>Paletä</button>
         <div className="links">
           {/* <button onClick={navigateToHome}>Home</button> */}
           <button onClick={navigateToAbout}>About</button>
