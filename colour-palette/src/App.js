@@ -9,7 +9,7 @@ import React, { createContext, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import About from './Pages/About';
 import Home from './Pages/Home';
-import ColourPicker from './Pages/ColorPicker';
+import ColourPicker from './Pages/ColourExtractor';
 import PaletteGenerator from './Pages/PaletteGenerator';
 import MoodboardGenerator from './Pages/MoodboardGenerator';
 import NotFoundPage from './Pages/NotFoundPage';

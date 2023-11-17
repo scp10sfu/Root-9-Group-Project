@@ -1,6 +1,6 @@
 /**
- * ColorPicker component for extracting palettes from images.
- * ColorPicker.js
+ * ColourExtractor component for extracting palettes from images.
+ * ColourExtractor.js
  * @component
  */
 import React, { useState, useRef } from 'react';
@@ -9,9 +9,9 @@ import axios from 'axios';
 import { ReactComponent as UploadIcon } from '../images/icon-upload-dark.svg';
 import { ReactComponent as InfoIcon } from '../images/icon-info-dark.svg';
 import Layout from '../Components/Layout';
-import './ColorPicker.css';
+import './ColourExtractor.css';
 
-function ColorPicker() {
+function ColourExtractor() {
   const [numberOfColors, setNumberOfColors] = useState(6);  // Number of colors to extract (5 by default)
   const [image, setImage] = useState(null);                 // Holds the image URL
   const [colors, setColors] = useState([]);                 // Stores an array of the extracted colors
@@ -481,4 +481,4 @@ function ColorPicker() {
   );
 }
 
-export default ColorPicker;
+export default ColourExtractor;

@@ -7,7 +7,7 @@ import './NavigationBar.css';
 
 import About from '../Pages/About';
 import Home from '../Pages/Home';
-import ColourPicker from '../Pages/ColorPicker';
+import ColourExtractor from '../Pages/ColourExtractor';
 import PaletteGenerator from '../Pages/PaletteGenerator';
 import MoodboardGenerator from '../Pages/MoodboardGenerator';
 
@@ -31,7 +31,7 @@ const NavigationBar = () => {
   const navigate = useNavigate();
   const navigateToHome = () => { navigate('/'); };
   const navigateToAbout = () => { navigate('/About'); };
-  const navigateToColourPicker = () => { navigate('/ColourPicker'); };
+  const navigateToColourExtractor = () => { navigate('/ColourExtractor'); };
   const navigateToPaletteGenerator = () => { navigate('/PaletteGenerator'); };
   const navigateToMoodboardGenerator = () => { navigate('/MoodboardGenerator'); };
   const navigateToNotFoundPage = () => { navigate('/NotFoundPage'); };
@@ -43,7 +43,7 @@ const NavigationBar = () => {
         <div className="links">
           {/* <button onClick={navigateToHome}>Home</button> */}
           <button onClick={navigateToAbout}>About</button>
-          <button onClick={navigateToColourPicker}>Colour Picker</button>
+          <button onClick={navigateToColourExtractor}>Colour Extractor</button>
           <button onClick={navigateToPaletteGenerator}>Palette Generator</button>
           <button onClick={navigateToMoodboardGenerator}>Moodboard Generator</button>
         </div>
