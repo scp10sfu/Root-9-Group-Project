@@ -9,7 +9,7 @@ import React, { createContext, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import About from './Pages/About';
 import Home from './Pages/Home';
-import ColourPicker from './Pages/ColourExtractor';
+import ColourExtractor from './Pages/ColourExtractor';
 import PaletteGenerator from './Pages/PaletteGenerator';
 import MoodboardGenerator from './Pages/MoodboardGenerator';
 import NotFoundPage from './Pages/NotFoundPage';
@@ -35,7 +35,7 @@ const App = () => {
   const navigate = useNavigate(); // gets navigation and stores it
   const navigateToHome = () => { navigate('/'); };
   const navigateToAbout = () => { navigate('/About'); };
-  const navigateToColourPicker = () => { navigate('/ColourPicker'); };
+  const navigateToColourExtractor = () => { navigate('/ColourExtractor'); };
   const navigateToPaletteGenerator = () => { navigate('/PaletteGenerator'); };
   const navigateToMoodboardGenerator = () => { navigate('/MoodboardGenerator'); };
   const navigateToNotFoundPage = () => { navigate('/NotFoundPage'); };
@@ -43,22 +43,15 @@ const App = () => {
   
   return (
     <div className="App">
-
-      {/* Include the NavigationBar component */}
       {/* <NavigationBar /> */}
 
       {/* <ColorSwitcher /> */}
-
-      {/* TODO: create nav bar as a component */}
-      {/* <Header /> */}
-
-
       <div>
         <div>
           <Routes>
             <Route path="/About" element={<About/>} />
             <Route path="/" element={<Home />} />
-            <Route path="/ColourPicker" element={<ColourPicker />} />
+            <Route path="/ColourExtractor" element={<ColourExtractor />} />
             <Route path="/PaletteGenerator" element={<PaletteGenerator />} />
             <Route path="/MoodboardGenerator" element={<MoodboardGenerator />} />
           </Routes>
