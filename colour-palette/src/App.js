@@ -4,7 +4,8 @@
  * @component
  */
 import React, { createContext, useState } from 'react';
-import './App.css';
+// import './App.css';
+// TODO: import css file for App component
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import About from './Pages/About';
 import Home from './Pages/Home';
@@ -41,11 +42,10 @@ const App = () => {
   const navigateToModeSwitch = () => { navigate('/ModeSwitch'); };
   
   return (
-
     <div className="App">
 
       {/* Include the NavigationBar component */}
-      <NavigationBar />
+      {/* <NavigationBar /> */}
 
       {/* <ColorSwitcher /> */}
 
@@ -64,16 +64,6 @@ const App = () => {
           </Routes>
         </div>
       </div> 
-
-      <main className="app-content">
-
-        {/* 
-        <header className="text_block">
-        <h1>Color Picker</h1>
-        <p>Extract wonderful palettes from your image.</p>
-        </header> */}
-
-      </main>
     </div>
   );
 };
