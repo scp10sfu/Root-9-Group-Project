@@ -207,18 +207,28 @@
 }
 
 /* Theme switcher styles */
-{/*.theme-switcher {
+/*.theme-switcher {
   position: absolute;
   top: 10px;
   right: 10px;
-}*/}
+}*/
 
+/*added the new switch just to test out
+and added mode changes and the test color will be change too
+- cindy*/
 .switch{
   display: flex;
   width: 100vw;
   height: 100px;
   justify-content: center;
   align-items: center;
+}
+
+.light.switch label{
+  color: black;
+}
+.light.switch label{
+  color: white;
 }
 
 .theme-switcher button {
@@ -284,3 +294,13 @@
   letter-spacing: -0.4px;
 }
 
+.App{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-direction: center;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
