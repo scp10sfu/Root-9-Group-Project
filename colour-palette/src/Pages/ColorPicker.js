@@ -20,7 +20,8 @@ function ColorPicker() {
   const [isImagePreviewActive, setIsImagePreviewActive] = useState(true);
   const imgRef = useRef(null);                              // Create a reference to the img tag
   const colorThief = new ColorThief();
-   
+  const [backgroundStyle, setBackgroundStyle] = useState({});
+
 
   /**
   * Converts RGB values to HEX format.
@@ -41,21 +42,41 @@ function ColorPicker() {
    const extractColors = async () => {
     if (imgRef.current && imgRef.current.complete) {
       try {
-        const result = colorThief.getPalette(imgRef.current, numberOfColors, 10);
-        const colorPromises = result.map(async (rgb) => {
+        // Use the state 'numberOfColors' to determine how many colors to get from the image
+        const palette = colorThief.getPalette(imgRef.current, numberOfColors);
+        const colorPromises = palette.map(async (rgb) => {
           const hex = rgbToHex(...rgb);
           const cmyk = rgbToCmyk(...rgb);
           const name = await fetchColorName(hex);
           return { hex, rgb: `rgb(${rgb.join(', ')})`, cmyk: `cmyk(${cmyk.join(', ')})`, name };
         });
         const colorObjects = await Promise.all(colorPromises);
-        setColors(colorObjects);
-        localStorage.setItem('extractedColors', JSON.stringify(colorObjects)); // Correct placement inside the try block
+        setColors(colorObjects); // Updates the color palette display
+        
+        // Update the background style based on the extracted colors
+        setBackgroundStyle({
+          '--color1': colorObjects[0]?.hex,
+          '--color2': colorObjects[1]?.hex,
+          '--color3': colorObjects[2]?.hex,
+          '--color4': colorObjects[3]?.hex,
+          '--color5': colorObjects[4]?.hex,
+          '--color6': colorObjects[5]?.hex,
+          '--color7': colorObjects[6]?.hex,
+          '--color8': colorObjects[7]?.hex,
+          '--color9': colorObjects[7]?.hex,
+          '--color10': colorObjects[7]?.hex,
+          '--color11': colorObjects[7]?.hex,
+          // ... add more if you're extracting more than 8 colors
+        });
       } catch (error) {
         console.error('Error extracting the colors:', error);
       }
     }
   };
+  
+  
+  
+  
   
 
   /**
@@ -103,29 +124,34 @@ function ColorPicker() {
     // }
     // Hold the current value of imgRef.current
     const currentImgRef = imgRef.current;
-
+    if (image) { // Check if there is an image uploaded
+      extractColors(); // This will extract colors again when 'numberOfColors' changes
+    }
     if (currentImgRef && currentImgRef.complete) {
       extractColors();
     }
-    // This function will be called to clean up when the component is unmounted or before the effect runs again
+    if (imgRef.current && imgRef.current.complete) {
+      extractColors();
+    }
+    // Clean up the event listener if it was added
     return () => {
-      // Clean up the event listener if it was added
-      if (currentImgRef) {
-        currentImgRef.removeEventListener('load', extractColors);
+      if (imgRef.current) {
+        imgRef.current.removeEventListener('load', extractColors);
       }
     };
+    // This function will be called to clean up when the component is unmounted or before the effect runs again
   }, [numberOfColors]);
 
   /**
   * Handles the change in the number of colors.
   * @param {object} event - The change event.
   */
-  const handleNumberChange = (event) => {
-    const newNumberOfColors = parseInt(event.target.value, 10);
-    setNumberOfColors(newNumberOfColors);
-    localStorage.setItem('savedNumberOfColors', newNumberOfColors); // Save number of colors to local storage
-
+   const handleNumberChange = (number) => {
+    setNumberOfColors(number); // This updates the number of colors to extract
+    extractColors(); // Call extractColors to update the palette and background with the new number
   };
+  
+  
 
   /**
   * Handles the file upload.
@@ -176,10 +202,10 @@ const handleImageChange = (event) => {
   };
 
 
-  const NumberButton = ({ number, setNumberOfColors, isActive }) => (
+  const NumberButton = ({ number, isActive }) => (
     <button
       className={`number-button ${isActive ? 'active' : ''}`}
-      onClick={() => setNumberOfColors(number)}
+      onClick={() => handleNumberChange(number)}
     >
       {number}
     </button>
@@ -190,12 +216,13 @@ const handleImageChange = (event) => {
 
   return (
     
-    <div className="ColorPicker">
+    <div className="ColorPicker" style={backgroundStyle}>
       {/* <ColorSwitcher /> */}
       {/* Animated background */}
+    {/* Animated background */}
     <div className="background">
       {Array.from({ length: 20 }, (_, i) => (
-        <span key={i}></span> // Using Array.from to create 20 span elements
+        <span key={i} style={{ color: `var(--color${i + 1})` }}></span>
       ))}
     </div>
       <main className="app-content">
@@ -241,15 +268,15 @@ const handleImageChange = (event) => {
           )}
 
 <section className="color-controls">
-      <p className="number-of-colors-label">The number of plate</p>
-      {[4, 6, 8, 10].map((number) => (
-        <NumberButton
-          key={number}
-          number={number}
-          isActive={numberOfColors === number}
-          setNumberOfColors={setNumberOfColors}
-        />
-      ))}
+  <p className="number-of-colors-label">The number of plate</p>
+  {[4, 6, 8, 10].map((number) => (
+    <NumberButton
+      key={number}
+      number={number}
+      isActive={numberOfColors === number}
+      setNumberOfColors={setNumberOfColors}
+    />
+  ))}
     </section>
         </section>
 
