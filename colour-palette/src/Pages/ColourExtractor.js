@@ -3,7 +3,7 @@
  * ColourExtractor.js
  * @component
  */
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import ColorThief from 'colorthief';
 import axios from 'axios';
 import { ReactComponent as UploadIcon } from '../images/icon-upload-dark.svg';
@@ -65,7 +65,8 @@ function ColourExtractor() {
   const extractColors = async () => {
     if (imgRef.current && imgRef.current.complete) {
       try {
-        const palette = colorThief.getPalette(imgRef.current, numberOfColors);
+        // NOTE: The value is set to 10, so we do not make multiple requests to the API
+        const palette = colorThief.getPalette(imgRef.current, 10);
         const colorPromises = palette.map(async (rgb) => {
           const hex = rgbToHex(...rgb);
           const cmyk = rgbToCmyk(...rgb);
@@ -109,7 +110,7 @@ function ColourExtractor() {
   * @param {number} numberOfColors - Number of colors to extract.
   * @returns {function} Cleanup function.
   */
-  React.useEffect(() => {
+  useEffect(() => {
     // Hold the current value of imgRef.current
     const currentImgRef = imgRef.current;
     if (image) {
