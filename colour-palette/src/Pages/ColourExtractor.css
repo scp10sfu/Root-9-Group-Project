@@ -4,7 +4,7 @@
   border: 1px dashed;
   border-radius: 10px;
   border-color: rgba(18, 18, 18, 0.50);
-  color: rgba(18, 18, 18, 0.50);
+  background-color: rgba(18, 18, 18, 0.05);
   text-align: center;
   padding: 20px 40px;
   cursor: pointer;
@@ -112,7 +112,7 @@
 }
 
 .number-of-colors-label {
-  color: #121212;
+  color: rgba(18, 18, 18, 1);
   text-align: center;
   /* Body */
   font-family: "DM Sans-Bold", Helvetica;
@@ -120,15 +120,20 @@
   font-style: bold;
   font-weight: 400;
   letter-spacing: -0.18px;
+  margin-top: 30px;
 }
 
 .number-button {
-  border: 2px solid rgba(18, 18, 18, 0.50); /* Black border */
+  font-family: "DM Sans-Bold", Helvetica;
+  font-weight: 600;
+  font-style: bold;
+
+  border: 2px solid rgba(18, 18, 18, 0.25); /* Black border */
   border-radius: 50%; /* Circular buttons */
   width: 50px; /* Adjust based on your design */
   height: 50px; /* Adjust based on your design */
   text-align: center; /* Center the text horizontally */
-  background-color: rgb(225, 255, 255); /* White background */
+  background-color: rgba(255, 225, 227, 0.25);
   color:rgba(18, 18, 18, 0.75);
   font-size: 16px; /* Adjust to match your design */
   margin: 0 10px; /* Spacing between buttons */

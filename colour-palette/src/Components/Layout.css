@@ -2,6 +2,8 @@
 /* the left part -> 1/3 of the total = 12 columns */
 /* the right part -> 2/3 of the total = 24 columns, so it divisible by 2, 4, 6, 8 */
 
+/* NOTE: in order for this to work, all elements must have a defined width and height */
+
 *{
     box-sizing: border-box;
   }
@@ -16,7 +18,8 @@
   
   .grid-container div{
     min-width: 100%;
-    background-color: #4a4e69;
+    /* DO NOT DELETE THIS! */
+    /* background-color: #4a4e69; */
     min-height: 1vmax;
     min-height: 100vh;
   }
@@ -28,7 +31,8 @@
   .nested-grid div{
     min-width: 100%;
     min-height: 1vmax;
-    background-color: #9a8c98 ;
+    /* DO NOT DELETE THIS! */
+    /* background-color: #9a8c98 ; */
   }
   
   .secondary-nested-grid{
@@ -37,13 +41,15 @@
   .secondary-nested-grid div{
     min-width: 100%;
     min-height: 0.2vmax;
-    background-color: #c9ada7 ;
+    /* DO NOT DELETE THIS! */
+    /* background-color: #c9ada7 ; */
   }
   
   body{
-    background-color:#22223b;
+    /* DO NOT DELETE THIS! */
+    /* background-color:#22223b; */
     font-family:monospace;
-    color: #f2e9e4;
+    /* color: #f2e9e4; */
     font-size:1.2em;
     padding: 1vmax 0 5vmax 0;
     line-height: 1.2em;
@@ -64,7 +70,7 @@
     grid-auto-flow: dense;
 }
 
-/*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
+
 .col-xs-justify-items-start{
     -ms-justify-items:start;
     justify-items:start;
@@ -82,7 +88,6 @@
     justify-items:stretch;
 }
 
-/*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
 .col-xs-align-items-start{
     -ms-align-items:start;
     align-items:start;
@@ -100,8 +105,6 @@
     align-items:stretch;
 }
 
-
-/*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
 .col-xs-justify-content-start{
     -ms-justify-content:start;
     justify-content:start;
@@ -131,10 +134,6 @@
     justify-content:space-evenly;
 }
 
-
-
-
-/*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
 .col-xs-align-content-start{
     -ms-align-content:start;
     align-content:start;
@@ -165,7 +164,6 @@
     align-content:space-evenly;
 }
 
-
 .col-xs-grid-auto-flow-row{
     -ms-align-content:center;
     grid-auto-flow:row;
@@ -178,8 +176,6 @@
     -ms-align-content:space-around;
     grid-auto-flow:dense;
 }
-
-
 
 .col-xs-1{
     -ms-grid-column-end: span 1;
@@ -378,8 +374,6 @@
 }
 
 
-
-
 .col-xs-justify-self-start{
     -ms-justify-self:start;
     justify-self:start;
@@ -414,264 +408,8 @@
     align-self:stretch;
 }
 
-@media only screen and (min-width:48em){    
+@media only screen and (min-width:76em){    
     
-    /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
-    .col-sm-justify-items-start{
-        -ms-justify-items:start;
-        justify-items:start;
-    }
-    .col-sm-justify-items-end{
-        -ms-justify-items:end;
-        justify-items:end;
-    }
-    .col-sm-justify-items-center{
-        -ms-justify-items:center;
-        justify-items:center;
-    }
-    .col-sm-justify-items-stretch{
-        -ms-justify-items:stretch;
-        justify-items:stretch;
-    }
-    
-    
-    
-    /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
-    .col-sm-align-items-start{
-        -ms-align-items:start;
-        align-items:start;
-    }
-    .col-sm-align-items-end{
-        -ms-align-items:end;
-        align-items:end;
-    }
-    .col-sm-align-items-center{
-        -ms-align-items:center;
-        align-items:center;
-    }
-    .col-sm-align-items-stretch{
-        -ms-align-items:stretch;
-        align-items:stretch;
-    }
-    
-    
-    /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
-    .col-sm-justify-content-start{
-        -ms-justify-content:start;
-        justify-content:start;
-    }
-    .col-sm-justify-content-end{
-        -ms-justify-content:end;
-        justify-content:end;
-    }
-    .col-sm-justify-content-center{
-        -ms-justify-content:center;
-        justify-content:center;
-    }
-    .col-sm-justify-content-stretch{
-        -ms-justify-content:stretch;
-        justify-content:stretch;
-    }
-    .col-sm-justify-content-space-around{
-        -ms-justify-content:space-around;
-        justify-content:space-around;
-    }
-    .col-sm-justify-content-space-between{
-       -ms-justify-content:space-between; 
-        justify-content:space-between;
-    }
-    .col-sm-justify-content-space-evenly{
-        -ms-justify-content:space-evenly;
-        justify-content:space-evenly;
-    }
-    
-    
-    
-    
-    /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
-    .col-sm-align-content-start{
-        -ms-align-content:start;
-        align-content:start;
-    }
-    .col-sm-align-content-end{
-        -ms-align-content:end;
-        align-content:end;
-    }
-    .col-sm-align-content-center{
-        -ms-align-content:center;
-        align-content:center;
-    }
-    
-    .col-sm-align-content-stretch{
-        -ms-align-content:stretch;
-        align-content:stretch;
-    }
-    .col-sm-align-content-space-around{
-       -ms-align-content:space-around;
-        align-content:space-around;
-    }
-    .col-sm-align-content-space-between{
-        -ms-align-content:start;
-        align-content:space-between;
-    }
-    .col-sm-align-content-space-evenly{
-        -ms-align-content:end;
-        align-content:space-evenly;
-    }
-    
-    
-
-    .col-sm-grid-auto-flow-row{
-        -ms-align-content:center;
-        grid-auto-flow:row;
-    }
-    .col-sm-grid-auto-flow-column{
-        -ms-align-content:stretch;
-        grid-auto-flow:column;
-    }
-    .col-sm-grid-auto-flow-dense{
-        -ms-align-content:space-around;
-        grid-auto-flow:dense;
-    }
-    
-    
-    
-    .col-sm-1{
-        -ms-grid-column-end: span 1;
-        grid-column-end: span 1;
-    }
-    .col-sm-2{
-        -ms-grid-column-end: span 2;
-        grid-column-end: span 2;
-    }
-    .col-sm-3{
-        -ms-grid-column-end: span 3;
-        grid-column-end: span 3;
-    }
-    .col-sm-4{
-        -ms-grid-column-end: span 4;
-        grid-column-end: span 4;
-    }
-    .col-sm-5{
-        -ms-grid-column-end: span 5;
-        grid-column-end: span 5;
-    }
-    .col-sm-6{
-        -ms-grid-column-end: span 6;
-        grid-column-end: span 6;
-    }
-    .col-sm-7{
-        -ms-grid-column-end: span 7;
-        grid-column-end: span 7;
-    }
-    .col-sm-8{
-        -ms-grid-column-end: span 8;
-        grid-column-end: span 8;
-    }
-    .col-sm-9{
-        -ms-grid-column-end: span 9;
-        grid-column-end: span 9;
-    }
-    .col-sm-10{
-        -ms-grid-column-end: span 10;
-        grid-column-end: span 10;
-    }
-    .col-sm-11{
-        -ms-grid-column-end: span 11;
-        grid-column-end: span 11;
-    }
-    .col-sm-12{
-        /* -ms-justify-self:; */
-        -ms-grid-column-end: span 12;
-        grid-column-end: span 12;
-    }
-
-
-    .col-sm-offset-2{
-        -ms-grid-column-start: 2;
-        grid-column-start: 2;
-    }
-    .col-sm-offset-3{
-        -ms-grid-column-start: 3;
-        grid-column-start: 3;
-    }
-    .col-sm-offset-4{
-        -ms-grid-column-start: 4;
-        grid-column-start: 4;
-    }
-    .col-sm-offset-5{
-        -ms-grid-column-start: 5;
-        grid-column-start: 5;
-    }
-    .col-sm-offset-6{
-        -ms-grid-column-start: 6;
-        grid-column-start: 6;
-    }
-    .col-sm-offset-7{
-        -ms-grid-column-start: 7;
-        grid-column-start: 7;
-    }
-    .col-sm-offset-8{
-        -ms-grid-column-start: 8;
-        grid-column-start: 8;
-    }
-    .col-sm-offset-9{
-        -ms-grid-column-start: 9;
-        grid-column-start: 9;
-    }
-    .col-sm-offset-10{
-        -ms-grid-column-start: 10;
-        grid-column-start: 10;
-    }
-    .col-sm-offset-11{
-        -ms-grid-column-start: 11;
-        grid-column-start: 11;
-    }
-    .col-sm-offset-12{
-        -ms-grid-column-start: 12;
-        grid-column-start: 12;
-    }
-
-    
-    
-    .col-sm-justify-self-start{
-        -ms-justify-self:start;
-        justify-self:start;
-    }
-    .col-sm-justify-self-end{
-        -ms-justify-self:end;
-        justify-self:end;
-    }
-    .col-sm-justify-self-center{
-        -ms-justify-self:center;
-        justify-self:center;
-    }
-    .col-sm-justify-self-stretch{
-       -ms-justify-self:stretch;
-        justify-self:stretch;
-    }
-    
-    .col-sm-align-self-start{
-       -ms-justify-self:start;
-        align-self:start;
-    }
-    .col-sm-align-self-end{
-        -ms-align-self:end;
-        align-self:end;
-    }
-    .col-sm-align-self-center{
-        -ms-align-self:center;
-        align-self:center;
-    }
-    .col-sm-align-self-stretch{
-        -ms-align-self:stretch;
-        align-self:stretch;
-    }
-}
-
-@media only screen and (min-width:62em){    
-    
-    /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
     .col-md-justify-items-start{
         -ms-justify-items:start;
         justify-items:start;
@@ -689,9 +427,6 @@
         justify-items:stretch;
     }
     
-    
-    
-    /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
     .col-md-align-items-start{
         -ms-align-items:start;
         align-items:start;
@@ -710,7 +445,6 @@
     }
     
     
-    /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
     .col-md-justify-content-start{
         -ms-justify-content:start;
         justify-content:start;
@@ -741,9 +475,6 @@
     }
     
     
-    
-    
-    /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
     .col-md-align-content-start{
         -ms-align-content:start;
         align-content:start;
@@ -1025,260 +756,6 @@
         align-self:center;
     }
     .col-md-align-self-stretch{
-        -ms-align-self:stretch;
-        align-self:stretch;
-    }
-}
-
-
-@media only screen and (min-width:75em){    
-    
-    /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
-    .col-lg-justify-items-start{
-        -ms-justify-items:start;
-        justify-items:start;
-    }
-    .col-lg-justify-items-end{
-        -ms-justify-items:end;
-        justify-items:end;
-    }
-    .col-lg-justify-items-center{
-        -ms-justify-items:center;
-        justify-items:center;
-    }
-    .col-lg-justify-items-stretch{
-        -ms-justify-items:stretch;
-        justify-items:stretch;
-    }
-    
-    
-    
-    /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
-    .col-lg-align-items-start{
-        -ms-align-items:start;
-        align-items:start;
-    }
-    .col-lg-align-items-end{
-        -ms-align-items:end;
-        align-items:end;
-    }
-    .col-lg-align-items-center{
-        -ms-align-items:center;
-        align-items:center;
-    }
-    .col-lg-align-items-stretch{
-        -ms-align-items:stretch;
-        align-items:stretch;
-    }
-    
-    
-    /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
-    .col-lg-justify-content-start{
-        -ms-justify-content:start;
-        justify-content:start;
-    }
-    .col-lg-justify-content-end{
-        -ms-justify-content:end;
-        justify-content:end;
-    }
-    .col-lg-justify-content-center{
-        -ms-justify-content:center;
-        justify-content:center;
-    }
-    .col-lg-justify-content-stretch{
-        -ms-justify-content:stretch;
-        justify-content:stretch;
-    }
-    .col-lg-justify-content-space-around{
-        -ms-justify-content:space-around;
-        justify-content:space-around;
-    }
-    .col-lg-justify-content-space-between{
-       -ms-justify-content:space-between; 
-        justify-content:space-between;
-    }
-    .col-lg-justify-content-space-evenly{
-        -ms-justify-content:space-evenly;
-        justify-content:space-evenly;
-    }
-    
-    
-    
-    
-    /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
-    .col-lg-align-content-start{
-        -ms-align-content:start;
-        align-content:start;
-    }
-    .col-lg-align-content-end{
-        -ms-align-content:end;
-        align-content:end;
-    }
-    .col-lg-align-content-center{
-        -ms-align-content:center;
-        align-content:center;
-    }
-    
-    .col-lg-align-content-stretch{
-        -ms-align-content:stretch;
-        align-content:stretch;
-    }
-    .col-lg-align-content-space-around{
-       -ms-align-content:space-around;
-        align-content:space-around;
-    }
-    .col-lg-align-content-space-between{
-        -ms-align-content:start;
-        align-content:space-between;
-    }
-    .col-lg-align-content-space-evenly{
-        -ms-align-content:end;
-        align-content:space-evenly;
-    }
-    
-    
-    .col-lg-grid-auto-flow-row{
-        -ms-align-content:center;
-        grid-auto-flow:row;
-    }
-    .col-lg-grid-auto-flow-column{
-        -ms-align-content:stretch;
-        grid-auto-flow:column;
-    }
-    .col-lg-grid-auto-flow-dense{
-        -ms-align-content:space-around;
-        grid-auto-flow:dense;
-    }
-    
-    
-    
-    .col-lg-1{
-        -ms-grid-column-end: span 1;
-        grid-column-end: span 1;
-    }
-    .col-lg-2{
-        -ms-grid-column-end: span 2;
-        grid-column-end: span 2;
-    }
-    .col-lg-3{
-        -ms-grid-column-end: span 3;
-        grid-column-end: span 3;
-    }
-    .col-lg-4{
-        -ms-grid-column-end: span 4;
-        grid-column-end: span 4;
-    }
-    .col-lg-5{
-        -ms-grid-column-end: span 5;
-        grid-column-end: span 5;
-    }
-    .col-lg-6{
-        -ms-grid-column-end: span 6;
-        grid-column-end: span 6;
-    }
-    .col-lg-7{
-        -ms-grid-column-end: span 7;
-        grid-column-end: span 7;
-    }
-    .col-lg-8{
-        -ms-grid-column-end: span 8;
-        grid-column-end: span 8;
-    }
-    .col-lg-9{
-        -ms-grid-column-end: span 9;
-        grid-column-end: span 9;
-    }
-    .col-lg-10{
-        -ms-grid-column-end: span 10;
-        grid-column-end: span 10;
-    }
-    .col-lg-11{
-        -ms-grid-column-end: span 11;
-        grid-column-end: span 11;
-    }
-    .col-lg-12{
-        -ms-grid-column-end: span 12;
-        grid-column-end: span 12;
-    }
-
-
-    .col-lg-offset-2{
-        -ms-grid-column-start: 2;
-        grid-column-start: 2;
-    }
-    .col-lg-offset-3{
-        -ms-grid-column-start: 3;
-        grid-column-start: 3;
-    }
-    .col-lg-offset-4{
-        -ms-grid-column-start: 4;
-        grid-column-start: 4;
-    }
-    .col-lg-offset-5{
-        -ms-grid-column-start: 5;
-        grid-column-start: 5;
-    }
-    .col-lg-offset-6{
-        -ms-grid-column-start: 6;
-        grid-column-start: 6;
-    }
-    .col-lg-offset-7{
-        -ms-grid-column-start: 7;
-        grid-column-start: 7;
-    }
-    .col-lg-offset-8{
-        -ms-grid-column-start: 8;
-        grid-column-start: 8;
-    }
-    .col-lg-offset-9{
-        -ms-grid-column-start: 9;
-        grid-column-start: 9;
-    }
-    .col-lg-offset-10{
-        -ms-grid-column-start: 10;
-        grid-column-start: 10;
-    }
-    .col-lg-offset-11{
-        -ms-grid-column-start: 11;
-        grid-column-start: 11;
-    }
-    .col-lg-offset-12{
-        -ms-grid-column-start: 12;
-        grid-column-start: 12;
-    }
-
-    
-    
-    .col-lg-justify-self-start{
-        -ms-justify-self:start;
-        justify-self:start;
-    }
-    .col-lg-justify-self-end{
-        -ms-justify-self:end;
-        justify-self:end;
-    }
-    .col-lg-justify-self-center{
-        -ms-justify-self:center;
-        justify-self:center;
-    }
-    .col-lg-justify-self-stretch{
-       -ms-justify-self:stretch;
-        justify-self:stretch;
-    }
-    
-    .col-lg-align-self-start{
-       -ms-justify-self:start;
-        align-self:start;
-    }
-    .col-lg-align-self-end{
-        -ms-align-self:end;
-        align-self:end;
-    }
-    .col-lg-align-self-center{
-        -ms-align-self:center;
-        align-self:center;
-    }
-    .col-lg-align-self-stretch{
         -ms-align-self:stretch;
         align-self:stretch;
     }

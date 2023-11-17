@@ -215,8 +215,7 @@ function ColourExtractor() {
             {/* <div class="col-xs-36 col-md-25 secondary-nested-grid"> */}
 
             <div class="col-xs-36 col-md-25">
-              <header className="text_block_text">Color Extractor
-              </header>
+              <header className="text_block_text">Colour Extractor</header>
             </div>   {/* Title */}
             <div class="col-xs-36 col-md-25">
               <header className="text_block_subtext">Extract wonderful palettes from your image.
@@ -475,6 +474,7 @@ function ColourExtractor() {
               </div>
             </div>}
 
+            {/* DO NOT DELETE THIS! */}
             <div class="footer col-xs-36 col-md-36"></div>
         </div>        
       </Layout>
