@@ -11,9 +11,15 @@ import { ReactComponent as UploadIcon } from '../images/icon-upload.svg';
 // import { ColorContext } from '../App';
 // TODO: add theme switcher to nav bar component
 // TODO: add SVG icons
-
+const debounce = (fn, delay) => {
+  let timeoutId;
+  return function(...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => fn(...args), delay);
+  };
+};
 function ColorPicker() {
-  const [numberOfColors, setNumberOfColors] = useState(4);  // Number of colors to extract (5 by default)
+  const [numberOfColors, setNumberOfColors] = useState(10);  // Number of colors to extract (5 by default)
   // const { darkTheme, toggleTheme } = useContext(ColorContext);
   const [image, setImage] = useState(null);                 // Holds the image URL
   const [colors, setColors] = useState([]);                 // Stores an array of the extracted colors
@@ -63,9 +69,9 @@ function ColorPicker() {
           '--color6': colorObjects[5]?.hex,
           '--color7': colorObjects[6]?.hex,
           '--color8': colorObjects[7]?.hex,
-          '--color9': colorObjects[7]?.hex,
-          '--color10': colorObjects[7]?.hex,
-          '--color11': colorObjects[7]?.hex,
+          '--color9': colorObjects[8]?.hex,
+          '--color10': colorObjects[9]?.hex,
+          '--color11': colorObjects[10]?.hex,
           // ... add more if you're extracting more than 8 colors
         });
       } catch (error) {
@@ -73,12 +79,40 @@ function ColorPicker() {
       }
     }
   };
-  
-  
-  
-  
-  
+  // Create a debounced version of extractColors
+  const debouncedExtractColors = debounce(async () => {
+    if (imgRef.current && imgRef.current.complete) {
+      try {
+        const palette = colorThief.getPalette(imgRef.current, numberOfColors);
+        const colorPromises = palette.map(async (rgb) => {
+          const hex = rgbToHex(...rgb);
+          const cmyk = rgbToCmyk(...rgb);
+          const name = await fetchColorName(hex);
+          return { hex, rgb: `rgb(${rgb.join(', ')})`, cmyk: `cmyk(${cmyk.join(', ')})`, name };
+        });
+        const colorObjects = await Promise.all(colorPromises);
+        setColors(colorObjects); // Updates the color palette display
 
+        // Update the background style based on the extracted colors
+        setBackgroundStyle({
+          '--color1': colorObjects[0]?.hex,
+          '--color2': colorObjects[1]?.hex,
+          '--color3': colorObjects[2]?.hex,
+          '--color4': colorObjects[3]?.hex,
+          '--color5': colorObjects[4]?.hex,
+          '--color6': colorObjects[5]?.hex,
+          '--color7': colorObjects[6]?.hex,
+          '--color8': colorObjects[7]?.hex,
+          '--color9': colorObjects[8]?.hex,
+          '--color10': colorObjects[9]?.hex,
+          '--color11': colorObjects[10]?.hex,
+          // ... add more if you're extracting more than 8 colors
+        });
+      } catch (error) {
+        console.error('Error extracting the colors:', error);
+      }
+    }
+  }, 500); // 500ms delay
   /**
   * Fetches color name from the API based on HEX code.
   * @param {string} hex - HEX color code.
@@ -147,8 +181,8 @@ function ColorPicker() {
   * @param {object} event - The change event.
   */
    const handleNumberChange = (number) => {
-    setNumberOfColors(number); // This updates the number of colors to extract
-    extractColors(); // Call extractColors to update the palette and background with the new number
+    setNumberOfColors(number); // Update the state
+    debouncedExtractColors();  // Call the debounced version of extractColors
   };
   
   
