@@ -5,7 +5,7 @@
     {
       "src": "favicon-32.svg",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "images/favicon-x"
+      "type": "images/favicon-x.svg"
     }
   ],
   "start_url": ".",

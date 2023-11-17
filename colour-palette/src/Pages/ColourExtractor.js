@@ -33,12 +33,12 @@ function ColourExtractor() {
   }).join('');
 
   /**
- * Converts RGB values to CMYK format.
- * @param {number} r - The red value (0 to 255).
- * @param {number} g - The green value (0 to 255).
- * @param {number} b - The blue value (0 to 255).
- * @returns {string} The CMEK representation of the RGB values.
- */
+  * Converts RGB values to CMYK format.
+   * @param {number} r - The red value (0 to 255).
+  * @param {number} g - The green value (0 to 255).
+  * @param {number} b - The blue value (0 to 255).
+  * @returns {string} The CMEK representation of the RGB values.
+  */
   const rgbToCmyk = (r, g, b) => {
     let c = 1 - (r / 255);
     let m = 1 - (g / 255);
@@ -56,7 +56,6 @@ function ColourExtractor() {
 
     return [c, m, y, k];
   };
-
 
   /**
     * Extracts colors from the loaded image using ColorThief and updates the state.
@@ -183,17 +182,26 @@ function ColourExtractor() {
     </button>
   );
 
+  // Default color information
+  const defaultColor = {
+    name: "Silver",
+    rgba: "196, 196, 196, 0.25"
+    // hex: "#C4C4C4",
+    // rgb: "196, 196, 196",
+    // cmyk: "0, 0, 0, 23.1"
+  };
+
   // TODO: create a default colour with full parameters to assign it to or return an error
-  const firstColor = colors.length > 0 ? colors[0] : "#000000";
-  const secondColor = colors.length > 0 ? colors[1] : "#000000";
-  const thirdColor = colors.length > 0 ? colors[2] : "#000000";
-  const fourthColor = colors.length > 0 ? colors[3] : "#000000";
-  const fifthColor = colors.length > 0 ? colors[4] : "#000000";
-  const sixthColor = colors.length > 0 ? colors[5] : "#000000";
-  const seventhColor = colors.length > 0 ? colors[6] : "#000000";
-  const eighthColor = colors.length > 0 ? colors[7] : "#000000";
-  const ninthColor = colors.length > 0 ? colors[8] : "#000000";
-  const tenthColor = colors.length > 0 ? colors[9] : "#000000";
+  const firstColor = colors.length >= 1 ? colors[0] : defaultColor;
+  const secondColor = colors.length >= 2 ? colors[1] : defaultColor;
+  const thirdColor = colors.length >= 3 ? colors[2] : defaultColor;
+  const fourthColor = colors.length >= 4 ? colors[3] : defaultColor;
+  const fifthColor = colors.length >= 5 ? colors[4] : defaultColor;
+  const sixthColor = colors.length >= 6 ? colors[5] : defaultColor;
+  const seventhColor = colors.length >= 7 ? colors[6] : defaultColor;
+  const eighthColor = colors.length >= 8 ? colors[7] : defaultColor;
+  const ninthColor = colors.length >= 9 ? colors[8] : defaultColor;
+  const tenthColor = colors.length >= 10 ? colors[9] : defaultColor;
 
   return (
 
