@@ -1,11 +1,11 @@
 {
-  "short_name": "React App",
-  "name": "Create React App",
+  "short_name": "Paletä",
+  "name": "Paletä",
   "icons": [
     {
       "src": "favicon-32.svg",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "type": "images/favicon-x"
     }
   ],
   "start_url": ".",
