@@ -13,14 +13,14 @@ import { ReactComponent as UploadIcon } from '../images/icon-upload.svg';
 // TODO: add SVG icons
 
 function ColorPicker() {
-  const [numberOfColors, setNumberOfColors] = useState(5);  // Number of colors to extract (5 by default)
+  const [numberOfColors, setNumberOfColors] = useState(4);  // Number of colors to extract (5 by default)
   // const { darkTheme, toggleTheme } = useContext(ColorContext);
   const [image, setImage] = useState(null);                 // Holds the image URL
   const [colors, setColors] = useState([]);                 // Stores an array of the extracted colors
   const [isImagePreviewActive, setIsImagePreviewActive] = useState(true);
   const imgRef = useRef(null);                              // Create a reference to the img tag
   const colorThief = new ColorThief();
-
+   
 
   /**
   * Converts RGB values to HEX format.
@@ -174,16 +174,36 @@ const handleImageChange = (event) => {
   
     return [c, m, y, k];
   };
+
+
+  const NumberButton = ({ number, setNumberOfColors, isActive }) => (
+    <button
+      className={`number-button ${isActive ? 'active' : ''}`}
+      onClick={() => setNumberOfColors(number)}
+    >
+      {number}
+    </button>
+  );
+  
+  
+  
+
   return (
+    
     <div className="ColorPicker">
       {/* <ColorSwitcher /> */}
-
+      {/* Animated background */}
+    <div className="background">
+      {Array.from({ length: 20 }, (_, i) => (
+        <span key={i}></span> // Using Array.from to create 20 span elements
+      ))}
+    </div>
       <main className="app-content">
         {/* Left column */}
         <section className="content-block">
 
           <header className="text_block">
-            <h1>Color Picker</h1>
+            <h1>Color Extractor</h1>
             <p>Extract wonderful palettes from your image.</p>
           </header>
 
@@ -194,7 +214,7 @@ const handleImageChange = (event) => {
                 <header className="text_block">
                   <div className="text_block_text">
                     <UploadIcon className="upload-icon" style={{ width: '30px', height: '30px' }} />
-                    <p>Click or drag file to this area to upload</p>
+                    <p>Click or drag image to upload</p>
                   </div>
                   <div className="text_block_subtext">
                     <i className="info-icon">i</i> Max file size: XX MB
@@ -220,16 +240,17 @@ const handleImageChange = (event) => {
             </div>
           )}
 
-          <section className="color-controls">
-            <input
-              type="range"
-              min="2"
-              max="10"
-              value={numberOfColors}
-              onChange={handleNumberChange}
-            />
-            <p>Number of colors: {numberOfColors}</p>
-          </section>
+<section className="color-controls">
+      <p className="number-of-colors-label">The number of plate</p>
+      {[4, 6, 8, 10].map((number) => (
+        <NumberButton
+          key={number}
+          number={number}
+          isActive={numberOfColors === number}
+          setNumberOfColors={setNumberOfColors}
+        />
+      ))}
+    </section>
         </section>
 
         {/* Right column */}
@@ -244,7 +265,7 @@ const handleImageChange = (event) => {
 ))}
 
 </section>
-
+      
       </main>
     </div>
   );
