@@ -38,7 +38,8 @@ const App = () => {
   const navigateToPaletteGenerator = () => { navigate('/PaletteGenerator'); };
   const navigateToMoodboardGenerator = () => { navigate('/MoodboardGenerator'); };
   const navigateToNotFoundPage = () => { navigate('/NotFoundPage'); };
-
+  const navigateToModeSwitch = () => { navigate('/ModeSwitch'); };
+  
   return (
 
     <div className="App">
@@ -76,5 +77,7 @@ const App = () => {
     </div>
   );
 };
+
+
 
 export default App;
