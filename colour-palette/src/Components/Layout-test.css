@@ -1,22 +1,18 @@
+/* 36 columns */
+/* the left part -> 1/3 of the total = 12 columns */
+/* the right part -> 2/3 of the total = 24 columns, so it divisible by 2, 4, 6, 8 */
+
 .grid-container{
     -ms-display: grid;
     display: grid;
-    -ms-grid-template-columns: repeat(12, 1fr);
-    grid-template-columns: repeat(12, 1fr);
+    -ms-grid-template-columns: repeat(36, 1fr);
+    grid-template-columns: repeat(36, 1fr);
     /*HERE YOU CAN SET YOUR CUSTOM COLUMN GAP*/
-    -ms-grid-column-gap:1.5vmax;
-    grid-column-gap:1.5vmax;
-
-     /*HERE YOU CAN SET YOUR CUSTOM ROW GAP*/
-    -ms-grid-row-gap: 1.5vmax;
-    grid-row-gap: 1.5vmax;
-    
-
-    /* -ms-grid-column-gap:16px;
-    grid-column-gap:16px;
-   
-    -ms-grid-row-gap: 16px;
-    grid-row-gap: 16px; */
+    -ms-grid-column-gap:1vmax;
+    grid-column-gap:1vmax;
+    /*HERE YOU CAN SET YOUR CUSTOM ROW GAP*/
+    -ms-grid-row-gap: 1vmax;
+    grid-row-gap: 1vmax;
 
     /*grid-auto-flow DETERMINES HOW THE GRID WILL FILL UP. IF YOU ENABLE THE grid-auto-flow PROPERTY, grid-column-gap WILL HAVE NO EFFECT ON THE AUTO-GENERATED ROWS, SO YOU WILL NEED TO SET A MARGIN TOP &/OR BOTTOM TO THE ELEMENTS INSIDE THE GRID CONTAINER IF YOU WANT A ROW GAP.
 
@@ -27,14 +23,6 @@
     column TELLS THE AUTO-PLACEMENT ALGORITHM TO FILL IN EACH COLUMN IN TURN, ADDING NEW COLUMNS AS NECESSARY */
     -ms-grid-auto-flow: dense;
     grid-auto-flow: dense;
-}
-
-/* make a column fill the entire height of the screen */
-.full-height-container {
-    /* min-height: calc(100vh - 10px);
-    display: flex;
-    flex-direction: column; */
-    
 }
 
 /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
@@ -204,6 +192,102 @@
     -ms-grid-column-end: span 12;
     grid-column-end: span 12;
 }
+.col-xs-13{
+    -ms-grid-column-end: span 13;
+    grid-column-end: span 13;
+}
+.col-xs-14{
+    -ms-grid-column-end: span 14;
+    grid-column-end: span 14;
+}
+.col-xs-15{
+    -ms-grid-column-end: span 15;
+    grid-column-end: span 15;
+}
+.col-xs-16{
+    -ms-grid-column-end: span 16;
+    grid-column-end: span 16;
+}
+.col-xs-17{
+    -ms-grid-column-end: span 17;
+    grid-column-end: span 17;
+}
+.col-xs-18{
+    -ms-grid-column-end: span 18;
+    grid-column-end: span 18;
+}
+.col-xs-19{
+    -ms-grid-column-end: span 19;
+    grid-column-end: span 19;
+}
+.col-xs-20{
+    -ms-grid-column-end: span 20;
+    grid-column-end: span 20;
+}
+.col-xs-21{
+    -ms-grid-column-end: span 21;
+    grid-column-end: span 21;
+}
+.col-xs-22{
+    -ms-grid-column-end: span 22;
+    grid-column-end: span 22;
+}
+.col-xs-23{
+    -ms-grid-column-end: span 23;
+    grid-column-end: span 23;
+}
+.col-xs-24{
+    -ms-grid-column-end: span 24;
+    grid-column-end: span 24;
+}
+.col-xs-25{
+    -ms-grid-column-end: span 25;
+    grid-column-end: span 25;
+}
+.col-xs-26{
+    -ms-grid-column-end: span 26;
+    grid-column-end: span 26;
+}
+.col-xs-27{
+    -ms-grid-column-end: span 27;
+    grid-column-end: span 27;
+}
+.col-xs-28{
+    -ms-grid-column-end: span 28;
+    grid-column-end: span 28;
+}
+.col-xs-29{
+    -ms-grid-column-end: span 29;
+    grid-column-end: span 29;
+}
+.col-xs-30{
+    -ms-grid-column-end: span 30;
+    grid-column-end: span 30;
+}
+.col-xs-31{
+    -ms-grid-column-end: span 31;
+    grid-column-end: span 31;
+}
+.col-xs-32{
+    -ms-grid-column-end: span 32;
+    grid-column-end: span 32;
+}
+.col-xs-33{
+    -ms-grid-column-end: span 33;
+    grid-column-end: span 33;
+}
+.col-xs-34{
+    -ms-grid-column-end: span 34;
+    grid-column-end: span 34;
+}
+.col-xs-35{
+    -ms-grid-column-end: span 35;
+    grid-column-end: span 35;
+}
+.col-xs-36{
+    -ms-grid-column-end: span 36;
+    grid-column-end: span 36;
+}
 
 
 
@@ -250,6 +334,10 @@
 .col-xs-offset-12{
     -ms-grid-column-start: 12;
     grid-column-start: 12;
+}
+.col-xs-offset-24{
+    -ms-grid-column-start: 24;
+    grid-column-start: 24;
 }
 
 
@@ -710,9 +798,104 @@
         grid-column-end: span 11;
     }
     .col-md-12{
-        /* -ms-justify-self:; */
         -ms-grid-column-end: span 12;
         grid-column-end: span 12;
+    }
+    .col-md-13{
+        -ms-grid-column-end: span 13;
+        grid-column-end: span 13;
+    }
+    .col-md-14{
+        -ms-grid-column-end: span 14;
+        grid-column-end: span 14;
+    }
+    .col-md-15{
+        -ms-grid-column-end: span 15;
+        grid-column-end: span 15;
+    }
+    .col-md-16{
+        -ms-grid-column-end: span 16;
+        grid-column-end: span 16;
+    }
+    .col-md-17{
+        -ms-grid-column-end: span 17;
+        grid-column-end: span 17;
+    }
+    .col-md-18{
+        -ms-grid-column-end: span 18;
+        grid-column-end: span 18;
+    }
+    .col-md-19{
+        -ms-grid-column-end: span 19;
+        grid-column-end: span 19;
+    }
+    .col-md-20{
+        -ms-grid-column-end: span 20;
+        grid-column-end: span 20;
+    }
+    .col-md-21{
+        -ms-grid-column-end: span 21;
+        grid-column-end: span 21;
+    }
+    .col-md-22{
+        -ms-grid-column-end: span 22;
+        grid-column-end: span 22;
+    }
+    .col-md-23{
+        -ms-grid-column-end: span 23;
+        grid-column-end: span 23;
+    }
+    .col-md-24{
+        -ms-grid-column-end: span 24;
+        grid-column-end: span 24;
+    }
+    .col-md-25{
+        -ms-grid-column-end: span 25;
+        grid-column-end: span 25;
+    }
+    .col-md-26{
+        -ms-grid-column-end: span 26;
+        grid-column-end: span 26;
+    }
+    .col-md-27{
+        -ms-grid-column-end: span 27;
+        grid-column-end: span 27;
+    }
+    .col-md-28{
+        -ms-grid-column-end: span 28;
+        grid-column-end: span 28;
+    }
+    .col-md-29{
+        -ms-grid-column-end: span 29;
+        grid-column-end: span 29;
+    }
+    .col-md-30{
+        -ms-grid-column-end: span 30;
+        grid-column-end: span 30;
+    }
+    .col-md-31{
+        -ms-grid-column-end: span 31;
+        grid-column-end: span 31;
+    }
+    .col-md-32{
+        -ms-grid-column-end: span 32;
+        grid-column-end: span 32;
+    }
+    .col-md-33{
+        -ms-grid-column-end: span 33;
+        grid-column-end: span 33;
+    }
+    .col-md-34{
+        -ms-grid-column-end: span 34;
+        grid-column-end: span 34;
+    }
+    .col-md-35{
+        -ms-grid-column-end: span 35;
+        grid-column-end: span 35;
+    }
+    .col-md-36{
+        -ms-grid-column-end: span 36;
+        grid-column-end: span 36;
     }
 
 
@@ -759,6 +942,18 @@
     .col-md-offset-12{
         -ms-grid-column-start: 12;
         grid-column-start: 12;
+    }
+    .col-md-offset-24{
+        -ms-grid-column-start: 24;
+        grid-column-start: 24;
+    }
+    .col-md-offset-30{
+        -ms-grid-column-start: 30;
+        grid-column-start: 30;
+    }
+    .col-md-offset-36{
+        -ms-grid-column-start: 36;
+        grid-column-start: 36;
     }
 
     
@@ -965,7 +1160,6 @@
         grid-column-end: span 11;
     }
     .col-lg-12{
-        /* -ms-justify-self:; */
         -ms-grid-column-end: span 12;
         grid-column-end: span 12;
     }
