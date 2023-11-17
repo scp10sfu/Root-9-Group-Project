@@ -218,10 +218,6 @@ function ColourExtractor() {
 
           {/* The main content - left part */}
           <div class="main-section col-xs-36 col-md-12 grid-container nested-grid">
-
-            {/* <div class="col-xs-36 col-md-24 grid-container secondary-nested-grid"> */}
-            {/* <div class="col-xs-36 col-md-25 secondary-nested-grid"> */}
-
             <div class="col-xs-36 col-md-25">
               <header className="text_block_text">Colour Extractor</header>
             </div>   {/* Title */}
@@ -229,7 +225,7 @@ function ColourExtractor() {
               <header className="text_block_subtext">Extract wonderful palettes from your image.
               </header>
             </div>   {/* Extra information */}
-            {/* <div class="col-xs-36 col-md-25">Upload image:</div>  Upload image */}
+            {/* <div class="col-xs-36 col-md-25">Upload image:</div> */}
             {/* Upload image */}
             <div class="col-xs-36 col-md-25">{isImagePreviewActive && (
               <section className="upload-area">
@@ -262,24 +258,21 @@ function ColourExtractor() {
                   />
                 </div>
               )}
-
             </div>
 
             <div class="col-xs-36 col-md-25">
               <section className="color-controls">
-              <div className="number-of-colors-label">The number of colours</div>
-              {[4, 6, 8, 10].map((number) => (
-                <NumberButton
-                  key={number}
-                  number={number}
-                  isActive={numberOfColors === number}
-                />
-              ))}
-            </section>
-
-            </div>  
+                <div className="number-of-colors-label">The number of colours</div>
+                {[4, 6, 8, 10].map((number) => (
+                  <NumberButton
+                    key={number}
+                    number={number}
+                    isActive={numberOfColors === number}
+                  />
+                ))}
+              </section>
+            </div>
           </div>
-
 
           {/* The main content - right part: DOMINANT COLOURS */}
           <div class="wrapper-2-col secondary-section col-xs-36 col-md-24 grid-container nested-grid">
@@ -295,11 +288,11 @@ function ColourExtractor() {
             {/* Second dominant colour */}
             <div class="col-xs-36 col-md-18">
               <div key={1} className="color-bottom-align" style={{ backgroundColor: secondColor.hex }}>
-              <p className="color-name">{secondColor.name}</p>
-              <p className="color-hex">HEX: {secondColor.hex}</p>
-              <p className="color-rgb">RGB: {secondColor.rgb}</p>
-              <p className="color-cmyk">CMYK: {secondColor.cmyk}</p>
-            </div></div>
+                <p className="color-name">{secondColor.name}</p>
+                <p className="color-hex">HEX: {secondColor.hex}</p>
+                <p className="color-rgb">RGB: {secondColor.rgb}</p>
+                <p className="color-cmyk">CMYK: {secondColor.cmyk}</p>
+              </div></div>
           </div>
 
           {/* 4 colours */}
@@ -482,12 +475,11 @@ function ColourExtractor() {
               </div>
             </div>}
 
-            {/* DO NOT DELETE THIS! */}
-            <div class="footer col-xs-36 col-md-36"></div>
-        </div>        
+          {/* DO NOT DELETE THIS! */}
+          <div class="footer col-xs-36 col-md-36"></div>
+        </div>
       </Layout>
     </div>
-
   );
 }
 
