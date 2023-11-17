@@ -9,38 +9,6 @@ const Home = () => {
   return (
     <body>
     <Layout>
-
-      {/* <main class="container">
-  <section class="row">
-
-    <div class="col-12 md-col-3 lg-col-3">
-      <div class="item">
-      <h1>Welcome to the Homepage!  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</h1>
-      </div>
-    </div>
-
-    <div class="sm-col-12 md-col-6 lg-col-3">
-      <div class="item">
-      <h3>TEST! Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</h3>
-      </div>
-    </div>
-
-    <div class="col-12 md-col-6 lg-col-3">
-      <div class="item">
-      <h1>Welcome to the Homepage! lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</h1>
-      <h3>TEST!</h3>
-      </div>
-    </div>
-
-    <div class="col-12 md-col-6 lg-col-3">
-      <div class="item">
-      <h1>Welcome to the Homepage! lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</h1>
-      <h3>TEST!</h3>
-      </div>
-    </div>
-  </section>
-</main> */}
-
       {/* <NavigationBar /> */}
       <div class="grid-container general-demo">
         {/* The nav bar */}

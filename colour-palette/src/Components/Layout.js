@@ -2,8 +2,6 @@
 import React from "react";
 // import "./Layout.css";
 import "./Layout-test.css";
-import NavigationBar from "./NavigationBar";
-
 import './12-column-css-grid-styles.css'
 
 // Always wrap your entire page with a container (unless you have a background image that you want to bleed to the edges of the page at all times)

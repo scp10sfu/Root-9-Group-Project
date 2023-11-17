@@ -6,21 +6,19 @@
 import React, { useState, useRef } from 'react';
 import ColorThief from 'colorthief';
 import axios from 'axios';
-import { ReactComponent as UploadIcon } from '../images/icon-upload.svg';
-// import ColorSwitcher from '../Components/ColorSwitcher'; 
-// import { ColorContext } from '../App';
-// TODO: add theme switcher to nav bar component
-// TODO: add SVG icons
+import { ReactComponent as UploadIcon } from '../images/icon-upload-dark.svg';
+import { ReactComponent as InfoIcon } from '../images/icon-info-dark.svg';
+import Layout from '../Components/Layout';
+import './ColorPicker.css';
 
 function ColorPicker() {
-  const [numberOfColors, setNumberOfColors] = useState(5);  // Number of colors to extract (5 by default)
-  // const { darkTheme, toggleTheme } = useContext(ColorContext);
+  const [numberOfColors, setNumberOfColors] = useState(6);  // Number of colors to extract (5 by default)
   const [image, setImage] = useState(null);                 // Holds the image URL
   const [colors, setColors] = useState([]);                 // Stores an array of the extracted colors
   const [isImagePreviewActive, setIsImagePreviewActive] = useState(true);
   const imgRef = useRef(null);                              // Create a reference to the img tag
   const colorThief = new ColorThief();
-
+  const [backgroundStyle, setBackgroundStyle] = useState({});
 
   /**
   * Converts RGB values to HEX format.
@@ -35,34 +33,66 @@ function ColorPicker() {
   }).join('');
 
   /**
-  * Extracts colors from the loaded image using ColorThief and updates the state.
-  * @returns {Promise<void>} A Promise that resolves when the extraction is complete.
-  */
-   const extractColors = async () => {
+ * Converts RGB values to CMYK format.
+ * @param {number} r - The red value (0 to 255).
+ * @param {number} g - The green value (0 to 255).
+ * @param {number} b - The blue value (0 to 255).
+ * @returns {string} The CMEK representation of the RGB values.
+ */
+  const rgbToCmyk = (r, g, b) => {
+    let c = 1 - (r / 255);
+    let m = 1 - (g / 255);
+    let y = 1 - (b / 255);
+    let k = Math.min(c, Math.min(m, y));
+
+    c = ((c - k) / (1 - k)) || 0;
+    m = ((m - k) / (1 - k)) || 0;
+    y = ((y - k) / (1 - k)) || 0;
+
+    c = Math.round(c * 100);
+    m = Math.round(m * 100);
+    y = Math.round(y * 100);
+    k = Math.round(k * 100);
+
+    return [c, m, y, k];
+  };
+
+
+  /**
+    * Extracts colors from the loaded image using ColorThief and updates the state.
+    * @returns {Promise<void>} A Promise that resolves when the extraction is complete.
+    */
+  const extractColors = async () => {
     if (imgRef.current && imgRef.current.complete) {
       try {
-        const result = colorThief.getPalette(imgRef.current, numberOfColors, 10);
-        const colorPromises = result.map(async (rgb) => {
+        const palette = colorThief.getPalette(imgRef.current, numberOfColors);
+        const colorPromises = palette.map(async (rgb) => {
           const hex = rgbToHex(...rgb);
           const cmyk = rgbToCmyk(...rgb);
           const name = await fetchColorName(hex);
-          return { hex, rgb: `rgb(${rgb.join(', ')})`, cmyk: `cmyk(${cmyk.join(', ')})`, name };
+          return { hex, rgb: `${rgb.join(', ')}`, cmyk: `${cmyk.join(', ')}`, name };
         });
         const colorObjects = await Promise.all(colorPromises);
         setColors(colorObjects);
-        localStorage.setItem('extractedColors', JSON.stringify(colorObjects)); // Correct placement inside the try block
+
+        // Update the background style based on the extracted colors
+        const background = {};
+        for (let i = 0; i < colorObjects.length; i++) {
+          background[`--color${i + 1}`] = colorObjects[i]?.hex;
+        }
+        setBackgroundStyle(background);
       } catch (error) {
         console.error('Error extracting the colors:', error);
       }
     }
   };
-  
+
 
   /**
-  * Fetches color name from the API based on HEX code.
-  * @param {string} hex - HEX color code.
-  * @returns {Promise<string>} Resolves with the color name.
-  */
+    * Fetches color name from the API based on HEX code.
+    * @param {string} hex - HEX color code.
+    * @returns {Promise<string>} Resolves with the color name.
+    */
   const fetchColorName = async (hex) => {
     try {
       const response = await axios.get(`https://www.thecolorapi.com/id?hex=${hex.replace('#', '')}`);
@@ -79,72 +109,60 @@ function ColorPicker() {
   * @param {number} numberOfColors - Number of colors to extract.
   * @returns {function} Cleanup function.
   */
-   React.useEffect(() => {
-    // const savedImage = localStorage.getItem('savedImage');
-    // const savedColors = JSON.parse(localStorage.getItem('extractedColors') || '[]');
-    
-    // if (savedImage) {
-    //   setImage(savedImage);
-    //   setIsImagePreviewActive(false);
-    // }
-    
-    // if (savedColors.length > 0) {
-    //   setColors(savedColors);
-    // }
-    
-    // if (savedColors.length > 0) {
-    // setColors(savedColors);
-    // }
-
-    //  // Load the saved number of colors
-    // const savedNumberOfColors = localStorage.getItem('savedNumberOfColors');
-    // if (savedNumberOfColors) {
-    // setNumberOfColors(parseInt(savedNumberOfColors, 10));
-    // }
+  React.useEffect(() => {
     // Hold the current value of imgRef.current
     const currentImgRef = imgRef.current;
-
+    if (image) {
+      extractColors();
+    }
     if (currentImgRef && currentImgRef.complete) {
+      extractColors();
+    }
+    if (imgRef.current && imgRef.current.complete) {
       extractColors();
     }
     // This function will be called to clean up when the component is unmounted or before the effect runs again
     return () => {
       // Clean up the event listener if it was added
-      if (currentImgRef) {
-        currentImgRef.removeEventListener('load', extractColors);
+      if (imgRef.current) {
+        imgRef.current.removeEventListener('load', extractColors);
       }
     };
   }, [numberOfColors]);
+
 
   /**
   * Handles the change in the number of colors.
   * @param {object} event - The change event.
   */
-  const handleNumberChange = (event) => {
-    const newNumberOfColors = parseInt(event.target.value, 10);
-    setNumberOfColors(newNumberOfColors);
-    localStorage.setItem('savedNumberOfColors', newNumberOfColors); // Save number of colors to local storage
-
+  const handleNumberChange = (number) => {
+    setNumberOfColors(number);
+    extractColors();
   };
+  // const handleNumberChange = (event) => {
+  //   const newNumberOfColors = parseInt(event.target.value, 10);
+  //   setNumberOfColors(newNumberOfColors);
+  //   localStorage.setItem('savedNumberOfColors', newNumberOfColors); // Save number of colors to local storage
+  // };
 
   /**
   * Handles the file upload.
   * @param {object} event - The file change event.
   */
-// When setting the image after upload
-const handleImageChange = (event) => {
-  if (event.target.files && event.target.files.length > 0) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
+  // When setting the image after upload
+  const handleImageChange = (event) => {
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
 
-    reader.onload = (e) => {
-      setImage(e.target.result); // Set image URL to display it
-      localStorage.setItem('savedImage', e.target.result); // Save image data to local storage
-      setIsImagePreviewActive(false); // Set image preview active
-    };
-    reader.readAsDataURL(file);
-  }
-};
+      reader.onload = (e) => {
+        setImage(e.target.result); // Set image URL to display it
+        localStorage.setItem('savedImage', e.target.result); // Save image data to local storage
+        setIsImagePreviewActive(false); // Set image preview active
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   /**
   * Handles closing the image preview.
@@ -154,117 +172,312 @@ const handleImageChange = (event) => {
     setColors([]); // Clear the colors when closing the preview
     setIsImagePreviewActive(true); // Set image preview inactive
   };
-  /** 
-   * function to change rgb to cmyk
-   */
-  const rgbToCmyk = (r, g, b) => {
-    let c = 1 - (r / 255);
-    let m = 1 - (g / 255);
-    let y = 1 - (b / 255);
-    let k = Math.min(c, Math.min(m, y));
-  
-    c = ((c - k) / (1 - k)) || 0;
-    m = ((m - k) / (1 - k)) || 0;
-    y = ((y - k) / (1 - k)) || 0;
-  
-    c = Math.round(c * 100);
-    m = Math.round(m * 100);
-    y = Math.round(y * 100);
-    k = Math.round(k * 100);
-  
-    return [c, m, y, k];
-  };
+
+  const NumberButton = ({ number, isActive }) => (
+    <button
+      className={`number-button ${isActive ? 'active' : ''}`}
+      onClick={() => handleNumberChange(number)}
+    >
+      {number}
+    </button>
+  );
+
+  // TODO: create a default colour with full parameters to assign it to or return an error
+  const firstColor = colors.length > 0 ? colors[0] : "#000000";
+  const secondColor = colors.length > 0 ? colors[1] : "#000000";
+  const thirdColor = colors.length > 0 ? colors[2] : "#000000";
+  const fourthColor = colors.length > 0 ? colors[3] : "#000000";
+  const fifthColor = colors.length > 0 ? colors[4] : "#000000";
+  const sixthColor = colors.length > 0 ? colors[5] : "#000000";
+  const seventhColor = colors.length > 0 ? colors[6] : "#000000";
+  const eighthColor = colors.length > 0 ? colors[7] : "#000000";
+  const ninthColor = colors.length > 0 ? colors[8] : "#000000";
+  const tenthColor = colors.length > 0 ? colors[9] : "#000000";
+
   return (
-    <div className="ColorPicker">
-      {/* <ColorSwitcher /> */}
 
-      <main className="app-content">
-        {/* Left column */}
-        <section className="content-block">
+    <div className="ColorPicker" style={backgroundStyle}>
+      <div className="background">
+        {Array.from({ length: 20 }, (_, i) => (
+          <span key={i} style={{ color: `var(--color${i + 1})` }}></span>
+        ))}
+      </div>
+      <Layout>
+        {/* <NavigationBar /> */}
+        <div class="grid-container general">
+          {/* The nav bar */}
+          <div class="logo col-xs-6 col-md-6">Paletä</div>
+          <div class="header col-xs-30 col-md-30"></div>
 
-          <header className="text_block">
-            <h1>Color Picker</h1>
-            <p>Extract wonderful palettes from your image.</p>
-          </header>
+          {/* The main content - left part */}
+          <div class="main-section col-xs-36 col-md-12 grid-container nested-grid">
 
-          {isImagePreviewActive && (
-            <section className="upload-area">
-              <input type="file" accept="image/*" onChange={handleImageChange} id="fileInput" />
-              <label htmlFor="fileInput">
-                <header className="text_block">
+            {/* <div class="col-xs-36 col-md-24 grid-container secondary-nested-grid"> */}
+            {/* <div class="col-xs-36 col-md-25 secondary-nested-grid"> */}
+
+            <div class="col-xs-36 col-md-25">
+              <header className="text_block_text">Color Extractor
+              </header>
+            </div>   {/* Title */}
+            <div class="col-xs-36 col-md-25">
+              <header className="text_block_subtext">Extract wonderful palettes from your image.
+              </header>
+            </div>   {/* Extra information */}
+            {/* <div class="col-xs-36 col-md-25">Upload image:</div>  Upload image */}
+            {/* Upload image */}
+            <div class="col-xs-36 col-md-25">{isImagePreviewActive && (
+              <section className="upload-area">
+                <input type="file" accept="image/*" onChange={handleImageChange} id="fileInput" />
+                <label htmlFor="fileInput">
+                  {/* <header className="text_block"> */}
                   <div className="text_block_text">
-                    <UploadIcon className="upload-icon" style={{ width: '30px', height: '30px' }} />
-                    <p>Click or drag file to this area to upload</p>
+                    <UploadIcon className="upload-icon-dark" style={{ width: '40px', height: '40px' }} />
+                    <div className='text'>Click or drag file to this area to upload</div>
                   </div>
-                  <div className="text_block_subtext">
-                    <i className="info-icon">i</i> Max file size: XX MB
+                  <div className="subtext">
+                    <InfoIcon className="info-icon-dark" style={{ width: '21px', height: '21px' }} />  Max file size: XX MB
                   </div>
-                </header>
-              </label>
-            </section>
-          )}
+                  {/* </header> */}
+                </label>
+              </section>
+            )}
+              {image && (
+                <div className="image-preview">
+                  <button className="close-button" onClick={handleClosePreview}>
+                    <span>&times;</span>
+                  </button>
 
-          {image && (
-            <div className="image-preview">
-              <button className="close-button" onClick={handleClosePreview}>
-                <span>&times;</span>
-              </button>
+                  <img
+                    ref={imgRef}
+                    src={image}
+                    alt="To extract colors from"
+                    crossOrigin="anonymous"
+                    onLoad={extractColors}
+                  />
+                </div>
+              )}
 
-              <img
-                ref={imgRef}
-                src={image}
-                alt="To extract colors from"
-                crossOrigin="anonymous"
-                onLoad={extractColors}
-              />
             </div>
-          )}
 
-          <section className="color-controls">
-            {/* <input
-              type="range"
-              min="2"
-              max="10"
-              value={numberOfColors}
-              onChange={handleNumberChange}
-            /> */}
-             <form action="#" class="my-number-color">
-              <label for="lang">choose a number</label>
-              <div popup id="testtest">
-               <select name="languages" id="lang" value={numberOfColors} onChange={handleNumberChange}>
-                  <option value="label">Select a number</option>
-                  <option value="num1">1</option>
-                  <option value="num2">2</option>
-                  <option value="num3">3</option>
-                  <option value="num4">4</option>
-                  <option value="num5">5</option>
-                  <option value="num6">6</option>
-                  <option value="num7">7</option>
-                  <option value="num8">8</option>
-                  <option value="num9">9</option>
-                  <option value="num10">10</option>
-          </select>
+            <div class="col-xs-36 col-md-25">
+              <section className="color-controls">
+              <div className="number-of-colors-label">The number of colours</div>
+              {[4, 6, 8, 10].map((number) => (
+                <NumberButton
+                  key={number}
+                  number={number}
+                  isActive={numberOfColors === number}
+                />
+              ))}
+            </section>
+
+            </div>  
           </div>
-    </form>
-           
-          </section>
-        </section>
 
-        {/* Right column */}
-       <section className={`color-palette ${colors.length === 2 ? 'two-colors' : colors.length === 8 ? 'eight-colors' : ''}`}>
-       {colors.map((colorObj, index) => (
-  <div key={index} className="color" style={{ backgroundColor: colorObj.hex }}>
-    <p className="color-name">{colorObj.name}</p>
-    <p className="color-hex">HEX: {colorObj.hex}</p>
-    <p className="color-rgb">RGB: {colorObj.rgb}</p>
-    <p className="color-cmyk">CMYK: {colorObj.cmyk}</p>
-  </div>
-))}
 
-</section>
+          {/* The main content - right part: DOMINANT COLOURS */}
+          <div class="wrapper-2-col secondary-section col-xs-36 col-md-24 grid-container nested-grid">
+            {/* First dominant colour */}
+            <div class="col-xs-36 col-md-18">
+              <div key={0} className="color" style={{ backgroundColor: firstColor.hex }}>
+                <p className="color-name">{firstColor.name}</p>
+                <p className="color-hex">HEX: {firstColor.hex}</p>
+                <p className="color-rgb">RGB: {firstColor.rgb}</p>
+                <p className="color-cmyk">CMYK: {firstColor.cmyk}</p>
+              </div>
+            </div>
+            {/* Second dominant colour */}
+            <div class="col-xs-36 col-md-18"><div key={1} className="color" style={{ backgroundColor: secondColor.hex }}>
+              <p className="color-name">{secondColor.name}</p>
+              <p className="color-hex">HEX: {secondColor.hex}</p>
+              <p className="color-rgb">RGB: {secondColor.rgb}</p>
+              <p className="color-cmyk">CMYK: {secondColor.cmyk}</p>
+            </div></div>
+          </div>
 
-      </main>
+          {/* 4 colours */}
+          {numberOfColors === 4 &&
+            <div class="wrapper-4-col secondary-section col-xs-36 col-md-24 grid-container nested-grid">
+              <div class="col-xs-36 col-md-18">
+                <div key={2} className="color" style={{ backgroundColor: thirdColor.hex }}>
+                  <p className="color-name">{thirdColor.name}</p>
+                  <p className="color-hex">HEX: {thirdColor.hex}</p>
+                  <p className="color-rgb">RGB: {thirdColor.rgb}</p>
+                  <p className="color-cmyk">CMYK: {thirdColor.cmyk}</p>
+                </div>
+              </div>
+              <div class="col-xs-36 col-md-18">
+                <div key={3} className="color" style={{ backgroundColor: fourthColor.hex }}>
+                  <p className="color-name">{fourthColor.name}</p>
+                  <p className="color-hex">HEX: {fourthColor.hex}</p>
+                  <p className="color-rgb">RGB: {fourthColor.rgb}</p>
+                  <p className="color-cmyk">CMYK: {fourthColor.cmyk}</p>
+                </div>
+              </div>
+            </div>}
+
+          {/* 6 colours */}
+          {numberOfColors === 6 &&
+            <div class="wrapper-4-col secondary-section col-xs-36 col-md-24 grid-container nested-grid">
+              <div class="col-xs-36 col-md-9">
+                <div key={2} className="color" style={{ backgroundColor: thirdColor.hex }}>
+                  <p className="color-name">{thirdColor.name}</p>
+                  <p className="color-hex">HEX: {thirdColor.hex}</p>
+                  <p className="color-rgb">RGB: {thirdColor.rgb}</p>
+                  <p className="color-cmyk">CMYK: {thirdColor.cmyk}</p>
+                </div>
+              </div>
+              <div class="col-xs-36 col-md-9">
+                <div key={3} className="color" style={{ backgroundColor: fourthColor.hex }}>
+                  <p className="color-name">{fourthColor.name}</p>
+                  <p className="color-hex">HEX: {fourthColor.hex}</p>
+                  <p className="color-rgb">RGB: {fourthColor.rgb}</p>
+                  <p className="color-cmyk">CMYK: {fourthColor.cmyk}</p>
+                </div>
+              </div>
+              <div class="col-xs-36 col-md-9">
+                <div key={4} className="color" style={{ backgroundColor: fifthColor.hex }}>
+                  <p className="color-name">{fifthColor.name}</p>
+                  <p className="color-hex">HEX: {fifthColor.hex}</p>
+                  <p className="color-rgb">RGB: {fifthColor.rgb}</p>
+                  <p className="color-cmyk">CMYK: {fifthColor.cmyk}</p>
+                </div>
+              </div>
+              <div class="col-xs-36 col-md-9">
+                <div key={5} className="color" style={{ backgroundColor: sixthColor.hex }}>
+                  <p className="color-name">{sixthColor.name}</p>
+                  <p className="color-hex">HEX: {sixthColor.hex}</p>
+                  <p className="color-rgb">RGB: {sixthColor.rgb}</p>
+                  <p className="color-cmyk">CMYK: {sixthColor.cmyk}</p>
+                </div>
+              </div>
+            </div>}
+
+          {/* 8 colours */}
+          {numberOfColors === 8 &&
+            <div class="wrapper-4-col secondary-section col-xs-36 col-md-24 grid-container nested-grid">
+              <div class="col-xs-36 col-md-6">
+                <div key={2} className="color" style={{ backgroundColor: thirdColor.hex }}>
+                  <p className="color-name">{thirdColor.name}</p>
+                  <p className="color-hex">HEX: {thirdColor.hex}</p>
+                  <p className="color-rgb">RGB: {thirdColor.rgb}</p>
+                  <p className="color-cmyk">CMYK: {thirdColor.cmyk}</p>
+                </div>
+              </div>
+              <div class="col-xs-36 col-md-6">
+                <div key={3} className="color" style={{ backgroundColor: fourthColor.hex }}>
+                  <p className="color-name">{fourthColor.name}</p>
+                  <p className="color-hex">HEX: {fourthColor.hex}</p>
+                  <p className="color-rgb">RGB: {fourthColor.rgb}</p>
+                  <p className="color-cmyk">CMYK: {fourthColor.cmyk}</p>
+                </div>
+              </div>
+              <div class="col-xs-36 col-md-6">
+                <div key={4} className="color" style={{ backgroundColor: fifthColor.hex }}>
+                  <p className="color-name">{fifthColor.name}</p>
+                  <p className="color-hex">HEX: {fifthColor.hex}</p>
+                  <p className="color-rgb">RGB: {fifthColor.rgb}</p>
+                  <p className="color-cmyk">CMYK: {fifthColor.cmyk}</p>
+                </div>
+              </div>
+              <div class="col-xs-36 col-md-6">
+                <div key={5} className="color" style={{ backgroundColor: sixthColor.hex }}>
+                  <p className="color-name">{sixthColor.name}</p>
+                  <p className="color-hex">HEX: {sixthColor.hex}</p>
+                  <p className="color-rgb">RGB: {sixthColor.rgb}</p>
+                  <p className="color-cmyk">CMYK: {sixthColor.cmyk}</p>
+                </div>
+              </div>
+              <div class="col-xs-36 col-md-6">
+                <div key={6} className="color" style={{ backgroundColor: seventhColor.hex }}>
+                  <p className="color-name">{seventhColor.name}</p>
+                  <p className="color-hex">HEX: {seventhColor.hex}</p>
+                  <p className="color-rgb">RGB: {seventhColor.rgb}</p>
+                  <p className="color-cmyk">CMYK: {seventhColor.cmyk}</p>
+                </div>
+              </div>
+              <div class="col-xs-36 col-md-6">
+                <div key={7} className="color" style={{ backgroundColor: eighthColor.hex }}>
+                  <p className="color-name">{eighthColor.name}</p>
+                  <p className="color-hex">HEX: {eighthColor.hex}</p>
+                  <p className="color-rgb">RGB: {eighthColor.rgb}</p>
+                  <p className="color-cmyk">CMYK: {eighthColor.cmyk}</p>
+                </div>
+              </div>
+            </div>}
+
+          {/* 10 colours */}
+          {numberOfColors === 10 &&
+            <div class="wrapper-4-col secondary-section col-xs-36 col-md-24 grid-container nested-grid">
+              <div class="col-xs-36 col-md-9">
+                <div key={2} className="color" style={{ backgroundColor: thirdColor.hex }}>
+                  <p className="color-name">{thirdColor.name}</p>
+                  <p className="color-hex">HEX: {thirdColor.hex}</p>
+                  <p className="color-rgb">RGB: {thirdColor.rgb}</p>
+                  <p className="color-cmyk">CMYK: {thirdColor.cmyk}</p>
+                </div>
+              </div>
+              <div class="col-xs-36 col-md-9">
+                <div key={3} className="color" style={{ backgroundColor: fourthColor.hex }}>
+                  <p className="color-name">{fourthColor.name}</p>
+                  <p className="color-hex">HEX: {fourthColor.hex}</p>
+                  <p className="color-rgb">RGB: {fourthColor.rgb}</p>
+                  <p className="color-cmyk">CMYK: {fourthColor.cmyk}</p>
+                </div>
+              </div>
+              <div class="col-xs-36 col-md-9">
+                <div key={4} className="color" style={{ backgroundColor: fifthColor.hex }}>
+                  <p className="color-name">{fifthColor.name}</p>
+                  <p className="color-hex">HEX: {fifthColor.hex}</p>
+                  <p className="color-rgb">RGB: {fifthColor.rgb}</p>
+                  <p className="color-cmyk">CMYK: {fifthColor.cmyk}</p>
+                </div>
+              </div>
+              <div class="col-xs-36 col-md-9">
+                <div key={5} className="color" style={{ backgroundColor: sixthColor.hex }}>
+                  <p className="color-name">{sixthColor.name}</p>
+                  <p className="color-hex">HEX: {sixthColor.hex}</p>
+                  <p className="color-rgb">RGB: {sixthColor.rgb}</p>
+                  <p className="color-cmyk">CMYK: {sixthColor.cmyk}</p>
+                </div>
+              </div>
+              <div class="col-xs-36 col-md-9">
+                <div key={6} className="color" style={{ backgroundColor: seventhColor.hex }}>
+                  <p className="color-name">{seventhColor.name}</p>
+                  <p className="color-hex">HEX: {seventhColor.hex}</p>
+                  <p className="color-rgb">RGB: {seventhColor.rgb}</p>
+                  <p className="color-cmyk">CMYK: {seventhColor.cmyk}</p>
+                </div>
+              </div>
+              <div class="col-xs-36 col-md-9">
+                <div key={7} className="color" style={{ backgroundColor: eighthColor.hex }}>
+                  <p className="color-name">{eighthColor.name}</p>
+                  <p className="color-hex">HEX: {eighthColor.hex}</p>
+                  <p className="color-rgb">RGB: {eighthColor.rgb}</p>
+                  <p className="color-cmyk">CMYK: {eighthColor.cmyk}</p>
+                </div>
+              </div>
+              <div class="col-xs-36 col-md-9">
+                <div key={8} className="color" style={{ backgroundColor: ninthColor.hex }}>
+                  <p className="color-name">{ninthColor.name}</p>
+                  <p className="color-hex">HEX: {ninthColor.hex}</p>
+                  <p className="color-rgb">RGB: {ninthColor.rgb}</p>
+                  <p className="color-cmyk">CMYK: {ninthColor.cmyk}</p>
+                </div>
+              </div>
+              <div class="col-xs-36 col-md-9">
+                <div key={9} className="color" style={{ backgroundColor: tenthColor.hex }}>
+                  <p className="color-name">{tenthColor.name}</p>
+                  <p className="color-hex">HEX: {tenthColor.hex}</p>
+                  <p className="color-rgb">RGB: {tenthColor.rgb}</p>
+                  <p className="color-cmyk">CMYK: {tenthColor.cmyk}</p>
+                </div>
+              </div>
+            </div>}
+        </div>
+      </Layout>
     </div>
+
   );
 }
 
