@@ -1,73 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './PaletteGenerator.css';
-// import '../Components/Button.css';
-// import Layout from '../Components/Layout';
-
-function PaletteGenerator() {
+function MyPaletteGenerator() {
     const [paletteSize, setPaletteSize] = useState(5); // Default size
     const [palette, setPalette] = useState([]);
 
-    /**
-    * Fetches color name from the API based on HEX code.
-    * @param {string} hex - HEX color code.
-    * @returns {Promise<string>} Resolves with the color details (name, rgb, cmyk).
-    */
-    const fetchColorDetails = async (hex) => {
-        const response = await axios.get(`https://www.thecolorapi.com/id?hex=${hex}`);
-        const { r, g, b } = response.data.rgb;
+    // Fetches a random color palette from the API based on the selected size.
+      // Function to fetch color details (name, rgb, cmyk) for each hex color
+      const getColorDetails = async (hex) => {
+        const rgbResponse = await axios.get(`https://www.thecolorapi.com/id?hex=${hex}`);
+        const { r, g, b } = rgbResponse.data.rgb;
         const cmyk = rgbToCmyk(r, g, b);
         return {
             hex: `#${hex}`,
             rgb: `(${r}, ${g}, ${b})`,
             cmyk: `(${cmyk.join(', ')})`,
-            name: response.data.name.value,
+            name: rgbResponse.data.name.value,
         };
     };
-
-    /**
-      * Converts RGB values to HEX format.
-      * @param {number} r - The red value (0 to 255).
-      * @param {number} g - The green value (0 to 255).
-      * @param {number} b - The blue value (0 to 255).
-      * @returns {string} The HEX representation of the RGB values.
-      */
-    const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
-        const hex = x.toString(16);
-        return hex.length === 1 ? '0' + hex : hex;
-    }).join('');
-
-    /**
-      * Converts RGB values to CMYK format.
-      * @param {number} r - The red value (0 to 255).
-      * @param {number} g - The green value (0 to 255).
-      * @param {number} b - The blue value (0 to 255).
-      * @returns {string} The CMEK representation of the RGB values.
-      */
     const rgbToCmyk = (r, g, b) => {
         let c = 1 - (r / 255);
         let m = 1 - (g / 255);
         let y = 1 - (b / 255);
         let k = Math.min(c, Math.min(m, y));
-
+      
         c = ((c - k) / (1 - k)) || 0;
         m = ((m - k) / (1 - k)) || 0;
         y = ((y - k) / (1 - k)) || 0;
-
+      
         c = Math.round(c * 100);
         m = Math.round(m * 100);
         y = Math.round(y * 100);
         k = Math.round(k * 100);
-
+      
         return [c, m, y, k];
-    };
-
+      };
     // Function to fetch random color palette
+
     const fetchRandomPalette = async () => {
         try {
             const response = await axios.get(`https://www.colr.org/json/colors/random/${paletteSize}`);
             const hexColors = response.data.colors.map(color => color.hex);
-            const colorDetailsPromises = hexColors.map(hex => fetchColorDetails(hex));
+            const colorDetailsPromises = hexColors.map(hex => getColorDetails(hex));
             const colorDetails = await Promise.all(colorDetailsPromises); // This defines colorDetails
             localStorage.setItem('colorPalette', JSON.stringify(colorDetails)); // Save to local storage
             setPalette(colorDetails);
@@ -76,7 +50,7 @@ function PaletteGenerator() {
             setPalette([]);
         }
     };
-
+    
     useEffect(() => {
         const savedPalette = JSON.parse(localStorage.getItem('colorPalette') || '[]');
         if (savedPalette.length > 0) {
@@ -101,24 +75,21 @@ function PaletteGenerator() {
                     onChange={handlePaletteSizeChange}
                 /> */}
                 <form action="#" class="my-number-color">
-
+                    
                     <div popup id="testtest">
-                        <select name="number" id="num" value={paletteSize} onChange={handlePaletteSizeChange}>
-                            <option value="select">Select a number</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
+                    <select name="number" id="num" value={paletteSize} onChange={handlePaletteSizeChange}>
+                        <option value="select">Select a number</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
                     </div>
                 </form>
-
-                <button onClick={fetchRandomPalette}></button>
-
-
+                <button onClick={fetchRandomPalette}>Generate Palette</button>
             </div>
             <div className="palette-display">
                 {palette.length > 0 ? (
@@ -138,5 +109,5 @@ function PaletteGenerator() {
             </div>
         </div>
     );
-}
-export default PaletteGenerator;
+                }
+export default MyPaletteGenerator;
