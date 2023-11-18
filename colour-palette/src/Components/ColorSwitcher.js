@@ -1,28 +1,44 @@
-import React, { useContext } from "react";
-import { ColorContext } from "../App"; // Import ColorContext
-import "./ColorSwitcher.css";
+// ColorSwitcher.js
 
-const ColorSwitcher = () => {
-  const { theme, setTheme } = useContext(ColorContext);
+import React, { useContext } from 'react';
+//import { ColorContext } from '../App';
+import { createContext, useState } from 'react';
+import ReactSwitch from "react-switch";
 
-  const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
-  };
+{/*const ColorSwitcher = () => {
+  const { darkTheme, toggleTheme } = useContext(ColorContext);
 
   return (
-    <div className="color-switcher-wrapper">
-      <div className="color-switcher">
-        {/* Other buttons/icons can go here */}
-        <button
-          onClick={toggleTheme}
-          className={`theme-toggle-button ${theme}`}
-        >
-          {theme === "light" ? "🌙" : "☀️"}
-        </button>
-        {/* Add more buttons/icons as needed */}
-      </div>
+    <div className="theme-switcher">
+      <button onClick={toggleTheme}>
+        {darkTheme ? 'Switch to Light' : 'Switch to Dark'}
+      </button>
     </div>
   );
 };
+export default ColorSwitcher;*/}
 
-export default ColorSwitcher;
+
+{/*
+trying to have a theme switch bar, added switch bar, might be some library not connect
+did not show as expected, ideally when user toggles then will show different mode 
+-cindy 
+*/ }
+export const ThemeContext = createContext(null);
+function App(){
+  const[theme, setTheme] = useState("light");
+  const toggleTheme = () => {
+    setTheme((curr) => (curr === "light" ? "dark" : "light"));
+  };
+  return(
+      <ThemeContext.Provider value = {{theme, setTheme}}>
+        <div className= "App" id={theme}>
+          <div className="switch" >
+            <label>{theme === "light" ? "Light Mode" : "Dark Mode"}</label>
+          <ReactSwitch onChange={toggleTheme} checked={theme=== "dark"}/>
+          </div>
+        </div>
+      </ThemeContext.Provider>
+
+  )}
+
