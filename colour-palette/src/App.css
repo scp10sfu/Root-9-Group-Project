@@ -262,9 +262,6 @@
   right: 10px;
 }*/
 
-/*added the new switch just to test out
-and added mode changes and the test color will be change too
-- cindy*/
 .switch{
   display: flex;
   width: 100vw;
@@ -272,16 +269,6 @@ and added mode changes and the test color will be change too
   justify-content: center;
   align-items: center;
 }
-
-
-.light.switch label{
-  color: black;
-}
-.light.switch label{
-  color: white;
-}
-
-
 .theme-switcher button {
   background-color: var(--secondary-bg-color);
   color: var(--primary-text-color);
@@ -343,18 +330,6 @@ and added mode changes and the test color will be change too
   font-weight: 700;
   line-height: 24px;
   letter-spacing: -0.4px;
-}
-
-
-.App{
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  flex-direction: center;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
 }
 
 
@@ -509,4 +484,3 @@ and added mode changes and the test color will be change too
   transform-origin: -21vw 16vh;
   box-shadow: -40vmin 0 5.054376341805417vmin currentColor;
 }
-
