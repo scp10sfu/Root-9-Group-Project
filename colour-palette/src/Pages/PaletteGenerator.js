@@ -66,15 +66,15 @@ function MyPaletteGenerator() {
         <div className="PaletteGenerator">
             <div className="palette-controls">
                 <label htmlFor="paletteSize">Select palette size (4-10): </label>
-                <input
+                {/* <input
                     id="paletteSize"
                     type="number"
                     min="4"
                     max="10"
                     value={paletteSize}
                     onChange={handlePaletteSizeChange}
-                />
-                {/* <form action="#" class="my-number-color">
+                /> */}
+                <form action="#" class="my-number-color">
                     
                     <div popup id="testtest">
                     <select name="number" id="num" value={paletteSize} onChange={handlePaletteSizeChange}>
@@ -88,7 +88,7 @@ function MyPaletteGenerator() {
                         <option value="10">10</option>
                     </select>
                     </div>
-                </form> */}
+                </form>
                 <button onClick={fetchRandomPalette}>Generate Palette</button>
             </div>
             <div className="palette-display">

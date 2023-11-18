@@ -1,77 +1,13 @@
-/* Default CSS variables for light theme */
-:root {
-  --primary-bg-color: #FFFFFF;
-  --primary-text-color: #121212;
-  --secondary-bg-color: white;
-  --border-color: #ccc;
-  --hover-border-color: rgb(90, 82, 82);
-  --icon-bg-color: #ccc;
-  --icon-color: #666;
-  --file-info-color: #666;
-}
-
-/* Dark theme styles */
-[data-theme="dark"] {
-  --primary-bg-color: #16131d;
-  --primary-text-color: white;
-  --secondary-bg-color: #1a1b1e;
-  --border-color: #666;
-  --hover-border-color: lightgray;
-  --icon-bg-color: #888;
-  --icon-color: white;
-  --file-info-color: lightgray;
-}
-
-/* Update icon color in dark theme */
-[data-theme="dark"] .upload-icon {
-  stroke: var(--icon-color);
-  fill: var(--icon-color);
-}
-
-/* Base styles for the entire app */
-.App {
-  /*background-color: var(--primary-bg-color);*/
-  color: var(--primary-text-color);
-  transition: background-color 0.3s, color 0.3s;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  min-height: 100vh;
-}
-
-/* Header styles */
-.App-header {
-  min-height: 10vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: "DM Sans-Bold", Helvetica;
-  font-size: calc(10px + 2vmin);
-  color: var(--primary-text-color);
-}
-
-/* Main content styles */
-.app-content {
-  align-self: stretch;
-  transition: background-color 0.3s, color 0.3s;
-  display: flex;
-  padding: 32px;
-  overflow: hidden;
-  justify-content: center;
-  align-items: center;
-}
+/* ColourExtractor.css */
 
 .upload-area {
   border: 1px dashed;
   border-radius: 10px;
-  border-color: var(--dark-050);
+  border-color: rgba(18, 18, 18, 0.50);
+  background-color: rgba(18, 18, 18, 0.05);
   text-align: center;
   padding: 20px 40px;
   cursor: pointer;
-  position: relative;
   transition: border-color 0.3s;
   flex-direction: column;
   justify-content: center;
@@ -84,37 +20,47 @@
   border-color: rgb(90, 82, 82);
 }
 
-.upload-icon {
+.upload-area .text {
+  color: #121212;
+  text-align: center;
+  /* Body */
+  font-family: "DM Sans-Bold", Helvetica;
+  font-size: 20px;
+  font-style: bold;
+  font-weight: 400;
+  letter-spacing: -0.18px;
+}
+
+.upload-area .subtext {
+  color: rgba(18, 18, 18, 0.50);
+  text-align: center;
+  font-family: "DM Sans-Regular", Helvetica;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: -0.14px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-icon-dark {
   font-size: 24px;
-  height: 40px;
-  width: 40px;
-  line-height: 40px;
+  position: relative;
   margin: 0 auto;
-  border: 2px solid #ccc;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
-.upload-area p {
-  margin: 0;
-  font-size: 16px;
-  color: #666;
-}
-
-.file-size-info {
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 12px;
-  color: #666;
-}
-
-.info-icon {
+.info-icon-dark {
   padding-right: 5px;
+  height: 13px;
+  position: relative;
+  width: 13px;
 }
 
 /* Hide file input but keep its functionality */
@@ -159,45 +105,36 @@
 }
 
 .color-controls {
+  color:rgba(18, 18, 18, 1);
   text-align: center;
   margin-bottom: 20px;
+  margin-top: 25px;
 }
 
 .number-of-colors-label {
-  /* text-align: center;
-  font-size: 18px; 
-  margin-bottom: 10px; 
-  font-family: "DM Sans-Bold", Helvetica;  */
-
-  position: fixed;
-  width: 424px;
-  top: 0;
-  left: 0;
+  color: rgba(18, 18, 18, 1);
+  text-align: center;
+  /* Body */
   font-family: "DM Sans-Bold", Helvetica;
-  font-weight: 700;
-  color: var(--dark-050);
   font-size: 20px;
-  letter-spacing: -0.4px;
-  line-height: 24px;
-  align-self: stretch;
-  color: var(--dark-050, rgba(18, 18, 18, 0.50));
-  font-family: DM Sans;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 24px;
-  letter-spacing: -0.4px;
+  font-style: bold;
+  font-weight: 400;
+  letter-spacing: -0.18px;
+  margin-top: 30px;
 }
 
 .number-button {
-  border: 2px solid rgb(151, 150, 150); /* Black border */
+  font-family: "DM Sans-Bold", Helvetica;
+  font-weight: 600;
+  font-style: bold;
+
+  border: 2px solid rgba(18, 18, 18, 0.25); /* Black border */
   border-radius: 50%; /* Circular buttons */
   width: 50px; /* Adjust based on your design */
   height: 50px; /* Adjust based on your design */
-  line-height: 46px; /* Center the text vertically */
   text-align: center; /* Center the text horizontally */
-  background-color: #fff; /* White background */
-  color:rgb(89, 86, 86);
+  background-color: rgba(255, 225, 227, 0.25);
+  color:rgba(18, 18, 18, 0.75);
   font-size: 16px; /* Adjust to match your design */
   margin: 0 10px; /* Spacing between buttons */
   cursor: pointer;
@@ -211,37 +148,53 @@
   transform: scale(1.1); /* Slightly larger on hover/active */
 }
 
-/* Remove the styles related to .number-label and .number-button-container */
-
-
 /* Color palette styles */
 .color-palette {
-  display: flex;
+  display: flex; 
   flex-wrap: wrap;
-  /* justify-content: space-around; */
-  /* gap: 5px;
-  margin: 0 auto; */
+  justify-content: space-around;
+  gap: 5px;
+  /* /* margin: 0 auto; */
 }
 
-.color {
+.color-bottom-align {
   width: 100%;
   height: 100%;
-  background-color: #ccc;
+  background-color: rgba(18, 18, 18, 0.15);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  /* border-radius: 8px; */
+  justify-content: flex-end; /* Aligns the content to the bottom */
+  align-items: left;
+  padding: 15px; 
+  white-space: nowrap; 
+}
+
+.color-top-align {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(18, 18, 18, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Aligns the content to the top */
+  align-items: left;
+  padding: 15px; 
+  white-space: nowrap; 
 }
 
 
 /* Style for color name at the top */
 .color-name {
-  margin-bottom: auto; /* Pushes everything else to the bottom */
-  font-family: monospace;
-  color: white;  font-size: 1.0em; /* Larger font size for color name */
+  /* margin-bottom: auto; */
+  /* Pushes everything else to the bottom */
+  font-family: "DM Mono-Medium", Helvetica;
+  font-size: 10px;
+  /* color: white; */
+  color: rgba(18, 18, 18, 1);
+  letter-spacing: 3px;
+  /* Larger font size for color name */
   font-weight: bold;
+  text-align: left;
+  margin-bottom: 10px;
 }
 
 /* Style for color codes */
@@ -249,26 +202,29 @@
 .color-rgb,
 .color-cmyk {
   margin: 5px 0;
-  font-family: monospace;
-  color: white;  
-  font-size: 0.9em;
+  font-family: "DM Mono-Medium", Helvetica;
+  letter-spacing: 3px;
+  /* color: white; */
+  color: rgba(18, 18, 18, 0.75);
+  font-size: 10px;
+  text-align: left;
 }
 
 /* Theme switcher styles */
-
 /*.theme-switcher {
   position: absolute;
   top: 10px;
   right: 10px;
 }*/
 
-.switch{
+.switch {
   display: flex;
   width: 100vw;
   height: 100px;
   justify-content: center;
   align-items: center;
 }
+
 .theme-switcher button {
   background-color: var(--secondary-bg-color);
   color: var(--primary-text-color);
@@ -291,7 +247,7 @@
   flex-shrink: 0;
 }
 
-.content-block text_block {
+.content-block .text_block {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -300,39 +256,28 @@
   align-self: stretch;
 }
 
-.content-block text_block_text {
+.text_block_text {
+  margin-top: 50px;
   align-self: stretch;
-  color: var(--dark-100, #121212);
-  font-family: DM Sans;
-  font-size: 172px;
+  color: rgba(18, 18, 18, 1);
+  /* H2 */
+  font-family: "DM Sans-Bold", Helvetica;
+  font-size: 72px;
   font-style: normal;
   font-weight: 700;
-  line-height: 72px;
   letter-spacing: -3.6px;
 }
 
-.content-block text_block_subtext {
-  position: fixed;
-  width: 424px;
-  top: 0;
-  left: 0;
-  font-family: "DM Sans-Bold", Helvetica;
-  font-weight: 700;
-  color: var(--dark-050);
-  font-size: 20px;
-  letter-spacing: -0.4px;
-  line-height: 24px;
+.text_block_subtext {
   align-self: stretch;
-  color: var(--dark-050, rgba(18, 18, 18, 0.50));
-  font-family: DM Sans;
+  color: rgba(18, 18, 18, 0.50);
+  font-family: "DM Mono-Medium", Helvetica;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px;
+  /* line-height: 24px; 120% */
   letter-spacing: -0.4px;
 }
-
-
 
 @keyframes move {
   100% {
