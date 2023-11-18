@@ -61,8 +61,8 @@
     -ms-grid-template-columns: repeat(36, 1fr);
     grid-template-columns: repeat(36, 1fr);
     
-    -ms-grid-column-gap:1vmax;
-    grid-column-gap:1vmax;
+    -ms-grid-column-gap: 1vmax;
+    grid-column-gap: 1vmax;
     -ms-grid-row-gap: 1vmax;
     grid-row-gap: 1vmax;
 

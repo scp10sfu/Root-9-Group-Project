@@ -19,6 +19,7 @@ function ColourExtractor() {
   const imgRef = useRef(null);                              // Create a reference to the img tag
   const colorThief = new ColorThief();
   const [backgroundStyle, setBackgroundStyle] = useState({});
+  const [imageLoading, setImageLoading] = useState(false);  // Add loading state for image upload
 
   /**
   * Converts RGB values to HEX format.
@@ -110,25 +111,37 @@ function ColourExtractor() {
   * @returns {function} Cleanup function.
   */
   useEffect(() => {
-    // Hold the current value of imgRef.current
-    const currentImgRef = imgRef.current;
-    if (image) {
-      extractColors();
+    if (image && !imageLoading) {
+      setImageLoading(true);
+      // Simulate loading delay for the skeleton loader
+      const loadingTimeout = setTimeout(() => {
+        extractColors(); // Perform the API call
+        setImageLoading(false); // Set loading state to false once API call is complete
+      }, 2000); // Adjust the timeout value based on your actual API call time
+
+      // Hold the current value of imgRef.current
+      // const currentImgRef = imgRef.current;
+      // if (image) {
+      //   extractColors();
+      // }
+      // if (currentImgRef && currentImgRef.complete) {
+      //   extractColors();
+      // }
+      // if (imgRef.current && imgRef.current.complete) {
+      //   extractColors();
+      // }
+      // This function will be called to clean up when the component is unmounted or before the effect runs again
+      // return () => {
+      //   // Clean up the event listener if it was added
+      //   if (imgRef.current) {
+      //     imgRef.current.removeEventListener('load', extractColors);
+      //   }
+      // };
+
+      // Clean up the timeout to avoid memory leaks
+      return () => clearTimeout(loadingTimeout);
     }
-    if (currentImgRef && currentImgRef.complete) {
-      extractColors();
-    }
-    if (imgRef.current && imgRef.current.complete) {
-      extractColors();
-    }
-    // This function will be called to clean up when the component is unmounted or before the effect runs again
-    return () => {
-      // Clean up the event listener if it was added
-      if (imgRef.current) {
-        imgRef.current.removeEventListener('load', extractColors);
-      }
-    };
-  }, [numberOfColors]);
+  }, [numberOfColors, imageLoading]);
 
 
   /**
@@ -152,6 +165,7 @@ function ColourExtractor() {
   // When setting the image after upload
   const handleImageChange = (event) => {
     if (event.target.files && event.target.files.length > 0) {
+      setImageLoading(true);
       const file = event.target.files[0];
       const reader = new FileReader();
 
@@ -159,6 +173,7 @@ function ColourExtractor() {
         setImage(e.target.result); // Set image URL to display it
         localStorage.setItem('savedImage', e.target.result); // Save image data to local storage
         setIsImagePreviewActive(false); // Set image preview active
+        setImageLoading(false);
       };
       reader.readAsDataURL(file);
     }
@@ -171,16 +186,128 @@ function ColourExtractor() {
     setImage(null); // Reset the image state to close the preview
     setColors([]); // Clear the colors when closing the preview
     setIsImagePreviewActive(true); // Set image preview inactive
+    setImageLoading(false);
   };
 
   const NumberButton = ({ number, isActive }) => (
     <button
       className={`number-button ${isActive ? 'active' : ''}`}
-      onClick={() => handleNumberChange(number)}
-    >
+      onClick={() => handleNumberChange(number)}>
       {number}
     </button>
   );
+
+  // Skeleton loader component
+  const SkeletonLoader = () => (
+    <div>
+      <div class="wrapper-2-col secondary-section col-xs-36 col-md-24 grid-container nested-grid">
+        {/* First dominant colour */}
+        <div class="col-xs-36 col-md-18">
+
+          <div class="skeleton">
+            <div class="loader-square">
+
+              <div key={0} className="color-bottom-align" style={{ backgroundColor: firstColor.hex }}>
+                <p className="color-name">{firstColor.name}</p>
+                <p className="color-hex">HEX: {firstColor.hex}</p>
+                <p className="color-rgb">RGB: {firstColor.rgb}</p>
+                <p className="color-cmyk">CMYK: {firstColor.cmyk}</p>
+
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        {/* Second dominant colour */}
+        <div class="col-xs-36 col-md-18">
+
+          <div class="skeleton">
+            <div class="loader-square">
+
+              <div key={1} className="color-bottom-align" style={{ backgroundColor: secondColor.hex }}>
+                <p className="color-name">{secondColor.name}</p>
+                <p className="color-hex">HEX: {secondColor.hex}</p>
+                <p className="color-rgb">RGB: {secondColor.rgb}</p>
+                <p className="color-cmyk">CMYK: {secondColor.cmyk}</p>
+              
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* {numberOfColors === 6 && */}
+      <div class="wrapper-4-col secondary-section col-xs-36 col-md-24 grid-container nested-grid">
+        <div class="col-xs-36 col-md-9">
+
+          <div class="skeleton">
+            <div class="loader-square">
+
+              <div key={2} className="color-top-align" style={{ backgroundColor: thirdColor.hex }}>
+                <p className="color-name">{thirdColor.name}</p>
+                <p className="color-hex">HEX: {thirdColor.hex}</p>
+                <p className="color-rgb">RGB: {thirdColor.rgb}</p>
+                <p className="color-cmyk">CMYK: {thirdColor.cmyk}</p>
+              
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-xs-36 col-md-9">
+
+          <div class="skeleton">
+            <div class="loader-square">
+
+              <div key={3} className="color-top-align" style={{ backgroundColor: fourthColor.hex }}>
+                <p className="color-name">{fourthColor.name}</p>
+                <p className="color-hex">HEX: {fourthColor.hex}</p>
+                <p className="color-rgb">RGB: {fourthColor.rgb}</p>
+                <p className="color-cmyk">CMYK: {fourthColor.cmyk}</p>
+              
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-xs-36 col-md-9">
+
+          <div class="skeleton">
+            <div class="loader-square">
+
+              <div key={4} className="color-top-align" style={{ backgroundColor: fifthColor.hex }}>
+                <p className="color-name">{fifthColor.name}</p>
+                <p className="color-hex">HEX: {fifthColor.hex}</p>
+                <p className="color-rgb">RGB: {fifthColor.rgb}</p>
+                <p className="color-cmyk">CMYK: {fifthColor.cmyk}</p>
+              
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-xs-36 col-md-9">
+
+          <div class="skeleton">
+            <div class="loader-square">
+
+              <div key={5} className="color-top-align" style={{ backgroundColor: sixthColor.hex }}>
+                <p className="color-name">{sixthColor.name}</p>
+                <p className="color-hex">HEX: {sixthColor.hex}</p>
+                <p className="color-rgb">RGB: {sixthColor.rgb}</p>
+                <p className="color-cmyk">CMYK: {sixthColor.cmyk}</p>
+              
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
+
 
   // Default color information
   const defaultColor = {
@@ -205,15 +332,18 @@ function ColourExtractor() {
 
   return (
 
-    <div className="ColorPicker" style={backgroundStyle}>
+    <div className="ColourExtractor" style={backgroundStyle}>
       <div className="background">
         {Array.from({ length: 20 }, (_, i) => (
           <span key={i} style={{ color: `var(--color${i + 1})` }}></span>
         ))}
       </div>
+
       <Layout>
+
         <div class="grid-container general">
           {/* The nav bar */}
+          <div class="header col-xs-36 col-md-36"></div>
           <div class="header col-xs-36 col-md-36"></div>
 
           {/* The main content - left part */}
@@ -241,8 +371,8 @@ function ColourExtractor() {
                   </div>
                   {/* </header> */}
                 </label>
-              </section>
-            )}
+              </section>)}
+
               {image && (
                 <div className="image-preview">
                   <button className="close-button" onClick={handleClosePreview}>
@@ -268,13 +398,17 @@ function ColourExtractor() {
                     key={number}
                     number={number}
                     isActive={numberOfColors === number}
-                  />
-                ))}
+                  />))}
               </section>
             </div>
           </div>
 
-          {/* The main content - right part: DOMINANT COLOURS */}
+          {/* Conditional rendering based on imageLoaded state */}
+          {imageLoading ? (
+            <SkeletonLoader />
+          ) : (
+            <div>
+                        {/* The main content - right part: DOMINANT COLOURS */}
           <div class="wrapper-2-col secondary-section col-xs-36 col-md-24 grid-container nested-grid">
             {/* First dominant colour */}
             <div class="col-xs-36 col-md-18">
@@ -474,11 +608,15 @@ function ColourExtractor() {
                 </div>
               </div>
             </div>}
+            </div>)}
 
           {/* DO NOT DELETE THIS! */}
           <div class="footer col-xs-36 col-md-36"></div>
+
         </div>
+
       </Layout>
+
     </div>
   );
 }

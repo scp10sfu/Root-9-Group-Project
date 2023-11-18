@@ -29,6 +29,11 @@ menu, nav, output, section, summary {
     grid-row: span 2;
 }
 
+.wrapper-3-col{
+    -ms-grid-row: span 3;
+    grid-row: span 3;
+}
+
 /* TODO: change it to adjust the height */
 .wrapper-4-col{
     -ms-grid-row: span 4;
