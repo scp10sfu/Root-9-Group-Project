@@ -9,7 +9,7 @@
   align-items: center;
   align-self: stretch;
   display: inline-block;
-  background-color: white;
+  background-color:rgba(255, 255, 255, 0.9); 
   padding: 3px; 
   border-radius: 0px 0px 20px 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* TODO: think about this */
@@ -71,9 +71,10 @@ margin-left: auto;
   border-radius: 40px;
 }
 .light{
-  background-color: #64267a;
+  /* background-color: #64267a; */
 }
 
 .dark{
-  background-color: #0c070d;
+  background-color: rgba(18, 18, 18, 0.5);
+  /* background-color: #0c070d; */
 }

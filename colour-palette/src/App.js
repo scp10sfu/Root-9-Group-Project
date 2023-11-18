@@ -4,9 +4,9 @@
  * @component
  */
 import React, { createContext, useState } from 'react';
-// import './App.css';
+ // import './App.css';
 // TODO: import css file for App component
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate} from 'react-router-dom';
 import About from './Pages/About';
 import Home from './Pages/Home';
 import ColourExtractor from './Pages/ColourExtractor';
@@ -41,23 +41,27 @@ const App = () => {
   const navigateToNotFoundPage = () => { navigate('/NotFoundPage'); };
   const navigateToModeSwitch = () => { navigate('/ModeSwitch'); };
   
-  return (
-    <div className="App">
-      <NavigationBar />
+  const [theme, setTheme] = useState("light"); // Default theme
 
-      {/* <ColorSwitcher /> */}
-      <div>
+  return (
+    <ColorContext.Provider value={{ theme, setTheme }}>
+      <div className={`App ${theme}`}>
+        <NavigationBar />
+
+        {/* Uncomment ColorSwitcher if you want it outside NavigationBar */}
+        {/* <ColorSwitcher /> */}
         <div>
           <Routes>
-            <Route path="/About" element={<About/>} />
+            <Route path="/About" element={<About />} />
             <Route path="/" element={<Home />} />
             <Route path="/ColourExtractor" element={<ColourExtractor />} />
             <Route path="/PaletteGenerator" element={<PaletteGenerator />} />
             <Route path="/MoodboardGenerator" element={<MoodboardGenerator />} />
+            {/* ... other routes ... */}
           </Routes>
         </div>
       </div> 
-    </div>
+    </ColorContext.Provider>
   );
 };
 

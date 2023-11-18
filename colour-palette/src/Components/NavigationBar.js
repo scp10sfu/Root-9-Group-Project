@@ -10,6 +10,7 @@ import Home from '../Pages/Home';
 import ColourExtractor from '../Pages/ColourExtractor';
 import PaletteGenerator from '../Pages/PaletteGenerator';
 import MoodboardGenerator from '../Pages/MoodboardGenerator';
+import ColorSwitcher from "./ColorSwitcher";
 
 export const ThemeContext = createContext(null);
 function App(){
@@ -46,7 +47,10 @@ const NavigationBar = () => {
           <button onClick={navigateToColourExtractor}>Colour Extractor</button>
           <button onClick={navigateToPaletteGenerator}>Palette Generator</button>
           <button onClick={navigateToMoodboardGenerator}>Moodboard Generator</button>
-        </div>
+          </div>
+
+          <ColorSwitcher />
+        
       </div>
     </nav>
   );
