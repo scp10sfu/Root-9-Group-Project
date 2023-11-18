@@ -1,3 +1,5 @@
+/* NavigationBar.css */
+
 .nav-bar {
   z-index: 10000000; /* High value to ensure it's on top */
   position: fixed;

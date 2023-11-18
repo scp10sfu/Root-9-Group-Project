@@ -5,9 +5,10 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import { createContext, useState } from "react";
 import "./NavigationBar.css";
 
+
 import About from "../Pages/About";
 import Home from "../Pages/Home";
-import ColourPicker from "../Pages/ColorPicker";
+import ColourExtractor from "../Pages/ColorExtractor";
 import PaletteGenerator from "../Pages/PaletteGenerator";
 import MoodboardGenerator from "../Pages/MoodboardGenerator";
 import ColorSwitcher from "./ColorSwitcher";
@@ -21,8 +22,8 @@ const NavigationBar = () => {
   const navigateToAbout = () => {
     navigate("/About");
   };
-  const navigateToColourPicker = () => {
-    navigate("/ColourPicker");
+  const navigateToColourExtractor = () => {
+    navigate("/ColourExtractor");
   };
   const navigateToPaletteGenerator = () => {
     navigate("/PaletteGenerator");
@@ -34,6 +35,7 @@ const NavigationBar = () => {
     navigate("/NotFoundPage");
   };
 
+
   return (
     <nav className="nav-bar">
 
@@ -42,7 +44,7 @@ const NavigationBar = () => {
         <div className="links">
           {/* <button onClick={navigateToHome}>Home</button> */}
           <button onClick={navigateToAbout}>About</button>
-          <button onClick={navigateToColourPicker}>Colour Picker</button>
+          <button onClick={navigateToColourExtractor}>Colour Extractor</button>
           <button onClick={navigateToPaletteGenerator}>
             Palette Generator
           </button>

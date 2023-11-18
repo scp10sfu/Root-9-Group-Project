@@ -3,6 +3,7 @@
  * App.js
  * @component
  */
+
 import React, { createContext, useState, useMemo } from "react";
 import "./App.css";
 import { Routes, Route, useNavigate } from "react-router-dom";
@@ -16,6 +17,7 @@ import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import ColorSwitcher from "./Components/ColorSwitcher";
 import NavigationBar from "./Components/NavigationBar";
+
 
 // TODO: add theme switcher to nav bar component
 
@@ -34,6 +36,7 @@ const App = () => {
 
   // Router
   const navigate = useNavigate(); // gets navigation and stores it
+
   const navigateToHome = () => {
     navigate("/");
   };
