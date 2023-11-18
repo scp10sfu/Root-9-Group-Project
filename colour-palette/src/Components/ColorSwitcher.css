@@ -1,0 +1,42 @@
+/* ColorSwitcher.css */
+.color-switcher-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.color-switcher {
+  /* No need to set positioning here, flex will handle it */
+  display: flex;
+  /* gap: 10px; */
+  margin: 10px;
+}
+
+.theme-toggle-button {
+  display: inline-block;
+  width: 30px;
+  /* example size, adjust as needed */
+  height: 30px;
+  border-radius: 50%;
+  /* circular shape */
+  border: none;
+  background-color: #f0f0f0;
+  /* adjust the color as needed */
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.theme-toggle-button:hover {
+  background-color: #e0e0e0;
+  /* slightly darker on hover */
+}
+
+/* Adjust the colors based on the theme */
+.theme-toggle-button.light {
+  /* Light mode specific styles */
+}
+
+.theme-toggle-button.dark {
+  /* Dark mode specific styles */
+}
