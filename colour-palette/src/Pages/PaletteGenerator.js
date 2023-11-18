@@ -45,7 +45,7 @@ function PaletteGenerator() {
 
         paletteArray.push(endColor.hex); // End with the end color
         setPalette(paletteArray);
-    };
+    };   
 
     return (
         <div className="PaletteGenerator">
