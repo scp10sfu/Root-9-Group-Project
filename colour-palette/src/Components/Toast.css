@@ -5,13 +5,17 @@
     bottom: 16px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 4px;
+    background-color: rgba(186, 229, 13, 1);
+    color: #000000;
+    border-radius: 85px;
+    /* height: 49px; */
+    padding: 10px 25px;
+    gap: 45px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
+    /* display: flex; */
     align-items: center;
+    display: inline-flex;
+    /* position: relative; */
   }
   
   .toast-content {
