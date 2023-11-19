@@ -175,35 +175,35 @@ function ColourExtractor() {
   const handleImageChange = (event) => {
     setIsLoadingAndExtracting(true);
     try {
-    if (event.target.files && event.target.files.length > 0) {
-      const file = event.target.files[0];
+      if (event.target.files && event.target.files.length > 0) {
+        const file = event.target.files[0];
 
-      // Check if file size exceeds the limit
-      if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
-        throw new Error(`The file exceeds the limit of ${MAX_FILE_SIZE_MB}MB.`);
+        // Check if file size exceeds the limit
+        if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+          throw new Error(`The file exceeds the limit of ${MAX_FILE_SIZE_MB} MB`);
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+          setImage(e.target.result); // Set image URL to display it
+          localStorage.setItem('savedImage', e.target.result); // Save image data to local storage
+          setIsImagePreviewActive(false); // Set image preview active
+        };
+        reader.readAsDataURL(file);
       }
-
-      const reader = new FileReader();
-
-      reader.onload = (e) => {
-        setImage(e.target.result); // Set image URL to display it
-        localStorage.setItem('savedImage', e.target.result); // Save image data to local storage
-        setIsImagePreviewActive(false); // Set image preview active
-      };
-      reader.readAsDataURL(file);
+    } catch (error) {
+      console.error('Error handling image change:', error);
+      // Reset to default values
+      setIsLoadingAndExtracting(false);
+      setIsImagePreviewActive(true);
+      setImage('');
+      setBackgroundStyle({});
+      setNumberOfColors(6);
+      // Display a toast message for the file size limit exceeded error
+      setToastMessage(error.message);
+      setShowToast(true);
     }
-  } catch (error) {
-    console.error('Error handling image change:', error);
-    // Reset to default values
-    setIsLoadingAndExtracting(false);
-    setIsImagePreviewActive(true);
-    setImage('');
-    setBackgroundStyle({});
-    setNumberOfColors(6);
-    // Display a toast message for the file size limit exceeded error
-    setToastMessage(error.message);
-    setShowToast(true);
-  }
     // Note: We don't need to set isLoadingAndExtracting to false here,
     // as the extraction process (extractColors function) will handle it
   };
@@ -341,92 +341,73 @@ function ColourExtractor() {
           <div class="main-section col-xs-36 col-md-12 grid-container nested-grid">
             <div class="col-xs-36 col-md-25">
               <header className="text_block_text">Colour Extractor</header>
-            </div>   {/* Title */}
+            </div>  
             <div class="col-xs-36 col-md-25">
               <header className="text_block_subtext">Extract wonderful palettes from your image.
               </header>
-            </div>   {/* Extra information */}
-            {/* <div class="col-xs-36 col-md-25">Upload image:</div> */}
-            {/* Upload image */}
-            {/* <div class="col-xs-36 col-md-25" onClick={(e) => e.stopPropagation()}> */}
-              {isImagePreviewActive && (
-               
+            </div> 
+
+            {isImagePreviewActive && (
+
               <div class="upload-container col-xs-36 col-md-25">
-                 <div className="upload-area">
-                <input type="file" accept="image/*" onChange={handleImageChange} id="fileInput" />
-                <label htmlFor="fileInput">
-                  {/* <header className="text_block"> */}
-                  <div className="text_block_text">
-                    <UploadIcon className="upload-icon-dark" style={{ width: '40px', height: '40px' }} />
-                    <div className='text'>Click or drag file to this area to upload</div>
-                  </div>
-                  <div className="subtext">
-                    <InfoIcon className="info-icon-dark" style={{ width: '21px', height: '21px' }} />  Max file size: {MAX_FILE_SIZE_MB} MB
-                  </div>
-                </label>
-                  </div>
-                  </div>
+                <div className="upload-area">
+                  <input type="file" accept="image/*" onChange={handleImageChange} id="fileInput" />
+                  <label htmlFor="fileInput">
+                    <div className="text_block_text">
+                      <UploadIcon className="upload-icon-dark" style={{ width: '40px', height: '40px' }} />
+                      <div className='text'>Click or drag file to this area to upload</div>
+                    </div>
+                    <div className="subtext">
+                      <InfoIcon className="info-icon-dark" style={{ width: '21px', height: '21px' }} />  Max file size: {MAX_FILE_SIZE_MB} MB
+                    </div>
+                  </label>
+                </div>
+              </div>
+            )}
 
-              // </>
-              )}
-
-              {image && (
-                <>
+            {image && (
+              <>
                 <div class="col-xs-36 col-md-25" onClick={(e) => e.stopPropagation()}>
-                <div className="image-preview">
-                  <button className="close-button" onClick={handleClosePreview}>
-                    <span>&times;</span>
-                  </button>
+                  <div className="image-preview">
+                    <button className="close-button" onClick={handleClosePreview}>
+                      <span>&times;</span>
+                    </button>
 
-                  <img
-                    ref={imgRef}
-                    src={image}
-                    alt="To extract colors from"
-                    crossOrigin="anonymous"
-                    onLoad={extractColors}
-                  />
+                    <img
+                      ref={imgRef}
+                      src={image}
+                      alt="To extract colors from"
+                      crossOrigin="anonymous"
+                      onLoad={extractColors}
+                    />
+                  </div>
                 </div>
-                </div>
-                </>
-              )}
-            {/* </div> */}
+              </>
+            )}
 
-            <div class="col-xs-36 col-md-25">
-              <section className="color-controls">
-                <div className="number-of-colors-text">Number of colours:</div>
+            <div class="number-of-colors-container col-xs-36 col-md-25 grid-container-small">
+              <div className="number-of-colors-text">
+                NUMBER OF COLOURS:
+              </div>
+              <div className="number-buttons-container">
                 {[4, 6, 8, 10].map((number) => (
                   <NumberButton
                     key={number}
                     number={number}
                     isActive={numberOfColors === number}
-                  />))}
-              </section>
+                  />
+                ))}
+              </div>
             </div>
+
           </div>
 
-          {/* Conditional rendering based on imageLoaded state */}
-
+          {/* Conditional rendering based on isLoadingAndExtracting state */}
+          {/* The main content - right part */}
           {isLoadingAndExtracting ? (<SkeletonLoader />)
             : (<>
 
               <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
-
-                {/* The main content - right part: DOMINANT COLOURS */}
-                {/* <div class="wrapper-2-col secondary-section col-xs-36 col-md-36 grid-container nested-grid"> */}
-                {/* First dominant colour */}
-
-                {/* {isImageLoading ? (
-            
-              <div class="wrapper-2-col secondary-section col-xs-36 col-md-18">
-                    <div key={0} className="loader-square-bottom-align" style={{ backgroundColor: firstColor.hex }}>
-                      <p className="color-name">{firstColor.name}</p>
-                      <p className="color-hex">HEX: {firstColor.hex}</p>
-                      <p className="color-rgb">RGB: {firstColor.rgb}</p>
-                      <p className="color-cmyk">CMYK: {firstColor.cmyk}</p>
-                    </div>
-                </div>
-            )
-              : ( */}
                 <div class="wrapper-2-col secondary-section col-xs-36 col-md-18">
                   <div key={0} className="color-bottom-align" style={{ backgroundColor: firstColor.hex }}>
                     <p className="color-name">{firstColor.name}</p>
@@ -435,7 +416,6 @@ function ColourExtractor() {
                     <p className="color-cmyk">CMYK: {firstColor.cmyk}</p>
                   </div>
                 </div>
-                {/* )}   */}
 
 
                 {/* Second dominant colour */}
@@ -447,7 +427,7 @@ function ColourExtractor() {
                     <p className="color-cmyk">CMYK: {secondColor.cmyk}</p>
                   </div>
                 </div>
-                {/* </div> */}
+
 
                 {/* 4 colours */}
                 {numberOfColors === 4 && (<>
@@ -505,12 +485,10 @@ function ColourExtractor() {
                       <p className="color-cmyk">CMYK: {sixthColor.cmyk}</p>
                     </div>
                   </div>
-                  {/* </div> */}
                 </>)}
 
                 {/* 8 colours */}
                 {numberOfColors === 8 && (<>
-                  {/* <div class="wrapper-4-col secondary-section col-xs-36 col-md-36 grid-container nested-grid"> */}
                   <div class="wrapper-4-col secondary-section col-xs-36 col-md-6">
                     <div key={2} className="color-top-align" style={{ backgroundColor: thirdColor.hex }}>
                       <p className="color-name">{thirdColor.name}</p>
@@ -559,12 +537,10 @@ function ColourExtractor() {
                       <p className="color-cmyk">CMYK: {eighthColor.cmyk}</p>
                     </div>
                   </div>
-                  {/* </div> */}
                 </>)}
 
                 {/* 10 colours */}
                 {numberOfColors === 10 && (<>
-                  {/* <div class="wrapper-4-col secondary-section col-xs-36 col-md-36 grid-container nested-grid"> */}
                   <div class="wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <div key={2} className="color-top-align" style={{ backgroundColor: thirdColor.hex }}>
                       <p className="color-name">{thirdColor.name}</p>
@@ -629,7 +605,7 @@ function ColourExtractor() {
                       <p className="color-cmyk">CMYK: {tenthColor.cmyk}</p>
                     </div>
                   </div>
-                  {/* </div> */}
+
                 </>)}
 
               </div>
@@ -638,7 +614,6 @@ function ColourExtractor() {
           {/* DO NOT DELETE THIS! */}
           <div class="footer col-xs-36 col-md-36"></div>
         </div>
-
 
       </Layout>
 

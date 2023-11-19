@@ -30,10 +30,6 @@
   cursor: pointer;
 }
 
-.upload-area:hover {
-  border-color: rgb(90, 82, 82);
-}
-
 .upload-area .text {
   color: #121212;
   text-align: center;
@@ -48,11 +44,12 @@
 .upload-area .subtext {
   color: rgba(18, 18, 18, 0.50);
   text-align: center;
-  font-family: "DM Sans-Regular", Helvetica;
+  
+  font-family: "DM Mono-Medium", Helvetica;
   font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
+  font-weight: regular;
   letter-spacing: -0.14px;
+
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -105,89 +102,66 @@
   background: none;
   border: none;
   font-size: 18px;
-  color: #fff;
+  color: #ffffff;
 }
 
-.color-controls {
-  color: rgba(18, 18, 18, 1);
-  /* text-align: left; */
-  /* margin-bottom: 20px;
-  margin-top: 25px; */
-
-  align-items: center;
-  /* display: inline-flex; */
-  /* gap: 20px;
-  height: 20px;
-  position: relative;
-  display: inline-block; */
-
-  /* align-items: center; */
-display: inline-flex;
-/* flex: 0 0 auto; */
-gap: 10px;
-justify-content: center;
-/* margin-bottom: -2.23px;
-margin-top: -2.23px; */
-position: relative;
-
+.number-of-colors-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
 }
 
-.color-controls .number-of-colors-text {
-  color: rgba(18, 18, 18, 1);
+.number-of-colors-text {
+  color: rgba(18, 18, 18, 0.75);
 
-  color: var(--dark-100);
-  font-family: "DM Sans-Medium", Helvetica;
-  font-size: 16px;
-  font-weight: 500;
-  height: 24px;
-  /* left: 0; */
-  letter-spacing: -0.18px;
-  line-height: 24px;
-  /* position: fixed; */
-  text-align: center;
-  /* top: 0; */
+  font-family: "DM Mono-Medium", Helvetica;
+  font-size: 14px;
+  font-weight: regular;
   white-space: nowrap;
+  letter-spacing: 1.4px;
 
-  /* Body */
-  /* font-family: "DM Sans-Bold", Helvetica;
-  font-size: 20px;
-  font-style: bold;
-  font-weight: 400;
-  letter-spacing: -0.18px;
-  margin-top: 30px; */
+  text-align: left;
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
 }
 
-.color-controls .number-button {
-  background-color: var(--dark-100);
-  border-radius: 38.7px;
-  /* border-radius: 50%;  */
-  height: 20px;
-  width: 51px;
-  text-align: center;
-  /* font-family: "DM Sans-Bold", Helvetica;
-  font-weight: 600;
-  font-style: bold;
+.number-buttons-container {
+  /* Center items both vertically and horizontally */
+  gap: 5%;
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+  justify-content: center;
+}
 
-  border: 2px solid rgba(18, 18, 18, 0.25); 
-  border-radius: 50%; 
-  width: 50px; 
-  height: 50px;
-  text-align: center; 
-  background-color: rgba(255, 225, 227, 0.25);
-  color:rgba(18, 18, 18, 0.75);
-  font-size: 16px; 
-  margin: 0 10px;
+.number-button {
+  background-color: rgba(18, 18, 18, 0.25);
+  border-radius: 38.7px;
+  height: 80%;
+  min-height: 20px;
+  width: 14%;
+  min-width: 40px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
-  display: inline-block;  */
+  text-align: center; 
+  border: 2px solid rgba(18, 18, 18, 0.25); 
+  display: inline-block; 
+
+  font-style: normal;
+  font-family: "DM Sans-Regular", Helvetica;
+  font-weight: 500;
+  font-style: bold;
 }
 
-.number-button:hover,
-.number-button.active {
-  background-color: #f0dedc;
-  /* Light grey background for active/hover state */
+.number-button:hover {
+  background-color: rgba(186, 229, 13, 0.4);
   transform: scale(1.1);
-  /* Slightly larger on hover/active */
+}
+
+.number-button.active {
+  background-color: rgba(186, 229, 13, 0.8);
+  transform: scale(1.1);
 }
 
 /* Color palette styles */
@@ -196,7 +170,6 @@ position: relative;
   flex-wrap: wrap;
   justify-content: space-around;
   gap: 5px;
-  /* /* margin: 0 auto; */
 }
 
 .color-bottom-align {
@@ -228,14 +201,10 @@ position: relative;
 
 /* Style for color name at the top */
 .color-name {
-  /* margin-bottom: auto; */
-  /* Pushes everything else to the bottom */
   font-family: "DM Mono-Medium", Helvetica;
   font-size: 10px;
-  /* color: white; */
   color: rgba(18, 18, 18, 1);
   letter-spacing: 3px;
-  /* Larger font size for color name */
   font-weight: bold;
   text-align: left;
   margin-bottom: 10px;
@@ -248,7 +217,6 @@ position: relative;
   margin: 5px 0;
   font-family: "DM Mono-Medium", Helvetica;
   letter-spacing: 3px;
-  /* color: white; */
   color: rgba(18, 18, 18, 0.75);
   font-size: 10px;
   text-align: left;
@@ -315,7 +283,7 @@ position: relative;
 .text_block_subtext {
   align-self: stretch;
   color: rgba(18, 18, 18, 0.50);
-  font-family: "DM Mono-Medium", Helvetica;
+  font-family: "DM Sans-Medium", Helvetica;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
