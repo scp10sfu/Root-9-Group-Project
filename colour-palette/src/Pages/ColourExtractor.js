@@ -341,11 +341,11 @@ function ColourExtractor() {
           <div class="main-section col-xs-36 col-md-12 grid-container nested-grid">
             <div class="col-xs-36 col-md-25">
               <header className="text_block_text">Colour Extractor</header>
-            </div>  
+            </div>
             <div class="col-xs-36 col-md-25">
               <header className="text_block_subtext">Extract wonderful palettes from your image.
               </header>
-            </div> 
+            </div>
 
             {isImagePreviewActive && (
 
@@ -417,7 +417,6 @@ function ColourExtractor() {
                   </div>
                 </div>
 
-
                 {/* Second dominant colour */}
                 <div class="wrapper-2-col secondary-section col-xs-36 col-md-18">
                   <div key={1} className="color-bottom-align" style={{ backgroundColor: secondColor.hex }}>
@@ -427,7 +426,6 @@ function ColourExtractor() {
                     <p className="color-cmyk">CMYK: {secondColor.cmyk}</p>
                   </div>
                 </div>
-
 
                 {/* 4 colours */}
                 {numberOfColors === 4 && (<>
