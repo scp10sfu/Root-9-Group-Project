@@ -1,113 +1,128 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+import { ColorPicker } from "react-color-palette";
+import "react-color-palette/dist/css/rcp.css";
 import './PaletteGenerator.css';
-function MyPaletteGenerator() {
-    const [paletteSize, setPaletteSize] = useState(5); // Default size
+import axios from 'axios';
+
+function PaletteGenerator() {
+    const [startColor, setStartColor] = useState({ hex: "#ffffff" });
+    const [endColor, setEndColor] = useState({ hex: "#000000" });
     const [palette, setPalette] = useState([]);
+    const [userInput, setUserInput] = useState('');
 
-    // Fetches a random color palette from the API based on the selected size.
-      // Function to fetch color details (name, rgb, cmyk) for each hex color
-      const getColorDetails = async (hex) => {
-        const rgbResponse = await axios.get(`https://www.thecolorapi.com/id?hex=${hex}`);
-        const { r, g, b } = rgbResponse.data.rgb;
-        const cmyk = rgbToCmyk(r, g, b);
-        return {
-            hex: `#${hex}`,
-            rgb: `(${r}, ${g}, ${b})`,
-            cmyk: `(${cmyk.join(', ')})`,
-            name: rgbResponse.data.name.value,
-        };
-    };
-    const rgbToCmyk = (r, g, b) => {
-        let c = 1 - (r / 255);
-        let m = 1 - (g / 255);
-        let y = 1 - (b / 255);
-        let k = Math.min(c, Math.min(m, y));
-      
-        c = ((c - k) / (1 - k)) || 0;
-        m = ((m - k) / (1 - k)) || 0;
-        y = ((y - k) / (1 - k)) || 0;
-      
-        c = Math.round(c * 100);
-        m = Math.round(m * 100);
-        y = Math.round(y * 100);
-        k = Math.round(k * 100);
-      
-        return [c, m, y, k];
-      };
-    // Function to fetch random color palette
-
-    const fetchRandomPalette = async () => {
-        try {
-            const response = await axios.get(`https://www.colr.org/json/colors/random/${paletteSize}`);
-            const hexColors = response.data.colors.map(color => color.hex);
-            const colorDetailsPromises = hexColors.map(hex => getColorDetails(hex));
-            const colorDetails = await Promise.all(colorDetailsPromises); // This defines colorDetails
-            localStorage.setItem('colorPalette', JSON.stringify(colorDetails)); // Save to local storage
-            setPalette(colorDetails);
-        } catch (error) {
-            console.error('Error fetching color palette:', error);
-            setPalette([]);
-        }
+    const hexToRgb = (hex) => {
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? [
+            parseInt(result[1], 16),
+            parseInt(result[2], 16),
+            parseInt(result[3], 16)
+        ] : null;
     };
     
-    useEffect(() => {
-        const savedPalette = JSON.parse(localStorage.getItem('colorPalette') || '[]');
-        if (savedPalette.length > 0) {
-            setPalette(savedPalette);
+    
+å
+    const rgbToHex = (r, g, b) => {
+        return "#" + [r, g, b].map(x => {
+            const hex = x.toString(16);
+            return hex.length === 1 ? '0' + hex : hex;
+        }).join('');
+    };
+    
+    
+
+    const interpolateColor = (color1, color2, factor) => {
+        if (arguments.length < 3) { 
+            factor = 0.5; 
         }
-    }, []);
-    // Handles the change in the number of colors selected by the user
-    const handlePaletteSizeChange = (event) => {
-        setPaletteSize(event.target.value);
+        var result = color1.slice();
+        for (var i = 0; i < 3; i++) {
+            result[i] = Math.round(result[i] + factor * (color2[i] - color1[i]));
+        }
+        return result;
+    };
+    
+    
+
+    const generatePalette = () => {
+        let startRgb = hexToRgb(startColor.hex);
+        let endRgb = hexToRgb(endColor.hex);
+        let paletteArray = [startColor.hex];
+    
+        for (let i = 1; i < 9; i++) {
+            let factor = i / 9;
+            let interpolatedRgb = interpolateColor(startRgb, endRgb, factor);
+            paletteArray.push(rgbToHex(...interpolatedRgb));
+        }
+    
+        paletteArray.push(endColor.hex);
+        setPalette(paletteArray);
+    };
+    
+    
+
+    const fetchColorFromAI = async () => {
+        try {
+            const response = await axios.post('https://api.openai.com/v1/engines/davinci-codex/completions', {
+                prompt: `Generate a color palette for a mood: ${userInput}. Provide start and end HEX colors.`,
+                max_tokens: 60
+            }, {
+                headers: {
+                    'Authorization': `Bearer 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`
+                }
+            });
+
+            const aiResponse = response.data.choices[0].text.trim();
+            const [startHex, endHex] = aiResponse.split(' '); 
+            setStartColor({ hex: startHex });
+            setEndColor({ hex: endHex });
+        } catch (error) {
+            console.error("Error fetching color from AI", error);
+        }
     };
 
     return (
         <div className="PaletteGenerator">
             <div className="palette-controls">
-                <label htmlFor="paletteSize">Select palette size (4-10): </label>
-                {/* <input
-                    id="paletteSize"
-                    type="number"
-                    min="4"
-                    max="10"
-                    value={paletteSize}
-                    onChange={handlePaletteSizeChange}
-                /> */}
-                <form action="#" class="my-number-color">
-                    
-                    <div popup id="testtest">
-                    <select name="number" id="num" value={paletteSize} onChange={handlePaletteSizeChange}>
-                        <option value="select">Select a number</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
-                    </div>
-                </form>
-                <button onClick={fetchRandomPalette}>Generate Palette</button>
+                <input
+                    type="text"
+                    value={userInput}
+                    onChange={(e) => setUserInput(e.target.value)}
+                    placeholder="Describe your mood..."
+                />
+                <button onClick={fetchColorFromAI}>Get Colors from AI</button>
+                <button onClick={generatePalette}>Generate Palette</button>
+                <div>
+                    <p>Start Color:</p>
+                    <ColorPicker 
+                        width={456}
+                        height={228}
+                        color={startColor}
+                        onChange={(color) => setStartColor(color)}
+                        hideHSV
+                        dark
+                    />
+                </div>
+                <div>
+                    <p>End Color:</p>
+                    <ColorPicker 
+                        width={456}
+                        height={228}
+                        color={endColor}
+                        onChange={(color) => setEndColor(color)}
+                        hideHSV
+                        dark
+                    />
+                </div>
             </div>
             <div className="palette-display">
-                {palette.length > 0 ? (
-                    palette.map((color, index) => (
-                        <div key={index} className="color-detail" style={{ backgroundColor: color.hex }}>
-                            <div className="color-info">
-                                <p>{color.name}</p>
-                                <p>HEX: {color.hex}</p>
-                                <p>RGB: {color.rgb}</p>
-                                <p>CMYK: {color.cmyk}</p>
-                            </div>
-                        </div>
-                    ))
-                ) : (
-                    <p>No palette generated yet. Use the controls above to generate one.</p>
-                )}
+                {palette.length > 0 && palette.map((color, index) => (
+                    <div key={index} className="color-block" style={{ backgroundColor: color }}>
+                        {color}
+                    </div>
+                ))}
             </div>
         </div>
     );
-                }
-export default MyPaletteGenerator;
+}
+
+export default PaletteGenerator;
