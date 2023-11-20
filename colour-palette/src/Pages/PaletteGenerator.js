@@ -1,62 +1,80 @@
 import React, { useState } from 'react';
-import { ColorPicker, useColor } from "react-color-palette";
+import { ColorPicker } from "react-color-palette";
 import "react-color-palette/dist/css/rcp.css";
 import './PaletteGenerator.css';
+import axios from 'axios';
 
 function PaletteGenerator() {
-    const [startColor, setStartColor] = useColor("hex", "#ffffff");
-    const [endColor, setEndColor] = useColor("hex", "#000000");
+    const [startColor, setStartColor] = useState({ hex: "#ffffff" });
+    const [endColor, setEndColor] = useState({ hex: "#000000" });
     const [palette, setPalette] = useState([]);
-
-    const interpolateColor = (color1, color2, factor) => {
-        if (arguments.length < 3) { 
-            factor = 0.5; 
-        }
-        var result = color1.slice();
-        for (var i = 0; i < 3; i++) {
-            result[i] = Math.round(result[i] + factor * (color2[i] - color1[i]));
-        }
-        return result;
-    };
+    const [userInput, setUserInput] = useState('');
 
     const hexToRgb = (hex) => {
-        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-        return result ? [
-            parseInt(result[1], 16),
-            parseInt(result[2], 16),
-            parseInt(result[3], 16)
-        ] : null;
+        // ... (existing hexToRgb function) ...
     };
 
     const rgbToHex = (r, g, b) => {
-        return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+        // ... (existing rgbToHex function) ...
+    };
+
+    const interpolateColor = (color1, color2, factor) => {
+        // ... (existing interpolateColor function) ...
     };
 
     const generatePalette = () => {
         let startRgb = hexToRgb(startColor.hex);
         let endRgb = hexToRgb(endColor.hex);
-        let paletteArray = [startColor.hex]; // Start with the start color
+        let paletteArray = [startColor.hex];
 
-        for (let i = 1; i < 9; i++) { // Generate 8 intermediate colors
+        for (let i = 1; i < 9; i++) {
             let factor = i / 9;
             let interpolatedRgb = interpolateColor(startRgb, endRgb, factor);
             paletteArray.push(rgbToHex(...interpolatedRgb));
         }
 
-        paletteArray.push(endColor.hex); // End with the end color
+        paletteArray.push(endColor.hex);
         setPalette(paletteArray);
-    };   
+    };
+
+    const fetchColorFromAI = async () => {
+        try {
+            const response = await axios.post('https://api.openai.com/v1/engines/davinci-codex/completions', {
+                prompt: `Generate a color palette for a mood: ${userInput}. Provide start and end HEX colors.`,
+                max_tokens: 60
+            }, {
+                headers: {
+                    'Authorization': `Bearer YOUR_OPENAI_API_KEY`
+                }
+            });
+
+            const aiResponse = response.data.choices[0].text.trim();
+            const [startHex, endHex] = aiResponse.split(' '); 
+            setStartColor({ hex: startHex });
+            setEndColor({ hex: endHex });
+        } catch (error) {
+            console.error("Error fetching color from AI", error);
+        }
+    };
 
     return (
         <div className="PaletteGenerator">
             <div className="palette-controls">
+                <input
+                    type="text"
+                    value={userInput}
+                    onChange={(e) => setUserInput(e.target.value)}
+                    placeholder="Describe your mood..."
+                />
+                <button onClick={fetchColorFromAI}>Get Colors from AI</button>
+                <button onClick={generatePalette}>Generate Palette</button>
                 <div>
                     <p>Start Color:</p>
                     <ColorPicker 
                         width={456}
                         height={228}
                         color={startColor}
-                        onChange={setStartColor}
+                        onChange={(color) => setStartColor(color)}
                         hideHSV
                         dark
                     />
@@ -67,12 +85,11 @@ function PaletteGenerator() {
                         width={456}
                         height={228}
                         color={endColor}
-                        onChange={setEndColor}
+                        onChange={(color) => setEndColor(color)}
                         hideHSV
                         dark
                     />
                 </div>
-                <button onClick={generatePalette}>Generate Palette</button>
             </div>
             <div className="palette-display">
                 {palette.length > 0 && palette.map((color, index) => (
