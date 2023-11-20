@@ -1,13 +1,16 @@
 /* ColourExtractor.css */
 
-.upload-area {
+.upload-container {
+  position: relative;
+  background-color: rgba(18, 18, 18, 0.05);
   border: 1px dashed;
   border-radius: 10px;
-  border-color: rgba(18, 18, 18, 0.50);
-  background-color: rgba(18, 18, 18, 0.05);
+  border-color: rgba(18, 18, 18, 0.55);
+}
+
+.upload-area {
   text-align: center;
-  padding: 20px 40px;
-  cursor: pointer;
+  padding: 10px 20px;
   transition: border-color 0.3s;
   flex-direction: column;
   justify-content: center;
@@ -16,31 +19,43 @@
   overflow: hidden;
 }
 
-.upload-area:hover {
-  border-color: rgb(90, 82, 82);
+/* Modify the file input styles to cover the entire container */
+.upload-container input[type="file"] {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
 }
 
 .upload-area .text {
   color: #121212;
-  text-align: center;
+
   /* Body */
   font-family: "DM Sans-Bold", Helvetica;
-  font-size: 20px;
-  font-style: bold;
+  font-size: 18px;
+  font-style: normal;
   font-weight: 400;
-  letter-spacing: -0.18px;
+  letter-spacing: 1.4px;
+
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .upload-area .subtext {
   color: rgba(18, 18, 18, 0.50);
-  text-align: center;
-  font-family: "DM Sans-Regular", Helvetica;
+  font-family: "DM Mono-Medium", Helvetica;
   font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  letter-spacing: -0.14px;
+  font-weight: regular;
+  white-space: nowrap;
+  letter-spacing: 1.4px;
+
+  text-align: center;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
@@ -63,16 +78,6 @@
   width: 13px;
 }
 
-/* Hide file input but keep its functionality */
-.upload-area input[type="file"] {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-}
-
 /* Image preview styles */
 .image-preview {
   text-align: center;
@@ -90,7 +95,7 @@
   min-width: 200px;
   width: 100%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 10px;
 }
 
 .close-button {
@@ -101,60 +106,82 @@
   background: none;
   border: none;
   font-size: 18px;
-  color: #fff;
+  color: #ffffff;
 }
 
-.color-controls {
-  color:rgba(18, 18, 18, 1);
-  text-align: center;
-  margin-bottom: 20px;
-  margin-top: 25px;
+.number-of-colors-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
 }
 
-.number-of-colors-label {
-  color: rgba(18, 18, 18, 1);
-  text-align: center;
-  /* Body */
-  font-family: "DM Sans-Bold", Helvetica;
-  font-size: 20px;
-  font-style: bold;
-  font-weight: 400;
-  letter-spacing: -0.18px;
-  margin-top: 30px;
+.number-of-colors-text {
+  color: rgba(18, 18, 18, 0.75);
+
+  font-family: "DM Mono-Medium", Helvetica;
+  font-size: 14px;
+  font-weight: regular;
+  white-space: nowrap;
+  letter-spacing: 1.4px;
+
+  text-align: left;
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+}
+
+.number-buttons-container {
+  /* Center items both vertically and horizontally */
+  gap: 5%;
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+  justify-content: center;
 }
 
 .number-button {
-  font-family: "DM Sans-Bold", Helvetica;
-  font-weight: 600;
-  font-style: bold;
+  color: rgba(18, 18, 18, 0.75);
+  background-color: rgba(18, 18, 18, 0.15);
 
-  border: 2px solid rgba(18, 18, 18, 0.25); /* Black border */
-  border-radius: 50%; /* Circular buttons */
-  width: 50px; /* Adjust based on your design */
-  height: 50px; /* Adjust based on your design */
-  text-align: center; /* Center the text horizontally */
-  background-color: rgba(255, 225, 227, 0.25);
-  color:rgba(18, 18, 18, 0.75);
-  font-size: 16px; /* Adjust to match your design */
-  margin: 0 10px; /* Spacing between buttons */
+  height: 80%;
+  min-height: 20px;
+  width: 14%;
+  min-width: 40px;
+
+  font-family: "DM Mono-Medium", Helvetica;
+  font-size: 12px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
-  display: inline-block; /* Align buttons in a row */
+ 
+  border-radius: 38.7px;
+  border: 1.5px solid rgba(18, 18, 18, 0.15); 
+  
+  display: inline-block; 
+  white-space: nowrap;
+  text-align: center; 
+  align-items: center;
+  justify-items: center;
 }
 
-.number-button:hover,
+.number-button:hover {
+  background-color: rgba(186, 229, 13, 0.75);
+  transform: scale(1.1);
+}
+
 .number-button.active {
-  background-color: #f0dedc; /* Light grey background for active/hover state */
-  transform: scale(1.1); /* Slightly larger on hover/active */
+  /* background-color: rgba(186, 229, 13, 0.8); */
+  /* background-color: rgba(255, 153, 102, 0.4); */
+  background-color: #121212;
+  color: #ffffff;
+  transform: scale(1.1);
 }
 
 /* Color palette styles */
 .color-palette {
-  display: flex; 
+  display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   gap: 5px;
-  /* /* margin: 0 auto; */
 }
 
 .color-bottom-align {
@@ -163,10 +190,12 @@
   background-color: rgba(18, 18, 18, 0.15);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* Aligns the content to the bottom */
+  justify-content: flex-end;
+  /* Aligns the content to the bottom */
   align-items: left;
-  padding: 15px; 
-  white-space: nowrap; 
+  padding: 15px;
+  white-space: nowrap;
+  gap: 3.5px;
 }
 
 .color-top-align {
@@ -175,39 +204,40 @@
   background-color: rgba(18, 18, 18, 0.15);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Aligns the content to the top */
+  justify-content: flex-start;
+  /* Aligns the content to the top */
   align-items: left;
-  padding: 15px; 
-  white-space: nowrap; 
+  padding: 15px;
+  white-space: nowrap;
+  gap: 3.5px;
 }
-
 
 /* Style for color name at the top */
 .color-name {
-  /* margin-bottom: auto; */
-  /* Pushes everything else to the bottom */
+  /* gap: 30px; */
   font-family: "DM Mono-Medium", Helvetica;
-  font-size: 10px;
-  /* color: white; */
+  font-size: 12px;
   color: rgba(18, 18, 18, 1);
   letter-spacing: 3px;
-  /* Larger font size for color name */
   font-weight: bold;
   text-align: left;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 /* Style for color codes */
 .color-hex,
 .color-rgb,
 .color-cmyk {
-  margin: 5px 0;
   font-family: "DM Mono-Medium", Helvetica;
-  letter-spacing: 3px;
-  /* color: white; */
   color: rgba(18, 18, 18, 0.75);
-  font-size: 10px;
   text-align: left;
+  font-size: 10px;
+  font-weight: medium;
+  letter-spacing: 1px;
+  line-height: 10px;
+  white-space: nowrap;
+  height: 10px;
+
 }
 
 /* Theme switcher styles */
@@ -271,33 +301,46 @@
 .text_block_subtext {
   align-self: stretch;
   color: rgba(18, 18, 18, 0.50);
-  font-family: "DM Mono-Medium", Helvetica;
+  font-family: "DM Sans-Medium", Helvetica;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
-  /* line-height: 24px; 120% */
   letter-spacing: -0.4px;
 }
 
 @keyframes move {
   100% {
-      transform: translate3d(0, 0, 1px) rotate(360deg);
+    transform: translate3d(0, 0, 1px) rotate(360deg);
   }
 }
+
 :root {
-  --color1: #361fd6;          /* Persian Blue */
-  --color2: #dea51f;          /* Golden Grass */
-  --color3: #efbcd0;          /* Beauty Bush */
-  --color4: #dd1c28;          /* Alizarin Crimson */
-  --color5: #20e620;          /* Malachite */
-  --color6: #cc21e3;          /* Electric Violet */
-  --color7: #d165b5;          /* Hopbush */
-  --color8: #9cbdd5;          /* Pigeon Post */
-  --color9: #f2f3c7;          /* Tusk */
-  --color10: #e9a762;         /* Porsche */
-  --color11: #cd607e;         /* Cinnamon Satin, a warm reddish-pink */
-  --color12: #ff9966;         /* Atomic Tangerine, a vibrant orange */
-  --color13: #f4a460;         /* Sandy Brown, a warm, light brown */
+  --color1: #361fd6;
+  /* Persian Blue */
+  --color2: #dea51f;
+  /* Golden Grass */
+  --color3: #efbcd0;
+  /* Beauty Bush */
+  --color4: #dd1c28;
+  /* Alizarin Crimson */
+  --color5: #20e620;
+  /* Malachite */
+  --color6: #cc21e3;
+  /* Electric Violet */
+  --color7: #d165b5;
+  /* Hopbush */
+  --color8: #9cbdd5;
+  /* Pigeon Post */
+  --color9: #f2f3c7;
+  /* Tusk */
+  --color10: #e9a762;
+  /* Porsche */
+  --color11: #cd607e;
+  /* Cinnamon Satin, a warm reddish-pink */
+  --color12: #ff9966;
+  /* Atomic Tangerine, a vibrant orange */
+  --color13: #f4a460;
+  /* Sandy Brown, a warm, light brown */
 }
 
 
@@ -307,7 +350,7 @@
   height: 100vh;
   top: 0;
   left: 0;
-  background: #fcfcfc;  
+  background: #fcfcfc;
   overflow: hidden;
   z-index: -1;
 }
@@ -327,6 +370,7 @@
   from {
     transform: translate(-50%, -50%) rotate(0deg);
   }
+
   to {
     transform: translate(50vw, 50vh) rotate(360deg);
   }
@@ -342,6 +386,7 @@
   transform-origin: 14vw 20vh;
   box-shadow: -40vmin 0 5.125340703195078vmin currentColor;
 }
+
 .background span:nth-child(1) {
   background-color: var(--color2);
   top: 7%;
@@ -351,6 +396,7 @@
   transform-origin: -12vw -7vh;
   box-shadow: -40vmin 0 5.147146375625605vmin currentColor;
 }
+
 .background span:nth-child(2) {
   background-color: var(--color3);
   top: 83%;
@@ -360,26 +406,29 @@
   transform-origin: 10vw 4vh;
   box-shadow: -40vmin 0 5.125434756506663vmin currentColor;
 }
+
 .background span:nth-child(3) {
   background-color: var(--color4);
-    top: 6%;
+  top: 6%;
   left: 45%;
   animation-duration: 25s;
   animation-delay: -50s;
   transform-origin: 21vw -11vh;
   box-shadow: -40vmin 0 5.2121301416587436vmin currentColor;
 }
+
 .background span:nth-child(4) {
   background-color: var(--color5);
-    top: 11%;
+  top: 11%;
   left: 26%;
   animation-duration: 16s;
   animation-delay: -22s;
   transform-origin: -8vw 9vh;
   box-shadow: 40vmin 0 5.619158909650866vmin currentColor;
 }
+
 .background span:nth-child(5) {
-  background-color: var(--color6);  
+  background-color: var(--color6);
   top: 33%;
   left: 7%;
   animation-duration: 52s;
@@ -387,6 +436,7 @@
   transform-origin: 15vw -13vh;
   box-shadow: 40vmin 0 5.271578872594347vmin currentColor;
 }
+
 .background span:nth-child(6) {
   color: #583C87;
   top: 81%;
@@ -396,36 +446,100 @@
   transform-origin: 12vw 0vh;
   box-shadow: -40vmin 0 5.16780273632795vmin currentColor;
 }
+
 .background span:nth-child(7) {
-  background-color: var(--color8);  top: 81%;
+  background-color: var(--color8);
+  top: 81%;
   left: 85%;
   animation-duration: 19s;
   animation-delay: -39s;
   transform-origin: 13vw 21vh;
   box-shadow: 40vmin 0 5.644889348082606vmin currentColor;
 }
+
 .background span:nth-child(8) {
-  background-color: var(--color9);  top: 75%;
+  background-color: var(--color9);
+  top: 75%;
   left: 85%;
   animation-duration: 49s;
   animation-delay: -18s;
   transform-origin: -6vw 0vh;
   box-shadow: -40vmin 0 5.6390822541236405vmin currentColor;
 }
+
 .background span:nth-child(9) {
-  background-color: var(--color10);  top: 93%;
+  background-color: var(--color10);
+  top: 93%;
   left: 65%;
   animation-duration: 26s;
   animation-delay: -7s;
   transform-origin: 9vw 19vh;
   box-shadow: 40vmin 0 5.16053049175409vmin currentColor;
 }
+
 .background span:nth-child(10) {
-  background-color: var(--color11);  
+  background-color: var(--color11);
   top: 62%;
   left: 86%;
   animation-duration: 50s;
   animation-delay: -45s;
   transform-origin: -21vw 16vh;
   box-shadow: -40vmin 0 5.054376341805417vmin currentColor;
+}
+
+
+/* Skeleton loader for colour blocks */
+.loader-square-bottom-align {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(18, 18, 18, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: left;
+  padding: 15px;
+  white-space: nowrap;
+  /* -webkit- is a hack for the Webkit Browser engine */
+  background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(18, 18, 18, 0.2)), color-stop(18%, rgba(18, 18, 18, 0.3)), color-stop(33%, rgba(18, 18, 18, 0.2)));
+  background: linear-gradient(to right, rgba(18, 18, 18, 0.2) 8%, rgba(18, 18, 18, 0.3) 18%, rgba(18, 18, 18, 0.2) 33%);
+  background-size: 800px 100px;
+  animation: wave-squares 2s infinite ease-out;
+}
+
+.loader-square-top-align {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(18, 18, 18, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: left;
+  padding: 15px;
+  white-space: nowrap;
+  /* -webkit- is a hack for the Webkit Browser engine */
+  background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(18, 18, 18, 0.2)), color-stop(18%, rgba(18, 18, 18, 0.3)), color-stop(33%, rgba(18, 18, 18, 0.2)));
+  background: linear-gradient(to right, rgba(18, 18, 18, 0.2) 8%, rgba(18, 18, 18, 0.3) 18%, rgba(18, 18, 18, 0.2) 33%);
+  background-size: 800px 100px;
+  animation: wave-squares 2s infinite ease-out;
+}
+
+
+@keyframes wave-lines {
+  0% {
+    background-position: -468px 0;
+  }
+
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+@keyframes wave-squares {
+  0% {
+    background-position: -468px 0;
+  }
+
+  100% {
+    background-position: 468px 0;
+  }
 }

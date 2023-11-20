@@ -10,16 +10,20 @@ import { ReactComponent as UploadIcon } from '../images/icon-upload-dark.svg';
 import { ReactComponent as InfoIcon } from '../images/icon-info-dark.svg';
 import Layout from '../Components/Layout';
 import './ColourExtractor.css';
+import Toast from '../Components/Toast';
 
 function ColourExtractor() {
-  const [numberOfColors, setNumberOfColors] = useState(6);  // Number of colors to extract (5 by default)
+  const [numberOfColors, setNumberOfColors] = useState(6);  // Number of colors to extract (6 by default)
   const [image, setImage] = useState(null);                 // Holds the image URL
   const [colors, setColors] = useState([]);                 // Stores an array of the extracted colors
   const [isImagePreviewActive, setIsImagePreviewActive] = useState(true);
   const imgRef = useRef(null);                              // Create a reference to the img tag
   const colorThief = new ColorThief();
   const [backgroundStyle, setBackgroundStyle] = useState({});
-
+  const [isLoadingAndExtracting, setIsLoadingAndExtracting] = useState(false);  // Add loading state for image upload
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const MAX_FILE_SIZE_MB = 10;
   /**
   * Converts RGB values to HEX format.
   * @param {number} r - The red value (0 to 255).
@@ -62,6 +66,7 @@ function ColourExtractor() {
     * @returns {Promise<void>} A Promise that resolves when the extraction is complete.
     */
   const extractColors = async () => {
+    setIsLoadingAndExtracting(true);
     if (imgRef.current && imgRef.current.complete) {
       try {
         // NOTE: The value is set to 10, so we do not make multiple requests to the API
@@ -81,8 +86,13 @@ function ColourExtractor() {
           background[`--color${i + 1}`] = colorObjects[i]?.hex;
         }
         setBackgroundStyle(background);
+        setIsLoadingAndExtracting(false);
       } catch (error) {
         console.error('Error extracting the colors:', error);
+      }
+      finally {
+        // Set loading state to false after extraction is complete (whether successful or not)
+        setIsLoadingAndExtracting(false);
       }
     }
   };
@@ -110,24 +120,36 @@ function ColourExtractor() {
   * @returns {function} Cleanup function.
   */
   useEffect(() => {
-    // Hold the current value of imgRef.current
-    const currentImgRef = imgRef.current;
     if (image) {
-      extractColors();
+      setIsLoadingAndExtracting(true);
+      // Simulate loading delay for the skeleton loader
+      // const loadingTimeout = setTimeout(() => {
+      extractColors(); // Perform the API call
+      setIsLoadingAndExtracting(false); // Set loading state to false once API call is complete
+      // }, 2000); // Adjust the timeout value based on your actual API call time
+
+      // Hold the current value of imgRef.current
+      // const currentImgRef = imgRef.current;
+      // if (image) {
+      //   extractColors();
+      // }
+      // if (currentImgRef && currentImgRef.complete) {
+      //   extractColors();
+      // }
+      // if (imgRef.current && imgRef.current.complete) {
+      //   extractColors();
+      // }
+      // This function will be called to clean up when the component is unmounted or before the effect runs again
+      // return () => {
+      //   // Clean up the event listener if it was added
+      //   if (imgRef.current) {
+      //     imgRef.current.removeEventListener('load', extractColors);
+      //   }
+      // };
+
+      // Clean up the timeout to avoid memory leaks
+      // return () => clearTimeout(loadingTimeout);
     }
-    if (currentImgRef && currentImgRef.complete) {
-      extractColors();
-    }
-    if (imgRef.current && imgRef.current.complete) {
-      extractColors();
-    }
-    // This function will be called to clean up when the component is unmounted or before the effect runs again
-    return () => {
-      // Clean up the event listener if it was added
-      if (imgRef.current) {
-        imgRef.current.removeEventListener('load', extractColors);
-      }
-    };
   }, [numberOfColors]);
 
 
@@ -137,7 +159,7 @@ function ColourExtractor() {
   */
   const handleNumberChange = (number) => {
     setNumberOfColors(number);
-    extractColors();
+    // extractColors();
   };
   // const handleNumberChange = (event) => {
   //   const newNumberOfColors = parseInt(event.target.value, 10);
@@ -151,36 +173,122 @@ function ColourExtractor() {
   */
   // When setting the image after upload
   const handleImageChange = (event) => {
-    if (event.target.files && event.target.files.length > 0) {
-      const file = event.target.files[0];
-      const reader = new FileReader();
+    setIsLoadingAndExtracting(true);
+    try {
+      if (event.target.files && event.target.files.length > 0) {
+        const file = event.target.files[0];
 
-      reader.onload = (e) => {
-        setImage(e.target.result); // Set image URL to display it
-        localStorage.setItem('savedImage', e.target.result); // Save image data to local storage
-        setIsImagePreviewActive(false); // Set image preview active
-      };
-      reader.readAsDataURL(file);
+        // Check if file size exceeds the limit
+        if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+          throw new Error(`The file exceeds the limit of ${MAX_FILE_SIZE_MB} MB`);
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+          setImage(e.target.result); // Set image URL to display it
+          localStorage.setItem('savedImage', e.target.result); // Save image data to local storage
+          setIsImagePreviewActive(false); // Set image preview active
+        };
+        reader.readAsDataURL(file);
+      }
+    } catch (error) {
+      console.error('Error handling image change:', error);
+      // Reset to default values
+      setIsLoadingAndExtracting(false);
+      setIsImagePreviewActive(true);
+      setImage('');
+      setBackgroundStyle({});
+      setNumberOfColors(6);
+      // Display a toast message for the file size limit exceeded error
+      setToastMessage(error.message);
+      setShowToast(true);
     }
+    // Note: We don't need to set isLoadingAndExtracting to false here,
+    // as the extraction process (extractColors function) will handle it
   };
 
   /**
   * Handles closing the image preview.
   */
   const handleClosePreview = () => {
+    setIsLoadingAndExtracting(false);
     setImage(null); // Reset the image state to close the preview
     setColors([]); // Clear the colors when closing the preview
     setIsImagePreviewActive(true); // Set image preview inactive
+    setNumberOfColors(6);   // Reset the number of colors to 6 (default value)
   };
 
   const NumberButton = ({ number, isActive }) => (
     <button
       className={`number-button ${isActive ? 'active' : ''}`}
-      onClick={() => handleNumberChange(number)}
-    >
+      onClick={() => handleNumberChange(number)}>
       {number}
     </button>
   );
+
+  // Skeleton loader component
+  const SkeletonLoader = () => (
+    // NOTE: keep this an empty container!
+    <>
+      <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
+        {/* First dominant colour */}
+        <div class="wrapper-2-col secondary-section col-xs-36 col-md-18">
+          <div key={0} className="loader-square-bottom-align" style={{ backgroundColor: firstColor.hex }}>
+            <p className="color-name">{firstColor.name}</p>
+            <p className="color-hex">HEX: {firstColor.hex}</p>
+            <p className="color-rgb">RGB: {firstColor.rgb}</p>
+            <p className="color-cmyk">CMYK: {firstColor.cmyk}</p>
+          </div>
+        </div>
+        {/* Second dominant colour */}
+        <div class="wrapper-2-col secondary-section col-xs-36 col-md-18">
+
+          <div key={1} className="loader-square-bottom-align" style={{ backgroundColor: secondColor.hex }}>
+            <p className="color-name">{secondColor.name}</p>
+            <p className="color-hex">HEX: {secondColor.hex}</p>
+            <p className="color-rgb">RGB: {secondColor.rgb}</p>
+            <p className="color-cmyk">CMYK: {secondColor.cmyk}</p>
+          </div>
+
+        </div>
+
+        <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+          <div key={2} className="loader-square-top-align" style={{ backgroundColor: thirdColor.hex }}>
+            <p className="color-name">{thirdColor.name}</p>
+            <p className="color-hex">HEX: {thirdColor.hex}</p>
+            <p className="color-rgb">RGB: {thirdColor.rgb}</p>
+            <p className="color-cmyk">CMYK: {thirdColor.cmyk}</p>
+          </div>
+        </div>
+        <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+          <div key={3} className="loader-square-top-align" style={{ backgroundColor: fourthColor.hex }}>
+            <p className="color-name">{fourthColor.name}</p>
+            <p className="color-hex">HEX: {fourthColor.hex}</p>
+            <p className="color-rgb">RGB: {fourthColor.rgb}</p>
+            <p className="color-cmyk">CMYK: {fourthColor.cmyk}</p>
+          </div>
+        </div>
+        <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+          <div key={4} className="loader-square-top-align" style={{ backgroundColor: fifthColor.hex }}>
+            <p className="color-name">{fifthColor.name}</p>
+            <p className="color-hex">HEX: {fifthColor.hex}</p>
+            <p className="color-rgb">RGB: {fifthColor.rgb}</p>
+            <p className="color-cmyk">CMYK: {fifthColor.cmyk}</p>
+          </div>
+        </div>
+        <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+          <div key={5} className="loader-square-top-align" style={{ backgroundColor: sixthColor.hex }}>
+            <p className="color-name">{sixthColor.name}</p>
+            <p className="color-hex">HEX: {sixthColor.hex}</p>
+            <p className="color-rgb">RGB: {sixthColor.rgb}</p>
+            <p className="color-cmyk">CMYK: {sixthColor.cmyk}</p>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+
 
   // Default color information
   const defaultColor = {
@@ -205,64 +313,83 @@ function ColourExtractor() {
 
   return (
 
-    <div className="ColorPicker" style={backgroundStyle}>
+    <div className="ColourExtractor" style={backgroundStyle}>
       <div className="background">
         {Array.from({ length: 20 }, (_, i) => (
           <span key={i} style={{ color: `var(--color${i + 1})` }}></span>
         ))}
       </div>
+
+      {showToast && (
+        <Toast
+          message={toastMessage}
+          onClose={() => {
+            setShowToast(false);
+            setToastMessage('');
+          }}
+        />
+      )}
+
       <Layout>
+
         <div class="grid-container general">
-          {/* The nav bar */}
-          <div class="header col-xs-36 col-md-36"></div>
+          {/* The nav bar (empty)*/}
+          <div class="col-xs-36 col-md-36"></div>
+          <div class="col-xs-36 col-md-36"></div>
 
           {/* The main content - left part */}
           <div class="main-section col-xs-36 col-md-12 grid-container nested-grid">
             <div class="col-xs-36 col-md-25">
               <header className="text_block_text">Colour Extractor</header>
-            </div>   {/* Title */}
+            </div>
             <div class="col-xs-36 col-md-25">
               <header className="text_block_subtext">Extract wonderful palettes from your image.
               </header>
-            </div>   {/* Extra information */}
-            {/* <div class="col-xs-36 col-md-25">Upload image:</div> */}
-            {/* Upload image */}
-            <div class="col-xs-36 col-md-25">{isImagePreviewActive && (
-              <section className="upload-area">
-                <input type="file" accept="image/*" onChange={handleImageChange} id="fileInput" />
-                <label htmlFor="fileInput">
-                  {/* <header className="text_block"> */}
-                  <div className="text_block_text">
-                    <UploadIcon className="upload-icon-dark" style={{ width: '40px', height: '40px' }} />
-                    <div className='text'>Click or drag file to this area to upload</div>
-                  </div>
-                  <div className="subtext">
-                    <InfoIcon className="info-icon-dark" style={{ width: '21px', height: '21px' }} />  Max file size: XX MB
-                  </div>
-                  {/* </header> */}
-                </label>
-              </section>
-            )}
-              {image && (
-                <div className="image-preview">
-                  <button className="close-button" onClick={handleClosePreview}>
-                    <span>&times;</span>
-                  </button>
-
-                  <img
-                    ref={imgRef}
-                    src={image}
-                    alt="To extract colors from"
-                    crossOrigin="anonymous"
-                    onLoad={extractColors}
-                  />
-                </div>
-              )}
             </div>
 
-            <div class="col-xs-36 col-md-25">
-              <section className="color-controls">
-                <div className="number-of-colors-label">The number of colours</div>
+            {isImagePreviewActive && (
+
+              <div class="upload-container col-xs-36 col-md-25">
+                <div className="upload-area">
+                  <input type="file" accept="image/*" onChange={handleImageChange} id="fileInput" />
+                  <label htmlFor="fileInput">
+                    <div className="text_block_text">
+                      <UploadIcon className="upload-icon-dark" style={{ width: '40px', height: '40px' }} />
+                      <div className='text'>Click or drag file to this area to upload</div>
+                    </div>
+                    <div className="subtext">
+                      <InfoIcon className="info-icon-dark" style={{ width: '21px', height: '21px' }} />  Max file size: {MAX_FILE_SIZE_MB} MB
+                    </div>
+                  </label>
+                </div>
+              </div>
+            )}
+
+            {image && (
+              <>
+                <div class="col-xs-36 col-md-25" onClick={(e) => e.stopPropagation()}>
+                  <div className="image-preview">
+                    <button className="close-button" onClick={handleClosePreview}>
+                      <span>&times;</span>
+                    </button>
+
+                    <img
+                      ref={imgRef}
+                      src={image}
+                      alt="To extract colors from"
+                      crossOrigin="anonymous"
+                      onLoad={extractColors}
+                    />
+                  </div>
+                </div>
+              </>
+            )}
+
+            <div class="number-of-colors-container col-xs-36 col-md-25 grid-container-small">
+              <div className="number-of-colors-text">
+                NUMBER OF COLOURS:
+              </div>
+              <div className="number-buttons-container">
                 {[4, 6, 8, 10].map((number) => (
                   <NumberButton
                     key={number}
@@ -270,215 +397,224 @@ function ColourExtractor() {
                     isActive={numberOfColors === number}
                   />
                 ))}
-              </section>
-            </div>
-          </div>
-
-          {/* The main content - right part: DOMINANT COLOURS */}
-          <div class="wrapper-2-col secondary-section col-xs-36 col-md-24 grid-container nested-grid">
-            {/* First dominant colour */}
-            <div class="col-xs-36 col-md-18">
-              <div key={0} className="color-bottom-align" style={{ backgroundColor: firstColor.hex }}>
-                <p className="color-name">{firstColor.name}</p>
-                <p className="color-hex">HEX: {firstColor.hex}</p>
-                <p className="color-rgb">RGB: {firstColor.rgb}</p>
-                <p className="color-cmyk">CMYK: {firstColor.cmyk}</p>
               </div>
             </div>
-            {/* Second dominant colour */}
-            <div class="col-xs-36 col-md-18">
-              <div key={1} className="color-bottom-align" style={{ backgroundColor: secondColor.hex }}>
-                <p className="color-name">{secondColor.name}</p>
-                <p className="color-hex">HEX: {secondColor.hex}</p>
-                <p className="color-rgb">RGB: {secondColor.rgb}</p>
-                <p className="color-cmyk">CMYK: {secondColor.cmyk}</p>
-              </div></div>
+
           </div>
 
-          {/* 4 colours */}
-          {numberOfColors === 4 &&
-            <div class="wrapper-4-col secondary-section col-xs-36 col-md-24 grid-container nested-grid">
-              <div class="col-xs-36 col-md-18">
-                <div key={2} className="color-top-align" style={{ backgroundColor: thirdColor.hex }}>
-                  <p className="color-name">{thirdColor.name}</p>
-                  <p className="color-hex">HEX: {thirdColor.hex}</p>
-                  <p className="color-rgb">RGB: {thirdColor.rgb}</p>
-                  <p className="color-cmyk">CMYK: {thirdColor.cmyk}</p>
-                </div>
-              </div>
-              <div class="col-xs-36 col-md-18">
-                <div key={3} className="color-top-align" style={{ backgroundColor: fourthColor.hex }}>
-                  <p className="color-name">{fourthColor.name}</p>
-                  <p className="color-hex">HEX: {fourthColor.hex}</p>
-                  <p className="color-rgb">RGB: {fourthColor.rgb}</p>
-                  <p className="color-cmyk">CMYK: {fourthColor.cmyk}</p>
-                </div>
-              </div>
-            </div>}
+          {/* Conditional rendering based on isLoadingAndExtracting state */}
+          {/* The main content - right part */}
+          {isLoadingAndExtracting ? (<SkeletonLoader />)
+            : (<>
 
-          {/* 6 colours */}
-          {numberOfColors === 6 &&
-            <div class="wrapper-4-col secondary-section col-xs-36 col-md-24 grid-container nested-grid">
-              <div class="col-xs-36 col-md-9">
-                <div key={2} className="color-top-align" style={{ backgroundColor: thirdColor.hex }}>
-                  <p className="color-name">{thirdColor.name}</p>
-                  <p className="color-hex">HEX: {thirdColor.hex}</p>
-                  <p className="color-rgb">RGB: {thirdColor.rgb}</p>
-                  <p className="color-cmyk">CMYK: {thirdColor.cmyk}</p>
+              <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
+                <div class="wrapper-2-col secondary-section col-xs-36 col-md-18">
+                  <div key={0} className="color-bottom-align" style={{ backgroundColor: firstColor.hex }}>
+                    <p className="color-name">{firstColor.name}</p>
+                    <p className="color-hex">HEX: {firstColor.hex}</p>
+                    <p className="color-rgb">RGB: {firstColor.rgb}</p>
+                    <p className="color-cmyk">CMYK: {firstColor.cmyk}</p>
+                  </div>
                 </div>
-              </div>
-              <div class="col-xs-36 col-md-9">
-                <div key={3} className="color-top-align" style={{ backgroundColor: fourthColor.hex }}>
-                  <p className="color-name">{fourthColor.name}</p>
-                  <p className="color-hex">HEX: {fourthColor.hex}</p>
-                  <p className="color-rgb">RGB: {fourthColor.rgb}</p>
-                  <p className="color-cmyk">CMYK: {fourthColor.cmyk}</p>
-                </div>
-              </div>
-              <div class="col-xs-36 col-md-9">
-                <div key={4} className="color-top-align" style={{ backgroundColor: fifthColor.hex }}>
-                  <p className="color-name">{fifthColor.name}</p>
-                  <p className="color-hex">HEX: {fifthColor.hex}</p>
-                  <p className="color-rgb">RGB: {fifthColor.rgb}</p>
-                  <p className="color-cmyk">CMYK: {fifthColor.cmyk}</p>
-                </div>
-              </div>
-              <div class="col-xs-36 col-md-9">
-                <div key={5} className="color-top-align" style={{ backgroundColor: sixthColor.hex }}>
-                  <p className="color-name">{sixthColor.name}</p>
-                  <p className="color-hex">HEX: {sixthColor.hex}</p>
-                  <p className="color-rgb">RGB: {sixthColor.rgb}</p>
-                  <p className="color-cmyk">CMYK: {sixthColor.cmyk}</p>
-                </div>
-              </div>
-            </div>}
 
-          {/* 8 colours */}
-          {numberOfColors === 8 &&
-            <div class="wrapper-4-col secondary-section col-xs-36 col-md-24 grid-container nested-grid">
-              <div class="col-xs-36 col-md-6">
-                <div key={2} className="color-top-align" style={{ backgroundColor: thirdColor.hex }}>
-                  <p className="color-name">{thirdColor.name}</p>
-                  <p className="color-hex">HEX: {thirdColor.hex}</p>
-                  <p className="color-rgb">RGB: {thirdColor.rgb}</p>
-                  <p className="color-cmyk">CMYK: {thirdColor.cmyk}</p>
+                {/* Second dominant colour */}
+                <div class="wrapper-2-col secondary-section col-xs-36 col-md-18">
+                  <div key={1} className="color-bottom-align" style={{ backgroundColor: secondColor.hex }}>
+                    <p className="color-name">{secondColor.name}</p>
+                    <p className="color-hex">HEX: {secondColor.hex}</p>
+                    <p className="color-rgb">RGB: {secondColor.rgb}</p>
+                    <p className="color-cmyk">CMYK: {secondColor.cmyk}</p>
+                  </div>
                 </div>
-              </div>
-              <div class="col-xs-36 col-md-6">
-                <div key={3} className="color-top-align" style={{ backgroundColor: fourthColor.hex }}>
-                  <p className="color-name">{fourthColor.name}</p>
-                  <p className="color-hex">HEX: {fourthColor.hex}</p>
-                  <p className="color-rgb">RGB: {fourthColor.rgb}</p>
-                  <p className="color-cmyk">CMYK: {fourthColor.cmyk}</p>
-                </div>
-              </div>
-              <div class="col-xs-36 col-md-6">
-                <div key={4} className="color-top-align" style={{ backgroundColor: fifthColor.hex }}>
-                  <p className="color-name">{fifthColor.name}</p>
-                  <p className="color-hex">HEX: {fifthColor.hex}</p>
-                  <p className="color-rgb">RGB: {fifthColor.rgb}</p>
-                  <p className="color-cmyk">CMYK: {fifthColor.cmyk}</p>
-                </div>
-              </div>
-              <div class="col-xs-36 col-md-6">
-                <div key={5} className="color-top-align" style={{ backgroundColor: sixthColor.hex }}>
-                  <p className="color-name">{sixthColor.name}</p>
-                  <p className="color-hex">HEX: {sixthColor.hex}</p>
-                  <p className="color-rgb">RGB: {sixthColor.rgb}</p>
-                  <p className="color-cmyk">CMYK: {sixthColor.cmyk}</p>
-                </div>
-              </div>
-              <div class="col-xs-36 col-md-6">
-                <div key={6} className="color-top-align" style={{ backgroundColor: seventhColor.hex }}>
-                  <p className="color-name">{seventhColor.name}</p>
-                  <p className="color-hex">HEX: {seventhColor.hex}</p>
-                  <p className="color-rgb">RGB: {seventhColor.rgb}</p>
-                  <p className="color-cmyk">CMYK: {seventhColor.cmyk}</p>
-                </div>
-              </div>
-              <div class="col-xs-36 col-md-6">
-                <div key={7} className="color-top-align" style={{ backgroundColor: eighthColor.hex }}>
-                  <p className="color-name">{eighthColor.name}</p>
-                  <p className="color-hex">HEX: {eighthColor.hex}</p>
-                  <p className="color-rgb">RGB: {eighthColor.rgb}</p>
-                  <p className="color-cmyk">CMYK: {eighthColor.cmyk}</p>
-                </div>
-              </div>
-            </div>}
 
-          {/* 10 colours */}
-          {numberOfColors === 10 &&
-            <div class="wrapper-4-col secondary-section col-xs-36 col-md-24 grid-container nested-grid">
-              <div class="col-xs-36 col-md-9">
-                <div key={2} className="color-top-align" style={{ backgroundColor: thirdColor.hex }}>
-                  <p className="color-name">{thirdColor.name}</p>
-                  <p className="color-hex">HEX: {thirdColor.hex}</p>
-                  <p className="color-rgb">RGB: {thirdColor.rgb}</p>
-                  <p className="color-cmyk">CMYK: {thirdColor.cmyk}</p>
-                </div>
+                {/* 4 colours */}
+                {numberOfColors === 4 && (<>
+                  {/* <div class="wrapper-4-col secondary-section col-xs-36 col-md-36 grid-container nested-grid"> */}
+                  <div class="wrapper-4-col secondary-section col-xs-36 col-md-18">
+                    <div key={2} className="color-top-align" style={{ backgroundColor: thirdColor.hex }}>
+                      <p className="color-name">{thirdColor.name}</p>
+                      <p className="color-hex">HEX: {thirdColor.hex}</p>
+                      <p className="color-rgb">RGB: {thirdColor.rgb}</p>
+                      <p className="color-cmyk">CMYK: {thirdColor.cmyk}</p>
+                    </div>
+                  </div>
+                  <div class="wrapper-4-col secondary-section col-xs-36 col-md-18">
+                    <div key={3} className="color-top-align" style={{ backgroundColor: fourthColor.hex }}>
+                      <p className="color-name">{fourthColor.name}</p>
+                      <p className="color-hex">HEX: {fourthColor.hex}</p>
+                      <p className="color-rgb">RGB: {fourthColor.rgb}</p>
+                      <p className="color-cmyk">CMYK: {fourthColor.cmyk}</p>
+                    </div>
+                  </div>
+                </>)}
+
+                {/* 6 colours */}
+                {numberOfColors === 6 && (<>
+                  {/* <div class="wrapper-4-col secondary-section col-xs-36 col-md-36 grid-container nested-grid"> */}
+                  <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                    <div key={2} className="color-top-align" style={{ backgroundColor: thirdColor.hex }}>
+                      <p className="color-name">{thirdColor.name}</p>
+                      <p className="color-hex">HEX: {thirdColor.hex}</p>
+                      <p className="color-rgb">RGB: {thirdColor.rgb}</p>
+                      <p className="color-cmyk">CMYK: {thirdColor.cmyk}</p>
+                    </div>
+                  </div>
+                  <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                    <div key={3} className="color-top-align" style={{ backgroundColor: fourthColor.hex }}>
+                      <p className="color-name">{fourthColor.name}</p>
+                      <p className="color-hex">HEX: {fourthColor.hex}</p>
+                      <p className="color-rgb">RGB: {fourthColor.rgb}</p>
+                      <p className="color-cmyk">CMYK: {fourthColor.cmyk}</p>
+                    </div>
+                  </div>
+                  <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                    <div key={4} className="color-top-align" style={{ backgroundColor: fifthColor.hex }}>
+                      <p className="color-name">{fifthColor.name}</p>
+                      <p className="color-hex">HEX: {fifthColor.hex}</p>
+                      <p className="color-rgb">RGB: {fifthColor.rgb}</p>
+                      <p className="color-cmyk">CMYK: {fifthColor.cmyk}</p>
+                    </div>
+                  </div>
+                  <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                    <div key={5} className="color-top-align" style={{ backgroundColor: sixthColor.hex }}>
+                      <p className="color-name">{sixthColor.name}</p>
+                      <p className="color-hex">HEX: {sixthColor.hex}</p>
+                      <p className="color-rgb">RGB: {sixthColor.rgb}</p>
+                      <p className="color-cmyk">CMYK: {sixthColor.cmyk}</p>
+                    </div>
+                  </div>
+                </>)}
+
+                {/* 8 colours */}
+                {numberOfColors === 8 && (<>
+                  <div class="wrapper-4-col secondary-section col-xs-36 col-md-6">
+                    <div key={2} className="color-top-align" style={{ backgroundColor: thirdColor.hex }}>
+                      <p className="color-name">{thirdColor.name}</p>
+                      <p className="color-hex">HEX: {thirdColor.hex}</p>
+                      <p className="color-rgb">RGB: {thirdColor.rgb}</p>
+                      <p className="color-cmyk">CMYK: {thirdColor.cmyk}</p>
+                    </div>
+                  </div>
+                  <div class="wrapper-4-col secondary-section col-xs-36 col-md-6">
+                    <div key={3} className="color-top-align" style={{ backgroundColor: fourthColor.hex }}>
+                      <p className="color-name">{fourthColor.name}</p>
+                      <p className="color-hex">HEX: {fourthColor.hex}</p>
+                      <p className="color-rgb">RGB: {fourthColor.rgb}</p>
+                      <p className="color-cmyk">CMYK: {fourthColor.cmyk}</p>
+                    </div>
+                  </div>
+                  <div class="wrapper-4-col secondary-section col-xs-36 col-md-6">
+                    <div key={4} className="color-top-align" style={{ backgroundColor: fifthColor.hex }}>
+                      <p className="color-name">{fifthColor.name}</p>
+                      <p className="color-hex">HEX: {fifthColor.hex}</p>
+                      <p className="color-rgb">RGB: {fifthColor.rgb}</p>
+                      <p className="color-cmyk">CMYK: {fifthColor.cmyk}</p>
+                    </div>
+                  </div>
+                  <div class="wrapper-4-col secondary-section col-xs-36 col-md-6">
+                    <div key={5} className="color-top-align" style={{ backgroundColor: sixthColor.hex }}>
+                      <p className="color-name">{sixthColor.name}</p>
+                      <p className="color-hex">HEX: {sixthColor.hex}</p>
+                      <p className="color-rgb">RGB: {sixthColor.rgb}</p>
+                      <p className="color-cmyk">CMYK: {sixthColor.cmyk}</p>
+                    </div>
+                  </div>
+                  <div class="wrapper-4-col secondary-section col-xs-36 col-md-6">
+                    <div key={6} className="color-top-align" style={{ backgroundColor: seventhColor.hex }}>
+                      <p className="color-name">{seventhColor.name}</p>
+                      <p className="color-hex">HEX: {seventhColor.hex}</p>
+                      <p className="color-rgb">RGB: {seventhColor.rgb}</p>
+                      <p className="color-cmyk">CMYK: {seventhColor.cmyk}</p>
+                    </div>
+                  </div>
+                  <div class="wrapper-4-col secondary-section col-xs-36 col-md-6">
+                    <div key={7} className="color-top-align" style={{ backgroundColor: eighthColor.hex }}>
+                      <p className="color-name">{eighthColor.name}</p>
+                      <p className="color-hex">HEX: {eighthColor.hex}</p>
+                      <p className="color-rgb">RGB: {eighthColor.rgb}</p>
+                      <p className="color-cmyk">CMYK: {eighthColor.cmyk}</p>
+                    </div>
+                  </div>
+                </>)}
+
+                {/* 10 colours */}
+                {numberOfColors === 10 && (<>
+                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                    <div key={2} className="color-top-align" style={{ backgroundColor: thirdColor.hex }}>
+                      <p className="color-name">{thirdColor.name}</p>
+                      <p className="color-hex">HEX: {thirdColor.hex}</p>
+                      <p className="color-rgb">RGB: {thirdColor.rgb}</p>
+                      <p className="color-cmyk">CMYK: {thirdColor.cmyk}</p>
+                    </div>
+                  </div>
+                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                    <div key={3} className="color-top-align" style={{ backgroundColor: fourthColor.hex }}>
+                      <p className="color-name">{fourthColor.name}</p>
+                      <p className="color-hex">HEX: {fourthColor.hex}</p>
+                      <p className="color-rgb">RGB: {fourthColor.rgb}</p>
+                      <p className="color-cmyk">CMYK: {fourthColor.cmyk}</p>
+                    </div>
+                  </div>
+                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                    <div key={4} className="color-top-align" style={{ backgroundColor: fifthColor.hex }}>
+                      <p className="color-name">{fifthColor.name}</p>
+                      <p className="color-hex">HEX: {fifthColor.hex}</p>
+                      <p className="color-rgb">RGB: {fifthColor.rgb}</p>
+                      <p className="color-cmyk">CMYK: {fifthColor.cmyk}</p>
+                    </div>
+                  </div>
+                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                    <div key={5} className="color-top-align" style={{ backgroundColor: sixthColor.hex }}>
+                      <p className="color-name">{sixthColor.name}</p>
+                      <p className="color-hex">HEX: {sixthColor.hex}</p>
+                      <p className="color-rgb">RGB: {sixthColor.rgb}</p>
+                      <p className="color-cmyk">CMYK: {sixthColor.cmyk}</p>
+                    </div>
+                  </div>
+                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                    <div key={6} className="color-top-align" style={{ backgroundColor: seventhColor.hex }}>
+                      <p className="color-name">{seventhColor.name}</p>
+                      <p className="color-hex">HEX: {seventhColor.hex}</p>
+                      <p className="color-rgb">RGB: {seventhColor.rgb}</p>
+                      <p className="color-cmyk">CMYK: {seventhColor.cmyk}</p>
+                    </div>
+                  </div>
+                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                    <div key={7} className="color-top-align" style={{ backgroundColor: eighthColor.hex }}>
+                      <p className="color-name">{eighthColor.name}</p>
+                      <p className="color-hex">HEX: {eighthColor.hex}</p>
+                      <p className="color-rgb">RGB: {eighthColor.rgb}</p>
+                      <p className="color-cmyk">CMYK: {eighthColor.cmyk}</p>
+                    </div>
+                  </div>
+                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                    <div key={8} className="color-top-align" style={{ backgroundColor: ninthColor.hex }}>
+                      <p className="color-name">{ninthColor.name}</p>
+                      <p className="color-hex">HEX: {ninthColor.hex}</p>
+                      <p className="color-rgb">RGB: {ninthColor.rgb}</p>
+                      <p className="color-cmyk">CMYK: {ninthColor.cmyk}</p>
+                    </div>
+                  </div>
+                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                    <div key={9} className="color-top-align" style={{ backgroundColor: tenthColor.hex }}>
+                      <p className="color-name">{tenthColor.name}</p>
+                      <p className="color-hex">HEX: {tenthColor.hex}</p>
+                      <p className="color-rgb">RGB: {tenthColor.rgb}</p>
+                      <p className="color-cmyk">CMYK: {tenthColor.cmyk}</p>
+                    </div>
+                  </div>
+
+                </>)}
+
               </div>
-              <div class="col-xs-36 col-md-9">
-                <div key={3} className="color-top-align" style={{ backgroundColor: fourthColor.hex }}>
-                  <p className="color-name">{fourthColor.name}</p>
-                  <p className="color-hex">HEX: {fourthColor.hex}</p>
-                  <p className="color-rgb">RGB: {fourthColor.rgb}</p>
-                  <p className="color-cmyk">CMYK: {fourthColor.cmyk}</p>
-                </div>
-              </div>
-              <div class="col-xs-36 col-md-9">
-                <div key={4} className="color-top-align" style={{ backgroundColor: fifthColor.hex }}>
-                  <p className="color-name">{fifthColor.name}</p>
-                  <p className="color-hex">HEX: {fifthColor.hex}</p>
-                  <p className="color-rgb">RGB: {fifthColor.rgb}</p>
-                  <p className="color-cmyk">CMYK: {fifthColor.cmyk}</p>
-                </div>
-              </div>
-              <div class="col-xs-36 col-md-9">
-                <div key={5} className="color-top-align" style={{ backgroundColor: sixthColor.hex }}>
-                  <p className="color-name">{sixthColor.name}</p>
-                  <p className="color-hex">HEX: {sixthColor.hex}</p>
-                  <p className="color-rgb">RGB: {sixthColor.rgb}</p>
-                  <p className="color-cmyk">CMYK: {sixthColor.cmyk}</p>
-                </div>
-              </div>
-              <div class="col-xs-36 col-md-9">
-                <div key={6} className="color-top-align" style={{ backgroundColor: seventhColor.hex }}>
-                  <p className="color-name">{seventhColor.name}</p>
-                  <p className="color-hex">HEX: {seventhColor.hex}</p>
-                  <p className="color-rgb">RGB: {seventhColor.rgb}</p>
-                  <p className="color-cmyk">CMYK: {seventhColor.cmyk}</p>
-                </div>
-              </div>
-              <div class="col-xs-36 col-md-9">
-                <div key={7} className="color-top-align" style={{ backgroundColor: eighthColor.hex }}>
-                  <p className="color-name">{eighthColor.name}</p>
-                  <p className="color-hex">HEX: {eighthColor.hex}</p>
-                  <p className="color-rgb">RGB: {eighthColor.rgb}</p>
-                  <p className="color-cmyk">CMYK: {eighthColor.cmyk}</p>
-                </div>
-              </div>
-              <div class="col-xs-36 col-md-9">
-                <div key={8} className="color-top-align" style={{ backgroundColor: ninthColor.hex }}>
-                  <p className="color-name">{ninthColor.name}</p>
-                  <p className="color-hex">HEX: {ninthColor.hex}</p>
-                  <p className="color-rgb">RGB: {ninthColor.rgb}</p>
-                  <p className="color-cmyk">CMYK: {ninthColor.cmyk}</p>
-                </div>
-              </div>
-              <div class="col-xs-36 col-md-9">
-                <div key={9} className="color-top-align" style={{ backgroundColor: tenthColor.hex }}>
-                  <p className="color-name">{tenthColor.name}</p>
-                  <p className="color-hex">HEX: {tenthColor.hex}</p>
-                  <p className="color-rgb">RGB: {tenthColor.rgb}</p>
-                  <p className="color-cmyk">CMYK: {tenthColor.cmyk}</p>
-                </div>
-              </div>
-            </div>}
+            </>)}
 
           {/* DO NOT DELETE THIS! */}
           <div class="footer col-xs-36 col-md-36"></div>
         </div>
+
       </Layout>
+
     </div>
   );
 }
