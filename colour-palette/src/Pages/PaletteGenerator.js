@@ -1,113 +1,101 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './PaletteGenerator.css';
-function MyPaletteGenerator() {
-    const [paletteSize, setPaletteSize] = useState(5); // Default size
-    const [palette, setPalette] = useState([]);
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./PaletteGenerator.css";
 
-    // Fetches a random color palette from the API based on the selected size.
-      // Function to fetch color details (name, rgb, cmyk) for each hex color
-      const getColorDetails = async (hex) => {
-        const rgbResponse = await axios.get(`https://www.thecolorapi.com/id?hex=${hex}`);
-        const { r, g, b } = rgbResponse.data.rgb;
-        const cmyk = rgbToCmyk(r, g, b);
-        return {
-            hex: `#${hex}`,
-            rgb: `(${r}, ${g}, ${b})`,
-            cmyk: `(${cmyk.join(', ')})`,
-            name: rgbResponse.data.name.value,
-        };
-    };
-    const rgbToCmyk = (r, g, b) => {
-        let c = 1 - (r / 255);
-        let m = 1 - (g / 255);
-        let y = 1 - (b / 255);
-        let k = Math.min(c, Math.min(m, y));
-      
-        c = ((c - k) / (1 - k)) || 0;
-        m = ((m - k) / (1 - k)) || 0;
-        y = ((y - k) / (1 - k)) || 0;
-      
-        c = Math.round(c * 100);
-        m = Math.round(m * 100);
-        y = Math.round(y * 100);
-        k = Math.round(k * 100);
-      
-        return [c, m, y, k];
-      };
-    // Function to fetch random color palette
+// Define a regular expression pattern to match HEX color codes
+const HEX_COLOR_PATTERN = /#[0-9A-Fa-f]{6}\b/;
 
-    const fetchRandomPalette = async () => {
-        try {
-            const response = await axios.get(`https://www.colr.org/json/colors/random/${paletteSize}`);
-            const hexColors = response.data.colors.map(color => color.hex);
-            const colorDetailsPromises = hexColors.map(hex => getColorDetails(hex));
-            const colorDetails = await Promise.all(colorDetailsPromises); // This defines colorDetails
-            localStorage.setItem('colorPalette', JSON.stringify(colorDetails)); // Save to local storage
-            setPalette(colorDetails);
-        } catch (error) {
-            console.error('Error fetching color palette:', error);
-            setPalette([]);
+function PaletteGenerator() {
+  const [colors, setColors] = useState([]);
+
+  useEffect(() => {
+    const form = document.getElementById("paletteForm");
+    const colorSwatches = document.getElementById("colorSwatches");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const prompt = document.getElementById("prompt").value;
+
+      try {
+        const response = await axios.post("/get_palette", { prompt });
+        const { data } = response;
+
+        // Clear previous colors
+        while (colorSwatches.firstChild) {
+          colorSwatches.removeChild(colorSwatches.firstChild);
         }
-    };
-    
-    useEffect(() => {
-        const savedPalette = JSON.parse(localStorage.getItem('colorPalette') || '[]');
-        if (savedPalette.length > 0) {
-            setPalette(savedPalette);
-        }
-    }, []);
-    // Handles the change in the number of colors selected by the user
-    const handlePaletteSizeChange = (event) => {
-        setPaletteSize(event.target.value);
-    };
 
-    return (
-        <div className="PaletteGenerator">
-            <div className="palette-controls">
-                <label htmlFor="paletteSize">Select palette size (4-10): </label>
-                {/* <input
-                    id="paletteSize"
-                    type="number"
-                    min="4"
-                    max="10"
-                    value={paletteSize}
-                    onChange={handlePaletteSizeChange}
-                /> */}
-                <form action="#" class="my-number-color">
-                    
-                    <div popup id="testtest">
-                    <select name="number" id="num" value={paletteSize} onChange={handlePaletteSizeChange}>
-                        <option value="select">Select a number</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
-                    </div>
-                </form>
-                <button onClick={fetchRandomPalette}>Generate Palette</button>
-            </div>
-            <div className="palette-display">
-                {palette.length > 0 ? (
-                    palette.map((color, index) => (
-                        <div key={index} className="color-detail" style={{ backgroundColor: color.hex }}>
-                            <div className="color-info">
-                                <p>{color.name}</p>
-                                <p>HEX: {color.hex}</p>
-                                <p>RGB: {color.rgb}</p>
-                                <p>CMYK: {color.cmyk}</p>
-                            </div>
-                        </div>
-                    ))
-                ) : (
-                    <p>No palette generated yet. Use the controls above to generate one.</p>
-                )}
-            </div>
-        </div>
-    );
-                }
-export default MyPaletteGenerator;
+        if (data.colors.length > 0) {
+          data.colors.forEach((color) => {
+            const colorSwatch = document.createElement("div");
+            colorSwatch.className = "color-swatch";
+            colorSwatch.style.backgroundColor = color;
+            colorSwatches.appendChild(colorSwatch);
+          });
+        } else {
+          const errorMessage = document.createElement("p");
+          errorMessage.textContent = "No HEX color codes could be identified.";
+          colorSwatches.appendChild(errorMessage);
+        }
+
+        setColors(data.colors);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    });
+  }, []);
+
+  return (
+    <div>
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
+          <title>Color Palette Generator</title>
+          <style>
+            {`
+            body { font-family: Arial, sans-serif; margin: 20px; }
+            .color-swatches { display: flex; margin-top: 20px; }
+            .color-swatch {
+                width: 50px; height: 50px; margin: 2px;
+                border: 1px solid #000; /* Add border to see the swatch clearly */
+            }
+          `}
+          </style>
+        </head>
+        <body>
+          <h2>Ask for a Color Palette</h2>
+          <form id="paletteForm">
+            <label htmlFor="prompt">
+              Describe the picture you want to draw:
+            </label>
+            <br />
+            <input
+              type="text"
+              id="prompt"
+              name="prompt"
+              required
+            />
+            <br />
+            <input
+              type="submit"
+              value="Get Palette"
+            />
+          </form>
+          <div id="palette">
+            <p>Color Palette:</p>
+            <div
+              className="color-swatches"
+              id="colorSwatches"
+            ></div>
+          </div>
+        </body>
+      </html>
+    </div>
+  );
+}
+
+export default PaletteGenerator;

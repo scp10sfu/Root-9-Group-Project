@@ -1,77 +1,55 @@
-.PaletteGenerator {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  text-align: center;
-  max-width: 600px;
-  margin: 30px auto;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background: #f9f9f9;
-}
+/* PaletteGenerator.css */
 
-.palette-controls {
+
+
+h2 {
+  margin-top: 150px;
   margin-bottom: 20px;
 }
 
-.palette-controls label {
-  margin-right: 10px;
-  font-size: 16px;
+form {
+  text-align: center;
+  margin-top: 20px;
 }
 
-.palette-controls input {
-  padding: 5px;
-  border-radius: 4px;
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
   border: 1px solid #ccc;
-  margin-right: 10px;
-}
-
-.palette-controls button {
-  padding: 10px 20px;
-  border: none;
   border-radius: 4px;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.palette-controls button:hover,
-.palette-controls button:focus {
+input[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
   background-color: #0056b3;
 }
 
-.palette-display {
+#palette {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.color-swatches {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
-}
-
-.color-detail {
-  width: 150px; /* Increase the width */
-  height: 150px; /* Increase the height */
-  margin: 15px; /* Adjust margin for spacing */
-  border-radius: 8px; /* You can adjust the border-radius */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Updated for a deeper shadow */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end; /* Align the color info to the bottom */
   align-items: center;
-  position: relative;
-  overflow: hidden; /* Hide overflow */
+  margin-top: 20px;
 }
 
-.color-info {
-  width: 100%;
-  padding: 10px; /* Increase padding */
-  background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
-  color: black; /* Change text color if necessary */
-  text-align: center;
-  font-size: 14px; /* Increase font size for better readability */
-}
-
-/* You may also want to adjust the font sizes within the .color-info for better legibility */
-.color-info p {
-  margin: 4px 0; /* Adjusted margin */
-  font-size: 12px; /* Adjusted font size */
+.color-swatch {
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+  border: 1px solid #000;
+  border-radius: 4px;
 }
