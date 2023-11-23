@@ -1,55 +1,90 @@
-/* PaletteGenerator.css */
-
-
-
-h2 {
-  margin-top: 150px;
-  margin-bottom: 20px;
+.palette-generator {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  font-family: monospace;
 }
 
-form {
+.palette-generator h2 {
+  margin-top: 100px;
+  color: #333;
   text-align: center;
-  margin-top: 20px;
 }
 
-input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
+.palette-generator form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.palette-generator label {
+  font-weight: bold;
+}
+
+.palette-generator input[type="text"] {
+  padding: 0.5rem;
+  border: 2px solid #ddd;
   border-radius: 4px;
+  font-size: 1rem;
 }
 
-input[type="submit"] {
-  background-color: #007bff;
-  color: #fff;
+.palette-generator input[type="submit"] {
+  padding: 0.5rem;
   border: none;
-  padding: 10px 20px;
   border-radius: 4px;
+  background-color: #656e77;
+  color: white;
   cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
 }
 
-input[type="submit"]:hover {
-  background-color: #0056b3;
+.palette-generator input[type="submit"]:hover {
+  background-color: #878e96;
 }
 
-#palette {
-  margin-top: 20px;
-  text-align: center;
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border-left-color: #09f;
+  animation: spin 1s ease infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .color-swatches {
   display: flex;
-  flex-wrap: wrap;
+  gap: 0.5rem;
   justify-content: center;
-  align-items: center;
-  margin-top: 20px;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
 }
 
 .color-swatch {
   width: 50px;
   height: 50px;
-  margin: 5px;
   border: 1px solid #000;
   border-radius: 4px;
+}
+
+#palette p {
+  text-align: center;
+  font-weight: bold;
+  margin: 1rem 0;
 }

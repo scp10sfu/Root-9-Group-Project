@@ -25,7 +25,7 @@ def get_palette():
     try:
         # Call the OpenAI API
         response = openai.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-3.5-turbo-1106",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": user_prompt}
