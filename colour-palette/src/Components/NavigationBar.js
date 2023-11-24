@@ -88,7 +88,7 @@ const NavigationBar = () => {
           <>
             {/* <ColorSwitcher /> */}
             {/* <button className="mobile-menu-btn col-xs-30 col-md-30" onClick={toggleMobileMenu} style={{ zIndex: isMobileMenuOpen ? 1001 : 1000, color: isMobileMenuOpen ? 'white' : 'black' }}> */}
-            <button className="mobile-menu-btn col-xs-30 col-md-30" onClick={toggleMobileMenu} style={{ zIndex: isMobileMenuOpen ? 1001 : 1000, backgroundColor: isMobileMenuOpen ? 'rgba(18, 18, 18, 1)' : 'rgba(255, 255, 255, 0.9)' }}>
+            <button className="mobile-menu-btn col-xs-30 col-md-30" onClick={toggleMobileMenu} style={{ zIndex: isMobileMenuOpen ? 1001 : 1000, backgroundColor: isMobileMenuOpen ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.9)' }}>
               {isMobileMenuOpen ? <CloseIcon /> : 'Menu'}
               {/* { isMobileMenuOpen ? <CloseIcon /> : <MenuIcon /> } */}
             </button>
