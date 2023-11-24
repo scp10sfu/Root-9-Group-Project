@@ -284,9 +284,12 @@ const NavigationBar = () => {
 
         {isMobile && (
           <>
-            <button className="mobile-menu-btn" onClick={toggleMobileMenu}>
+            <button className="mobile-menu-btn" onClick={toggleMobileMenu} style={{ zIndex: isMobileMenuOpen ? 1001 : 1000, color: isMobileMenuOpen ? 'white' : 'black' }}>
               {isMobileMenuOpen ? 'Close' : 'Menu'}
             </button>
+          
+            {isMobileMenuOpen && (
+
             <div className="mobile-menu-overlay">
               <div className="mobile-menu-content">
               <button onClick={() => { navigate('/About'); closeMobileMenu(); }}>About</button>
@@ -295,7 +298,8 @@ const NavigationBar = () => {
             <button onClick={() => { navigate('/MoodboardGenerator'); closeMobileMenu(); }}>Moodboard Generator</button>
               </div>
             </div>
-            {isMobileMenuOpen && <MobileMenu closeMenu={closeMobileMenu} />}
+            )}
+             {isMobileMenuOpen && <MobileMenu closeMenu={closeMobileMenu} />}
           </>
         )}
 

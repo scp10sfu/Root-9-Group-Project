@@ -80,6 +80,11 @@ margin-left: auto;
   /* background-color: #0c070d; */
 }
 
+
+/* ************************* */
+/* Mobile Menu Button Styles */
+/* ************************* */
+
 .mobile-menu-btn {
   display: none; /* Initially hidden on larger screens */
 }
@@ -171,4 +176,6 @@ margin-left: auto;
   margin: 10px;
   border: none;
   font-size: 18px;
+  cursor: pointer;
 }
+
