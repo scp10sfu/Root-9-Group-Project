@@ -165,6 +165,7 @@
 
 .number-button:hover {
   background-color: var(--color1);
+  color: getTextColor(--color1);
   transform: scale(1.1);
 }
 
@@ -212,6 +213,20 @@
   gap: 3.5px;
 }
 
+.color-name-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  gap:10px;
+
+}
+
+.copy-icon {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
 /* Style for color name at the top */
 .color-name {
   /* gap: 30px; */
@@ -221,7 +236,6 @@
   letter-spacing: 3px;
   font-weight: bold;
   text-align: left;
-  margin-bottom: 20px;
 }
 
 /* Style for color codes */
