@@ -73,6 +73,11 @@ function ColourExtractor() {
    * @returns {string} The text color.
    */
   const getTextColor = (hexColor) => {
+    if (!hexColor || typeof hexColor !== 'string' || !hexColor.match(/^#[0-9a-fA-F]{6}$/)) {
+      // Return a default color or handle the error in a way that fits your application
+      return 'rgba(18, 18, 18, 1)';
+    }
+
     // Convert hex to RGB
     const r = parseInt(hexColor.slice(1, 3), 16);
     const g = parseInt(hexColor.slice(3, 5), 16);
@@ -346,6 +351,7 @@ function ColourExtractor() {
   const ninthColor = colors.length >= 9 ? colors[8] : defaultColor;
   const tenthColor = colors.length >= 10 ? colors[9] : defaultColor;
 
+  
   const ColourBoxBottom = ({ color }) => {
     const textColor = getTextColor(color.hex);
 
