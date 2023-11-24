@@ -8,10 +8,9 @@ import { ReactComponent as CloseIcon } from '../images/icon-close-white.svg';
 import { ReactComponent as MenuIcon } from '../images/icon-menu-dark.svg';
 
 import About from '../Pages/About';
-import Home from '../Pages/Home';
+// import Home from '../Pages/ColourExtractor';
 import ColourExtractor from '../Pages/ColourExtractor';
 import PaletteGenerator from '../Pages/PaletteGenerator';
-import MoodboardGenerator from '../Pages/MoodboardGenerator';
 import ColorSwitcher from "./ColorSwitcher";
 
 export const ThemeContext = createContext(null);
@@ -43,7 +42,6 @@ const MobileMenu = ({ closeMenu }) => {
       <button onClick={() => handleNavigation('/About')}>About</button>
       <button onClick={() => handleNavigation('/ColourExtractor')}>Colour Extractor</button>
       <button onClick={() => handleNavigation('/PaletteGenerator')}>Palette Generator</button>
-      <button onClick={() => handleNavigation('/MoodboardGenerator')}>Moodboard Generator</button>
     </div>
   );
 };
@@ -82,7 +80,7 @@ const NavigationBar = () => {
   return (
     <nav className="nav-bar">
       <div className="nav-content">
-        <button className="title-page" onClick={() => { navigate('/'); closeMobileMenu(); }}>Paletä</button>
+        <button className="title-page" onClick={() => { navigate('/ColourExtractor'); closeMobileMenu(); }}>Paletä</button>
 
         {isMobile && (
           <>
@@ -99,7 +97,6 @@ const NavigationBar = () => {
                   <button onClick={() => { navigate('/About'); closeMobileMenu(); }}>About</button>
                   <button onClick={() => { navigate('/ColourExtractor'); closeMobileMenu(); }}>Colour Extractor</button>
                   <button onClick={() => { navigate('/PaletteGenerator'); closeMobileMenu(); }}>Palette Generator</button>
-                  <button onClick={() => { navigate('/MoodboardGenerator'); closeMobileMenu(); }}>Moodboard Generator</button>
                 </div>
               </div>
             )}
@@ -113,7 +110,6 @@ const NavigationBar = () => {
               <button onClick={() => { navigate('/About'); closeMobileMenu(); }}>About</button>
               <button onClick={() => { navigate('/ColourExtractor'); closeMobileMenu(); }}>Colour Extractor</button>
               <button onClick={() => { navigate('/PaletteGenerator'); closeMobileMenu(); }}>Palette Generator</button>
-              <button onClick={() => { navigate('/MoodboardGenerator'); closeMobileMenu(); }}>Moodboard Generator</button>
             </div>
 
             {/* <ColorSwitcher /> */}
