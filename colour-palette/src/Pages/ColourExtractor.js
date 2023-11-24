@@ -27,6 +27,7 @@ function ColourExtractor() {
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const MAX_FILE_SIZE_MB = 10;
+  
   /**
   * Converts RGB values to HEX format.
   * @param {number} r - The red value (0 to 255).
@@ -83,17 +84,6 @@ function ColourExtractor() {
         const colorObjects = await Promise.all(colorPromises);
         setColors(colorObjects);
 
-        // Determine whether the image is light or dark
-        const dominantColor = colorThief.getColor(imgRef.current);
-        const brightness = (dominantColor[0] * 299 + dominantColor[1] * 587 + dominantColor[2] * 114) / 1000;
-        setIsLightImage(brightness > 50);
-
-        const [hue, saturation, lightness] = colorThief.getHSL(imgRef.current);
-        const isLightBackground = lightness > 70 ? true : false;
-        const isHighSaturation = saturation > 50 ? true : false;
-
-        setIsLightImage(isLightBackground || isHighSaturation);
-
         // Update the background style based on the extracted colors
         const background = {};
         for (let i = 0; i < colorObjects.length; i++) {
@@ -101,6 +91,18 @@ function ColourExtractor() {
         }
         setBackgroundStyle(background);
         setIsLoadingAndExtracting(false);
+
+        // Determine whether the image is light or dark
+        const dominantColor = colorThief.getColor(imgRef.current);
+        const brightness = (dominantColor[0] * 299 + dominantColor[1] * 587 + dominantColor[2] * 114) / 1000;
+        setIsLightImage(brightness > 30);
+
+        const [hue, saturation, lightness] = colorThief.getHSL(imgRef.current);
+        const isLightBackground = lightness > 70 ? true : false;
+        const isHighSaturation = saturation > 50 ? true : false;
+
+        setIsLightImage(isLightBackground || isHighSaturation);
+
       } catch (error) {
         console.error('Error extracting the colors:', error);
       }
@@ -135,8 +137,8 @@ function ColourExtractor() {
   useEffect(() => {
     if (image) {
       setIsLoadingAndExtracting(true);
-      extractColors(); // Perform the API call
-      setIsLoadingAndExtracting(false); // Set loading state to false once API call is complete
+      extractColors();                      // Perform the API call
+      setIsLoadingAndExtracting(false);     // Set loading state to false once API call is complete
     }
   }, [numberOfColors]);
 
@@ -153,7 +155,6 @@ function ColourExtractor() {
   * Handles the file upload.
   * @param {object} event - The file change event.
   */
-  // When setting the image after upload
   const handleImageChange = (event) => {
     setIsLoadingAndExtracting(true);
     try {
@@ -168,24 +169,27 @@ function ColourExtractor() {
         const reader = new FileReader();
 
         reader.onload = (e) => {
-          setImage(e.target.result); // Set image URL to display it
-          localStorage.setItem('savedImage', e.target.result); // Save image data to local storage
-          setIsImagePreviewActive(false); // Set image preview active
+          setImage(e.target.result);                            // Set image URL to display it
+          localStorage.setItem('savedImage', e.target.result);  // Save image data to local storage
+          setIsImagePreviewActive(false);                       // Set image preview active
         };
         reader.readAsDataURL(file);
       }
     } catch (error) {
       console.error('Error handling image change:', error);
+      
       // Reset to default values
       setIsLoadingAndExtracting(false);
       setIsImagePreviewActive(true);
       setImage('');
       setBackgroundStyle({});
       setNumberOfColors(6);
+      
       // Display a toast message for the file size limit exceeded error
       setToastMessage(error.message);
       setShowToast(true);
     }
+
     // Note: We don't need to set isLoadingAndExtracting to false here,
     // as the extraction process (extractColors function) will handle it
   };
@@ -195,12 +199,19 @@ function ColourExtractor() {
   */
   const handleClosePreview = () => {
     setIsLoadingAndExtracting(false);
-    setImage(null); // Reset the image state to close the preview
-    setColors([]); // Clear the colors when closing the preview
-    setIsImagePreviewActive(true); // Set image preview inactive
-    setNumberOfColors(6);   // Reset the number of colors to 6 (default value)
+    setImage(null);                   // Reset the image state to close the preview
+    setColors([]);                    // Clear the colors when closing the preview
+    setIsImagePreviewActive(true);    // Set image preview inactive
+    setNumberOfColors(6);             // Reset the number of colors to 6 (default value)
   };
 
+
+  /**
+  * NumberButton Component
+  * @param {number} number - The number to display on the button.
+  * @param {boolean}isActive - A flag indicating whether the button is active.
+  * @returns {JSX.Element} - The rendered NumberButton component.
+  */
   const NumberButton = ({ number, isActive }) => (
     <button
       className={`number-button ${isActive ? 'active' : ''}`}
@@ -209,9 +220,14 @@ function ColourExtractor() {
     </button>
   );
 
-  // Skeleton loader component
+  
+  /**
+  * SkeletonLoader Component
+  * A component representing a skeleton loader with color information.
+  * NOTE: keep this an empty container!
+  * @returns {JSX.Element} - The rendered SkeletonLoader component.
+  */
   const SkeletonLoader = () => (
-    // NOTE: keep this an empty container!
     <>
       <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
         {/* First dominant colour */}
@@ -271,8 +287,10 @@ function ColourExtractor() {
     </>
   );
 
-
-  // Default color information
+  /**
+  * Default Color Object
+  * Represents a default color with optional properties.
+  */
   const defaultColor = {
     name: "Silver",
     rgba: "196, 196, 196, 0.25"
@@ -281,7 +299,11 @@ function ColourExtractor() {
     // cmyk: "0, 0, 0, 23.1"
   };
 
-  // TODO: create a default colour with full parameters to assign it to or return an error
+
+  /**
+  * Color Variables
+  * Variables representing colors based on the 'colors' array.
+  */
   const firstColor = colors.length >= 1 ? colors[0] : defaultColor;
   const secondColor = colors.length >= 2 ? colors[1] : defaultColor;
   const thirdColor = colors.length >= 3 ? colors[2] : defaultColor;
@@ -296,12 +318,15 @@ function ColourExtractor() {
   return (
 
     <div className="ColourExtractor" style={backgroundStyle}>
+
       <div className="background">
         {Array.from({ length: 20 }, (_, i) => (
           <span key={i} style={{ color: `var(--color${i + 1})` }}></span>
         ))}
       </div>
 
+    
+      {/* Toast message */}
       {showToast && (
         <Toast
           message={toastMessage}
