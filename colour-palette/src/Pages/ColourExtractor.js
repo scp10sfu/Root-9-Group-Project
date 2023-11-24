@@ -342,7 +342,7 @@ function ColourExtractor() {
         <div class="grid-container general">
           {/* The nav bar (empty)*/}
           <div class="col-xs-36 col-md-36"></div>
-          <div class="col-xs-36 col-md-36"></div>
+          {/* <div class="col-xs-36 col-md-36"></div> */}
 
           {/* The main content - left part */}
           <div class="main-section col-xs-36 col-md-12 grid-container nested-grid">
