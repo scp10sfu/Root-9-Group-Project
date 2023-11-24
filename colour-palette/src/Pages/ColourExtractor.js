@@ -349,7 +349,7 @@ function ColourExtractor() {
   const ninthColor = colors.length >= 9 ? colors[8] : defaultColor;
   const tenthColor = colors.length >= 10 ? colors[9] : defaultColor;
 
-  
+
   /**
    * ColourBoxBottom Component
    * A component representing a colour box with color information aligned to bottom.
@@ -365,17 +365,16 @@ function ColourExtractor() {
         // toast.success('Copied to clipboard!', { autoClose: 1500 });
         setShowToast(true);
         setToastMessage('Copied to clipboard!');
-  
+
         setTimeout(() => {
           setShowToast(false);
         }, 1500); // Auto-close after 2 seconds
 
         // Change the copy icon to filled for a second
-      setIsCopyIconFilled(true);
-      setTimeout(() => {
-        setIsCopyIconFilled(false);
-      }, 750);
-
+        setIsCopyIconFilled(true);
+        setTimeout(() => {
+          setIsCopyIconFilled(false);
+        }, 750);
       });
     };
 
@@ -383,27 +382,27 @@ function ColourExtractor() {
       <div className="color-bottom-align" style={{ backgroundColor: color.hex }}>
 
         <div className="color-name-container">
-        <p className="color-name" style={{ color: textColor }}>{color.name}</p>
+          <p className="color-name" style={{ color: textColor }}>{color.name}</p>
 
-        <button
-          className="copy-icon"
-          onClick={() => copyToClipboard(`${color.name}\nHEX: ${color.hex}\nRGB: ${color.rgb}\nCMYK: ${color.cmyk}`)}
-          aria-label="Copy to clipboard"
-        >
-          {textColor === 'rgba(18, 18, 18, 1)' ? (
+          <button
+            className="copy-icon"
+            onClick={() => copyToClipboard(`${color.name}\nHEX: ${color.hex}\nRGB: ${color.rgb}\nCMYK: ${color.cmyk}`)}
+            aria-label="Copy to clipboard"
+          >
+            {textColor === 'rgba(18, 18, 18, 1)' ? (
               isCopyIconFilled ? <CopyIconDarkFilled /> : <CopyIconDarkUnfilled />
             ) : (
               isCopyIconFilled ? <CopyIconWhiteFilled /> : <CopyIconWhiteUnfilled />
             )}
           </button>
-      </div>
+        </div>
 
         <p className="color-hex" style={{ color: textColor }}>HEX: {color.hex}</p>
         <p className="color-rgb" style={{ color: textColor }}>RGB: {color.rgb}</p>
         <p className="color-cmyk" style={{ color: textColor }}>CMYK: {color.cmyk}</p>
-    
+
       </div>
-      
+
     );
   };
 
@@ -423,16 +422,16 @@ function ColourExtractor() {
         // toast.success('Copied to clipboard!', { autoClose: 1500 });
         setShowToast(true);
         setToastMessage('Copied to clipboard!');
-  
+
         setTimeout(() => {
           setShowToast(false);
         }, 1500); // Auto-close after 2 seconds
 
         // Change the copy icon to filled for a second
-      setIsCopyIconFilled(true);
-      setTimeout(() => {
-        setIsCopyIconFilled(false);
-      }, 750);
+        setIsCopyIconFilled(true);
+        setTimeout(() => {
+          setIsCopyIconFilled(false);
+        }, 750);
 
       });
     };
@@ -441,25 +440,25 @@ function ColourExtractor() {
       <div className="color-top-align" style={{ backgroundColor: color.hex }}>
 
         <div className="color-name-container">
-        <p className="color-name" style={{ color: textColor }}>{color.name}</p>
+          <p className="color-name" style={{ color: textColor }}>{color.name}</p>
 
-        <button
-          className="copy-icon"
-          onClick={() => copyToClipboard(`${color.name}\nHEX: ${color.hex}\nRGB: ${color.rgb}\nCMYK: ${color.cmyk}`)}
-          aria-label="Copy to clipboard"
-        >
-          {textColor === 'rgba(18, 18, 18, 1)' ? (
+          <button
+            className="copy-icon"
+            onClick={() => copyToClipboard(`${color.name}\nHEX: ${color.hex}\nRGB: ${color.rgb}\nCMYK: ${color.cmyk}`)}
+            aria-label="Copy to clipboard"
+          >
+            {textColor === 'rgba(18, 18, 18, 1)' ? (
               isCopyIconFilled ? <CopyIconDarkFilled /> : <CopyIconDarkUnfilled />
             ) : (
               isCopyIconFilled ? <CopyIconWhiteFilled /> : <CopyIconWhiteUnfilled />
             )}
           </button>
-      </div>
+        </div>
 
         <p className="color-hex" style={{ color: textColor }}>HEX: {color.hex}</p>
         <p className="color-rgb" style={{ color: textColor }}>RGB: {color.rgb}</p>
         <p className="color-cmyk" style={{ color: textColor }}>CMYK: {color.cmyk}</p>
-    
+
       </div>
     );
   };
