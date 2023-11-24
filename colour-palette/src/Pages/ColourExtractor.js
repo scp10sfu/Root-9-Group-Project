@@ -86,7 +86,13 @@ function ColourExtractor() {
         // Determine whether the image is light or dark
         const dominantColor = colorThief.getColor(imgRef.current);
         const brightness = (dominantColor[0] * 299 + dominantColor[1] * 587 + dominantColor[2] * 114) / 1000;
-        setIsLightImage(brightness > 128);
+        setIsLightImage(brightness > 50);
+
+        const [hue, saturation, lightness] = colorThief.getHSL(imgRef.current);
+        const isLightBackground = lightness > 70 ? true : false;
+        const isHighSaturation = saturation > 50 ? true : false;
+
+        setIsLightImage(isLightBackground || isHighSaturation);
 
         // Update the background style based on the extracted colors
         const background = {};
@@ -346,7 +352,7 @@ function ColourExtractor() {
                 <div class="col-xs-36 col-md-25" onClick={(e) => e.stopPropagation()}>
                   <div className="image-preview">
                     <button className="close-button" onClick={handleClosePreview}>
-                    {isLightImage ? <CloseIconWhite /> : <CloseIconDark />}
+                      {isLightImage ? <CloseIconWhite /> : <CloseIconDark />}
                     </button>
 
                     <img
