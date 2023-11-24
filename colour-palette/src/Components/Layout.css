@@ -323,8 +323,13 @@
 }
 .col-xs-36{
     text-align: center; 
-  /* align-items: center; */
-  /* justify-items: center; */
+    -ms-grid-column-end: span 36;
+    grid-column-end: span 36;
+}
+.col-xs-36-center{
+    text-align: center;
+    align-items: center;
+    justify-items: center;
     -ms-grid-column-end: span 36;
     grid-column-end: span 36;
 }
@@ -671,6 +676,14 @@
     }
     .col-md-36{
         text-align: left; 
+        -ms-grid-column-end: span 36;
+        grid-column-end: span 36;
+    }
+
+    .col-md-36-center{
+        text-align: center;
+        align-items: center;
+        justify-items: center;
         -ms-grid-column-end: span 36;
         grid-column-end: span 36;
     }

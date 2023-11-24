@@ -17,14 +17,14 @@ function About () {
             </div>
 
             <Layout>
+
                 <div class="grid-container general">
 
                     <div class="col-xs-36 col-md-36" style={{ textAlign: 'center' }}></div>
                     {/* The main content */}
-                    <div class="main-section col-xs-36 col-md-36 grid-container nested-grid">
+                    <div class="main-section col-xs-36-center col-md-36-center">
                     <header className="text_block_text">Welcome!</header>
                     </div>
-
 
                 </div>
 
