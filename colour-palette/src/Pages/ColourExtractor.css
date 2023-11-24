@@ -164,7 +164,7 @@
 }
 
 .number-button:hover {
-  background-color: rgba(186, 229, 13, 0.75);
+  background-color: var(--color1);
   transform: scale(1.1);
 }
 

@@ -1,15 +1,14 @@
 .palette-generator {
-  max-width: 600px;
-  margin: 2rem auto;
+  max-width: 800px;
+  margin: 10rem auto 2rem; /* Increase the top margin */
   padding: 1rem;
   background: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  font-family: monospace;
+  font-family: 'Arial', sans-serif;
 }
 
 .palette-generator h2 {
-  margin-top: 100px;
   color: #333;
   text-align: center;
 }
@@ -17,12 +16,11 @@
 .palette-generator form {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
   margin-bottom: 1rem;
 }
 
 .palette-generator label {
-  font-weight: bold;
+  font-weight: normal;
 }
 
 .palette-generator input[type="text"] {
@@ -73,18 +71,47 @@
   gap: 0.5rem;
   justify-content: center;
   flex-wrap: wrap;
-  padding-bottom: 1rem;
 }
 
 .color-swatch {
-  width: 50px;
-  height: 50px;
-  border: 1px solid #000;
+  margin-top: 10px;
+  width: 70px;
+  height: 200px;
   border-radius: 4px;
 }
 
+/* Chat bubble style for response message */
+.palette-response-text {
+  font-family: 'Courier New', Courier, monospace;
+  white-space: pre-wrap; /* Ensures that the spacing is preserved as in the response */
+  word-wrap: break-word; /* To prevent overflow */
+  text-align: left; /* Aligns text to the left */
+  background-color: #f0f0f0;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  display: inline-block;
+  margin: 0 auto;
+  border: 1px solid #ddd;
+  text-transform: none; /* Add this line to prevent uppercase transformation */
+}
+
+
 #palette p {
   text-align: center;
-  font-weight: bold;
   margin: 1rem 0;
+}
+
+/* Adjustments for the chat bubble to prevent bold text */
+.palette-response-text {
+  background-color: #f0f0f0;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  display: inline-block;
+  margin: 0 auto;
+  border: 1px solid #ddd;
+  font-weight: normal; /* Ensure text is not bold */
+  font-size: 1rem; /* Adjust font size if needed */
+  max-width: 90%; /* Ensure it does not stretch too wide */
+  word-wrap:normal; /* To prevent overflow */
+  text-align: left; /* Align text to the left */
 }
