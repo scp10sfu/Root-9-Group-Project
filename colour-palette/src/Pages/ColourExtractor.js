@@ -8,6 +8,8 @@ import ColorThief from 'colorthief';
 import axios from 'axios';
 import { ReactComponent as UploadIcon } from '../images/icon-upload-dark.svg';
 import { ReactComponent as InfoIcon } from '../images/icon-info-dark.svg';
+import { ReactComponent as CloseIconWhite } from '../images/icon-close-white.svg';
+import { ReactComponent as CloseIconDark } from '../images/icon-close-dark.svg';
 import Layout from '../Components/Layout';
 import './ColourExtractor.css';
 import Toast from '../Components/Toast';
@@ -19,6 +21,7 @@ function ColourExtractor() {
   const [isImagePreviewActive, setIsImagePreviewActive] = useState(true);
   const imgRef = useRef(null);                              // Create a reference to the img tag
   const colorThief = new ColorThief();
+  const [isLightImage, setIsLightImage] = useState(false);
   const [backgroundStyle, setBackgroundStyle] = useState({});
   const [isLoadingAndExtracting, setIsLoadingAndExtracting] = useState(false);  // Add loading state for image upload
   const [showToast, setShowToast] = useState(false);
@@ -38,7 +41,7 @@ function ColourExtractor() {
 
   /**
   * Converts RGB values to CMYK format.
-   * @param {number} r - The red value (0 to 255).
+  * @param {number} r - The red value (0 to 255).
   * @param {number} g - The green value (0 to 255).
   * @param {number} b - The blue value (0 to 255).
   * @returns {string} The CMEK representation of the RGB values.
@@ -80,6 +83,11 @@ function ColourExtractor() {
         const colorObjects = await Promise.all(colorPromises);
         setColors(colorObjects);
 
+        // Determine whether the image is light or dark
+        const dominantColor = colorThief.getColor(imgRef.current);
+        const brightness = (dominantColor[0] * 299 + dominantColor[1] * 587 + dominantColor[2] * 114) / 1000;
+        setIsLightImage(brightness > 128);
+
         // Update the background style based on the extracted colors
         const background = {};
         for (let i = 0; i < colorObjects.length; i++) {
@@ -96,7 +104,6 @@ function ColourExtractor() {
       }
     }
   };
-
 
   /**
     * Fetches color name from the API based on HEX code.
@@ -122,33 +129,8 @@ function ColourExtractor() {
   useEffect(() => {
     if (image) {
       setIsLoadingAndExtracting(true);
-      // Simulate loading delay for the skeleton loader
-      // const loadingTimeout = setTimeout(() => {
       extractColors(); // Perform the API call
       setIsLoadingAndExtracting(false); // Set loading state to false once API call is complete
-      // }, 2000); // Adjust the timeout value based on your actual API call time
-
-      // Hold the current value of imgRef.current
-      // const currentImgRef = imgRef.current;
-      // if (image) {
-      //   extractColors();
-      // }
-      // if (currentImgRef && currentImgRef.complete) {
-      //   extractColors();
-      // }
-      // if (imgRef.current && imgRef.current.complete) {
-      //   extractColors();
-      // }
-      // This function will be called to clean up when the component is unmounted or before the effect runs again
-      // return () => {
-      //   // Clean up the event listener if it was added
-      //   if (imgRef.current) {
-      //     imgRef.current.removeEventListener('load', extractColors);
-      //   }
-      // };
-
-      // Clean up the timeout to avoid memory leaks
-      // return () => clearTimeout(loadingTimeout);
     }
   }, [numberOfColors]);
 
@@ -159,13 +141,7 @@ function ColourExtractor() {
   */
   const handleNumberChange = (number) => {
     setNumberOfColors(number);
-    // extractColors();
   };
-  // const handleNumberChange = (event) => {
-  //   const newNumberOfColors = parseInt(event.target.value, 10);
-  //   setNumberOfColors(newNumberOfColors);
-  //   localStorage.setItem('savedNumberOfColors', newNumberOfColors); // Save number of colors to local storage
-  // };
 
   /**
   * Handles the file upload.
@@ -370,7 +346,7 @@ function ColourExtractor() {
                 <div class="col-xs-36 col-md-25" onClick={(e) => e.stopPropagation()}>
                   <div className="image-preview">
                     <button className="close-button" onClick={handleClosePreview}>
-                      <span>&times;</span>
+                    {isLightImage ? <CloseIconWhite /> : <CloseIconDark />}
                     </button>
 
                     <img
