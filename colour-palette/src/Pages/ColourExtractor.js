@@ -10,6 +10,11 @@ import { ReactComponent as UploadIcon } from '../images/icon-upload-dark.svg';
 import { ReactComponent as InfoIcon } from '../images/icon-info-dark.svg';
 import { ReactComponent as CloseIconWhite } from '../images/icon-close-white.svg';
 import { ReactComponent as CloseIconDark } from '../images/icon-close-dark.svg';
+import { ReactComponent as CopyIconWhiteUnfilled } from '../images/icon-copy-white-unfilled.svg';
+import { ReactComponent as CopyIconDarkUnfilled } from '../images/icon-copy-dark-unfilled.svg';
+import { ReactComponent as CopyIconWhiteFilled } from '../images/icon-copy-white-filled.svg';
+import { ReactComponent as CopyIconDarkFilled } from '../images/icon-copy-dark-filled.svg';
+
 import Layout from '../Components/Layout';
 import './ColourExtractor.css';
 import Toast from '../Components/Toast';
@@ -26,8 +31,6 @@ function ColourExtractor() {
   const [isLoadingAndExtracting, setIsLoadingAndExtracting] = useState(false);  // Add loading state for image upload
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
-  // const [blockTextNameColour, setBlockTextNameColour] = useState('rgba(18, 18, 18, 1)');
-  // const [blockTextInfoColour, setBlockTextInfoColour] = useState('rgba(18, 18, 18, 0.75)');
   const MAX_FILE_SIZE_MB = 10;
 
   /**
@@ -355,14 +358,52 @@ function ColourExtractor() {
    */
   const ColourBoxBottom = ({ color }) => {
     const textColor = getTextColor(color.hex);
+    const [isCopyIconFilled, setIsCopyIconFilled] = useState(false);
+
+    const copyToClipboard = (text) => {
+      navigator.clipboard.writeText(text).then(() => {
+        // toast.success('Copied to clipboard!', { autoClose: 1500 });
+        setShowToast(true);
+        setToastMessage('Copied to clipboard!');
+  
+        setTimeout(() => {
+          setShowToast(false);
+        }, 1500); // Auto-close after 2 seconds
+
+        // Change the copy icon to filled for a second
+      setIsCopyIconFilled(true);
+      setTimeout(() => {
+        setIsCopyIconFilled(false);
+      }, 750);
+
+      });
+    };
 
     return (
       <div className="color-bottom-align" style={{ backgroundColor: color.hex }}>
+
+        <div className="color-name-container">
         <p className="color-name" style={{ color: textColor }}>{color.name}</p>
+
+        <button
+          className="copy-icon"
+          onClick={() => copyToClipboard(`${color.name}\nHEX: ${color.hex}\nRGB: ${color.rgb}\nCMYK: ${color.cmyk}`)}
+          aria-label="Copy to clipboard"
+        >
+          {textColor === 'rgba(18, 18, 18, 1)' ? (
+              isCopyIconFilled ? <CopyIconDarkFilled /> : <CopyIconDarkUnfilled />
+            ) : (
+              isCopyIconFilled ? <CopyIconWhiteFilled /> : <CopyIconWhiteUnfilled />
+            )}
+          </button>
+      </div>
+
         <p className="color-hex" style={{ color: textColor }}>HEX: {color.hex}</p>
         <p className="color-rgb" style={{ color: textColor }}>RGB: {color.rgb}</p>
         <p className="color-cmyk" style={{ color: textColor }}>CMYK: {color.cmyk}</p>
+    
       </div>
+      
     );
   };
 
