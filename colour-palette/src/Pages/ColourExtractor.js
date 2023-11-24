@@ -67,6 +67,7 @@ function ColourExtractor() {
     return [c, m, y, k];
   };
 
+
   /**
    * Determines whether the text in the colour block should be light or dark.
    * @param {string} hexColor - The HEX color code.
@@ -123,16 +124,6 @@ function ColourExtractor() {
         const brightness = (dominantColor[0] * 299 + dominantColor[1] * 587 + dominantColor[2] * 114) / 1000;
         setIsLightImage(brightness > 30);
 
-        // Determine whether the text in the colour block should be light or dark
-        // const luminance = (0.299 * dominantColor[0] + 0.587 * dominantColor[1] + 0.114 * dominantColor[2]) / 255;
-        // if (luminance > 0.5) {
-        //   setBlockTextNameColour('rgba(18, 18, 18, 1)');
-        //   setBlockTextInfoColour('rgba(18, 18, 18, 0.75)');
-        // } else {
-        //   setBlockTextNameColour('rgba(255, 255, 255, 1)');
-        //   setBlockTextInfoColour('rgba(255, 255, 255, 0.75)');
-        // }
-
         const [hue, saturation, lightness] = colorThief.getHSL(imgRef.current);
         const isLightBackground = lightness > 70 ? true : false;
         const isHighSaturation = saturation > 50 ? true : false;
@@ -149,6 +140,7 @@ function ColourExtractor() {
     }
   };
 
+
   /**
     * Fetches color name from the API based on HEX code.
     * @param {string} hex - HEX color code.
@@ -163,6 +155,7 @@ function ColourExtractor() {
       return hex; // Fallback to HEX if the name can't be fetched
     }
   };
+
 
   /**
   * Effect hook to update the colors when numberOfColors changes.
@@ -186,6 +179,7 @@ function ColourExtractor() {
   const handleNumberChange = (number) => {
     setNumberOfColors(number);
   };
+
 
   /**
   * Handles the file upload.
@@ -229,6 +223,7 @@ function ColourExtractor() {
     // Note: We don't need to set isLoadingAndExtracting to false here,
     // as the extraction process (extractColors function) will handle it
   };
+
 
   /**
   * Handles closing the image preview.
@@ -352,6 +347,12 @@ function ColourExtractor() {
   const tenthColor = colors.length >= 10 ? colors[9] : defaultColor;
 
   
+  /**
+   * ColourBoxBottom Component
+   * A component representing a colour box with color information aligned to bottom.
+   * @param {object} color - The color object.
+   * @returns {JSX.Element} - The rendered ColourBoxBottom component.
+   */
   const ColourBoxBottom = ({ color }) => {
     const textColor = getTextColor(color.hex);
 
@@ -365,6 +366,13 @@ function ColourExtractor() {
     );
   };
 
+
+  /**
+   * ColourBoxTop Component
+   * A component representing a colour box with color information aligned to top.
+   * @param {object} color - The color object.
+   * @returns {JSX.Element} - The rendered ColourBoxTop component.
+   */
   const ColourBoxTop = ({ color }) => {
     const textColor = getTextColor(color.hex);
 
@@ -404,9 +412,7 @@ function ColourExtractor() {
       <Layout>
 
         <div class="grid-container general">
-          {/* The nav bar (empty)*/}
           <div class="col-xs-36 col-md-36"></div>
-          {/* <div class="col-xs-36 col-md-36"></div> */}
 
           {/* The main content - left part */}
           <div class="main-section col-xs-36 col-md-12 grid-container nested-grid">
@@ -477,7 +483,7 @@ function ColourExtractor() {
           {/* The main content - right part */}
           {isLoadingAndExtracting ? (<SkeletonLoader />)
             : (<>
-
+              {/* First dominant colour */}
               <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
                 <div class="wrapper-2-col secondary-section col-xs-36 col-md-18">
                   <ColourBoxBottom color={firstColor} />
@@ -491,7 +497,6 @@ function ColourExtractor() {
 
                 {/* 4 colours */}
                 {numberOfColors === 4 && (<>
-                  {/* <div class="wrapper-4-col secondary-section col-xs-36 col-md-36 grid-container nested-grid"> */}
                   <div class="wrapper-4-col secondary-section col-xs-36 col-md-18">
                     <ColourBoxTop color={thirdColor} />
                   </div>
@@ -502,7 +507,6 @@ function ColourExtractor() {
 
                 {/* 6 colours */}
                 {numberOfColors === 6 && (<>
-                  {/* <div class="wrapper-4-col secondary-section col-xs-36 col-md-36 grid-container nested-grid"> */}
                   <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={thirdColor} />
                   </div>
@@ -519,22 +523,22 @@ function ColourExtractor() {
 
                 {/* 8 colours */}
                 {numberOfColors === 8 && (<>
-                  <div class="wrapper-4-col secondary-section col-xs-36 col-md-6">
+                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-12">
                     <ColourBoxTop color={thirdColor} />
                   </div>
-                  <div class="wrapper-4-col secondary-section col-xs-36 col-md-6">
+                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-12">
                     <ColourBoxTop color={fourthColor} />
                   </div>
-                  <div class="wrapper-4-col secondary-section col-xs-36 col-md-6">
+                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-12">
                     <ColourBoxTop color={fifthColor} />
                   </div>
-                  <div class="wrapper-4-col secondary-section col-xs-36 col-md-6">
+                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-12">
                     <ColourBoxTop color={sixthColor} />
                   </div>
-                  <div class="wrapper-4-col secondary-section col-xs-36 col-md-6">
+                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-12">
                     <ColourBoxTop color={seventhColor} />
                   </div>
-                  <div class="wrapper-4-col secondary-section col-xs-36 col-md-6">
+                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-12">
                     <ColourBoxTop color={eighthColor} />
                   </div>
                 </>)}
