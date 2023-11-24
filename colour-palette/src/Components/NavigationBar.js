@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { createContext, useState } from 'react';
 import './NavigationBar.css';
+import { ReactComponent as CloseIcon } from '../images/icon-close-white.svg';
 
 import About from '../Pages/About';
 import Home from '../Pages/Home';
@@ -248,11 +249,11 @@ const MobileMenu = ({ closeMenu }) => {
 
 const NavigationBar = () => {
   const navigate = useNavigate();
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 800);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleResize = () => {
-    const newIsMobile = window.innerWidth <= 768;
+    const newIsMobile = window.innerWidth <= 800;
 
     if (isMobileMenuOpen && !newIsMobile) {
       setMobileMenuOpen(false);
@@ -285,7 +286,7 @@ const NavigationBar = () => {
         {isMobile && (
           <>
             <button className="mobile-menu-btn" onClick={toggleMobileMenu} style={{ zIndex: isMobileMenuOpen ? 1001 : 1000, color: isMobileMenuOpen ? 'white' : 'black' }}>
-              {isMobileMenuOpen ? 'Close' : 'Menu'}
+              {isMobileMenuOpen ? <CloseIcon /> : 'Menu'}
             </button>
           
             {isMobileMenuOpen && (
