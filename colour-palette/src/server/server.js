@@ -14,8 +14,10 @@ const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const HEX_COLOR_PATTERN = /#[0-9A-Fa-f]{6}\b/g;  // Regular expression for HEX color codes
 
 app.post('/get_palette', async (req, res) => {
-  const userPrompt = req.body.prompt + " Provide a 5 color palette with HEX codes.";
+  const userPrompt = req.body.prompt + " Provide a 15 color palette with HEX codes.";
 
+  // Set the maximum number of tokens to be used for the response
+const maxTokens = 300; // You can adjust this number as needed
   try {
     // Call the OpenAI API
     const response = await axios.post('https://api.openai.com/v1/chat/completions', {
@@ -23,7 +25,8 @@ app.post('/get_palette', async (req, res) => {
       messages: [
         { "role": "system", "content": "You are a helpful assistant." },
         { "role": "user", "content": userPrompt }
-      ]
+      ],
+      max_tokens: maxTokens
     }, {
       headers: {
         'Authorization': `Bearer ${OPENAI_API_KEY}`
