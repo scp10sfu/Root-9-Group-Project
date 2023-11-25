@@ -275,14 +275,12 @@ function ColourExtractor() {
         </div>
         {/* Second dominant colour */}
         <div class="wrapper-2-col secondary-section col-xs-36 col-md-18">
-
           <div key={1} className="loader-square-bottom-align" style={{ backgroundColor: secondColor.hex }}>
             <p className="color-name">{secondColor.name}</p>
             <p className="color-hex">HEX: {secondColor.hex}</p>
             <p className="color-rgb">RGB: {secondColor.rgb}</p>
             <p className="color-cmyk">CMYK: {secondColor.cmyk}</p>
           </div>
-
         </div>
 
         <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">

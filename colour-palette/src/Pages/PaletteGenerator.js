@@ -1,12 +1,75 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from 'react';
+import ColorThief from 'colorthief';
 import axios from "axios";
 import "./PaletteGenerator.css";
+
+import Layout from '../Components/Layout';
+import Toast from '../Components/Toast';
+
+import { ReactComponent as CopyIconWhiteUnfilled } from '../images/icon-copy-white-unfilled.svg';
+import { ReactComponent as CopyIconDarkUnfilled } from '../images/icon-copy-dark-unfilled.svg';
+import { ReactComponent as CopyIconWhiteFilled } from '../images/icon-copy-white-filled.svg';
+import { ReactComponent as CopyIconDarkFilled } from '../images/icon-copy-dark-filled.svg';
+
 
 function PaletteGenerator() {
     const [prompt, setPrompt] = useState('');
     const [colors, setColors] = useState([]);
     const [fullResponse, setFullResponse] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const colorThief = new ColorThief();
+    const [backgroundStyle, setBackgroundStyle] = useState({});
+    const [showToast, setShowToast] = useState(false);
+    const [toastMessage, setToastMessage] = useState('');
+
+    /* ************************************************************************ */
+    /* ********************* SAME AS COLOUR EXTRACTOR ************************* */
+    /* ************************************************************************ */
+    
+    
+    /**
+   * Determines whether the text in the colour block should be light or dark.
+   * @param {string} hexColor - The HEX color code.
+   * @returns {string} The text color.
+   */
+  const getTextColor = (hexColor) => {
+    if (!hexColor || typeof hexColor !== 'string' || !hexColor.match(/^#[0-9a-fA-F]{6}$/)) {
+      // Return a default color or handle the error in a way that fits your application
+      return 'rgba(18, 18, 18, 1)';
+    }
+
+    // Convert hex to RGB
+    const r = parseInt(hexColor.slice(1, 3), 16);
+    const g = parseInt(hexColor.slice(3, 5), 16);
+    const b = parseInt(hexColor.slice(5, 7), 16);
+
+    // Calculate relative luminance
+    const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+
+    // Choose the text color based on luminance
+    return luminance > 128 ? 'rgba(18, 18, 18, 1)' : 'rgba(255, 255, 255, 1)';
+  };
+
+
+  /**
+    * Fetches color name from the API based on HEX code.
+    * @param {string} hex - HEX color code.
+    * @returns {Promise<string>} Resolves with the color name.
+    */
+  const fetchColorName = async (hex) => {
+    try {
+      const response = await axios.get(`https://www.thecolorapi.com/id?hex=${hex.replace('#', '')}`);
+      return response.data.name.value;
+    } catch (error) {
+      console.error('Error fetching the color name:', error);
+      return hex; // Fallback to HEX if the name can't be fetched
+    }
+  };
+
+  /* ************************************************************************ */
+  /* ************************************************************************ */
+  /* ************************************************************************ */
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
