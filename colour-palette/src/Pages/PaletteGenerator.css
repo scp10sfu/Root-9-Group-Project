@@ -125,3 +125,25 @@
   flex-direction: row; 
   align-items: center;
 }
+
+.text_block_subtext {
+  align-self: stretch;
+  color: rgba(18, 18, 18, 0.50);
+  font-family: "DM Sans-Medium", Helvetica;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+}
+
+.text_block_text {
+  margin-top: 50px;
+  align-self: stretch;
+  color: rgba(18, 18, 18, 1);
+  /* H2 */
+  font-family: "DM Sans-Bold", Helvetica;
+  font-size: 72px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -3.6px;
+}

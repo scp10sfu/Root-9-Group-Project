@@ -26,6 +26,51 @@ function PaletteGenerator() {
     /* ********************* SAME AS COLOUR EXTRACTOR ************************* */
     /* ************************************************************************ */
 
+    /**
+     * Converts HEX values to RGB format.
+     * @param {string} hex - The HEX color code.
+     * @returns {object} The RGB representation of the HEX value.
+     */
+    const hexToRgb = (hex) => {
+        // Remove the hash if it's included
+        hex = hex.replace(/^#/, '');
+
+        // Parse the hex values to separate R, G, B components
+        let bigint = parseInt(hex, 16);
+        let r = (bigint >> 16) & 255;
+        let g = (bigint >> 8) & 255;
+        let b = bigint & 255;
+
+        // Return an object with the R, G, B values
+        return { r, g, b };
+    }
+
+    /**
+  * Converts RGB values to CMYK format.
+  * @param {number} r - The red value (0 to 255).
+  * @param {number} g - The green value (0 to 255).
+  * @param {number} b - The blue value (0 to 255).
+  * @returns {string} The CMEK representation of the RGB values.
+  */
+  const rgbToCmyk = (r, g, b) => {
+    let c = 1 - (r / 255);
+    let m = 1 - (g / 255);
+    let y = 1 - (b / 255);
+    let k = Math.min(c, Math.min(m, y));
+
+    c = ((c - k) / (1 - k)) || 0;
+    m = ((m - k) / (1 - k)) || 0;
+    y = ((y - k) / (1 - k)) || 0;
+
+    c = Math.round(c * 100);
+    m = Math.round(m * 100);
+    y = Math.round(y * 100);
+    k = Math.round(k * 100);
+
+    return { c, m, y, k };
+  };
+
+
 
     /**
    * Determines whether the text in the colour block should be light or dark.
@@ -137,10 +182,10 @@ function PaletteGenerator() {
 */
     const defaultColor = {
         name: "Silver",
-        rgba: "196, 196, 196, 0.25"
-        // hex: "#C4C4C4",
-        // rgb: "196, 196, 196",
-        // cmyk: "0, 0, 0, 23.1"
+        // rgba: "196, 196, 196, 0.25"
+        hex: "#C4C4C4",
+        rgb: "196, 196, 196",
+        cmyk: "0, 0, 0, 23.1"
     };
 
     /**
@@ -284,7 +329,19 @@ function PaletteGenerator() {
         try {
             // Update this URL to point to your Node.js server endpoint
             const response = await axios.post("http://localhost:3000/get_palette", { prompt });
-            setColors(response.data.colors || []);
+
+            // Assuming response.data.colors is an array of hex color strings
+            const colorPromises = response.data.colors.map(async (hex) => {
+                const rgb = hexToRgb(hex);
+                const cmyk = rgbToCmyk(rgb.r, rgb.g, rgb.b);
+                const name = await fetchColorName(hex);
+                return { hex, rgb: `${rgb.r}, ${rgb.g}, ${rgb.b}`, cmyk: `${cmyk.c}, ${cmyk.m}, ${cmyk.y}, ${cmyk.k}`, name };
+            });
+            const colorObjects = await Promise.all(colorPromises);
+            setColors(colorObjects);
+
+            // setColors(response.data.colors || []);
+
             setFullResponse(response.data.fullResponse || ""); // Update with full response
         } catch (error) {
             console.error("Error:", error);
@@ -324,10 +381,12 @@ function PaletteGenerator() {
                         <div claclassNamess="col-xs-36 col-md-25">
                             <header className="text_block_text">Palette Generator</header>
                         </div>
+
                         <div className="col-xs-36 col-md-25">
                             <header className="text_block_subtext">Generate wonderful palettes.
                             </header>
                         </div>
+
 
                         {/* FOR CHAT */}
                         <div className="upload-container col-xs-36 col-md-25">
@@ -342,9 +401,9 @@ function PaletteGenerator() {
                                 </label>
                             </div> */}
 
-        <div className="request-info-text">
-            Enter Request:
-              </div>
+                            <div className="request-info-text">
+                                Enter Request:
+                            </div>
 
                             <div className="palette-generator">
                                 <form onSubmit={handleSubmit}>
@@ -369,13 +428,13 @@ function PaletteGenerator() {
                                     {fullResponse && <p className="palette-response-text">{fullResponse}</p>}
                                 </div>
                                 {/* <div id="palette"> */}
-                                    {colors.length > 0 && (
+                                {/* {colors.length > 0 && (
                                         <div className="color-swatches">
                                             {colors.map((color, index) => (
                                                 <div key={index} className="color-swatch" style={{ backgroundColor: color }}></div>
                                             ))}
                                         </div>
-                                    )}
+                                    )} */}
                                 {/* </div> */}
                             </div>
 
@@ -383,29 +442,30 @@ function PaletteGenerator() {
 
                     </div>
 
-                    {/* Conditional rendering based on isLoadingAndExtracting state */}
+                    {/* Conditional rendering based on isLoading state */}
                     {/* The main content - right part */}
                     {isLoading ? (<SkeletonLoader />)
                         : (<>
                             <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
                                 <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
-                                    <ColourBoxBottom color={firstColor} />
+                                    <ColourBoxBottom color={colors.length >= 1 ? colors[0] : defaultColor} />
                                 </div>
                                 <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
-                                    <ColourBoxBottom color={secondColor} />
+                                    <ColourBoxBottom color={colors.length >= 2 ? colors[1] : defaultColor} />
                                 </div>
                                 <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                                    <ColourBoxTop color={thirdColor} />
+                                    <ColourBoxTop color={colors.length >= 3 ? colors[2] : defaultColor} />
                                 </div>
                                 <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                                    <ColourBoxTop color={fourthColor} />
+                                    <ColourBoxTop color={colors.length >= 4 ? colors[3] : defaultColor} />
                                 </div>
                                 <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                                    <ColourBoxTop color={fifthColor} />
+                                    <ColourBoxTop color={colors.length >= 5 ? colors[4] : defaultColor} />
                                 </div>
                                 <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                                    <ColourBoxTop color={sixthColor} />
+                                    <ColourBoxTop color={colors.length >= 6 ? colors[5] : defaultColor} />
                                 </div>
+
                             </div>
                         </>)}
 
