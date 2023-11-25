@@ -15,7 +15,8 @@ function PaletteGenerator() {
     setFullResponse(''); // Clear previous response
 
     try {
-      const response = await axios.post('/get_palette', { prompt });
+        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+        const response = await axios.post(`${apiUrl}/get_palette`, { prompt });
       setAllColors(response.data.colors || []); // Store all colors
       setFullResponse(response.data.fullResponse || ''); // Store the full response
     } catch (error) {
