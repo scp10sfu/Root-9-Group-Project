@@ -1,11 +1,5 @@
 .palette-generator {
-  max-width: 800px;
-  margin: 10rem auto 2rem; /* Increase the top margin */
-  padding: 1rem;
-  background: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  font-family: 'Arial', sans-serif;
+ background: transparent;
 }
 
 .palette-generator h2 {
@@ -114,4 +108,20 @@
   max-width: 90%; /* Ensure it does not stretch too wide */
   word-wrap:normal; /* To prevent overflow */
   text-align: left; /* Align text to the left */
+}
+
+.request-info-text {
+  color: rgba(18, 18, 18, 0.75);
+
+  font-family: "DM Mono-Medium", Helvetica;
+  font-size: 14px;
+  font-weight: regular;
+  white-space: nowrap;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+
+  text-align: left;
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
 }

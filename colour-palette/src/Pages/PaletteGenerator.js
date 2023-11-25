@@ -77,7 +77,7 @@ function PaletteGenerator() {
         <>
             <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
                 {/* First dominant colour */}
-                <div class="wrapper-2-col secondary-section col-xs-36 col-md-18">
+                <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
                     <div key={0} className="loader-square-bottom-align" style={{ backgroundColor: 'rgba(196, 196, 196, 0.25)' }}>
                         <p className="color-name">{defaultColor.name}</p>
                         <p className="color-hex">HEX: {defaultColor.hex}</p>
@@ -86,7 +86,7 @@ function PaletteGenerator() {
                     </div>
                 </div>
                 {/* Second dominant colour */}
-                <div class="wrapper-2-col secondary-section col-xs-36 col-md-18">
+                <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
                     <div key={1} className="loader-square-bottom-align" style={{ backgroundColor: 'rgba(196, 196, 196, 0.25)' }}>
                         <p className="color-name">{defaultColor.name}</p>
                         <p className="color-hex">HEX: {defaultColor.hex}</p>
@@ -95,7 +95,7 @@ function PaletteGenerator() {
                     </div>
                 </div>
 
-                <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
                     <div key={2} className="loader-square-top-align" style={{ backgroundColor: 'rgba(196, 196, 196, 0.25)' }}>
                         <p className="color-name">{defaultColor.name}</p>
                         <p className="color-hex">HEX: {defaultColor.hex}</p>
@@ -103,7 +103,7 @@ function PaletteGenerator() {
                         <p className="color-cmyk">CMYK: {defaultColor.cmyk}</p>
                     </div>
                 </div>
-                <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
                     <div key={3} className="loader-square-top-align" style={{ backgroundColor: 'rgba(196, 196, 196, 0.25)' }}>
                         <p className="color-name">{defaultColor.name}</p>
                         <p className="color-hex">HEX: {defaultColor.hex}</p>
@@ -111,7 +111,7 @@ function PaletteGenerator() {
                         <p className="color-cmyk">CMYK: {defaultColor.cmyk}</p>
                     </div>
                 </div>
-                <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
                     <div key={4} className="loader-square-top-align" style={{ backgroundColor: 'rgba(196, 196, 196, 0.25)' }}>
                         <p className="color-name">{defaultColor.name}</p>
                         <p className="color-hex">HEX: {defaultColor.hex}</p>
@@ -119,7 +119,7 @@ function PaletteGenerator() {
                         <p className="color-cmyk">CMYK: {defaultColor.cmyk}</p>
                     </div>
                 </div>
-                <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
                     <div key={5} className="loader-square-top-align" style={{ backgroundColor: 'rgba(196, 196, 196, 0.25)' }}>
                         <p className="color-name">{defaultColor.name}</p>
                         <p className="color-hex">HEX: {defaultColor.hex}</p>
@@ -147,12 +147,12 @@ function PaletteGenerator() {
   * Color Variables
   * Variables representing colors based on the 'colors' array.
   */
-  const firstColor = colors.length >= 1 ? colors[0] : defaultColor;
-  const secondColor = colors.length >= 2 ? colors[1] : defaultColor;
-  const thirdColor = colors.length >= 3 ? colors[2] : defaultColor;
-  const fourthColor = colors.length >= 4 ? colors[3] : defaultColor;
-  const fifthColor = colors.length >= 5 ? colors[4] : defaultColor;
-  const sixthColor = colors.length >= 6 ? colors[5] : defaultColor;
+    const firstColor = colors.length >= 1 ? colors[0] : defaultColor;
+    const secondColor = colors.length >= 2 ? colors[1] : defaultColor;
+    const thirdColor = colors.length >= 3 ? colors[2] : defaultColor;
+    const fourthColor = colors.length >= 4 ? colors[3] : defaultColor;
+    const fifthColor = colors.length >= 5 ? colors[4] : defaultColor;
+    const sixthColor = colors.length >= 6 ? colors[5] : defaultColor;
 
 
     /**
@@ -316,21 +316,21 @@ function PaletteGenerator() {
             )}
 
             <Layout>
-                <div class="grid-container general">
-                    <div class="col-xs-36 col-md-36"></div>
+                <div className="grid-container general">
+                    <div className="col-xs-36 col-md-36"></div>
 
                     {/* The main content - left part */}
-                    <div class="main-section col-xs-36 col-md-12 grid-container nested-grid">
-                        <div class="col-xs-36 col-md-25">
+                    <div className="main-section col-xs-36 col-md-12 grid-container nested-grid">
+                        <div claclassNamess="col-xs-36 col-md-25">
                             <header className="text_block_text">Palette Generator</header>
                         </div>
-                        <div class="col-xs-36 col-md-25">
+                        <div className="col-xs-36 col-md-25">
                             <header className="text_block_subtext">Generate wonderful palettes.
                             </header>
                         </div>
 
                         {/* FOR CHAT */}
-                        <div class="upload-container col-xs-36 col-md-25">
+                        <div className="upload-container col-xs-36 col-md-25">
                             {/* <div className="upload-area">
                                 <label htmlFor="fileInput">
                                     <div className="text_block_text">
@@ -342,11 +342,12 @@ function PaletteGenerator() {
                                 </label>
                             </div> */}
 
+        <div className="request-info-text">
+            Enter Request:
+              </div>
+
                             <div className="palette-generator">
                                 <form onSubmit={handleSubmit}>
-                                    <label htmlFor="prompt">
-                                        Describe the picture you want to draw:
-                                    </label>
                                     <br />
                                     <input
                                         type="text"
@@ -367,7 +368,7 @@ function PaletteGenerator() {
                                 <div id="palette-response">
                                     {fullResponse && <p className="palette-response-text">{fullResponse}</p>}
                                 </div>
-                                <div id="palette">
+                                {/* <div id="palette"> */}
                                     {colors.length > 0 && (
                                         <div className="color-swatches">
                                             {colors.map((color, index) => (
@@ -375,7 +376,7 @@ function PaletteGenerator() {
                                             ))}
                                         </div>
                                     )}
-                                </div>
+                                {/* </div> */}
                             </div>
 
                         </div>
@@ -386,33 +387,29 @@ function PaletteGenerator() {
                     {/* The main content - right part */}
                     {isLoading ? (<SkeletonLoader />)
                         : (<>
-                            {/* First dominant colour */}
                             <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
-                                <div class="wrapper-2-col secondary-section col-xs-36 col-md-18">
+                                <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
                                     <ColourBoxBottom color={firstColor} />
                                 </div>
-
-                                {/* Second dominant colour */}
-                                <div class="wrapper-2-col secondary-section col-xs-36 col-md-18">
+                                <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
                                     <ColourBoxBottom color={secondColor} />
                                 </div>
-
-                                <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                                <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
                                     <ColourBoxTop color={thirdColor} />
                                 </div>
-                                <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                                <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
                                     <ColourBoxTop color={fourthColor} />
                                 </div>
-                                <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                                <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
                                     <ColourBoxTop color={fifthColor} />
                                 </div>
-                                <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                                <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
                                     <ColourBoxTop color={sixthColor} />
                                 </div>
                             </div>
                         </>)}
 
-                    <div class="col-xs-36 col-md-36"></div>
+                    <div className="col-xs-36 col-md-36"></div>
                 </div>
             </Layout>
 
