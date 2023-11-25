@@ -68,63 +68,63 @@ function PaletteGenerator() {
 
 
     /**
-  * SkeletonLoader Component
-  * A component representing a skeleton loader with color information.
-  * NOTE: keep this an empty container!
-  * @returns {JSX.Element} - The rendered SkeletonLoader component.
-  */
+   * SkeletonLoader Component
+   * A component representing a skeleton loader with color information.
+   * NOTE: keep this an empty container!
+   * @returns {JSX.Element} - The rendered SkeletonLoader component.
+   */
     const SkeletonLoader = () => (
         <>
             <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
                 {/* First dominant colour */}
                 <div class="wrapper-2-col secondary-section col-xs-36 col-md-18">
-                    <div key={0} className="loader-square-bottom-align" style={{ backgroundColor: firstColor.hex }}>
-                        <p className="color-name">{firstColor.name}</p>
-                        <p className="color-hex">HEX: {firstColor.hex}</p>
-                        <p className="color-rgb">RGB: {firstColor.rgb}</p>
-                        <p className="color-cmyk">CMYK: {firstColor.cmyk}</p>
+                    <div key={0} className="loader-square-bottom-align" style={{ backgroundColor: 'rgba(196, 196, 196, 0.25)' }}>
+                        <p className="color-name">{defaultColor.name}</p>
+                        <p className="color-hex">HEX: {defaultColor.hex}</p>
+                        <p className="color-rgb">RGB: {defaultColor.rgb}</p>
+                        <p className="color-cmyk">CMYK: {defaultColor.cmyk}</p>
                     </div>
                 </div>
                 {/* Second dominant colour */}
                 <div class="wrapper-2-col secondary-section col-xs-36 col-md-18">
-                    <div key={1} className="loader-square-bottom-align" style={{ backgroundColor: secondColor.hex }}>
-                        <p className="color-name">{secondColor.name}</p>
-                        <p className="color-hex">HEX: {secondColor.hex}</p>
-                        <p className="color-rgb">RGB: {secondColor.rgb}</p>
-                        <p className="color-cmyk">CMYK: {secondColor.cmyk}</p>
+                    <div key={1} className="loader-square-bottom-align" style={{ backgroundColor: 'rgba(196, 196, 196, 0.25)' }}>
+                        <p className="color-name">{defaultColor.name}</p>
+                        <p className="color-hex">HEX: {defaultColor.hex}</p>
+                        <p className="color-rgb">RGB: {defaultColor.rgb}</p>
+                        <p className="color-cmyk">CMYK: {defaultColor.cmyk}</p>
                     </div>
                 </div>
 
                 <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                    <div key={2} className="loader-square-top-align" style={{ backgroundColor: thirdColor.hex }}>
-                        <p className="color-name">{thirdColor.name}</p>
-                        <p className="color-hex">HEX: {thirdColor.hex}</p>
-                        <p className="color-rgb">RGB: {thirdColor.rgb}</p>
-                        <p className="color-cmyk">CMYK: {thirdColor.cmyk}</p>
+                    <div key={2} className="loader-square-top-align" style={{ backgroundColor: 'rgba(196, 196, 196, 0.25)' }}>
+                        <p className="color-name">{defaultColor.name}</p>
+                        <p className="color-hex">HEX: {defaultColor.hex}</p>
+                        <p className="color-rgb">RGB: {defaultColor.rgb}</p>
+                        <p className="color-cmyk">CMYK: {defaultColor.cmyk}</p>
                     </div>
                 </div>
                 <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                    <div key={3} className="loader-square-top-align" style={{ backgroundColor: fourthColor.hex }}>
-                        <p className="color-name">{fourthColor.name}</p>
-                        <p className="color-hex">HEX: {fourthColor.hex}</p>
-                        <p className="color-rgb">RGB: {fourthColor.rgb}</p>
-                        <p className="color-cmyk">CMYK: {fourthColor.cmyk}</p>
+                    <div key={3} className="loader-square-top-align" style={{ backgroundColor: 'rgba(196, 196, 196, 0.25)' }}>
+                        <p className="color-name">{defaultColor.name}</p>
+                        <p className="color-hex">HEX: {defaultColor.hex}</p>
+                        <p className="color-rgb">RGB: {defaultColor.rgb}</p>
+                        <p className="color-cmyk">CMYK: {defaultColor.cmyk}</p>
                     </div>
                 </div>
                 <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                    <div key={4} className="loader-square-top-align" style={{ backgroundColor: fifthColor.hex }}>
-                        <p className="color-name">{fifthColor.name}</p>
-                        <p className="color-hex">HEX: {fifthColor.hex}</p>
-                        <p className="color-rgb">RGB: {fifthColor.rgb}</p>
-                        <p className="color-cmyk">CMYK: {fifthColor.cmyk}</p>
+                    <div key={4} className="loader-square-top-align" style={{ backgroundColor: 'rgba(196, 196, 196, 0.25)' }}>
+                        <p className="color-name">{defaultColor.name}</p>
+                        <p className="color-hex">HEX: {defaultColor.hex}</p>
+                        <p className="color-rgb">RGB: {defaultColor.rgb}</p>
+                        <p className="color-cmyk">CMYK: {defaultColor.cmyk}</p>
                     </div>
                 </div>
                 <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                    <div key={5} className="loader-square-top-align" style={{ backgroundColor: sixthColor.hex }}>
-                        <p className="color-name">{sixthColor.name}</p>
-                        <p className="color-hex">HEX: {sixthColor.hex}</p>
-                        <p className="color-rgb">RGB: {sixthColor.rgb}</p>
-                        <p className="color-cmyk">CMYK: {sixthColor.cmyk}</p>
+                    <div key={5} className="loader-square-top-align" style={{ backgroundColor: 'rgba(196, 196, 196, 0.25)' }}>
+                        <p className="color-name">{defaultColor.name}</p>
+                        <p className="color-hex">HEX: {defaultColor.hex}</p>
+                        <p className="color-rgb">RGB: {defaultColor.rgb}</p>
+                        <p className="color-cmyk">CMYK: {defaultColor.cmyk}</p>
                     </div>
                 </div>
             </div>
@@ -142,6 +142,18 @@ function PaletteGenerator() {
         // rgb: "196, 196, 196",
         // cmyk: "0, 0, 0, 23.1"
     };
+
+    /**
+  * Color Variables
+  * Variables representing colors based on the 'colors' array.
+  */
+  const firstColor = colors.length >= 1 ? colors[0] : defaultColor;
+  const secondColor = colors.length >= 2 ? colors[1] : defaultColor;
+  const thirdColor = colors.length >= 3 ? colors[2] : defaultColor;
+  const fourthColor = colors.length >= 4 ? colors[3] : defaultColor;
+  const fifthColor = colors.length >= 5 ? colors[4] : defaultColor;
+  const sixthColor = colors.length >= 6 ? colors[5] : defaultColor;
+
 
     /**
      * ColourBoxBottom Component
@@ -284,7 +296,7 @@ function PaletteGenerator() {
 
     return (
 
-        <div className="ColourExtractor" style={backgroundStyle}>
+        <div className="palette-generator" style={backgroundStyle}>
 
             <div className="background">
                 {Array.from({ length: 20 }, (_, i) => (
@@ -307,47 +319,103 @@ function PaletteGenerator() {
                 <div class="grid-container general">
                     <div class="col-xs-36 col-md-36"></div>
 
+                    {/* The main content - left part */}
+                    <div class="main-section col-xs-36 col-md-12 grid-container nested-grid">
+                        <div class="col-xs-36 col-md-25">
+                            <header className="text_block_text">Palette Generator</header>
+                        </div>
+                        <div class="col-xs-36 col-md-25">
+                            <header className="text_block_subtext">Generate wonderful palettes.
+                            </header>
+                        </div>
+
+                        {/* FOR CHAT */}
+                        <div class="upload-container col-xs-36 col-md-25">
+                            {/* <div className="upload-area">
+                                <label htmlFor="fileInput">
+                                    <div className="text_block_text">
+                                        <div className='text'>Click or drag file to this area to upload</div>
+                                    </div>
+                                    <div className="subtext">
+
+                                    </div>
+                                </label>
+                            </div> */}
+
+                            <div className="palette-generator">
+                                <form onSubmit={handleSubmit}>
+                                    <label htmlFor="prompt">
+                                        Describe the picture you want to draw:
+                                    </label>
+                                    <br />
+                                    <input
+                                        type="text"
+                                        id="prompt"
+                                        name="prompt"
+                                        value={prompt}
+                                        onChange={e => setPrompt(e.target.value)}
+                                        required
+                                    />
+                                    <br />
+                                    <input type="submit" value="Get Palette" disabled={isLoading} />
+                                </form>
+                                {isLoading && (
+                                    <div className="spinner-container">
+                                        <div className="spinner"></div>
+                                    </div>
+                                )}
+                                <div id="palette-response">
+                                    {fullResponse && <p className="palette-response-text">{fullResponse}</p>}
+                                </div>
+                                <div id="palette">
+                                    {colors.length > 0 && (
+                                        <div className="color-swatches">
+                                            {colors.map((color, index) => (
+                                                <div key={index} className="color-swatch" style={{ backgroundColor: color }}></div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    {/* Conditional rendering based on isLoadingAndExtracting state */}
+                    {/* The main content - right part */}
+                    {isLoading ? (<SkeletonLoader />)
+                        : (<>
+                            {/* First dominant colour */}
+                            <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
+                                <div class="wrapper-2-col secondary-section col-xs-36 col-md-18">
+                                    <ColourBoxBottom color={firstColor} />
+                                </div>
+
+                                {/* Second dominant colour */}
+                                <div class="wrapper-2-col secondary-section col-xs-36 col-md-18">
+                                    <ColourBoxBottom color={secondColor} />
+                                </div>
+
+                                <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                                    <ColourBoxTop color={thirdColor} />
+                                </div>
+                                <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                                    <ColourBoxTop color={fourthColor} />
+                                </div>
+                                <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                                    <ColourBoxTop color={fifthColor} />
+                                </div>
+                                <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                                    <ColourBoxTop color={sixthColor} />
+                                </div>
+                            </div>
+                        </>)}
+
                     <div class="col-xs-36 col-md-36"></div>
                 </div>
             </Layout>
 
-
-            <div className="palette-generator">
-                <h2>Ask for a Color Palette</h2>
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="prompt">
-                        Describe the picture you want to draw:
-                    </label>
-                    <br />
-                    <input
-                        type="text"
-                        id="prompt"
-                        name="prompt"
-                        value={prompt}
-                        onChange={e => setPrompt(e.target.value)}
-                        required
-                    />
-                    <br />
-                    <input type="submit" value="Get Palette" disabled={isLoading} />
-                </form>
-                {isLoading && (
-                    <div className="spinner-container">
-                        <div className="spinner"></div>
-                    </div>
-                )}
-                <div id="palette-response">
-                    {fullResponse && <p className="palette-response-text">{fullResponse}</p>}
-                </div>
-                <div id="palette">
-                    {colors.length > 0 && (
-                        <div className="color-swatches">
-                            {colors.map((color, index) => (
-                                <div key={index} className="color-swatch" style={{ backgroundColor: color }}></div>
-                            ))}
-                        </div>
-                    )}
-                </div>
-            </div>
         </div>
     );
 }

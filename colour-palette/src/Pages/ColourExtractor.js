@@ -464,7 +464,7 @@ function ColourExtractor() {
 
   return (
 
-    <div className="ColourExtractor" style={backgroundStyle}>
+    <div className="colour-extractor" style={backgroundStyle}>
 
       <div className="background">
         {Array.from({ length: 20 }, (_, i) => (
