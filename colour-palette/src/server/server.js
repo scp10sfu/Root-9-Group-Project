@@ -14,7 +14,7 @@ const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const HEX_COLOR_PATTERN = /#[0-9A-Fa-f]{6}\b/g;  // Regular expression for HEX color codes
 
 app.post('/get_palette', async (req, res) => {
-  const userPrompt = req.body.prompt + " Provide a color palette with HEX codes.";
+  const userPrompt = req.body.prompt + " Provide a 5 color palette with HEX codes.";
 
   try {
     // Call the OpenAI API

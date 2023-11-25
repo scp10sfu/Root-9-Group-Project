@@ -115,3 +115,49 @@
   word-wrap:normal; /* To prevent overflow */
   text-align: left; /* Align text to the left */
 }
+
+.palette-generator {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: 'Arial', sans-serif;
+}
+
+.chat-and-palette {
+  display: flex;
+  height: calc(100% - 50px); /* Assuming send box height is 50px */
+}
+
+.chat-section {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.past-responses, .new-response {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.new-prompt {
+  margin-top: auto;
+}
+
+.palette-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px;
+  gap: 10px;
+}
+
+.send-box {
+  height: 50px;
+  background-color: #f0f0f0;
+  padding: 10px;
+}
+
+/* Rest of the CSS ... */
