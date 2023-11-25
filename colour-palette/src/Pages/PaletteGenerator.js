@@ -16,7 +16,7 @@ function PaletteGenerator() {
 
         try {
             // Update this URL to point to your Node.js server endpoint
-            const response = await axios.post("http://localhost:3000/get_palette", { prompt });
+            const response = await axios.post("/get_palette", { prompt });
             setColors(response.data.colors || []);
             setFullResponse(response.data.fullResponse || ""); // Update with full response
         } catch (error) {
