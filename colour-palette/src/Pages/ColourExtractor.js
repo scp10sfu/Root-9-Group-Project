@@ -265,7 +265,7 @@ function ColourExtractor() {
     <>
       <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
         {/* First dominant colour */}
-        <div class="wrapper-2-col secondary-section col-xs-36 col-md-18">
+        <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
           <div key={0} className="loader-square-bottom-align" style={{ backgroundColor: firstColor.hex }}>
             <p className="color-name">{firstColor.name}</p>
             <p className="color-hex">HEX: {firstColor.hex}</p>
@@ -274,7 +274,7 @@ function ColourExtractor() {
           </div>
         </div>
         {/* Second dominant colour */}
-        <div class="wrapper-2-col secondary-section col-xs-36 col-md-18">
+        <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
           <div key={1} className="loader-square-bottom-align" style={{ backgroundColor: secondColor.hex }}>
             <p className="color-name">{secondColor.name}</p>
             <p className="color-hex">HEX: {secondColor.hex}</p>
@@ -283,7 +283,7 @@ function ColourExtractor() {
           </div>
         </div>
 
-        <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+        <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
           <div key={2} className="loader-square-top-align" style={{ backgroundColor: thirdColor.hex }}>
             <p className="color-name">{thirdColor.name}</p>
             <p className="color-hex">HEX: {thirdColor.hex}</p>
@@ -291,7 +291,7 @@ function ColourExtractor() {
             <p className="color-cmyk">CMYK: {thirdColor.cmyk}</p>
           </div>
         </div>
-        <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+        <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
           <div key={3} className="loader-square-top-align" style={{ backgroundColor: fourthColor.hex }}>
             <p className="color-name">{fourthColor.name}</p>
             <p className="color-hex">HEX: {fourthColor.hex}</p>
@@ -299,7 +299,7 @@ function ColourExtractor() {
             <p className="color-cmyk">CMYK: {fourthColor.cmyk}</p>
           </div>
         </div>
-        <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+        <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
           <div key={4} className="loader-square-top-align" style={{ backgroundColor: fifthColor.hex }}>
             <p className="color-name">{fifthColor.name}</p>
             <p className="color-hex">HEX: {fifthColor.hex}</p>
@@ -307,7 +307,7 @@ function ColourExtractor() {
             <p className="color-cmyk">CMYK: {fifthColor.cmyk}</p>
           </div>
         </div>
-        <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+        <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
           <div key={5} className="loader-square-top-align" style={{ backgroundColor: sixthColor.hex }}>
             <p className="color-name">{sixthColor.name}</p>
             <p className="color-hex">HEX: {sixthColor.hex}</p>
@@ -486,22 +486,22 @@ function ColourExtractor() {
 
       <Layout>
 
-        <div class="grid-container general">
-          <div class="col-xs-36 col-md-36"></div>
+        <div className="grid-container general">
+          <div className="col-xs-36 col-md-36"></div>
 
           {/* The main content - left part */}
-          <div class="main-section col-xs-36 col-md-12 grid-container nested-grid">
-            <div class="col-xs-36 col-md-25">
+          <div className="main-section col-xs-36 col-md-12 grid-container nested-grid">
+            <div className="col-xs-36 col-md-25">
               <header className="text_block_text">Colour Extractor</header>
             </div>
-            <div class="col-xs-36 col-md-25">
+            <div className="col-xs-36 col-md-25">
               <header className="text_block_subtext">Extract wonderful palettes from your image.
               </header>
             </div>
 
             {isImagePreviewActive && (
 
-              <div class="upload-container col-xs-36 col-md-25">
+              <div className="upload-container col-xs-36 col-md-25">
                 <div className="upload-area">
                   <input type="file" accept="image/*" onChange={handleImageChange} id="fileInput" />
                   <label htmlFor="fileInput">
@@ -519,7 +519,7 @@ function ColourExtractor() {
 
             {image && (
               <>
-                <div class="col-xs-36 col-md-25" onClick={(e) => e.stopPropagation()}>
+                <div className="col-xs-36 col-md-25" onClick={(e) => e.stopPropagation()}>
                   <div className="image-preview">
                     <button className="close-button" onClick={handleClosePreview}>
                       {isLightImage ? <CloseIconWhite /> : <CloseIconDark />}
@@ -537,7 +537,7 @@ function ColourExtractor() {
               </>
             )}
 
-            <div class="number-of-colors-container col-xs-36 col-md-25 grid-container-small">
+            <div className="number-of-colors-container col-xs-36 col-md-25 grid-container-small">
               <div className="number-of-colors-text">
                 NUMBER OF COLOURS:
               </div>
@@ -560,88 +560,88 @@ function ColourExtractor() {
             : (<>
               {/* First dominant colour */}
               <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
-                <div class="wrapper-2-col secondary-section col-xs-36 col-md-18">
+                <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
                   <ColourBoxBottom color={firstColor} />
                 </div>
 
                 {/* Second dominant colour */}
-                <div class="wrapper-2-col secondary-section col-xs-36 col-md-18">
+                <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
                   <ColourBoxBottom color={secondColor} />
 
                 </div>
 
                 {/* 4 colours */}
                 {numberOfColors === 4 && (<>
-                  <div class="wrapper-4-col secondary-section col-xs-36 col-md-18">
+                  <div className="wrapper-4-col secondary-section col-xs-36 col-md-18">
                     <ColourBoxTop color={thirdColor} />
                   </div>
-                  <div class="wrapper-4-col secondary-section col-xs-36 col-md-18">
+                  <div className="wrapper-4-col secondary-section col-xs-36 col-md-18">
                     <ColourBoxTop color={fourthColor} />
                   </div>
                 </>)}
 
                 {/* 6 colours */}
                 {numberOfColors === 6 && (<>
-                  <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                  <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={thirdColor} />
                   </div>
-                  <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                  <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={fourthColor} />
                   </div>
-                  <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                  <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={fifthColor} />
                   </div>
-                  <div class="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                  <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={sixthColor} />
                   </div>
                 </>)}
 
                 {/* 8 colours */}
                 {numberOfColors === 8 && (<>
-                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-12">
                     <ColourBoxTop color={thirdColor} />
                   </div>
-                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-12">
                     <ColourBoxTop color={fourthColor} />
                   </div>
-                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-12">
                     <ColourBoxTop color={fifthColor} />
                   </div>
-                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-12">
                     <ColourBoxTop color={sixthColor} />
                   </div>
-                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-12">
                     <ColourBoxTop color={seventhColor} />
                   </div>
-                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-12">
                     <ColourBoxTop color={eighthColor} />
                   </div>
                 </>)}
 
                 {/* 10 colours */}
                 {numberOfColors === 10 && (<>
-                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={thirdColor} />
                   </div>
-                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={fourthColor} />
                   </div>
-                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={fifthColor} />
                   </div>
-                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={sixthColor} />
                   </div>
-                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={seventhColor} />
                   </div>
-                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={eighthColor} />
                   </div>
-                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={ninthColor} />
                   </div>
-                  <div class="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={tenthColor} />
                   </div>
 
@@ -651,7 +651,7 @@ function ColourExtractor() {
             </>)}
 
           {/* DO NOT DELETE THIS! */}
-          <div class="footer col-xs-36 col-md-36"></div>
+          <div className="footer col-xs-36 col-md-36"></div>
         </div>
 
       </Layout>
