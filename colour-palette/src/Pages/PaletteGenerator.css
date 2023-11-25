@@ -161,3 +161,37 @@
 }
 
 /* Rest of the CSS ... */
+.color-choices {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Adjust the gap between buttons as needed */
+  margin: 1rem 0;
+}
+
+.color-choice-button {
+  border: none;
+  background-color: #d8d8d8; /* Light grey background */
+  color: #000;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 50%; /* Circular buttons */
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  width: 40px; /* Fixed width */
+  height: 40px; /* Fixed height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.color-choice-button:hover,
+.color-choice-button:focus {
+  background-color: #a8a8a8; /* Darker grey on hover/focus */
+  transform: scale(1.1); /* Slightly larger on hover/focus */
+}
+
+.color-choice-button.selected {
+  background-color: #000; /* Black for selected button */
+  color: #fff;
+}
