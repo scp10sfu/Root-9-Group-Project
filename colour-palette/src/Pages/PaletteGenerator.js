@@ -15,17 +15,24 @@ function PaletteGenerator() {
     setFullResponse(''); // Clear previous response
 
     try {
-        const apiUrl = 'https://paleta-11d0ba2b2f2b.herokuapp.com/get_palette' || 'http://localhost:3000';
+        // Set the API URL
+        const apiUrl = 'https://paleta-11d0ba2b2f2b.herokuapp.com/' || 'http://localhost:3000';
+        console.log(`API URL being used: ${apiUrl}`); // Debug: Log the API URL
+
+        // Make the POST request
         const response = await axios.post(`${apiUrl}/get_palette`, { prompt });
-      setAllColors(response.data.colors || []); // Store all colors
-      setFullResponse(response.data.fullResponse || ''); // Store the full response
+        console.log('Response from API:', response); // Debug: Log the response
+
+        // Set state based on response
+        setAllColors(response.data.colors || []); // Store all colors
+        setFullResponse(response.data.fullResponse || ''); // Store the full response
     } catch (error) {
-      console.error('Error:', error);
-      setFullResponse('Failed to get the color palette. Please try again.');
+        console.error('Error:', error); // Log any errors
+        setFullResponse('Failed to get the color palette. Please try again.');
     } finally {
-      setIsLoading(false);
+        setIsLoading(false); // Ensure isLoading is set to false
     }
-  };
+};
 
   const handleColorSelection = (num) => {
     setNumberOfColors(num); // Update the number of colors without calling API
