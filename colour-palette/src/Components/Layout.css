@@ -53,7 +53,7 @@
     /* DO NOT DELETE THIS! */
     background-color:#22223b;
     font-family:monospace;
-    color: #f2e9e4;
+    /* color: #f2e9e4; */
     font-size:1.2em;
     padding: 1vmax 0 5vmax 0;
     line-height: 1.2em;
@@ -421,7 +421,7 @@
     align-self:stretch;
 }
 
-@media only screen and (min-width:76em){    
+@media only screen and (min-width: 76em){    
     
     .col-md-justify-items-start{
         -ms-justify-items:start;
