@@ -2,10 +2,10 @@
   max-width: 800px;
   margin: 10rem auto 2rem; /* Increase the top margin */
   padding: 1rem;
-  background: #fff;
+  background: rgb(237, 236, 236);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  font-family: 'Arial', sans-serif;
+  font-family: monospace;
 }
 
 .palette-generator h2 {
@@ -114,4 +114,84 @@
   max-width: 90%; /* Ensure it does not stretch too wide */
   word-wrap:normal; /* To prevent overflow */
   text-align: left; /* Align text to the left */
+}
+
+.palette-generator {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: 'Arial', sans-serif;
+}
+
+.chat-and-palette {
+  display: flex;
+  height: calc(100% - 50px); /* Assuming send box height is 50px */
+}
+
+.chat-section {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.past-responses, .new-response {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.new-prompt {
+  margin-top: auto;
+}
+
+.palette-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px;
+  gap: 10px;
+}
+
+.send-box {
+  height: 50px;
+  background-color: #f0f0f0;
+  padding: 10px;
+}
+
+/* Rest of the CSS ... */
+.color-choices {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Adjust the gap between buttons as needed */
+  margin: 1rem 0;
+}
+
+.color-choice-button {
+  border: none;
+  background-color: #d8d8d8; /* Light grey background */
+  color: #000;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 50%; /* Circular buttons */
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  width: 40px; /* Fixed width */
+  height: 40px; /* Fixed height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.color-choice-button:hover,
+.color-choice-button:focus {
+  background-color: #a8a8a8; /* Darker grey on hover/focus */
+  transform: scale(1.1); /* Slightly larger on hover/focus */
+}
+
+.color-choice-button.selected {
+  background-color: #000; /* Black for selected button */
+  color: #fff;
 }
