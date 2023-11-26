@@ -11,7 +11,7 @@
   p{
     margin: 0 auto;
     text-align: center;
-    text-transform:uppercase;
+    text-transform: uppercase;
     letter-spacing: 0.5vw;
     padding: 0 10%;
   }
@@ -19,7 +19,7 @@
   .grid-container div{
     min-width: 100%;
     /* DO NOT DELETE THIS! */
-    background-color: #4a4e69;
+    /* background-color: #4a4e69; */
     min-height: 1vmax;
     min-height: 100vh;
   }
@@ -36,22 +36,23 @@
     min-width: 100%;
     min-height: 1vmax;
     /* DO NOT DELETE THIS! */
-    background-color: #9a8c98 ;
+    /* background-color: #9a8c98; */
   }
   
   .secondary-nested-grid{
     padding: 1vmax;
   }
+
   .secondary-nested-grid div{
     min-width: 100%;
     min-height: 0.2vmax;
     /* DO NOT DELETE THIS! */
-    background-color: #c9ada7 ;
+    /* background-color: #c9ada7; */
   }
   
   body{
     /* DO NOT DELETE THIS! */
-    background-color:#22223b;
+    /* background-color:#22223b; */
     font-family:monospace;
     /* color: #f2e9e4; */
     font-size:1.2em;
