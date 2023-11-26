@@ -39,9 +39,12 @@ const MobileMenu = ({ closeMenu }) => {
 
   return (
     <div className="mobile-menu">
-      <button onClick={() => handleNavigation('/About')}>About</button>
+      {/* <button onClick={() => handleNavigation('/About')}>About</button>
       <button onClick={() => handleNavigation('/ColourExtractor')}>Colour Extractor</button>
-      <button onClick={() => handleNavigation('/PaletteGenerator')}>Palette Generator</button>
+      <button onClick={() => handleNavigation('/PaletteGenerator')}>Palette Generator</button> */}
+      <button onClick={() => { navigate('/About')}}>About</button>
+                  <button onClick={() => { navigate('/ColourExtractor')}}>Colour Extractor</button>
+                  <button onClick={() => { navigate('/PaletteGenerator')}}>Palette Generator</button>
     </div>
   );
 };
