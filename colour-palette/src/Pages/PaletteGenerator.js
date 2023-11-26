@@ -426,36 +426,44 @@ function PaletteGenerator() {
                                 Enter Request:
                             </div>
 
-                            <main class="main flow">
+                            {/* <main class="main flow">
                                 <div class="main__cards cards">
                                     <div class="cards__inner">
                                         <div class="cards__card card">
                                             <h2 class="card__heading">Ultimate</h2>
                                             <p class="card__price">$29.99</p>
-                                            <ul role="list" class="card__bullets flow">
-                                                <li>Access to all premium workouts and nutrition plans</li>
-                                                <li>24/7 Priority support</li>
-                                                <li>1-on-1 virtual coaching session every month</li>
-                                                <li>Exclusive content and early access to new features</li>
-                                            </ul>
-                                            <a href="#ultimate" class="card__cta cta">Go Ultimate</a>
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Quisquam, voluptatum. 
+                                            <a href="#ultimate" class="card__cta cta">Check this ↗</a>
                                         </div>
                                     </div>
 
                                     <div class="overlay cards__inner"></div>
                                 </div>
-                            </main>
+                            </main> */}
 
 
-                            <div className="chat-container box">
+                            {/* <div className="chat-container box"> */}
+                                <main class="main flow">
+                                    <div class="main__cards cards">
+                                        <div class="cards__inner">
+                                            <div class="cards__card card">
 
-                                {/* Display chat messages */}
-                                {chatHistory.map((message, index) => (
-                                    <div key={index} className={message.role === 'user' ? 'user-message' : 'ai-message'}>
-                                        {message.message}
+                                                {/* Display chat messages */}
+                                                {chatHistory.map((message, index) => (
+                                                    <div key={index} className={message.role === 'user' ? 'user-message' : 'ai-message'}>
+                                                        {message.message}
+                                                    </div>
+                                                ))}
+
+                                                <a href="#ultimate" class="card__cta cta">Check this ↗</a>
+                                            </div>
+                                        </div>
+
+                                        <div class="overlay cards__inner"></div>
                                     </div>
-                                ))}
-                            </div>
+                                </main>
+
+                            {/* </div> */}
 
                             <div className="text-input-container">
                                 <form onSubmit={handleSubmit}>
