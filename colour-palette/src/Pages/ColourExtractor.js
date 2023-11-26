@@ -33,6 +33,7 @@ function ColourExtractor() {
   const [toastMessage, setToastMessage] = useState('');
   const MAX_FILE_SIZE_MB = 10;
 
+
   /**
   * Converts RGB values to HEX format.
   * @param {number} r - The red value (0 to 255).
