@@ -8,13 +8,11 @@ import React, { createContext, useState } from 'react';
 // TODO: import css file for App component
 import { Routes, Route, useNavigate} from 'react-router-dom';
 import About from './Pages/About';
-import Home from './Pages/Home';
 import ColourExtractor from './Pages/ColourExtractor';
 import PaletteGenerator from './Pages/PaletteGenerator';
-import MoodboardGenerator from './Pages/MoodboardGenerator';
 import NotFoundPage from './Pages/NotFoundPage';
-import Header from './Components/Header';
-import Footer from './Components/Footer';
+// import Header from './Components/Header';
+// import Footer from './Components/Footer';
 import ColorSwitcher from './Components/ColorSwitcher';
 import NavigationBar from './Components/NavigationBar';
 
@@ -37,7 +35,6 @@ const App = () => {
   const navigateToAbout = () => { navigate('/About'); };
   const navigateToColourExtractor = () => { navigate('/ColourExtractor'); };
   const navigateToPaletteGenerator = () => { navigate('/PaletteGenerator'); };
-  const navigateToMoodboardGenerator = () => { navigate('/MoodboardGenerator'); };
   const navigateToNotFoundPage = () => { navigate('/NotFoundPage'); };
   const navigateToModeSwitch = () => { navigate('/ModeSwitch'); };
   
@@ -53,14 +50,13 @@ const App = () => {
         <div>
           <Routes>
             <Route path="/About" element={<About />} />
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<ColourExtractor />} />
             <Route path="/ColourExtractor" element={<ColourExtractor />} />
             <Route path="/PaletteGenerator" element={<PaletteGenerator />} />
-            <Route path="/MoodboardGenerator" element={<MoodboardGenerator />} />
             {/* ... other routes ... */}
           </Routes>
         </div>
-        <Footer/>
+        {/* <Footer/> */}
       </div> 
     </ColorContext.Provider>
   );
