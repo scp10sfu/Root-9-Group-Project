@@ -2,12 +2,11 @@
 .toast {
     z-index: 10000000;
     position: fixed;
-    bottom: 24px;
+    bottom: 16px;
     left: 50%;
     transform: translateX(-50%);
-    /* background-color: rgba(186, 229, 13, 1); */
-    background-color: rgba(255, 255, 255, 0.7);
-    color: #121212;
+    background-color: rgba(186, 229, 13, 1);
+    color: #000000;
     border-radius: 85px;
     /* height: 49px; */
     padding: 10px 25px;
@@ -20,13 +19,13 @@
 .toast-content {
     display: flex;
     align-items: center;
-    gap: 10px;
 }
 
 .toast-message {
     margin-right: 10px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: "DM Sans-Regular", Helvetica;
     font-size: 14px;
+    font-style: normal;
     font-weight: 400;
     letter-spacing: -0.14px;
 }
