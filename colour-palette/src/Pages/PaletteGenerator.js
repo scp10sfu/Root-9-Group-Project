@@ -386,15 +386,7 @@ function PaletteGenerator() {
                             <header className="text_block_subtext">Generate wonderful palettes.
                             </header>
                         </div>
-
-                        {/* <div className="number-of-colors-container col-xs-36 col-md-25 grid-container-small">
-                            <div className="number-of-colors-text">
-                                NUMBER OF COLOURS:
-                            </div>
-
-
-                        </div>
- */}
+                        
 
                         {/* FOR CHAT */}
                         <div className="chat-container col-xs-36 col-md-25">

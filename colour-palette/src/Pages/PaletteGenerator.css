@@ -126,26 +126,28 @@
   align-items: center;
 }
 
-.text_block_subtext {
-  align-self: stretch;
-  color: rgba(18, 18, 18, 0.50);
-  font-family: "DM Sans-Medium", Helvetica;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  letter-spacing: -0.4px;
-}
-
 .text_block_text {
   margin-top: 50px;
   align-self: stretch;
   color: rgba(18, 18, 18, 1);
-  /* H2 */
-  font-family: "DM Sans-Bold", Helvetica;
+  font-family: 'DM Sans', sans-serif;
   font-size: 72px;
   font-style: normal;
   font-weight: 700;
   letter-spacing: -3.6px;
+}
+
+.text_block_subtext {
+  align-self: stretch;
+  color: rgba(18, 18, 18, 0.50);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+
+  padding-top: 1%;
+  padding-bottom: 3%;
 }
 
 .chat-container {
@@ -157,4 +159,42 @@
   align-items: flex-start;
   align-self: stretch;
   overflow: hidden;
+}
+
+
+/* *************************************************************************** */
+/* ***************************** COLOUR PALETTE ****************************** */
+/* *************************************************************************** */
+
+.copy-icon {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* Style for color name at the top */
+.color-name {
+  /* gap: 30px; */
+  font-family: 'DM Mono', monospace;
+  font-weight: 600;
+  font-size: 11px;
+  color: rgba(18, 18, 18, 1);
+  letter-spacing: 3px;
+  text-align: left;
+}
+
+/* Style for color codes */
+.color-hex,
+.color-rgb,
+.color-cmyk {
+  font-family: 'DM Mono', monospace;
+  font-weight: 400;
+
+  color: rgba(18, 18, 18, 0.75);
+  text-align: left;
+  font-size: 10px;
+
+  letter-spacing: 1.6px;
+  line-height: 10px;
+  white-space: nowrap;
 }
