@@ -8,10 +8,9 @@ import { ReactComponent as CloseIcon } from '../images/icon-close-white.svg';
 import { ReactComponent as MenuIcon } from '../images/icon-menu-dark.svg';
 
 import About from '../Pages/About';
-import Home from '../Pages/Home';
+// import Home from '../Pages/ColourExtractor';
 import ColourExtractor from '../Pages/ColourExtractor';
 import PaletteGenerator from '../Pages/PaletteGenerator';
-import MoodboardGenerator from '../Pages/MoodboardGenerator';
 import ColorSwitcher from "./ColorSwitcher";
 
 export const ThemeContext = createContext(null);
@@ -43,7 +42,9 @@ const MobileMenu = ({ closeMenu }) => {
       <button onClick={() => handleNavigation('/About')}>About</button>
       <button onClick={() => handleNavigation('/ColourExtractor')}>Colour Extractor</button>
       <button onClick={() => handleNavigation('/PaletteGenerator')}>Palette Generator</button>
-      <button onClick={() => handleNavigation('/MoodboardGenerator')}>Moodboard Generator</button>
+      {/* <button onClick={() => { navigate('/About') }}>About</button>
+      <button onClick={() => { navigate('/ColourExtractor') }}>Colour Extractor</button>
+      <button onClick={() => { navigate('/PaletteGenerator')}}>Palette Generator</button> */}
     </div>
   );
 };
@@ -80,14 +81,17 @@ const NavigationBar = () => {
   };
 
   return (
-    <nav className="nav-bar">
+    <nav className="nav-bar col-xs-36 col-md-36">
       <div className="nav-content">
-        <button className="title-page" onClick={() => { navigate('/'); closeMobileMenu(); }}>Paletä</button>
+        <button className="title-page col-xs-6 col-md-6" onClick={() => { navigate('/ColourExtractor'); closeMobileMenu(); }}>
+          Paletä
+        </button>
 
         {isMobile && (
           <>
             {/* <ColorSwitcher /> */}
-            <button className="mobile-menu-btn" onClick={toggleMobileMenu} style={{ zIndex: isMobileMenuOpen ? 1001 : 1000, color: isMobileMenuOpen ? 'white' : 'black' }}>
+            {/* <button className="mobile-menu-btn col-xs-30 col-md-30" onClick={toggleMobileMenu} style={{ zIndex: isMobileMenuOpen ? 1001 : 1000, color: isMobileMenuOpen ? 'white' : 'black' }}> */}
+            <button className="mobile-menu-btn col-xs-30 col-md-30" onClick={toggleMobileMenu} style={{ zIndex: isMobileMenuOpen ? 1001 : 1000, backgroundColor: isMobileMenuOpen ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.9)' }}>
               {isMobileMenuOpen ? <CloseIcon /> : 'Menu'}
               {/* { isMobileMenuOpen ? <CloseIcon /> : <MenuIcon /> } */}
             </button>
@@ -99,7 +103,6 @@ const NavigationBar = () => {
                   <button onClick={() => { navigate('/About'); closeMobileMenu(); }}>About</button>
                   <button onClick={() => { navigate('/ColourExtractor'); closeMobileMenu(); }}>Colour Extractor</button>
                   <button onClick={() => { navigate('/PaletteGenerator'); closeMobileMenu(); }}>Palette Generator</button>
-                  <button onClick={() => { navigate('/MoodboardGenerator'); closeMobileMenu(); }}>Moodboard Generator</button>
                 </div>
               </div>
             )}
@@ -109,18 +112,17 @@ const NavigationBar = () => {
 
         {!isMobile && (
           <>
-            <div className="links">
+            <div className="links col-xs-30 col-md-30">
               <button onClick={() => { navigate('/About'); closeMobileMenu(); }}>About</button>
               <button onClick={() => { navigate('/ColourExtractor'); closeMobileMenu(); }}>Colour Extractor</button>
               <button onClick={() => { navigate('/PaletteGenerator'); closeMobileMenu(); }}>Palette Generator</button>
-              <button onClick={() => { navigate('/MoodboardGenerator'); closeMobileMenu(); }}>Moodboard Generator</button>
             </div>
 
             {/* <ColorSwitcher /> */}
           </>
         )}
 
-        <ColorSwitcher />
+        {/* <ColorSwitcher /> */}
 
       </div>
     </nav>
