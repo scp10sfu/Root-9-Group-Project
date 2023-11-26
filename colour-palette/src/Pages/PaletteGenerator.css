@@ -147,3 +147,14 @@
   font-weight: 700;
   letter-spacing: -3.6px;
 }
+
+.chat-container {
+  text-align: center;
+  padding: 10px 20px;
+  transition: border-color 0.3s;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  align-self: stretch;
+  overflow: hidden;
+}

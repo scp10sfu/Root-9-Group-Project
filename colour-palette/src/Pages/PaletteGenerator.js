@@ -52,23 +52,23 @@ function PaletteGenerator() {
   * @param {number} b - The blue value (0 to 255).
   * @returns {string} The CMEK representation of the RGB values.
   */
-  const rgbToCmyk = (r, g, b) => {
-    let c = 1 - (r / 255);
-    let m = 1 - (g / 255);
-    let y = 1 - (b / 255);
-    let k = Math.min(c, Math.min(m, y));
+    const rgbToCmyk = (r, g, b) => {
+        let c = 1 - (r / 255);
+        let m = 1 - (g / 255);
+        let y = 1 - (b / 255);
+        let k = Math.min(c, Math.min(m, y));
 
-    c = ((c - k) / (1 - k)) || 0;
-    m = ((m - k) / (1 - k)) || 0;
-    y = ((y - k) / (1 - k)) || 0;
+        c = ((c - k) / (1 - k)) || 0;
+        m = ((m - k) / (1 - k)) || 0;
+        y = ((y - k) / (1 - k)) || 0;
 
-    c = Math.round(c * 100);
-    m = Math.round(m * 100);
-    y = Math.round(y * 100);
-    k = Math.round(k * 100);
+        c = Math.round(c * 100);
+        m = Math.round(m * 100);
+        y = Math.round(y * 100);
+        k = Math.round(k * 100);
 
-    return { c, m, y, k };
-  };
+        return { c, m, y, k };
+    };
 
 
 
@@ -378,7 +378,7 @@ function PaletteGenerator() {
 
                     {/* The main content - left part */}
                     <div className="main-section col-xs-36 col-md-12 grid-container nested-grid">
-                        <div claclassNamess="col-xs-36 col-md-25">
+                        <div className="col-xs-36 col-md-25">
                             <header className="text_block_text">Palette Generator</header>
                         </div>
 
@@ -387,9 +387,17 @@ function PaletteGenerator() {
                             </header>
                         </div>
 
+                        {/* <div className="number-of-colors-container col-xs-36 col-md-25 grid-container-small">
+                            <div className="number-of-colors-text">
+                                NUMBER OF COLOURS:
+                            </div>
+
+
+                        </div>
+ */}
 
                         {/* FOR CHAT */}
-                        <div className="upload-container col-xs-36 col-md-25">
+                        <div className="chat-container col-xs-36 col-md-25">
                             {/* <div className="upload-area">
                                 <label htmlFor="fileInput">
                                     <div className="text_block_text">
