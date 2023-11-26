@@ -170,6 +170,20 @@
   background: transparent;
   border: none;
   cursor: pointer;
+  display: block;
+}
+
+/* Styles for desktop */
+@media only screen and (min-width: 76em) {
+  .copy-icon {
+    display: none; /* Hide the icon by default on desktop */
+  }
+
+  /* Show the icon only when the parent block is hovered on desktop */
+  .color-bottom-align:hover .copy-icon,
+  .color-top-align:hover .copy-icon {
+    display: block;
+  }
 }
 
 /* Style for color name at the top */
