@@ -21,6 +21,7 @@ function PaletteGenerator() {
     const [backgroundStyle, setBackgroundStyle] = useState({});
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
+    const [chatHistory, setChatHistory] = useState([]);
 
     /* ************************************************************************ */
     /* ********************* SAME AS COLOUR EXTRACTOR ************************* */
@@ -386,21 +387,10 @@ function PaletteGenerator() {
                             <header className="text_block_subtext">Generate wonderful palettes.
                             </header>
                         </div>
-                        
+
 
                         {/* FOR CHAT */}
                         <div className="chat-container col-xs-36 col-md-25">
-                            {/* <div className="upload-area">
-                                <label htmlFor="fileInput">
-                                    <div className="text_block_text">
-                                        <div className='text'>Click or drag file to this area to upload</div>
-                                    </div>
-                                    <div className="subtext">
-
-                                    </div>
-                                </label>
-                            </div> */}
-
                             <div className="request-info-text">
                                 Enter Request:
                             </div>
@@ -427,15 +417,6 @@ function PaletteGenerator() {
                                 <div id="palette-response">
                                     {fullResponse && <p className="palette-response-text">{fullResponse}</p>}
                                 </div>
-                                {/* <div id="palette"> */}
-                                {/* {colors.length > 0 && (
-                                        <div className="color-swatches">
-                                            {colors.map((color, index) => (
-                                                <div key={index} className="color-swatch" style={{ backgroundColor: color }}></div>
-                                            ))}
-                                        </div>
-                                    )} */}
-                                {/* </div> */}
                             </div>
 
                         </div>
