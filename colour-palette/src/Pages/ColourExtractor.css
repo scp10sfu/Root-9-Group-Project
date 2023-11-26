@@ -423,67 +423,9 @@
 }
 
 
-/* Skeleton loader for colour blocks */
-.loader-square-bottom-align {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(18, 18, 18, 0.15);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: left;
-  padding: 15px;
-  white-space: nowrap;
-  /* -webkit- is a hack for the Webkit Browser engine */
-  background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(18, 18, 18, 0.2)), color-stop(18%, rgba(18, 18, 18, 0.3)), color-stop(33%, rgba(18, 18, 18, 0.2)));
-  background: linear-gradient(to right, rgba(18, 18, 18, 0.2) 8%, rgba(18, 18, 18, 0.3) 18%, rgba(18, 18, 18, 0.2) 33%);
-  background-size: 800px 100px;
-  animation: wave-squares 2s infinite ease-out;
-}
-
-.loader-square-top-align {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(18, 18, 18, 0.15);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: left;
-  padding: 15px;
-  white-space: nowrap;
-  /* -webkit- is a hack for the Webkit Browser engine */
-  background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(18, 18, 18, 0.2)), color-stop(18%, rgba(18, 18, 18, 0.3)), color-stop(33%, rgba(18, 18, 18, 0.2)));
-  background: linear-gradient(to right, rgba(18, 18, 18, 0.2) 8%, rgba(18, 18, 18, 0.3) 18%, rgba(18, 18, 18, 0.2) 33%);
-  background-size: 800px 100px;
-  animation: wave-squares 2s infinite ease-out;
-}
-
-
-@keyframes wave-lines {
-  0% {
-    background-position: -468px 0;
-  }
-
-  100% {
-    background-position: 468px 0;
-  }
-}
-
-@keyframes wave-squares {
-  0% {
-    background-position: -468px 0;
-  }
-
-  100% {
-    background-position: 468px 0;
-  }
-}
-
-
 /* *************************************************************************** */
 /* ***************************** COLOUR PALETTE ****************************** */
 /* *************************************************************************** */
-
 
 /* Color palette styles */
 .color-palette {
@@ -561,9 +503,62 @@
   white-space: nowrap;
 }
 
-/* Theme switcher styles */
-/*.theme-switcher {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}*/
+/* *************************************************************************** */
+/* ************************ COLOUR PALETTE - LOADER ************************** */
+/* *************************************************************************** */
+
+/* Skeleton loader for colour blocks */
+.loader-square-bottom-align {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(18, 18, 18, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: left;
+  padding: 15px;
+  white-space: nowrap;
+  /* -webkit- is a hack for the Webkit Browser engine */
+  background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(18, 18, 18, 0.2)), color-stop(18%, rgba(18, 18, 18, 0.3)), color-stop(33%, rgba(18, 18, 18, 0.2)));
+  background: linear-gradient(to right, rgba(18, 18, 18, 0.2) 8%, rgba(18, 18, 18, 0.3) 18%, rgba(18, 18, 18, 0.2) 33%);
+  background-size: 800px 100px;
+  animation: wave-squares 2s infinite ease-out;
+}
+
+.loader-square-top-align {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(18, 18, 18, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: left;
+  padding: 15px;
+  white-space: nowrap;
+  /* -webkit- is a hack for the Webkit Browser engine */
+  background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(18, 18, 18, 0.2)), color-stop(18%, rgba(18, 18, 18, 0.3)), color-stop(33%, rgba(18, 18, 18, 0.2)));
+  background: linear-gradient(to right, rgba(18, 18, 18, 0.2) 8%, rgba(18, 18, 18, 0.3) 18%, rgba(18, 18, 18, 0.2) 33%);
+  background-size: 800px 100px;
+  animation: wave-squares 2s infinite ease-out;
+}
+
+
+@keyframes wave-lines {
+  0% {
+    background-position: -468px 0;
+  }
+
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+@keyframes wave-squares {
+  0% {
+    background-position: -468px 0;
+  }
+
+  100% {
+    background-position: 468px 0;
+  }
+}
