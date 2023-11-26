@@ -25,7 +25,7 @@ function About () {
                     <div class="main-section col-xs-36-center col-md-36-center">
                     <header className="text_block_text">Welcome!</header>
                     </div>
-
+                    
                 </div>
 
             </Layout>
