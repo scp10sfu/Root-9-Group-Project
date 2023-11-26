@@ -1,30 +1,30 @@
-.palette-generator {
+.text-input-container {
  background: transparent;
 }
 
-.palette-generator h2 {
+.text-input-container h2 {
   color: #333;
   text-align: center;
 }
 
-.palette-generator form {
+.text-input-container form {
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
 }
 
-.palette-generator label {
+.text-input-containerr label {
   font-weight: normal;
 }
 
-.palette-generator input[type="text"] {
+.text-input-container input[type="text"] {
   padding: 0.5rem;
   border: 2px solid #ddd;
   border-radius: 4px;
   font-size: 1rem;
 }
 
-.palette-generator input[type="submit"] {
+.text-input-container input[type="submit"] {
   padding: 0.5rem;
   border: none;
   border-radius: 4px;
@@ -35,7 +35,7 @@
   transition: background-color 0.3s;
 }
 
-.palette-generator input[type="submit"]:hover {
+.text-input-container input[type="submit"]:hover {
   background-color: #878e96;
 }
 
@@ -103,27 +103,29 @@
   display: inline-block;
   margin: 0 auto;
   border: 1px solid #ddd;
-  font-weight: normal; /* Ensure text is not bold */
-  font-size: 1rem; /* Adjust font size if needed */
+
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400; 
+  font-size: 1rem; 
   max-width: 90%; /* Ensure it does not stretch too wide */
-  word-wrap:normal; /* To prevent overflow */
+  word-wrap: normal; /* To prevent overflow */
   text-align: left; /* Align text to the left */
 }
 
 .request-info-text {
   color: rgba(18, 18, 18, 0.75);
 
-  font-family: "DM Mono-Medium", Helvetica;
+  font-family: 'DM Mono', monospace;
   font-size: 14px;
-  font-weight: regular;
+  font-weight: 500;
   white-space: nowrap;
-  letter-spacing: 1.4px;
-  text-transform: uppercase;
+  letter-spacing: 1.6px;
 
   text-align: left;
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   align-items: center;
+  text-transform: uppercase;
 }
 
 .text_block_text {
@@ -150,16 +152,71 @@
   padding-bottom: 3%;
 }
 
-.chat-container {
-  text-align: center;
+
+
+/* *************************************************************************** */
+/* ***************************** CHAT CONTAINER ****************************** */
+/* *************************************************************************** */
+
+#chat-container {
+  /* text-align: center;
   padding: 10px 20px;
   transition: border-color 0.3s;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   align-self: stretch;
-  overflow: hidden;
+  overflow: hidden; */
+
+  max-height: 300px; /* Adjust the maximum height as needed */
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
 }
+
+/* Message styles */
+.user-message {
+  background-color: #e6e6e6; /* Light gray for user messages */
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  align-self: flex-start;
+  max-width: 70%; /* Adjust as needed */
+}
+
+.ai-message {
+  background-color: #4caf50; /* Green for AI messages */
+  color: #fff;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  align-self: flex-end;
+  max-width: 70%; /* Adjust as needed */
+}
+
+* Text input and send button styles */
+.text-input-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.text-input-container form {
+    display: flex;
+    width: 100%;
+}
+
+.text-input-container input[type="text"] {
+    flex: 1;
+    padding: 8px;
+}
+
+.text-input-container input[type="submit"] {
+    padding: 8px;
+    margin-left: 8px;
+}
+
+
 
 
 /* *************************************************************************** */

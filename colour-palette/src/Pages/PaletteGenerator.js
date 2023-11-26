@@ -341,7 +341,8 @@ function PaletteGenerator() {
             const colorObjects = await Promise.all(colorPromises);
             setColors(colorObjects);
 
-            // setColors(response.data.colors || []);
+            const userMessage = { role: 'user', message: prompt };
+            setChatHistory((prevHistory) => [...prevHistory, userMessage]);
 
             setFullResponse(response.data.fullResponse || ""); // Update with full response
         } catch (error) {
@@ -349,8 +350,18 @@ function PaletteGenerator() {
             setFullResponse('Failed to get the color palette. Please try again.');
         } finally {
             setIsLoading(false);
+
+            setPrompt('');  // Clear the input field
         }
     };
+
+    useEffect(() => {
+        // Scroll to the bottom of the chat when chatHistory changes
+        const chatContainer = document.getElementById('chat-container');
+        if (chatContainer) {
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+    }, [chatHistory]);
 
     return (
 
@@ -395,7 +406,17 @@ function PaletteGenerator() {
                                 Enter Request:
                             </div>
 
-                            <div className="palette-generator">
+                            <div className="chat-container box">
+
+                                {/* Display chat messages */}
+                                {chatHistory.map((message, index) => (
+                                    <div key={index} className={message.role === 'user' ? 'user-message' : 'ai-message'}>
+                                        {message.message}
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="text-input-container">
                                 <form onSubmit={handleSubmit}>
                                     <br />
                                     <input
