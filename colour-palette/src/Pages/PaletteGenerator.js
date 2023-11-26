@@ -16,7 +16,7 @@ function PaletteGenerator() {
 
     try {
         // Set the API URL
-        const apiUrl = 'https://paleta-11d0ba2b2f2b.herokuapp.com/' || 'http://localhost:3000';
+        const apiUrl = 'https://paleta-11d0ba2b2f2b.herokuapp.com' || 'http://localhost:3000';
         console.log(`API URL being used: ${apiUrl}`); // Debug: Log the API URL
 
         // Make the POST request
