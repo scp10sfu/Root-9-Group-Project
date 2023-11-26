@@ -3,9 +3,9 @@
   "name": "Paletä",
   "icons": [
     {
-      "src": "favicon-32.svg",
+      "src": "/Root-9-Group-Project/colour-palette/public/paleta.png",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "images/favicon-x.svg"
+      "type": "/Root-9-Group-Project/colour-palette/public/paleta.png"
     }
   ],
   "start_url": ".",
