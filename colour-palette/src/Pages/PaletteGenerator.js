@@ -501,37 +501,37 @@ function PaletteGenerator() {
                                 </div>
 
                             </div>
-
-                            {/* Conditional rendering based on isLoading state */}
-                            {/* The main content - right part */}
-                            {isLoading ? (<SkeletonLoader />)
-                                : (<>
-                                    <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
-                                        <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
-                                            <ColourBoxBottom color={colors.length >= 1 ? colors[0] : defaultColor} />
-                                        </div>
-                                        <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
-                                            <ColourBoxBottom color={colors.length >= 2 ? colors[1] : defaultColor} />
-                                        </div>
-                                        <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                                            <ColourBoxTop color={colors.length >= 3 ? colors[2] : defaultColor} />
-                                        </div>
-                                        <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                                            <ColourBoxTop color={colors.length >= 4 ? colors[3] : defaultColor} />
-                                        </div>
-                                        <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                                            <ColourBoxTop color={colors.length >= 5 ? colors[4] : defaultColor} />
-                                        </div>
-                                        <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                                            <ColourBoxTop color={colors.length >= 6 ? colors[5] : defaultColor} />
-                                        </div>
-
-                                    </div>
-                                </>)}
-
-                            <div className="col-xs-36 col-md-36"></div>
                         </div>
                     </div>
+
+                    {/* Conditional rendering based on isLoading state */}
+                        {/* The main content - right part */}
+                        {isLoading ? (<SkeletonLoader />)
+                            : (<>
+                                <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
+                                    <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
+                                        <ColourBoxBottom color={colors.length >= 1 ? colors[0] : defaultColor} />
+                                    </div>
+                                    <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
+                                        <ColourBoxBottom color={colors.length >= 2 ? colors[1] : defaultColor} />
+                                    </div>
+                                    <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                                        <ColourBoxTop color={colors.length >= 3 ? colors[2] : defaultColor} />
+                                    </div>
+                                    <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                                        <ColourBoxTop color={colors.length >= 4 ? colors[3] : defaultColor} />
+                                    </div>
+                                    <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                                        <ColourBoxTop color={colors.length >= 5 ? colors[4] : defaultColor} />
+                                    </div>
+                                    <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                                        <ColourBoxTop color={colors.length >= 6 ? colors[5] : defaultColor} />
+                                    </div>
+
+                                </div>
+                            </>)}
+
+                        <div className="col-xs-36 col-md-36"></div>
                 </div>
             </Layout>
         </div >

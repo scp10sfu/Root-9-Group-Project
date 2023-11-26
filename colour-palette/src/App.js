@@ -56,7 +56,7 @@ const App = () => {
             {/* ... other routes ... */}
           </Routes>
         </div>
-        <Footer/>
+        {/* <Footer/> */}
       </div> 
     </ColorContext.Provider>
   );
