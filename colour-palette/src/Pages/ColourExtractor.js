@@ -372,7 +372,7 @@ function ColourExtractor() {
         setIsCopyIconFilled(true);
         setTimeout(() => {
           setIsCopyIconFilled(false);
-        }, 750);
+        }, 300);
       });
     };
 
@@ -429,7 +429,7 @@ function ColourExtractor() {
         setIsCopyIconFilled(true);
         setTimeout(() => {
           setIsCopyIconFilled(false);
-        }, 750);
+        }, 300);
 
       });
     };
