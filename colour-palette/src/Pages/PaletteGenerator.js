@@ -22,6 +22,9 @@ function PaletteGenerator() {
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
     const [chatHistory, setChatHistory] = useState([]);
+    const [numberOfColors, setNumberOfColors] = useState(8); // Default number of colors
+    const [allColors, setAllColors] = useState([]); // All colors fetched from the API
+
 
     /* ************************************************************************ */
     /* ********************* SAME AS COLOUR EXTRACTOR ************************* */
@@ -328,8 +331,13 @@ function PaletteGenerator() {
         setColors([]); // Clear previous colors
 
         try {
-            // Update this URL to point to your Node.js server endpoint
-            const response = await axios.post("http://localhost:3000/get_palette", { prompt });
+            // Set the API URL
+            const apiUrl = 'https://paleta-11d0ba2b2f2b.herokuapp.com' || 'http://localhost:3000';
+            console.log(`API URL being used: ${apiUrl}`); // Debug: Log the API URL
+
+            // Make the POST request
+            const response = await axios.post(`${apiUrl}/get_palette`, { prompt });
+            console.log('Response from API:', response); // Debug: Log the response
 
             // Assuming response.data.colors is an array of hex color strings
             const colorPromises = response.data.colors.map(async (hex) => {
@@ -340,6 +348,9 @@ function PaletteGenerator() {
             });
             const colorObjects = await Promise.all(colorPromises);
             setColors(colorObjects);
+
+            // TODO: check it!
+            setAllColors(response.data.colors || []); // Store all colors
 
             const userMessage = { role: 'user', message: prompt };
             setChatHistory((prevHistory) => [...prevHistory, userMessage]);
@@ -354,6 +365,15 @@ function PaletteGenerator() {
             setPrompt('');  // Clear the input field
         }
     };
+
+
+    const handleColorSelection = (num) => {
+        setNumberOfColors(num); // Update the number of colors without calling API
+    };
+
+    // Get the colors to display based on the selected number
+    const displayedColors = allColors.slice(0, numberOfColors);
+
 
     useEffect(() => {
         // Scroll to the bottom of the chat when chatHistory changes
@@ -407,16 +427,16 @@ function PaletteGenerator() {
                             </div>
 
                             <main class="main flow">
-                            <div class="main__cards cards">
-                                <div class="cards__inner">
-                                    <div class="cards__card card">
-                                        <h2 class="card__heading">Title</h2>
+                                <div class="main__cards cards">
+                                    <div class="cards__inner">
+                                        <div class="cards__card card">
+                                            <h2 class="card__heading">Title</h2>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="overlay cards__inner"></div>
-                            </div>
-                        </main>
+                                    <div class="overlay cards__inner"></div>
+                                </div>
+                            </main>
 
 
                             <div className="chat-container box">
@@ -443,53 +463,78 @@ function PaletteGenerator() {
                                     <br />
                                     <input type="submit" value="Get Palette" disabled={isLoading} />
                                 </form>
-                                {isLoading && (
+
+                                {/* {isLoading && (
                                     <div className="spinner-container">
                                         <div className="spinner"></div>
                                     </div>
-                                )}
+                                )} */}
+
+                                {isLoading && <div className="spinner"></div>}
+                                <div className="color-choices">
+                                    {[4, 6, 8, 10, 15].map((num) => (
+                                        <button
+                                            type="button" // Ensure the button does not submit the form
+                                            key={num}
+                                            className={`color-choice-button ${num === numberOfColors ? 'selected' : ''}`}
+                                            onClick={() => handleColorSelection(num)}
+                                        >
+                                            {num}
+                                        </button>
+                                    ))}
+                                </div>
                                 <div id="palette-response">
                                     {fullResponse && <p className="palette-response-text">{fullResponse}</p>}
                                 </div>
+                                <div id="palette">
+                                    <div className="color-swatches">
+                                        {displayedColors.map((color, index) => (
+                                            <div key={index} className="color-swatch" style={{ backgroundColor: color }}></div>
+                                        ))}
+
+
+                                        <div id="palette-response">
+                                            {fullResponse && <p className="palette-response-text">{fullResponse}</p>}
+                                        </div>
+                                    </div>
+
+                                </div>
+
                             </div>
 
+                            {/* Conditional rendering based on isLoading state */}
+                            {/* The main content - right part */}
+                            {isLoading ? (<SkeletonLoader />)
+                                : (<>
+                                    <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
+                                        <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
+                                            <ColourBoxBottom color={colors.length >= 1 ? colors[0] : defaultColor} />
+                                        </div>
+                                        <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
+                                            <ColourBoxBottom color={colors.length >= 2 ? colors[1] : defaultColor} />
+                                        </div>
+                                        <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                                            <ColourBoxTop color={colors.length >= 3 ? colors[2] : defaultColor} />
+                                        </div>
+                                        <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                                            <ColourBoxTop color={colors.length >= 4 ? colors[3] : defaultColor} />
+                                        </div>
+                                        <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                                            <ColourBoxTop color={colors.length >= 5 ? colors[4] : defaultColor} />
+                                        </div>
+                                        <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                                            <ColourBoxTop color={colors.length >= 6 ? colors[5] : defaultColor} />
+                                        </div>
+
+                                    </div>
+                                </>)}
+
+                            <div className="col-xs-36 col-md-36"></div>
                         </div>
-
                     </div>
-
-                    {/* Conditional rendering based on isLoading state */}
-                    {/* The main content - right part */}
-                    {isLoading ? (<SkeletonLoader />)
-                        : (<>
-                            <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
-                                <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
-                                    <ColourBoxBottom color={colors.length >= 1 ? colors[0] : defaultColor} />
-                                </div>
-                                <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
-                                    <ColourBoxBottom color={colors.length >= 2 ? colors[1] : defaultColor} />
-                                </div>
-                                <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                                    <ColourBoxTop color={colors.length >= 3 ? colors[2] : defaultColor} />
-                                </div>
-                                <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                                    <ColourBoxTop color={colors.length >= 4 ? colors[3] : defaultColor} />
-                                </div>
-                                <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                                    <ColourBoxTop color={colors.length >= 5 ? colors[4] : defaultColor} />
-                                </div>
-                                <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                                    <ColourBoxTop color={colors.length >= 6 ? colors[5] : defaultColor} />
-                                </div>
-
-                            </div>
-                        </>)}
-
-                    <div className="col-xs-36 col-md-36"></div>
                 </div>
             </Layout>
-
-        </div>
+        </div >
     );
 }
-
 export default PaletteGenerator;

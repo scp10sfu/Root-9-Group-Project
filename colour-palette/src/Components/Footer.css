@@ -1,0 +1,10 @@
+footer{
+    padding:1px 0;
+    flex-direction: row;
+    background-color:#FFFFFF;
+  }
+footer img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
