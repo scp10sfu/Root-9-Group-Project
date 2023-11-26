@@ -1,120 +1,421 @@
-.palette-generator {
-  max-width: 800px;
-  margin: 10rem auto 2rem; /* Increase the top margin */
-  padding: 1rem;
-  background: rgb(237, 236, 236);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  font-family: monospace;
-}
+.text-input-container {
+  background: transparent;
+ }
+ 
+ .text-input-container h2 {
+   color: #333;
+   text-align: center;
+ }
+ 
+ .text-input-container form {
+   display: flex;
+   flex-direction: column;
+   margin-bottom: 1rem;
+ }
+ 
+ .text-input-containerr label {
+   font-weight: normal;
+ }
+ 
+ .text-input-container input[type="text"] {
+   padding: 0.5rem;
+   border: 2px solid #ddd;
+   border-radius: 4px;
+   font-size: 1rem;
+ }
+ 
+ .text-input-container input[type="submit"] {
+   padding: 0.5rem;
+   border: none;
+   border-radius: 4px;
+   background-color: #656e77;
+   color: white;
+   cursor: pointer;
+   font-size: 1rem;
+   transition: background-color 0.3s;
+ }
+ 
+ .text-input-container input[type="submit"]:hover {
+   background-color: #878e96;
+ }
+ 
+ .spinner-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin: 1rem 0;
+ }
+ 
+ .spinner {
+   border: 4px solid rgba(0, 0, 0, 0.1);
+   width: 36px;
+   height: 36px;
+   border-radius: 50%;
+   border-left-color: #09f;
+   animation: spin 1s ease infinite;
+ }
+ 
+ @keyframes spin {
+   0% { transform: rotate(0deg); }
+   100% { transform: rotate(360deg); }
+ }
+ 
+ .color-swatches {
+   display: flex;
+   gap: 0.5rem;
+   justify-content: center;
+   flex-wrap: wrap;
+ }
+ 
+ .color-swatch {
+   margin-top: 10px;
+   width: 70px;
+   height: 200px;
+   border-radius: 4px;
+ }
+ 
+ /* Chat bubble style for response message */
+ .palette-response-text {
+   font-family: 'Courier New', Courier, monospace;
+   white-space: pre-wrap; /* Ensures that the spacing is preserved as in the response */
+   word-wrap: break-word; /* To prevent overflow */
+   text-align: left; /* Aligns text to the left */
+   background-color: #f0f0f0;
+   padding: 0.5rem 1rem;
+   border-radius: 15px;
+   display: inline-block;
+   margin: 0 auto;
+   border: 1px solid #ddd;
+   text-transform: none; /* Add this line to prevent uppercase transformation */
+ }
+ 
+ 
+ #palette p {
+   text-align: center;
+   margin: 1rem 0;
+ }
+ 
+ /* Adjustments for the chat bubble to prevent bold text */
+ .palette-response-text {
+   background-color: #f0f0f0;
+   padding: 0.5rem 1rem;
+   border-radius: 15px;
+   display: inline-block;
+   margin: 0 auto;
+   border: 1px solid #ddd;
+ 
+   font-family: 'DM Sans', sans-serif;
+   font-weight: 400; 
+   font-size: 1rem; 
+   max-width: 90%; /* Ensure it does not stretch too wide */
+   word-wrap: normal; /* To prevent overflow */
+   text-align: left; /* Align text to the left */
+ }
+ 
+ .request-info-text {
+   color: rgba(18, 18, 18, 0.75);
+ 
+   font-family: 'DM Mono', monospace;
+   font-size: 14px;
+   font-weight: 500;
+   white-space: nowrap;
+   letter-spacing: 1.6px;
+ 
+   text-align: left;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   text-transform: uppercase;
+ }
+ 
+ .text_block_text {
+   margin-top: 50px;
+   align-self: stretch;
+   color: rgba(18, 18, 18, 1);
+   font-family: 'DM Sans', sans-serif;
+   font-size: 72px;
+   font-style: normal;
+   font-weight: 700;
+   letter-spacing: -3.6px;
+ }
+ 
+ .text_block_subtext {
+   align-self: stretch;
+   color: rgba(18, 18, 18, 0.50);
+   font-family: 'DM Sans', sans-serif;
+   font-size: 20px;
+   font-style: normal;
+   font-weight: 700;
+   letter-spacing: -0.4px;
+ 
+   padding-top: 1%;
+   padding-bottom: 3%;
+ }
+ 
+ 
+ 
+ /* *************************************************************************** */
+ /* ***************************** CHAT CONTAINER ****************************** */
+ /* *************************************************************************** */
+ 
+ .chat-container {
+   /* text-align: center;
+   padding: 10px 20px;
+   transition: border-color 0.3s;
+   flex-direction: column;
+   justify-content: center;
+   align-items: flex-start;
+   align-self: stretch;
+   overflow: hidden; */
+ 
+   max-height: 300px; /* Adjust the maximum height as needed */
+     overflow-y: auto;
+     border: 1px solid #ccc;
+     padding: 10px;
+ 
+     --flow-space: 0.5em;
+     --hsl: var(--hue), var(--saturation), var(--lightness);
+     flex: 1 1 14rem;
+     padding: 1.5em 2em;
+     display: grid;
+     grid-template-rows: auto auto auto 1fr;
+     align-items: start;
+     gap: 1.25em;
+     color: #eceff1;
+     background-color: #2b2b2b;
+     border: 1px solid #eceff133;
+     border-radius: 15px;
+ }
+ 
+ /* Message styles */
+ .user-message {
+   background-color: #e6e6e6; /* Light gray for user messages */
+   padding: 8px;
+   margin-bottom: 8px;
+   border-radius: 8px;
+   align-self: flex-start;
+   max-width: 70%; /* Adjust as needed */
+ }
+ 
+ .ai-message {
+   background-color: #4caf50; /* Green for AI messages */
+   color: #fff;
+   padding: 8px;
+   margin-bottom: 8px;
+   border-radius: 8px;
+   align-self: flex-end;
+   max-width: 70%; /* Adjust as needed */
+ }
+ 
+ * Text input and send button styles */
+ .text-input-container {
+     display: flex;
+     align-items: center;
+     padding: 10px;
+ }
+ 
+ .text-input-container form {
+     display: flex;
+     width: 100%;
+ }
+ 
+ .text-input-container input[type="text"] {
+     flex: 1;
+     padding: 8px;
+ }
+ 
+ .text-input-container input[type="submit"] {
+     padding: 8px;
+     margin-left: 8px;
+ }
+ 
+ 
+ /* *************************************************************************** */
+ /* ***************************** COLOUR PALETTE ****************************** */
+ /* *************************************************************************** */
+ 
+ .copy-icon {
+   background: transparent;
+   border: none;
+   cursor: pointer;
+   display: block;
+ }
+ 
+ /* Styles for desktop */
+ @media only screen and (min-width: 76em) {
+   .copy-icon {
+     display: none; /* Hide the icon by default on desktop */
+   }
+ 
+   /* Show the icon only when the parent block is hovered on desktop */
+   .color-bottom-align:hover .copy-icon,
+   .color-top-align:hover .copy-icon {
+     display: block;
+   }
+ }
+ 
+ /* Style for color name at the top */
+ .color-name {
+   /* gap: 30px; */
+   font-family: 'DM Mono', monospace;
+   font-weight: 600;
+   font-size: 11px;
+   color: rgba(18, 18, 18, 1);
+   letter-spacing: 3px;
+   text-align: left;
+ }
+ 
+ /* Style for color codes */
+ .color-hex,
+ .color-rgb,
+ .color-cmyk {
+   font-family: 'DM Mono', monospace;
+   font-weight: 400;
+ 
+   color: rgba(18, 18, 18, 0.75);
+   text-align: left;
+   font-size: 10px;
+ 
+   letter-spacing: 1.6px;
+   line-height: 10px;
+   white-space: nowrap;
+ }
+ 
+ 
+ 
+ /* *************************************************************************** */
+ /* ********************************** TEST *********************************** */
+ /* *************************************************************************** */
+ 
+ .cards {
+   position: relative;
+ }
+ 
+ .cards__inner {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 2.5em;
+ }
+ 
+ .card {
+   --flow-space: 0.5em;
+   --hsl: var(--hue), var(--saturation), var(--lightness);
+   flex: 1 1 14rem;
+   padding: 1.5em 2em;
+   display: grid;
+   grid-template-rows: auto auto auto 1fr;
+   align-items: start;
+   gap: 1.25em;
+   color: #eceff1;
+   background-color: #2b2b2b;
+   border: 1px solid #eceff133;
+   border-radius: 15px;
+ }
+ 
+ .card:nth-child(1) {
+   --hue: 165;
+   --saturation: 82.26%;
+   --lightness: 51.37%;
+ }
+ 
+ .card:nth-child(2) {
+   --hue: 291.34;
+   --saturation: 95.9%;
+   --lightness: 61.76%;
+ }
+ 
+ .card:nth-child(3) {
+   --hue: 338.69;
+   --saturation: 100%;
+   --lightness: 48.04%;
+ }
+ 
+ .card__bullets {
+   line-height: 1.4;
+ }
+ 
+ .card__bullets li::before {
+   display: inline-block;
+   content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='16' title='check' fill='%23dddddd'%3E%3Cpath d='M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z' /%3E%3C/svg%3E");
+   transform: translatey(0.25ch);
+   margin-right: 1ch;
+ }
+ 
+ .card__heading {
+   font-size: 1.05em;
+   font-weight: 600;
+ }
+ 
+ .card__price {
+   font-size: 1.75em;
+   font-weight: 700;
+ }
+ 
+ .flow > * + * {
+   margin-top: var(--flow-space, 1.25em);
+ }
+ 
+ .cta {
+   display: block;
+   align-self: end;
+   margin: 1em 0 0.5em 0;
+   text-align: center;
+   text-decoration: none;
+   color: #fff;
+   background-color: #0d0d0d;
+   padding: 0.7em;
+   border-radius: 10px;
+   font-size: 1rem;
+   font-weight: 600;
+ }
+ 
+ .overlay {
+   position: absolute;
+   inset: 0;
+   pointer-events: none;
+   user-select: none;
+   opacity: var(--opacity, 0);
+   -webkit-mask: radial-gradient(
+     25rem 25rem at var(--x) var(--y),
+     #000 1%,
+     transparent 50%
+   );
+   mask: radial-gradient(
+     25rem 25rem at var(--x) var(--y),
+     #000 1%,
+     transparent 50%
+   );
+   transition: 400ms mask ease;
+   will-change: mask;
+ }
+ 
+ .overlay .card {
+   background-color: hsla(var(--hsl), 0.15);
+   border-color: hsla(var(--hsl), 1);
+   box-shadow: 0 0 0 1px inset hsl(var(--hsl));
+ }
+ 
+ .overlay .cta {
+   display: block;
+   grid-row: -1;
+   width: 100%;
+   background-color: hsl(var(--hsl));
+   box-shadow: 0 0 0 1px hsl(var(--hsl));
+ }
+ 
+ :not(.overlay) > .card {
+   transition: 400ms background ease;
+   will-change: background;
+ }
+ 
+ :not(.overlay) > .card:hover {
+   --lightness: 95%;
+   background: hsla(var(--hsl), 0.1);
+ }
+ 
 
-.palette-generator h2 {
-  color: #333;
-  text-align: center;
-}
+ /* *************************************************************************** */
 
-.palette-generator form {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
-
-.palette-generator label {
-  font-weight: normal;
-}
-
-.palette-generator input[type="text"] {
-  padding: 0.5rem;
-  border: 2px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-.palette-generator input[type="submit"] {
-  padding: 0.5rem;
-  border: none;
-  border-radius: 4px;
-  background-color: #656e77;
-  color: white;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s;
-}
-
-.palette-generator input[type="submit"]:hover {
-  background-color: #878e96;
-}
-
-.spinner-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 1rem 0;
-}
-
-.spinner {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border-left-color: #09f;
-  animation: spin 1s ease infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.color-swatches {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.color-swatch {
-  margin-top: 10px;
-  width: 70px;
-  height: 200px;
-  border-radius: 4px;
-}
-
-/* Chat bubble style for response message */
-.palette-response-text {
-  font-family: 'Courier New', Courier, monospace;
-  white-space: pre-wrap; /* Ensures that the spacing is preserved as in the response */
-  word-wrap: break-word; /* To prevent overflow */
-  text-align: left; /* Aligns text to the left */
-  background-color: #f0f0f0;
-  padding: 0.5rem 1rem;
-  border-radius: 15px;
-  display: inline-block;
-  margin: 0 auto;
-  border: 1px solid #ddd;
-  text-transform: none; /* Add this line to prevent uppercase transformation */
-}
-
-
-#palette p {
-  text-align: center;
-  margin: 1rem 0;
-}
-
-/* Adjustments for the chat bubble to prevent bold text */
-.palette-response-text {
-  background-color: #f0f0f0;
-  padding: 0.5rem 1rem;
-  border-radius: 15px;
-  display: inline-block;
-  margin: 0 auto;
-  border: 1px solid #ddd;
-  font-weight: normal; /* Ensure text is not bold */
-  font-size: 1rem; /* Adjust font size if needed */
-  max-width: 90%; /* Ensure it does not stretch too wide */
-  word-wrap:normal; /* To prevent overflow */
-  text-align: left; /* Align text to the left */
-}
 
 .palette-generator {
   display: flex;
