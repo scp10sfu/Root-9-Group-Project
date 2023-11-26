@@ -3,12 +3,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Toast.css';
+import { ReactComponent as InfoIcon } from '../images/icon-info-dark.svg';
 
 const Toast = ({ type, message, onClose }) => {
   return (
     <div className={`toast ${type}`}>
       <div className="toast-content">
         {/* Add your icon component here */}
+        <InfoIcon />
         <span className="toast-message">{message}</span>
         <span className="toast-close" onClick={onClose}>
           &#x2715;
