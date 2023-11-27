@@ -55,7 +55,11 @@
 .palette-generator input[type="submit"]:hover {
   background-color: rgba(255, 255, 255, 0.15);
 }
-
+.palette-additional-message{
+  font-family: 'DM Mono', monospace;
+  font-weight: 400;
+  font-size: 12px;
+}
 /* .spinner-container {
   display: flex;
   justify-content: center;

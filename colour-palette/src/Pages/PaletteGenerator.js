@@ -458,7 +458,9 @@ function PaletteGenerator() {
                   {message.message}
                 </div>
               ))}
-
+            <div id="palette-additional-message">
+    {additionalMessage && <p className="additional-message-text">{additionalMessage}</p>}
+  </div>
               {isLoading && (
                 <div className="loading">
                   {/* <div className="spinner"></div> */}
@@ -479,10 +481,6 @@ function PaletteGenerator() {
                   <br />
                   <input type="submit" value="Get Palette" disabled={isLoading} />
                 </form>
-
-                <div id="palette-additional-message">
-    {additionalMessage && <p className="additional-message-text">{additionalMessage}</p>}
-  </div>
 
               </div>
             </div>
