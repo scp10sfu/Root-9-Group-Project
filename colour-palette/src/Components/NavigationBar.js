@@ -41,7 +41,7 @@ const MobileMenu = ({ closeMenu }) => {
     <div className="mobile-menu">
       <button onClick={() => handleNavigation('/About')}>About</button>
       <button onClick={() => handleNavigation('/ColourExtractor')}>Colour Extractor</button>
-      <button onClick={() => handleNavigation('/PaletteGenerator')}>Palette Generator</button>
+      <button onClick={() => handleNavigation('/PaletteGenerator')}>AI Palette Generator</button>
       {/* <button onClick={() => { navigate('/About') }}>About</button>
       <button onClick={() => { navigate('/ColourExtractor') }}>Colour Extractor</button>
       <button onClick={() => { navigate('/PaletteGenerator')}}>Palette Generator</button> */}
@@ -102,7 +102,7 @@ const NavigationBar = () => {
                 <div className="mobile-menu-content">
                   <button onClick={() => { navigate('/About'); closeMobileMenu(); }}>About</button>
                   <button onClick={() => { navigate('/ColourExtractor'); closeMobileMenu(); }}>Colour Extractor</button>
-                  <button onClick={() => { navigate('/PaletteGenerator'); closeMobileMenu(); }}>Palette Generator</button>
+                  <button onClick={() => { navigate('/PaletteGenerator'); closeMobileMenu(); }}>AI Palette Generator</button>
                 </div>
               </div>
             )}
@@ -115,7 +115,7 @@ const NavigationBar = () => {
             <div className="links col-xs-30 col-md-30">
               <button onClick={() => { navigate('/About'); closeMobileMenu(); }}>About</button>
               <button onClick={() => { navigate('/ColourExtractor'); closeMobileMenu(); }}>Colour Extractor</button>
-              <button onClick={() => { navigate('/PaletteGenerator'); closeMobileMenu(); }}>Palette Generator</button>
+              <button onClick={() => { navigate('/PaletteGenerator'); closeMobileMenu(); }}>AI Palette Generator</button>
             </div>
 
             {/* <ColorSwitcher /> */}
