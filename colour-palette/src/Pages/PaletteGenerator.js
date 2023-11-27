@@ -189,63 +189,75 @@ function PaletteGenerator() {
 
 
   /**
-   * SkeletonLoader Component
-   * A component representing a skeleton loader with color information.
-   * NOTE: keep this an empty container!
-   * @returns {JSX.Element} - The rendered SkeletonLoader component.
-   */
+* SkeletonLoader Component
+* A component representing a skeleton loader with color information.
+* NOTE: keep this an empty container!
+* @returns {JSX.Element} - The rendered SkeletonLoader component.
+*/
   const SkeletonLoader = () => (
     <>
       <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
         {/* First dominant colour */}
         <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
-          <div key={0} className="loader-square-bottom-align" style={{ backgroundColor: firstColor.hex }}>
-            <p className="color-name">{firstColor.name}</p>
-            <p className="color-hex">HEX: {firstColor.hex}</p>
-            <p className="color-rgb">RGB: {firstColor.rgb}</p>
-            <p className="color-cmyk">CMYK: {firstColor.cmyk}</p>
+          <div className="loader-square-bottom-align" style={{ backgroundColor: defaultColor.hex }}>
+            <div className="color-name-container">
+              <p className="color-name" style={{ color: defaultColor }}>{defaultColor.name}</p>
+            </div>
+            <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
+            <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
+            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
           </div>
         </div>
         {/* Second dominant colour */}
         <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
-          <div key={1} className="loader-square-bottom-align" style={{ backgroundColor: secondColor.hex }}>
-            <p className="color-name">{secondColor.name}</p>
-            <p className="color-hex">HEX: {secondColor.hex}</p>
-            <p className="color-rgb">RGB: {secondColor.rgb}</p>
-            <p className="color-cmyk">CMYK: {secondColor.cmyk}</p>
+          <div className="loader-square-bottom-align" style={{ backgroundColor: defaultColor.hex }}>
+            <div className="color-name-container">
+              <p className="color-name" style={{ color: defaultColor }}>{defaultColor.name}</p>
+            </div>
+            <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
+            <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
+            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
           </div>
         </div>
 
         <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-          <div key={2} className="loader-square-top-align" style={{ backgroundColor: thirdColor.hex }}>
-            <p className="color-name">{thirdColor.name}</p>
-            <p className="color-hex">HEX: {thirdColor.hex}</p>
-            <p className="color-rgb">RGB: {thirdColor.rgb}</p>
-            <p className="color-cmyk">CMYK: {thirdColor.cmyk}</p>
+          <div className="loader-square-top-align" style={{ backgroundColor: defaultColor.hex }}>
+            <div className="color-name-container">
+              <p className="color-name" style={{ color: defaultColor }}>{defaultColor.name}</p>
+            </div>
+            <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
+            <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
+            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
           </div>
         </div>
         <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-          <div key={3} className="loader-square-top-align" style={{ backgroundColor: fourthColor.hex }}>
-            <p className="color-name">{fourthColor.name}</p>
-            <p className="color-hex">HEX: {fourthColor.hex}</p>
-            <p className="color-rgb">RGB: {fourthColor.rgb}</p>
-            <p className="color-cmyk">CMYK: {fourthColor.cmyk}</p>
+          <div className="loader-square-top-align" style={{ backgroundColor: defaultColor.hex }}>
+            <div className="color-name-container">
+              <p className="color-name" style={{ color: defaultColor }}>{defaultColor.name}</p>
+            </div>
+            <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
+            <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
+            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
           </div>
         </div>
         <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-          <div key={4} className="loader-square-top-align" style={{ backgroundColor: fifthColor.hex }}>
-            <p className="color-name">{fifthColor.name}</p>
-            <p className="color-hex">HEX: {fifthColor.hex}</p>
-            <p className="color-rgb">RGB: {fifthColor.rgb}</p>
-            <p className="color-cmyk">CMYK: {fifthColor.cmyk}</p>
+          <div className="loader-square-top-align" style={{ backgroundColor: defaultColor.hex }}>
+            <div className="color-name-container">
+              <p className="color-name" style={{ color: defaultColor }}>{defaultColor.name}</p>
+            </div>
+            <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
+            <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
+            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
           </div>
         </div>
         <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-          <div key={5} className="loader-square-top-align" style={{ backgroundColor: sixthColor.hex }}>
-            <p className="color-name">{sixthColor.name}</p>
-            <p className="color-hex">HEX: {sixthColor.hex}</p>
-            <p className="color-rgb">RGB: {sixthColor.rgb}</p>
-            <p className="color-cmyk">CMYK: {sixthColor.cmyk}</p>
+          <div className="loader-square-top-align" style={{ backgroundColor: defaultColor.hex }}>
+            <div className="color-name-container">
+              <p className="color-name" style={{ color: defaultColor }}>{defaultColor.name}</p>
+            </div>
+            <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
+            <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
+            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
           </div>
         </div>
       </div>
@@ -433,12 +445,13 @@ function PaletteGenerator() {
               </header>
             </div>
 
+            <div className="request-info-text col-xs-36 col-md-25">
+              Enter Request:
+            </div>
 
             {/* FOR CHAT */}
             <div className="chat-container col-xs-36 col-md-25">
-              <div className="request-info-text">
-                Enter Request:
-              </div>
+
 
               {/* Display chat messages */}
               {chatHistory.map((message, index) => (
