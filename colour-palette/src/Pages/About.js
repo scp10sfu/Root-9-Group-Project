@@ -25,28 +25,28 @@ function About() {
                     </div>
 
                     <div className="col-xs-36 col-md-36 grid-container nested-grid">
-                        <div className="col-xs-8 col-md-8">
-                        <div className="left-title">Overview</div>
+                        <div className="col-xs-36 col-md-8">
+                            <div className="left-title">Overview</div>
                         </div>
-                        <div className="block col-xs-28 col-md-28">
-                        <div className="content-text">Our project is designed to cater to visual artists and individuals seeking creative inspiration.</div>
+                        <div className="block col-xs-36 col-md-28">
+                            <div className="content-text">Our project is designed to cater to visual artists and individuals seeking creative inspiration.</div>
                         </div>
                     </div>
 
 
                     <div className="col-xs-36 col-md-36 grid-container nested-grid">
-                        <div className="wrapper-2-col col-xs-8 col-md-8">
+                        <div className="wrapper-2-col col-xs-36 col-md-8">
                             <div className="left-title">Main<br />features</div>
                         </div>
 
-                        <div className="block col-xs-28 col-md-28">
-                            <div className="col-xs-28 col-md-28">
+                        <div className="block col-xs-36 col-md-28">
+                            <div className="col-xs-36 col-md-28">
                                 <div className="title">1. Image-Based Colour Extraction</div>
                                 <div className="content-text">Extract dominant colours from user-uploaded images, and identify and organize them into visually appealing palettes.</div>
                             </div>
-                            <div className="col-xs-28 col-md-28"></div>
+                            <div className="col-xs-36 col-md-28"></div>
 
-                            <div className="col-xs-28 col-md-28">
+                            <div className="col-xs-36 col-md-28">
                                 <div className="title">2. Prompt-Driven Palette Generation</div>
                                 <div className="content-text">Generate colour palettes based on text prompts through a chat interface for a dynamic and personalized user experience.</div>
                             </div>
@@ -59,12 +59,7 @@ function About() {
 
 
 
-
-
-
-
-
-                {/* <section id="about" className="about-section">
+                    {/* <section id="about" className="about-section">
                     <div className="section-content">
                         <div className="section-header">
                             <p className="section-text">Get To Know More</p>
