@@ -437,7 +437,7 @@ function PaletteGenerator() {
           {/* The main content - left part */}
           <div className="main-section col-xs-36 col-md-12 grid-container nested-grid">
             <div className="col-xs-36 col-md-25">
-              <header className="text_block_text">Palette Generator</header>
+              <header className="text_block_text">AI Palette Generator</header>
             </div>
 
             <div className="col-xs-36 col-md-25">
