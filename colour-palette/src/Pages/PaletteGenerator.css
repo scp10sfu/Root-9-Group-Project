@@ -55,12 +55,20 @@
 .palette-generator input[type="submit"]:hover {
   background-color: rgba(255, 255, 255, 0.15);
 }
+
 .palette-additional-message{
   font-family: 'DM Mono', monospace;
   font-weight: 400;
   font-size: 12px;
   margin-bottom: 30px;
-  text-transform:lowercase;
+}
+
+.user-message {
+  font-family: 'DM Mono', monospace;
+  font-weight: 400;
+  font-size: 12px;
+  margin-bottom: 30px;
+  color: #ffffff;
 }
 /* .spinner-container {
   display: flex;
