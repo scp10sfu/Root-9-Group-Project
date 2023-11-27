@@ -24,22 +24,20 @@ function PaletteGenerator() {
   const [toastMessage, setToastMessage] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
 
+  const [additionalMessage, setAdditionalMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setFullResponse(''); // Clear previous response
-    // setColors([]); // Clear previous colors
-
+  
     try {
-      // Set the API URL
       const apiUrl = 'https://paleta-11d0ba2b2f2b.herokuapp.com' || 'http://localhost:3000';
-      console.log(`API URL being used: ${apiUrl}`); // Debug: Log the API URL
-
-      // Make the POST request
       const response = await axios.post(`${apiUrl}/get_palette`, { prompt });
-      console.log('Response from API:', response); // Debug: Log the response
-
+  
+      const fullResponse = response.data.fullResponse;
+      
+      // Extracting colors and converting them to the desired format
       const colorPromises = response.data.colors.map(async (hex) => {
         const rgb = hexToRgb(hex);
         const cmyk = rgbToCmyk(rgb.r, rgb.g, rgb.b);
@@ -47,18 +45,20 @@ function PaletteGenerator() {
         return { hex, rgb: `${rgb.r}, ${rgb.g}, ${rgb.b}`, cmyk: `${cmyk.c}, ${cmyk.m}, ${cmyk.y}, ${cmyk.k}`, name };
       });
       const colorObjects = await Promise.all(colorPromises);
+  
+      // Assuming the last HEX code is followed by a newline and the message
+      const lastHexCode = colorObjects[colorObjects.length - 1].hex;
+      const messageStartIndex = fullResponse.indexOf(lastHexCode) + lastHexCode.length;
+      const additionalMessage = fullResponse.slice(messageStartIndex).trim();
+  
       setColors(colorObjects);
-
-      const userMessage = { role: 'user', message: prompt };
-      setChatHistory((prevHistory) => [...prevHistory, userMessage]);
-
-
-      setFullResponse(response.data.fullResponse || ''); // Store the full response
+      setFullResponse(additionalMessage); // Store the additional message
+      setAdditionalMessage(additionalMessage);
     } catch (error) {
-      console.error('Error:', error); // Log any errors
+      console.error('Error:', error);
       setFullResponse('Failed to get the color palette. Please try again.');
     } finally {
-      setIsLoading(false); // Ensure isLoading is set to false
+      setIsLoading(false);
       setPrompt('');  // Clear the input field
     }
   };
@@ -481,9 +481,9 @@ function PaletteGenerator() {
                   <input type="submit" value="Get Palette" disabled={isLoading} />
                 </form>
 
-                {/* <div id="palette-response">
-                                    {fullResponse && <p className="palette-response-text">{fullResponse}</p>}
-                                </div> */}
+                <div id="palette-additional-message">
+    {additionalMessage && <p className="additional-message-text">{additionalMessage}</p>}
+  </div>
 
               </div>
             </div>
