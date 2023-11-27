@@ -13,7 +13,7 @@ import { ReactComponent as CopyIconDarkFilled } from '../images/icon-copy-dark-f
 
 function PaletteGenerator() {
     const [prompt, setPrompt] = useState('');
-    const [numberOfColors, setNumberOfColors] = useState(8); // Default number of colors
+    const [numberOfColors, setNumberOfColors] = useState(6); // Default number of colors
     // const [allColors, setAllColors] = useState([]); // All colors fetched from the API
     const [fullResponse, setFullResponse] = useState(''); // Full response from the API
     const [isLoading, setIsLoading] = useState(false);
@@ -250,6 +250,10 @@ function PaletteGenerator() {
     const fourthColor = colors.length >= 4 ? colors[3] : defaultColor;
     const fifthColor = colors.length >= 5 ? colors[4] : defaultColor;
     const sixthColor = colors.length >= 6 ? colors[5] : defaultColor;
+    const seventhColor = colors.length >= 7 ? colors[6] : defaultColor;
+    const eighthColor = colors.length >= 8 ? colors[7] : defaultColor;
+    const ninthColor = colors.length >= 9 ? colors[8] : defaultColor;
+    const tenthColor = colors.length >= 10 ? colors[9] : defaultColor;
 
 
     /**
@@ -449,7 +453,7 @@ function PaletteGenerator() {
                         </div>
 
                         <div className="color-choices col-xs-36 col-md-25">
-                            {[4, 6, 8, 10, 15].map((num) => (
+                            {[4, 6, 8, 10].map((num) => (
                                 <button
                                     type="button" // Ensure the button does not submit the form
                                     key={num}
@@ -467,27 +471,97 @@ function PaletteGenerator() {
                     {/* The main content - right part */}
                     {isLoading ? (<SkeletonLoader />)
                         : (<>
-                            <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
-                                <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
-                                    <ColourBoxBottom color={colors.length >= 1 ? colors[0] : defaultColor} />
-                                </div>
-                                <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
-                                    <ColourBoxBottom color={colors.length >= 2 ? colors[1] : defaultColor} />
-                                </div>
-                                <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                                    <ColourBoxTop color={colors.length >= 3 ? colors[2] : defaultColor} />
-                                </div>
-                                <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                                    <ColourBoxTop color={colors.length >= 4 ? colors[3] : defaultColor} />
-                                </div>
-                                <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                                    <ColourBoxTop color={colors.length >= 5 ? colors[4] : defaultColor} />
-                                </div>
-                                <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                                    <ColourBoxTop color={colors.length >= 6 ? colors[5] : defaultColor} />
-                                </div>
+                            
+              {/* First dominant colour */}
+              <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
+                <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
+                  <ColourBoxBottom color={firstColor} />
+                </div>
 
-                            </div>
+                {/* Second dominant colour */}
+                <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
+                  <ColourBoxBottom color={secondColor} />
+
+                </div>
+
+                {/* 4 colours */}
+                {numberOfColors === 4 && (<>
+                  <div className="wrapper-4-col secondary-section col-xs-36 col-md-18">
+                    <ColourBoxTop color={thirdColor} />
+                  </div>
+                  <div className="wrapper-4-col secondary-section col-xs-36 col-md-18">
+                    <ColourBoxTop color={fourthColor} />
+                  </div>
+                </>)}
+
+                {/* 6 colours */}
+                {numberOfColors === 6 && (<>
+                  <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                    <ColourBoxTop color={thirdColor} />
+                  </div>
+                  <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                    <ColourBoxTop color={fourthColor} />
+                  </div>
+                  <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                    <ColourBoxTop color={fifthColor} />
+                  </div>
+                  <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                    <ColourBoxTop color={sixthColor} />
+                  </div>
+                </>)}
+
+                {/* 8 colours */}
+                {numberOfColors === 8 && (<>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-12">
+                    <ColourBoxTop color={thirdColor} />
+                  </div>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-12">
+                    <ColourBoxTop color={fourthColor} />
+                  </div>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-12">
+                    <ColourBoxTop color={fifthColor} />
+                  </div>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-12">
+                    <ColourBoxTop color={sixthColor} />
+                  </div>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-12">
+                    <ColourBoxTop color={seventhColor} />
+                  </div>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-12">
+                    <ColourBoxTop color={eighthColor} />
+                  </div>
+                </>)}
+
+                {/* 10 colours */}
+                {numberOfColors === 10 && (<>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                    <ColourBoxTop color={thirdColor} />
+                  </div>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                    <ColourBoxTop color={fourthColor} />
+                  </div>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                    <ColourBoxTop color={fifthColor} />
+                  </div>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                    <ColourBoxTop color={sixthColor} />
+                  </div>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                    <ColourBoxTop color={seventhColor} />
+                  </div>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                    <ColourBoxTop color={eighthColor} />
+                  </div>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                    <ColourBoxTop color={ninthColor} />
+                  </div>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                    <ColourBoxTop color={tenthColor} />
+                  </div>
+
+                </>)}
+
+              </div>
                         </>
                     )}
 
