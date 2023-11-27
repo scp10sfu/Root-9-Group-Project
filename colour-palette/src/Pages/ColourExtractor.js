@@ -264,7 +264,8 @@ function ColourExtractor() {
   */
   const SkeletonLoader = () => (
     <>
-      <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
+      <div className="  020928
+      ">
         {/* First dominant colour */}
         <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
           <div className="loader-square-bottom-align" style={{ backgroundColor: defaultColor.hex }}>
