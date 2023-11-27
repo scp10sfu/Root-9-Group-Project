@@ -20,7 +20,7 @@ function About () {
       <div class="section__pic-container2">
   <img
     src="lufy.gif"
-    alt="Luffy Pixel Art"
+    alt="paleta"
     class="about-pic"
   />
 </div>
