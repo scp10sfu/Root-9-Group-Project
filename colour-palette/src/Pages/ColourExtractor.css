@@ -174,7 +174,7 @@
 .number-button.active {
   /* background-color: rgba(186, 229, 13, 0.8); */
   /* background-color: rgba(255, 153, 102, 0.4); */
-  background-color: #121212;
+  background-color: rgba(18, 18, 18, 1);
   color: #ffffff;
   transform: scale(1.1);
 }
@@ -224,7 +224,7 @@
   color: rgba(18, 18, 18, 1);
   /* H2 */
   font-family: 'DM Sans', sans-serif;
-  font-size: 72px;
+  font-size: 8vh;
   font-style: normal;
   font-weight: 700;
   letter-spacing: -3.6px;
@@ -484,7 +484,8 @@
 /* Styles for desktop */
 @media only screen and (min-width: 76em) {
   .copy-icon {
-    display: none; /* Hide the icon by default on desktop */
+    display: none;
+    /* Hide the icon by default on desktop */
   }
 
   /* Show the icon only when the parent block is hovered on desktop */
