@@ -13,7 +13,7 @@ import { ReactComponent as CopyIconDarkFilled } from '../images/icon-copy-dark-f
 
 function PaletteGenerator() {
     const [prompt, setPrompt] = useState('');
-    const [numberOfColors, setNumberOfColors] = useState(8); // Default number of colors
+    const [numberOfColors, setNumberOfColors] = useState(6); // Default number of colors
     // const [allColors, setAllColors] = useState([]); // All colors fetched from the API
     const [fullResponse, setFullResponse] = useState(''); // Full response from the API
     const [isLoading, setIsLoading] = useState(false);
@@ -164,69 +164,69 @@ function PaletteGenerator() {
         }
     };
 
-    /**
-    * SkeletonLoader Component
-    * A component representing a skeleton loader with color information.
-    * NOTE: keep this an empty container!
-    * @returns {JSX.Element} - The rendered SkeletonLoader component.
-    */
-    const SkeletonLoader = () => (
-        <>
-            <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
-                {/* First dominant colour */}
-                <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
-                    <div key={0} className="loader-square-bottom-align" style={{ backgroundColor: 'rgba(196, 196, 196, 0.25)' }}>
-                        <p className="color-name">{defaultColor.name}</p>
-                        <p className="color-hex">HEX: {defaultColor.hex}</p>
-                        <p className="color-rgb">RGB: {defaultColor.rgb}</p>
-                        <p className="color-cmyk">CMYK: {defaultColor.cmyk}</p>
-                    </div>
-                </div>
-                {/* Second dominant colour */}
-                <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
-                    <div key={1} className="loader-square-bottom-align" style={{ backgroundColor: 'rgba(196, 196, 196, 0.25)' }}>
-                        <p className="color-name">{defaultColor.name}</p>
-                        <p className="color-hex">HEX: {defaultColor.hex}</p>
-                        <p className="color-rgb">RGB: {defaultColor.rgb}</p>
-                        <p className="color-cmyk">CMYK: {defaultColor.cmyk}</p>
-                    </div>
-                </div>
+ /**
+  * SkeletonLoader Component
+  * A component representing a skeleton loader with color information.
+  * NOTE: keep this an empty container!
+  * @returns {JSX.Element} - The rendered SkeletonLoader component.
+  */
+  const SkeletonLoader = () => (
+    <>
+      <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
+        {/* First dominant colour */}
+        <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
+          <div key={0} className="loader-square-bottom-align" style={{ backgroundColor: firstColor.hex }}>
+            <p className="color-name">{firstColor.name}</p>
+            <p className="color-hex">HEX: {firstColor.hex}</p>
+            <p className="color-rgb">RGB: {firstColor.rgb}</p>
+            <p className="color-cmyk">CMYK: {firstColor.cmyk}</p>
+          </div>
+        </div>
+        {/* Second dominant colour */}
+        <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
+          <div key={1} className="loader-square-bottom-align" style={{ backgroundColor: secondColor.hex }}>
+            <p className="color-name">{secondColor.name}</p>
+            <p className="color-hex">HEX: {secondColor.hex}</p>
+            <p className="color-rgb">RGB: {secondColor.rgb}</p>
+            <p className="color-cmyk">CMYK: {secondColor.cmyk}</p>
+          </div>
+        </div>
 
-                <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                    <div key={2} className="loader-square-top-align" style={{ backgroundColor: 'rgba(196, 196, 196, 0.25)' }}>
-                        <p className="color-name">{defaultColor.name}</p>
-                        <p className="color-hex">HEX: {defaultColor.hex}</p>
-                        <p className="color-rgb">RGB: {defaultColor.rgb}</p>
-                        <p className="color-cmyk">CMYK: {defaultColor.cmyk}</p>
-                    </div>
-                </div>
-                <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                    <div key={3} className="loader-square-top-align" style={{ backgroundColor: 'rgba(196, 196, 196, 0.25)' }}>
-                        <p className="color-name">{defaultColor.name}</p>
-                        <p className="color-hex">HEX: {defaultColor.hex}</p>
-                        <p className="color-rgb">RGB: {defaultColor.rgb}</p>
-                        <p className="color-cmyk">CMYK: {defaultColor.cmyk}</p>
-                    </div>
-                </div>
-                <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                    <div key={4} className="loader-square-top-align" style={{ backgroundColor: 'rgba(196, 196, 196, 0.25)' }}>
-                        <p className="color-name">{defaultColor.name}</p>
-                        <p className="color-hex">HEX: {defaultColor.hex}</p>
-                        <p className="color-rgb">RGB: {defaultColor.rgb}</p>
-                        <p className="color-cmyk">CMYK: {defaultColor.cmyk}</p>
-                    </div>
-                </div>
-                <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                    <div key={5} className="loader-square-top-align" style={{ backgroundColor: 'rgba(196, 196, 196, 0.25)' }}>
-                        <p className="color-name">{defaultColor.name}</p>
-                        <p className="color-hex">HEX: {defaultColor.hex}</p>
-                        <p className="color-rgb">RGB: {defaultColor.rgb}</p>
-                        <p className="color-cmyk">CMYK: {defaultColor.cmyk}</p>
-                    </div>
-                </div>
-            </div>
-        </>
-    );
+        <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
+          <div key={2} className="loader-square-top-align" style={{ backgroundColor: thirdColor.hex }}>
+            <p className="color-name">{thirdColor.name}</p>
+            <p className="color-hex">HEX: {thirdColor.hex}</p>
+            <p className="color-rgb">RGB: {thirdColor.rgb}</p>
+            <p className="color-cmyk">CMYK: {thirdColor.cmyk}</p>
+          </div>
+        </div>
+        <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
+          <div key={3} className="loader-square-top-align" style={{ backgroundColor: fourthColor.hex }}>
+            <p className="color-name">{fourthColor.name}</p>
+            <p className="color-hex">HEX: {fourthColor.hex}</p>
+            <p className="color-rgb">RGB: {fourthColor.rgb}</p>
+            <p className="color-cmyk">CMYK: {fourthColor.cmyk}</p>
+          </div>
+        </div>
+        <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
+          <div key={4} className="loader-square-top-align" style={{ backgroundColor: fifthColor.hex }}>
+            <p className="color-name">{fifthColor.name}</p>
+            <p className="color-hex">HEX: {fifthColor.hex}</p>
+            <p className="color-rgb">RGB: {fifthColor.rgb}</p>
+            <p className="color-cmyk">CMYK: {fifthColor.cmyk}</p>
+          </div>
+        </div>
+        <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
+          <div key={5} className="loader-square-top-align" style={{ backgroundColor: sixthColor.hex }}>
+            <p className="color-name">{sixthColor.name}</p>
+            <p className="color-hex">HEX: {sixthColor.hex}</p>
+            <p className="color-rgb">RGB: {sixthColor.rgb}</p>
+            <p className="color-cmyk">CMYK: {sixthColor.cmyk}</p>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 
  /**
   * Default Color Object
@@ -250,6 +250,10 @@ function PaletteGenerator() {
     const fourthColor = colors.length >= 4 ? colors[3] : defaultColor;
     const fifthColor = colors.length >= 5 ? colors[4] : defaultColor;
     const sixthColor = colors.length >= 6 ? colors[5] : defaultColor;
+    const seventhColor = colors.length >= 7 ? colors[6] : defaultColor;
+    const eighthColor = colors.length >= 8 ? colors[7] : defaultColor;
+    const ninthColor = colors.length >= 9 ? colors[8] : defaultColor;
+    const tenthColor = colors.length >= 10 ? colors[9] : defaultColor;
 
 
     /**
@@ -449,7 +453,7 @@ function PaletteGenerator() {
                         </div>
 
                         <div className="color-choices col-xs-36 col-md-25">
-                            {[4, 6, 8, 10, 15].map((num) => (
+                            {[4, 6, 8, 10].map((num) => (
                                 <button
                                     type="button" // Ensure the button does not submit the form
                                     key={num}
@@ -467,27 +471,97 @@ function PaletteGenerator() {
                     {/* The main content - right part */}
                     {isLoading ? (<SkeletonLoader />)
                         : (<>
-                            <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
-                                <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
-                                    <ColourBoxBottom color={colors.length >= 1 ? colors[0] : defaultColor} />
-                                </div>
-                                <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
-                                    <ColourBoxBottom color={colors.length >= 2 ? colors[1] : defaultColor} />
-                                </div>
-                                <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                                    <ColourBoxTop color={colors.length >= 3 ? colors[2] : defaultColor} />
-                                </div>
-                                <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                                    <ColourBoxTop color={colors.length >= 4 ? colors[3] : defaultColor} />
-                                </div>
-                                <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                                    <ColourBoxTop color={colors.length >= 5 ? colors[4] : defaultColor} />
-                                </div>
-                                <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-                                    <ColourBoxTop color={colors.length >= 6 ? colors[5] : defaultColor} />
-                                </div>
+                            
+              {/* First dominant colour */}
+              <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
+                <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
+                  <ColourBoxBottom color={firstColor} />
+                </div>
 
-                            </div>
+                {/* Second dominant colour */}
+                <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
+                  <ColourBoxBottom color={secondColor} />
+
+                </div>
+
+                {/* 4 colours */}
+                {numberOfColors === 4 && (<>
+                  <div className="wrapper-4-col secondary-section col-xs-36 col-md-18">
+                    <ColourBoxTop color={thirdColor} />
+                  </div>
+                  <div className="wrapper-4-col secondary-section col-xs-36 col-md-18">
+                    <ColourBoxTop color={fourthColor} />
+                  </div>
+                </>)}
+
+                {/* 6 colours */}
+                {numberOfColors === 6 && (<>
+                  <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                    <ColourBoxTop color={thirdColor} />
+                  </div>
+                  <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                    <ColourBoxTop color={fourthColor} />
+                  </div>
+                  <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                    <ColourBoxTop color={fifthColor} />
+                  </div>
+                  <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                    <ColourBoxTop color={sixthColor} />
+                  </div>
+                </>)}
+
+                {/* 8 colours */}
+                {numberOfColors === 8 && (<>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-12">
+                    <ColourBoxTop color={thirdColor} />
+                  </div>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-12">
+                    <ColourBoxTop color={fourthColor} />
+                  </div>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-12">
+                    <ColourBoxTop color={fifthColor} />
+                  </div>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-12">
+                    <ColourBoxTop color={sixthColor} />
+                  </div>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-12">
+                    <ColourBoxTop color={seventhColor} />
+                  </div>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-12">
+                    <ColourBoxTop color={eighthColor} />
+                  </div>
+                </>)}
+
+                {/* 10 colours */}
+                {numberOfColors === 10 && (<>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                    <ColourBoxTop color={thirdColor} />
+                  </div>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                    <ColourBoxTop color={fourthColor} />
+                  </div>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                    <ColourBoxTop color={fifthColor} />
+                  </div>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                    <ColourBoxTop color={sixthColor} />
+                  </div>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                    <ColourBoxTop color={seventhColor} />
+                  </div>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                    <ColourBoxTop color={eighthColor} />
+                  </div>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                    <ColourBoxTop color={ninthColor} />
+                  </div>
+                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                    <ColourBoxTop color={tenthColor} />
+                  </div>
+
+                </>)}
+
+              </div>
                         </>
                     )}
 
