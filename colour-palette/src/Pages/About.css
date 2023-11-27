@@ -1,165 +1,79 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
-
-* {
-  margin: 0;
-  padding: 0;
+.about-section {
+  padding: 5rem;
+  background: rgba(0, 0, 0, 0.1); /* Or any other color you prefer */
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  max-width: 1024px;
 }
 
-body {
-  font-family: "Poppins", sans-serif;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-p {
-  color: rgb(85, 85, 85);
-}
-
-/* TRANSITION */
-
-a,
-.btn {
-  transition: all 300ms ease;
-}
-
-
-/* SECTIONS */
-
-section {
-  padding-top: 4vh;
-  height: 96vh;
-  margin: 0 10rem;
-  box-sizing: border-box;
-  min-height: fit-content;
-}
-
-.section-container {
+.section-content {
   display: flex;
-}
-
-/* PROFILE SECTION */
-
-#profile {
-  display: flex;
-  justify-content: center;
-  gap: 5rem;
-  height: 80vh;
-}
-
-.section__pic-container {
-  display: flex;
-  height: 400px;
-  width: 400px;
-  margin: auto;
-  overflow: hidden; /* This is important to ensure the image doesn't exceed the circular boundary */
-  border-radius: 50%; /* This creates a circular shape */
-}
-
-.section__pic-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* This ensures the image fills the circular container */
-}
-
-.section__pic-container2 {
-  display: flex;
-  height: 400px;
-  width: 400px;
-  margin: auto;
-}
-
-.section__text {
-  align-self: center;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
-.section__text p {
-  font-weight: 600;
-}
-
-.section__text__p1 {
-  text-align: center;
-}
-
-.section__text__p2 {
-  font-size: 1.75rem;
-  margin-bottom: 1rem;
+.section-header .section-text {
+  color: #757575; /* Or any other color you prefer */
+  font-size: 1.2rem;
 }
 
 .title {
-  font-size: 3rem;
-  text-align: center;
+  font-size: 2.5rem;
+  color: #333; /* Or any other color you prefer */
+  margin-bottom: 1rem;
 }
 
-#socials-container {
+.about-main {
   display: flex;
-  justify-content: center;
-  margin-top: 1rem;
-  gap: 1rem;
-}
-
-/* ICONS */
-
-.icon {
-  cursor: pointer;
-  height: 2rem;
-}
-
-
-/* ABOUT SECTION */
-
-#about {
-  position: relative;
-}
-
-.about-containers {
+  flex-direction: row;
+  align-items: flex-start;
   gap: 2rem;
-  margin-bottom: 2rem;
-  margin-top: 2rem;
 }
 
-.about-details-container {
-  width: 100%;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.about-containers,
-.about-details-container {
-  display: flex;
+.about-image-container {
+  flex: 1;
 }
 
 .about-pic {
-  border-radius: 2rem;
+  max-width: 100%;
+  height: auto;
+  border-radius: 1rem;
 }
 
-.arrow {
-  position: absolute;
-  right: -5rem;
-  bottom: 2.5rem;
+.about-details {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
 }
 
-.details-container {
-  padding: 1.5rem;
-  flex: 1;
-  background: rgba(234, 228, 228, 0.6);
-  border-radius: 2rem;
-  border: rgb(53, 53, 53) 0.1rem solid;
-  border-color: rgb(163, 163, 163);
-  text-align: center;
+.overview, .features {
+  background: #fee; /* Soft pink background, change as needed */
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
 }
 
-.section-container {
-  gap: 4rem;
-  height: 80%;
+.overview h3, .features h4 {
+  color: #333;
+  margin-bottom: 0.5rem;
 }
 
-.section__pic-container {
-  height: 400px;
-  width: 400px;
-  margin: auto 0;
+.features ol {
+  list-style: inside decimal;
+  padding-left: 0;
+}
+
+.features li {
+  margin-bottom: 1rem;
+}
+
+/* Add media queries for responsiveness */
+@media (max-width: 768px) {
+  .about-main {
+    flex-direction: column;
+  }
 }
 /* *************************************************************************** */
 /* ******************************* BACKGROUND ******************************** */

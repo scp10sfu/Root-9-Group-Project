@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import React, { useState, useRef, useEffect } from 'react';
 import Layout from '../Components/Layout';
-import './About.css'; // This imports the CSS file directly, no 'styles' object is created
+import './About.css'; // This imports the CSS file directly, no 'styles' object is 
+import image1 from '../images/paleta2.png';
 
 function About () {
     const [backgroundStyle, setBackgroundStyle] = useState({});
@@ -13,33 +14,37 @@ function About () {
                 ))}
             </div>
 
-            <section id="about">
-      <p class="section__text__p1">Get To Know More</p>
-      <h1 class="title">About Us</h1>
-      <div class="section-container">
-      <div class="section__pic-container2">
-  <img
-    src="lufy.gif"
-    alt="paleta"
-    class="about-pic"
-  />
-</div>
-        <div class="about-details-container">
-          <div class="about-containers">
-            <div class="details-container">
-              <img
-                src="/Root-9-Group-Project/colour-palette/public/paleta.png"
-                alt="Education icon"
-                class="icon"
-              />
-              <h3>Education</h3>
-              <h4>Simon Frasier University</h4>
-              <p>B.Sc. Computer Science - 2026 grad</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+            <section id="about" className="about-section">
+                <div className="section-content">
+                    <div className="section-header">
+                        <p className="section-text">Get To Know More</p>
+                        <h1 className="title">About Us</h1>
+                    </div>
+                    <div className="about-main">
+                        <div className="about-image-container">
+                            <img src={image1} alt="Paleta" className="about-pic" />
+                        </div>
+                        <div className="about-details">
+                            <div className="overview">
+                                <h3>Overview</h3>
+                                <p>Our project is designed to cater to visual artists and individuals seeking creative inspiration.</p>
+                            </div>
+                            <div className="features">
+                                <ol>
+                                    <li>
+                                        <h4>Image-Based Colour Extraction</h4>
+                                        <p>Extract dominant colours from user-uploaded images, and identify and organize them into visually appealing palettes.</p>
+                                    </li>
+                                    <li>
+                                        <h4>Prompt-Driven Palette Generation</h4>
+                                        <p>Generate colour palettes based on text prompts through a chat interface for a dynamic and personalized user experience.</p>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     );
 }
