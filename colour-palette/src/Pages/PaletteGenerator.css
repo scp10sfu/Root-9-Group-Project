@@ -59,6 +59,8 @@
   font-family: 'DM Mono', monospace;
   font-weight: 400;
   font-size: 12px;
+  padding-bottom: 30px;
+  text-transform: none;
 }
 /* .spinner-container {
   display: flex;
