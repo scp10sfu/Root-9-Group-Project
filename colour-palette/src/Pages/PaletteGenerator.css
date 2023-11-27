@@ -1,380 +1,114 @@
-.palette-generator {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 5px;
+/* ColourExtractor.css */
+
+.upload-container {
+  position: relative;
+  background-color: rgba(18, 18, 18, 0.05);
+  border: 1px dashed;
+  border-radius: 10px;
+  border-color: rgba(18, 18, 18, 0.55);
 }
 
-.palette-generator h2 {
-  color: #333;
+.upload-area {
   text-align: center;
-}
-
-.palette-generator form {
-  display: flex;
+  padding: 10px 20px;
+  transition: border-color 0.3s;
   flex-direction: column;
-  margin-bottom: 1rem;
+  justify-content: center;
+  align-items: flex-start;
+  align-self: stretch;
+  overflow: hidden;
 }
 
-.palette-generator label {
-  font-weight: normal;
-}
-
-.palette-generator input[type="text"] {
-  padding: 0.5rem;
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  font-size: 1rem;
-}
-
-.palette-generator input[type="submit"] {
-  padding: 0.5rem;
-  border: none;
-  border-radius: 10px;
-  background-color: rgba(18, 18, 18, 1);
-  color: white;
+/* Modify the file input styles to cover the entire container */
+.upload-container input[type="file"] {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s;
+}
 
-  font-family: 'DM Mono', monospace;
+.upload-area .text {
+  color: rgba(18, 18, 18, 0.85);
+
+  /* Body */
+  font-family: 'DM Sans', sans-serif;
+  font-size: 18px;
+  font-style: normal;
   font-weight: 500;
-  font-size: 14px;
-  letter-spacing: 2.3px;
-  color: white;
+  letter-spacing: 1.4px;
 
-  height: 80%;
-  min-height: 30px;
-}
-
-.palette-generator input[type="submit"]:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-}
-
-.spinner-container {
+  text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 1rem 0;
 }
 
-.spinner {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border-left-color: #09f;
-  animation: spin 1s ease infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Chat bubble style for response message */
-.palette-response-text {
-  font-family: 'Courier New', Courier, monospace;
-  white-space: pre-wrap;
-  /* Ensures that the spacing is preserved as in the response */
-  word-wrap: break-word;
-  /* To prevent overflow */
-  text-align: left;
-  /* Aligns text to the left */
-  background-color: #f0f0f0;
-  padding: 0.5rem 1rem;
-  border-radius: 15px;
-  display: inline-block;
-  margin: 0 auto;
-  border: 1px solid #ddd;
-  text-transform: none;
-  /* Add this line to prevent uppercase transformation */
-}
-
-
-#palette p {
-  text-align: center;
-  margin: 1rem 0;
-}
-
-/* Adjustments for the chat bubble to prevent bold text */
-.palette-response-text {
-  background-color: #f0f0f0;
-  padding: 0.5rem 1rem;
-  border-radius: 15px;
-  display: inline-block;
-  margin: 0 auto;
-  border: 1px solid #ddd;
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 400;
-  /* Ensure text is not bold */
-  font-size: 1rem;
-  /* Adjust font size if needed */
-  max-width: 90%;
-  /* Ensure it does not stretch too wide */
-  word-wrap: normal;
-  /* To prevent overflow */
-  text-align: left;
-  /* Align text to the left */
-}
-
-.request-info-text {
-  color: rgba(18, 18, 18, 0.75);
-
+.upload-area .subtext {
+  color: rgba(18, 18, 18, 0.50);
   font-family: 'DM Mono', monospace;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: regular;
   white-space: nowrap;
-  letter-spacing: 1.6px;
+  letter-spacing: 1.4px;
 
-  text-align: left;
+  text-align: center;
   display: flex;
-  flex-direction: row;
+  justify-content: center;
   align-items: center;
   text-transform: uppercase;
 }
 
-.text_block_text {
-  margin-top: 50px;
-  align-self: stretch;
-  color: rgba(18, 18, 18, 1);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 8vh;
-  font-style: normal;
-  font-weight: 700;
-  letter-spacing: -3.6px;
-}
-
-.text_block_subtext {
-  align-self: stretch;
-  color: rgba(18, 18, 18, 0.50);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  letter-spacing: -0.4px;
-
-  padding-top: 1%;
-  padding-bottom: 3%;
-}
-
-/* *************************************************************************** */
-/* ***************************** CHAT CONTAINER ****************************** */
-/* *************************************************************************** */
-.chat-container {
-  max-height: 400px;
-  height: 200px;
-  overflow-y: auto;
-  padding: 10px;
-
-  /* flex: 1 1 14rem; */
-  padding: 1.5em 2em;
-  display: grid;
-  grid-template-rows: auto auto auto 1fr;
-  align-items: start;
-  gap: 0.5em;
-  background-color: rgba(18, 18, 18, 0.75);
-  border: 1px solid #eceff133;
-  border-radius: 15px;
-}
-
-/* *************************************************************************** */
-/* ***************************** COLOUR PALETTE ****************************** */
-/* *************************************************************************** */
-
-/* Color palette styles */
-.color-palette {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 5px;
-}
-
-.color-bottom-align {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(18, 18, 18, 0.15);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  /* Aligns the content to the bottom */
-  align-items: left;
-  padding: 15px;
-  white-space: nowrap;
-  gap: 3.5px;
-}
-
-.color-top-align {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(18, 18, 18, 0.15);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  /* Aligns the content to the top */
-  align-items: left;
-  padding: 15px;
-  white-space: nowrap;
-  gap: 3.5px;
-}
-
-.color-name-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  gap: 5px;
-}
-
-.copy-icon {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  display: block;
-}
-
-/* Styles for desktop */
-@media only screen and (min-width: 76em) {
-  .copy-icon {
-    display: none;
-    /* Hide the icon by default on desktop */
-  }
-
-  /* Show the icon only when the parent block is hovered on desktop */
-  .color-bottom-align:hover .copy-icon,
-  .color-top-align:hover .copy-icon {
-    display: block;
-  }
-}
-
-/* Style for color name at the top */
-.color-name {
-  /* gap: 30px; */
-  font-family: 'DM Mono', monospace;
-  font-weight: 600;
-  font-size: 11px;
-  color: rgba(18, 18, 18, 1);
-  letter-spacing: 3px;
-  text-align: left;
-}
-
-/* Style for color codes */
-.color-hex,
-.color-rgb,
-.color-cmyk {
-  font-family: 'DM Mono', monospace;
-  font-weight: 400;
-
-  color: rgba(18, 18, 18, 0.75);
-  text-align: left;
-  font-size: 10px;
-
-  letter-spacing: 1.6px;
-  line-height: 10px;
-  white-space: nowrap;
-}
-
-
-.palette-generator {
-  display: flex;
-  flex-direction: column;
-  /* font-family: 'Arial', sans-serif; */
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 5px;
-}
-
-.chat-and-palette {
-  display: flex;
-  height: calc(100% - 50px);
-  /* Assuming send box height is 50px */
-}
-
-.chat-section {
-  flex: 1;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.past-responses,
-.new-response {
-  flex-grow: 1;
-  overflow-y: auto;
-}
-
-.new-prompt {
-  margin-top: auto;
-}
-
-.palette-section {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 20px;
-  gap: 10px;
-}
-
-.send-box {
-  height: 50px;
-  background-color: #f0f0f0;
-  padding: 10px;
-}
-
-/* Rest of the CSS ... */
-.color-choices {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  /* Adjust the gap between buttons as needed */
-  margin: 1rem 0;
-}
-
-.color-choice-button {
-  border: none;
-  background-color: #d8d8d8;
-  /* Light grey background */
-  color: rgba(18, 18, 18, 1);
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
+.upload-icon-dark {
+  font-size: 24px;
+  position: relative;
+  margin: 0 auto;
   border-radius: 50%;
-  /* Circular buttons */
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
-  width: 40px;
-  /* Fixed width */
-  height: 40px;
-  /* Fixed height */
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
 }
 
-.color-choice-button:hover,
-.color-choice-button:focus {
-  background-color: #a8a8a8;
-  /* Darker grey on hover/focus */
-  transform: scale(1.1);
-  /* Slightly larger on hover/focus */
+.info-icon-dark {
+  padding-right: 5px;
+  height: 12px;
+  position: relative;
+  width: 12px;
 }
 
-.color-choice-button.selected {
-  background-color: rgba(18, 18, 18, 1);
-  /* Black for selected button */
-  color: #fff;
+/* Image preview styles */
+.image-preview {
+  text-align: center;
+  position: relative;
+  height: auto;
+  width: auto;
+  max-width: 430px;
+  min-width: 200px;
+  display: inline-block;
 }
 
+.image-preview img {
+  object-fit: cover;
+  max-width: 430px;
+  min-width: 200px;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
 
-/* *************************************************************************** */
-/* **************************** NUMBER SELECTION ***************************** */
-/* *************************************************************************** */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #ffffff;
+}
 
 .number-of-colors-container {
   display: flex;
@@ -438,9 +172,353 @@
 }
 
 .number-button.active {
+  /* background-color: rgba(186, 229, 13, 0.8); */
+  /* background-color: rgba(255, 153, 102, 0.4); */
   background-color: #121212;
   color: #ffffff;
   transform: scale(1.1);
+}
+
+.switch {
+  display: flex;
+  width: 100vw;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+}
+
+.theme-switcher button {
+  background-color: var(--secondary-bg-color);
+  color: var(--primary-text-color);
+  border: none;
+  border-radius: 20px;
+  padding: 5px 10px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s, color 0.3s;
+  font-family: Tahoma;
+}
+
+/* Content block styles */
+.content-block {
+  display: flex;
+  align-items: center;
+  padding: 128px 76px 128px 96px;
+  flex-direction: column;
+  gap: 50px;
+  flex-shrink: 0;
+}
+
+.content-block .text_block {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: stretch;
+}
+
+.text_block_text {
+  margin-top: 50px;
+  align-self: stretch;
+  color: rgba(18, 18, 18, 1);
+  /* H2 */
+  font-family: 'DM Sans', sans-serif;
+  font-size: 8vh;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -3.6px;
+}
+
+.text_block_subtext {
+  align-self: stretch;
+  color: rgba(18, 18, 18, 0.50);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+
+  padding-top: 1%;
+  padding-bottom: 3%;
+}
+
+/* *************************************************************************** */
+/* ******************************* BACKGROUND ******************************** */
+/* *************************************************************************** */
+
+@keyframes move {
+  100% {
+    transform: translate3d(0, 0, 1px) rotate(360deg);
+  }
+}
+
+:root {
+  --color1: #361fd6;
+  /* Persian Blue */
+  --color2: #dea51f;
+  /* Golden Grass */
+  --color3: #efbcd0;
+  /* Beauty Bush */
+  --color4: #dd1c28;
+  /* Alizarin Crimson */
+  --color5: #20e620;
+  /* Malachite */
+  --color6: #cc21e3;
+  /* Electric Violet */
+  --color7: #d165b5;
+  /* Hopbush */
+  --color8: #9cbdd5;
+  /* Pigeon Post */
+  --color9: #f2f3c7;
+  /* Tusk */
+  --color10: #e9a762;
+  /* Porsche */
+  --color11: #cd607e;
+  /* Cinnamon Satin, a warm reddish-pink */
+  --color12: #ff9966;
+  /* Atomic Tangerine, a vibrant orange */
+  --color13: #f4a460;
+  /* Sandy Brown, a warm, light brown */
+}
+
+
+.background {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 1);
+  overflow: hidden;
+  z-index: -1;
+}
+
+.background span {
+  width: 20vmin;
+  height: 20vmin;
+  border-radius: 50%;
+  position: absolute;
+  /* Use a large blur radius to create a soft, glowing effect */
+  filter: blur(40px);
+  /* Animate the element's position and rotation */
+  animation: move 20s infinite linear;
+}
+
+@keyframes move {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(50vw, 50vh) rotate(360deg);
+  }
+}
+
+/* Now use the variables for each span */
+.background span:nth-child(0) {
+  background-color: var(--color1);
+  top: 96%;
+  left: 9%;
+  animation-duration: 39s;
+  animation-delay: -50s;
+  transform-origin: 14vw 20vh;
+  box-shadow: -40vmin 0 5.125340703195078vmin currentColor;
+}
+
+.background span:nth-child(1) {
+  background-color: var(--color2);
+  top: 7%;
+  left: 10%;
+  animation-duration: 16s;
+  animation-delay: -37s;
+  transform-origin: -12vw -7vh;
+  box-shadow: -40vmin 0 5.147146375625605vmin currentColor;
+}
+
+.background span:nth-child(2) {
+  background-color: var(--color3);
+  top: 83%;
+  left: 1%;
+  animation-duration: 26s;
+  animation-delay: -29s;
+  transform-origin: 10vw 4vh;
+  box-shadow: -40vmin 0 5.125434756506663vmin currentColor;
+}
+
+.background span:nth-child(3) {
+  background-color: var(--color4);
+  top: 6%;
+  left: 45%;
+  animation-duration: 25s;
+  animation-delay: -50s;
+  transform-origin: 21vw -11vh;
+  box-shadow: -40vmin 0 5.2121301416587436vmin currentColor;
+}
+
+.background span:nth-child(4) {
+  background-color: var(--color5);
+  top: 11%;
+  left: 26%;
+  animation-duration: 16s;
+  animation-delay: -22s;
+  transform-origin: -8vw 9vh;
+  box-shadow: 40vmin 0 5.619158909650866vmin currentColor;
+}
+
+.background span:nth-child(5) {
+  background-color: var(--color6);
+  top: 33%;
+  left: 7%;
+  animation-duration: 52s;
+  animation-delay: -23s;
+  transform-origin: 15vw -13vh;
+  box-shadow: 40vmin 0 5.271578872594347vmin currentColor;
+}
+
+.background span:nth-child(6) {
+  color: #583C87;
+  top: 81%;
+  left: 31%;
+  animation-duration: 13s;
+  animation-delay: -19s;
+  transform-origin: 12vw 0vh;
+  box-shadow: -40vmin 0 5.16780273632795vmin currentColor;
+}
+
+.background span:nth-child(7) {
+  background-color: var(--color8);
+  top: 81%;
+  left: 85%;
+  animation-duration: 19s;
+  animation-delay: -39s;
+  transform-origin: 13vw 21vh;
+  box-shadow: 40vmin 0 5.644889348082606vmin currentColor;
+}
+
+.background span:nth-child(8) {
+  background-color: var(--color9);
+  top: 75%;
+  left: 85%;
+  animation-duration: 49s;
+  animation-delay: -18s;
+  transform-origin: -6vw 0vh;
+  box-shadow: -40vmin 0 5.6390822541236405vmin currentColor;
+}
+
+.background span:nth-child(9) {
+  background-color: var(--color10);
+  top: 93%;
+  left: 65%;
+  animation-duration: 26s;
+  animation-delay: -7s;
+  transform-origin: 9vw 19vh;
+  box-shadow: 40vmin 0 5.16053049175409vmin currentColor;
+}
+
+.background span:nth-child(10) {
+  background-color: var(--color11);
+  top: 62%;
+  left: 86%;
+  animation-duration: 50s;
+  animation-delay: -45s;
+  transform-origin: -21vw 16vh;
+  box-shadow: -40vmin 0 5.054376341805417vmin currentColor;
+}
+
+
+/* *************************************************************************** */
+/* ***************************** COLOUR PALETTE ****************************** */
+/* *************************************************************************** */
+
+/* Color palette styles */
+.color-palette {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 5px;
+}
+
+.color-bottom-align {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(18, 18, 18, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  /* Aligns the content to the bottom */
+  align-items: left;
+  padding: 15px;
+  white-space: nowrap;
+  gap: 3.5px;
+}
+
+.color-top-align {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(18, 18, 18, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* Aligns the content to the top */
+  align-items: left;
+  padding: 15px;
+  white-space: nowrap;
+  gap: 3.5px;
+}
+
+.color-name-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 5px;
+}
+
+.copy-icon {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: block;
+}
+
+/* Styles for desktop */
+@media only screen and (min-width: 76em) {
+  .copy-icon {
+    display: none; /* Hide the icon by default on desktop */
+  }
+
+  /* Show the icon only when the parent block is hovered on desktop */
+  .color-bottom-align:hover .copy-icon,
+  .color-top-align:hover .copy-icon {
+    display: block;
+  }
+}
+
+/* Style for color name at the top */
+.color-name {
+  /* gap: 30px; */
+  font-family: 'DM Mono', monospace;
+  font-weight: 600;
+  font-size: 11px;
+  color: rgba(18, 18, 18, 1);
+  letter-spacing: 3px;
+  text-align: left;
+}
+
+/* Style for color codes */
+.color-hex,
+.color-rgb,
+.color-cmyk {
+  font-family: 'DM Mono', monospace;
+  font-weight: 400;
+
+  color: rgba(18, 18, 18, 0.75);
+  text-align: left;
+  font-size: 10px;
+
+  letter-spacing: 1.6px;
+  line-height: 10px;
+  white-space: nowrap;
 }
 
 /* *************************************************************************** */
