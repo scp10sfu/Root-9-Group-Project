@@ -228,17 +228,17 @@ function PaletteGenerator() {
         </>
     );
 
-    /**
-    * Default Color Object
-    * Represents a default color with optional properties.
-    */
-    const defaultColor = {
-        name: "Silver",
-        // rgba: "196, 196, 196, 0.25"
-        hex: "#C4C4C4",
-        rgb: "196, 196, 196",
-        cmyk: "0, 0, 0, 23.1"
-    };
+ /**
+  * Default Color Object
+  * Represents a default color with optional properties.
+  */
+ const defaultColor = {
+    name: "Silver",
+    rgba: "196, 196, 196, 0.25"
+    // hex: "#C4C4C4",
+    // rgb: "196, 196, 196",
+    // cmyk: "0, 0, 0, 23.1"
+  };
 
     /**
     * Color Variables
@@ -418,35 +418,12 @@ function PaletteGenerator() {
                                 Enter Request:
                             </div>
 
-                            <div className="chat-container box">
-                                <main class="main flow">
-                                    <div class="main__cards cards">
-
-                                        {/* Display chat messages */}
-                                        {chatHistory.map((message, index) => (
-                                            <div key={index} className={message.role === 'user' ? 'user-message' : 'ai-message'}>
-                                                {message.message}
-                                            </div>
-                                        ))}
-
-                                        <div id="palette-response">
-                                            {fullResponse && <p className="palette-response-text">{fullResponse}</p>}
-                                        </div>
-
-
-                                        {/* <div class="cards__inner">
-                                            <div class="cards__card card">
-
-                                                
-
-                                                <a href="#ultimate" class="card__cta cta">Check this ↗</a>
-                                            </div>
-                                        </div> */}
-
-                                        <div class="overlay cards__inner"></div>
-                                    </div>
-                                </main>
-                            </div>
+                            {/* Display chat messages */}
+                            {chatHistory.map((message, index) => (
+                                <div key={index} className={message.role === 'user' ? 'user-message' : 'ai-message'}>
+                                    {message.message}
+                                </div>
+                            ))}
 
                             <div className="text-input-container">
                                 <form onSubmit={handleSubmit}>
@@ -462,11 +439,16 @@ function PaletteGenerator() {
                                     <br />
                                     <input type="submit" value="Get Palette" disabled={isLoading} />
                                 </form>
+
                                 {isLoading && (
                                     <div className="spinner-container">
                                         <div className="spinner"></div>
                                     </div>
                                 )}
+
+                                <div id="palette-response">
+                                    {fullResponse && <p className="palette-response-text">{fullResponse}</p>}
+                                </div>
 
                             </div>
 
