@@ -459,20 +459,23 @@ function PaletteGenerator() {
                 </div>
               ))}
 
-            <div id="palette-additional-message">
-    {additionalMessage && <p className="additional-message-text">{additionalMessage}</p>}
-  </div>
+              */}
+              
 
-*/}
+    {additionalMessage && <p className="user-message">{additionalMessage}</p>}
+  
+
+
 
 
             {/* Display chat messages */}
-              {chatHistory.map((message, index) => (
+           {/*   
+{chatHistory.map((message, index) => (
                 <div key={index} className={message.role === 'user' ? 'user-message' : 'ai-message'}>
                   {message.additionalMessage}
                 </div>
               ))}
-
+*/}
 
               {isLoading && (
                 <div className="loading">
