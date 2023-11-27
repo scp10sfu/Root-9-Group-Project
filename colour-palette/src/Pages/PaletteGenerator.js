@@ -460,6 +460,12 @@ function PaletteGenerator() {
                 </div>
               ))}
 
+              {isLoading && (
+                <div className="loading">
+                  {/* <div className="spinner"></div> */}
+                </div>
+              )}
+
               <div className="text-input-container">
                 <form onSubmit={handleSubmit}>
                   <br />
@@ -474,12 +480,6 @@ function PaletteGenerator() {
                   <br />
                   <input type="submit" value="Get Palette" disabled={isLoading} />
                 </form>
-
-                {isLoading && (
-                  <div className="spinner-container">
-                    <div className="spinner"></div>
-                  </div>
-                )}
 
                 {/* <div id="palette-response">
                                     {fullResponse && <p className="palette-response-text">{fullResponse}</p>}
