@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ColorThief from 'colorthief';
 import './PaletteGenerator.css';
