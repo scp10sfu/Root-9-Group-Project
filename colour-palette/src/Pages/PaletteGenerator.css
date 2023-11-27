@@ -59,37 +59,32 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+  0% {
+    transform: rotate(0deg);
+  }
 
-.color-swatches {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.color-swatch {
-  margin-top: 10px;
-  width: 70px;
-  height: 200px;
-  border-radius: 4px;
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Chat bubble style for response message */
 .palette-response-text {
   font-family: 'Courier New', Courier, monospace;
-  white-space: pre-wrap; /* Ensures that the spacing is preserved as in the response */
-  word-wrap: break-word; /* To prevent overflow */
-  text-align: left; /* Aligns text to the left */
+  white-space: pre-wrap;
+  /* Ensures that the spacing is preserved as in the response */
+  word-wrap: break-word;
+  /* To prevent overflow */
+  text-align: left;
+  /* Aligns text to the left */
   background-color: #f0f0f0;
   padding: 0.5rem 1rem;
   border-radius: 15px;
   display: inline-block;
   margin: 0 auto;
   border: 1px solid #ddd;
-  text-transform: none; /* Add this line to prevent uppercase transformation */
+  text-transform: none;
+  /* Add this line to prevent uppercase transformation */
 }
 
 
@@ -107,11 +102,16 @@
   margin: 0 auto;
   border: 1px solid #ddd;
   font-family: 'DM Sans', sans-serif;
-  font-weight: 400; /* Ensure text is not bold */
-  font-size: 1rem; /* Adjust font size if needed */
-  max-width: 90%; /* Ensure it does not stretch too wide */
-  word-wrap: normal; /* To prevent overflow */
-  text-align: left; /* Align text to the left */
+  font-weight: 400;
+  /* Ensure text is not bold */
+  font-size: 1rem;
+  /* Adjust font size if needed */
+  max-width: 90%;
+  /* Ensure it does not stretch too wide */
+  word-wrap: normal;
+  /* To prevent overflow */
+  text-align: left;
+  /* Align text to the left */
 }
 
 .request-info-text {
@@ -129,6 +129,7 @@
   align-items: center;
   text-transform: uppercase;
 }
+
 .text_block_text {
   margin-top: 50px;
   align-self: stretch;
@@ -153,33 +154,32 @@
   padding-bottom: 3%;
 }
 
- /* *************************************************************************** */
- /* ***************************** CHAT CONTAINER ****************************** */
- /* *************************************************************************** */
- 
- .chat-container {
-   max-height: 300px; /* Adjust the maximum height as needed */
-     overflow-y: auto;
-     border: 1px solid #ccc;
-     padding: 10px;
- 
-     --flow-space: 0.5em;
-     --hsl: var(--hue), var(--saturation), var(--lightness);
-     flex: 1 1 14rem;
-     padding: 1.5em 2em;
-     display: grid;
-     grid-template-rows: auto auto auto 1fr;
-     align-items: start;
-     gap: 1.25em;
-     color: #eceff1;
-     background-color: #2b2b2b;
-     border: 1px solid #eceff133;
-     border-radius: 15px;
- }
+/* *************************************************************************** */
+/* ***************************** CHAT CONTAINER ****************************** */
+/* *************************************************************************** */
+.chat-container {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
 
- /* *************************************************************************** */
- /* ***************************** COLOUR PALETTE ****************************** */
- /* *************************************************************************** */
+  --flow-space: 0.5em;
+  --hsl: var(--hue), var(--saturation), var(--lightness);
+  flex: 1 1 14rem;
+  padding: 1.5em 2em;
+  display: grid;
+  grid-template-rows: auto auto auto 1fr;
+  align-items: start;
+  gap: 1.25em;
+  color: #eceff1;
+  background-color: #2b2b2b;
+  border: 1px solid #eceff133;
+  border-radius: 15px;
+}
+
+/* *************************************************************************** */
+/* ***************************** COLOUR PALETTE ****************************** */
+/* *************************************************************************** */
 
 /* Color palette styles */
 .color-palette {
@@ -234,7 +234,8 @@
 /* Styles for desktop */
 @media only screen and (min-width: 76em) {
   .copy-icon {
-    display: none; /* Hide the icon by default on desktop */
+    display: none;
+    /* Hide the icon by default on desktop */
   }
 
   /* Show the icon only when the parent block is hovered on desktop */
@@ -248,7 +249,7 @@
 .color-name {
   /* gap: 30px; */
   font-family: 'DM Mono', monospace;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 11px;
   color: rgba(18, 18, 18, 1);
   letter-spacing: 3px;
@@ -273,17 +274,19 @@
 
 
 
-
 .palette-generator {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  font-family: 'Arial', sans-serif;
+  /* font-family: 'Arial', sans-serif; */
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 5px;
 }
 
 .chat-and-palette {
   display: flex;
-  height: calc(100% - 50px); /* Assuming send box height is 50px */
+  height: calc(100% - 50px);
+  /* Assuming send box height is 50px */
 }
 
 .chat-section {
@@ -293,7 +296,8 @@
   flex-direction: column;
 }
 
-.past-responses, .new-response {
+.past-responses,
+.new-response {
   flex-grow: 1;
   overflow-y: auto;
 }
@@ -323,21 +327,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px; /* Adjust the gap between buttons as needed */
+  gap: 10px;
+  /* Adjust the gap between buttons as needed */
   margin: 1rem 0;
 }
 
 .color-choice-button {
   border: none;
-  background-color: #d8d8d8; /* Light grey background */
+  background-color: #d8d8d8;
+  /* Light grey background */
   color: #000;
   font-size: 1rem;
   padding: 0.5rem 1rem;
-  border-radius: 50%; /* Circular buttons */
+  border-radius: 50%;
+  /* Circular buttons */
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
-  width: 40px; /* Fixed width */
-  height: 40px; /* Fixed height */
+  width: 40px;
+  /* Fixed width */
+  height: 40px;
+  /* Fixed height */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -345,11 +354,86 @@
 
 .color-choice-button:hover,
 .color-choice-button:focus {
-  background-color: #a8a8a8; /* Darker grey on hover/focus */
-  transform: scale(1.1); /* Slightly larger on hover/focus */
+  background-color: #a8a8a8;
+  /* Darker grey on hover/focus */
+  transform: scale(1.1);
+  /* Slightly larger on hover/focus */
 }
 
 .color-choice-button.selected {
-  background-color: #000; /* Black for selected button */
+  background-color: #000;
+  /* Black for selected button */
   color: #fff;
+}
+
+
+/* *************************************************************************** */
+/* **************************** NUMBER SELECTION ***************************** */
+/* *************************************************************************** */
+
+.number-of-colors-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.number-of-colors-text {
+  color: rgba(18, 18, 18, 0.75);
+
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  letter-spacing: 1.6px;
+
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.number-buttons-container {
+  /* Center items both vertically and horizontally */
+  gap: 5%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.number-button {
+  color: rgba(18, 18, 18, 0.75);
+  background-color: rgba(18, 18, 18, 0.15);
+
+  height: 80%;
+  min-height: 20px;
+  width: 14%;
+  min-width: 40px;
+
+  font-family: 'DM Mono', monospace;
+  font-weight: 400;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+
+  border-radius: 38.7px;
+  border: 1.5px solid rgba(18, 18, 18, 0.15);
+
+  display: inline-block;
+  white-space: nowrap;
+  text-align: center;
+  align-items: center;
+  justify-items: center;
+}
+
+.number-button:hover {
+  background-color: var(--color1);
+  color: getTextColor(--color1);
+  transform: scale(1.1);
+}
+
+.number-button.active {
+  background-color: #121212;
+  color: #ffffff;
+  transform: scale(1.1);
 }
