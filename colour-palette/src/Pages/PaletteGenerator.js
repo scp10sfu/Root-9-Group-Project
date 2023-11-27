@@ -36,7 +36,7 @@ function PaletteGenerator() {
       const response = await axios.post(`${apiUrl}/get_palette`, { prompt });
   
       const fullResponse = response.data.fullResponse;
-      
+  
       // Extracting colors and converting them to the desired format
       const colorPromises = response.data.colors.map(async (hex) => {
         const rgb = hexToRgb(hex);
@@ -46,14 +46,13 @@ function PaletteGenerator() {
       });
       const colorObjects = await Promise.all(colorPromises);
   
-      // Assuming the last HEX code is followed by a newline and the message
+      // Find the index of the last HEX code in the full response
       const lastHexCode = colorObjects[colorObjects.length - 1].hex;
-      const messageStartIndex = fullResponse.indexOf(lastHexCode) + lastHexCode.length;
+      const messageStartIndex = fullResponse.lastIndexOf(lastHexCode) + lastHexCode.length;
       const additionalMessage = fullResponse.slice(messageStartIndex).trim();
   
       setColors(colorObjects);
-      setFullResponse(additionalMessage); // Store the additional message
-      setAdditionalMessage(additionalMessage);
+      setAdditionalMessage(additionalMessage); // Store the additional message
     } catch (error) {
       console.error('Error:', error);
       setFullResponse('Failed to get the color palette. Please try again.');
