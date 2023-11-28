@@ -9,6 +9,8 @@ Website Link: https://root9colourpalette.netlify.app/
 
 Our first presentation video link: https://drive.google.com/file/d/1D5xowmShwgpPiy_jJseGULDg8wyn9yxM/view?usp=sharing
 
+Github Server Repository: https://github.com/scp10sfu/Paleta-Server
+
 ## 📄 Table of contents 📄
 
 - [Description](https://github.com/scp10sfu/Root-9-Group-Project#-description)
@@ -69,6 +71,8 @@ The project-plan-files folder will have all the files related to milestone 1, wh
 - **Root_9 Final Timeline.pdf** is a pdf file with the timeline/schedule of our project.
 - **Root_9 Final Timeline.xlsx** is the excel format of the timeline/schedule of our project.
 - **Milestone_1_AI_Disclosure_Root_9_Taiga_Okuma_301594583.pdf** is a pdf file for AI use disclosure.
+
+Files associated with the server (AI parts) of the website are found in the github repository mentioned at the start of the README
 
 <H3> Project Structure </H3>
 
