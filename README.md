@@ -70,7 +70,7 @@ The project-plan-files folder will have all the files related to milestone 1, wh
 - **Root_9 Final Timeline.xlsx** is the excel format of the timeline/schedule of our project.
 - **Milestone_1_AI_Disclosure_Root_9_Taiga_Okuma_301594583.pdf** is a pdf file for AI use disclosure.
 
-`<H3>` Project Structure `</H3>`
+<H3> Project Structure </H3>
 
 <pre>
 .
