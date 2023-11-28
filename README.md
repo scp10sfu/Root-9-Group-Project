@@ -9,11 +9,12 @@ Website Link: https://root9colourpalette.netlify.app/
 Our first presentation video link: https://drive.google.com/file/d/1D5xowmShwgpPiy_jJseGULDg8wyn9yxM/view?usp=sharing
 
 ## 📄 Table of contents 📄 
-- [Description](#description)
-- [Explanation of files and folders](#files&folders)
-- [Tech stack](#tech-stack)
-- [Usage](#usage)
-- [Contributors](#contributors)
+- [Description](https://github.com/scp10sfu/Root-9-Group-Project#-description)
+- [Explanation of files and folders](https://github.com/scp10sfu/Root-9-Group-Project#-explanation-of-files-and-folders)
+- [Tech stack](https://github.com/scp10sfu/Root-9-Group-Project#-tech-stack)
+- [Dependencies](https://github.com/scp10sfu/Root-9-Group-Project#-dependencies)
+- [Usage](https://github.com/scp10sfu/Root-9-Group-Project#usage)
+- [Contributors](https://github.com/scp10sfu/Root-9-Group-Project#-contributors)
 
 ## 🚀 Description
 
