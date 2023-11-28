@@ -45,7 +45,14 @@ function PaletteGenerator() {
         return { hex, rgb: `${rgb.r}, ${rgb.g}, ${rgb.b}`, cmyk: `${cmyk.c}, ${cmyk.m}, ${cmyk.y}, ${cmyk.k}`, name };
       });
       const colorObjects = await Promise.all(colorPromises);
-  
+      
+      // Update the background style based on the extracted colors
+      const background = {};
+      for (let i = 0; i < colorObjects.length; i++) {
+        background[`--color${i + 1}`] = colorObjects[i]?.hex;
+      }
+      setBackgroundStyle(background);
+
       // Find the index of the last HEX code in the full response
       const lastHexCode = colorObjects[colorObjects.length - 1].hex;
       const messageStartIndex = fullResponse.lastIndexOf(lastHexCode) + lastHexCode.length;
