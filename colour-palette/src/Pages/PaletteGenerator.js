@@ -457,46 +457,49 @@ function PaletteGenerator() {
 
             {/* FOR CHAT */}
             <div className="chat-container col-xs-36 col-md-25">
-
-
               
-               {/* Display chat messages */}
-  {/* 
+
+              {/* Display chat messages */}
+              {/* 
               {chatHistory.map((additionalMessage, index) => (
                 <div key={index} className={"user-message"}>
                   {additionalMessage.message}
                 </div>
               ))}
               */}
- 
-<div id="palette-additional-message">
-    {additionalMessage && <p className="user-message">{additionalMessage}</p>}
-  </div>
 
+              <div id="palette-additional-message">
+                {additionalMessage && <p className="user-message">{additionalMessage}</p>}
+              </div>
 
 
               {isLoading && (
-                <div className="loading">
-                  {/* <div className="spinner"></div> */}
-                </div>
+                <div className="loading"></div>
               )}
 
-              <div className="text-input-container">
-                <form onSubmit={handleSubmit}>
-                  <br />
-                  <input
-                    type="text"
-                    id="prompt"
-                    name="prompt"
-                    value={prompt}
-                    onChange={e => setPrompt(e.target.value)}
-                    required
-                  />
-                  <br />
-                  <input type="submit" value="Get Palette" disabled={isLoading} />
-                </form>
+            </div>
 
-              </div>
+            <div className="col-xs-36 col-md-25">
+              <form onSubmit={handleSubmit} className="input-container text-input-container">
+                <br />
+                <input
+                  type="text"
+                  id="prompt"
+                  name="prompt"
+                  value={prompt}
+                  onChange={(e) => setPrompt(e.target.value)}
+                  required
+                  // style={{ width: '60%' }} // Adjust the width as needed
+                />
+                <br />
+                <input
+                  className="col-xs-8 col-md-8"
+                  type="submit"
+                  value="Get"
+                  disabled={isLoading}
+                  // style={{ width: '20%' }} // Adjust the width as needed
+                />
+              </form>
             </div>
 
 
