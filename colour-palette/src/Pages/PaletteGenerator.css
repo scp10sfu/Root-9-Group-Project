@@ -67,7 +67,7 @@
 }
 
 .input-container input[type="text"] {
-  width: 80%;
+  /* width: 80%;
   padding: 0.5rem;
   border: 1.5px solid rgba(18, 18, 18, 0.15);
   border-radius: 40px;
@@ -80,7 +80,17 @@
   color: rgba(18, 18, 18, 1);
   transition: border-color 0.3s;
   background-color: rgba(255, 255, 255, 0.25);
-  padding-left: 1em;
+  padding-left: 1em; */
+
+
+  appearance: none;
+	border: none;
+	outline: none;
+	border-bottom: .2em solid #E91E63;
+	background: rgba(#E91E63, .2);
+	border-radius: .2em .2em 0 0;
+	padding: .4em;
+	color: #E91E63;
 }
 
 .input-container input[type="submit"] {
