@@ -479,25 +479,24 @@ function PaletteGenerator() {
 
             </div>
 
+
             <div className="col-xs-36 col-md-25">
               <form onSubmit={handleSubmit} className="input-container text-input-container">
-                <br />
-                <input
-                  type="text"
-                  id="prompt"
-                  name="prompt"
-                  value={prompt}
-                  onChange={(e) => setPrompt(e.target.value)}
-                  required
+                  <input
+                    type="text"
+                    id="prompt"
+                    name="prompt"
+                    value={prompt}
+                    onChange={(e) => setPrompt(e.target.value)}
+                    required
                   // style={{ width: '60%' }} // Adjust the width as needed
-                />
-                <br />
+                  />
                 <input
                   className="col-xs-8 col-md-8"
                   type="submit"
                   value="Get"
                   disabled={isLoading}
-                  // style={{ width: '20%' }} // Adjust the width as needed
+                // style={{ width: '20%' }} // Adjust the width as needed
                 />
               </form>
             </div>

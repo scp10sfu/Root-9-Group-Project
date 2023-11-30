@@ -58,6 +58,7 @@
   width: 100%;
   /* align-items: flex-start; */
   flex-direction: row;
+  position: relative;
 }
 
 .input-container form {
@@ -67,30 +68,72 @@
 }
 
 .input-container input[type="text"] {
-  /* width: 80%;
-  padding: 0.5rem;
-  border: 1.5px solid rgba(18, 18, 18, 0.15);
+  width: 80%;
+  border: 0.1em solid rgba(18, 18, 18, 0.15);
   border-radius: 40px;
-  
   margin-right: 10px;
   font-family: 'DM Mono', monospace;
   font-weight: 400;
   font-size: 0.9rem;
   letter-spacing: 1.6px;
   color: rgba(18, 18, 18, 1);
-  transition: border-color 0.3s;
-  background-color: rgba(255, 255, 255, 0.25);
-  padding-left: 1em; */
-
-
+  transition: box-shadow 0.3s, background 0.3s;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 0.5rem;
+  padding-left: 1em;
+  display: inline-block;
   appearance: none;
-	border: none;
 	outline: none;
-	border-bottom: .2em solid #E91E63;
-	background: rgba(#E91E63, .2);
-	border-radius: .2em .2em 0 0;
-	padding: .4em;
-	color: #E91E63;
+  box-shadow: inset 0 0 0 1px rgba(18, 18, 18, 0.15);
+  box-shadow: inset 0 0 0 1px rgba(18, 18, 18, 0.15); /* Border color */
+  
+
+  /* Gradient box shadow */
+  &:hover, &:focus {
+    box-shadow: inset 0 0 0 1px rgba(18, 18, 18, 0.15), 0 0 5px rgba(16, 171, 255, 0.5);
+  }
+
+	/* style of the actual input field */
+  *:not(span) {
+      position: relative;
+      display: inherit;
+      border-radius: inherit;
+      margin: 0;
+      border: none;
+      outline: none;
+      padding: 0 .325em;
+      z-index: 1; 
+      /* // needs to be above the :focus span */
+  
+      /* // summon fancy shadow styles when focussed */
+      &:focus+span {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+	
+	/* // we don't animate box-shadow directly as that can't be done on the GPU, only animate opacity and transform for high performance animations. */
+	span {
+		transform: scale(.993, .94); 
+		transition: transform .5s, opacity .25s;
+		opacity: 0;
+		
+		position:absolute;
+		z-index: 0; 
+		margin:4px;
+		left:0;
+		top:0;
+		right:0;
+		bottom:0;
+		border-radius: inherit;
+		pointer-events: none;
+		
+		/* // fancy shadow styles */
+		box-shadow: inset 0 0 0 3px #fff,
+			0 0 0 4px #fff,
+			3px -3px 30px #1beabd, 
+			-3px 3px 30px #10abff;
+	}
 }
 
 .input-container input[type="submit"] {
