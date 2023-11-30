@@ -2,145 +2,11 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  gap: 5px;
-  color: #ffffff;
 }
 
-.palette-generator h2 {
-  color: #333;
-  text-align: center;
-}
-
-.palette-generator form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  margin-top: 12px;
-}
-
-.palette-generator label {
-  font-weight: normal;
-}
-
-.palette-generator input[type="text"] {
-  padding: 0.5rem;
-  border: 2px solid #ddd;
-  border-radius: 40px;
-  font-size: 1rem;
-}
-
-.palette-generator input[type="submit"] {
-  padding: 0.5rem;
-  border: none;
-  border-radius: 40px;
-  background-color: rgba(18, 18, 18, 1);
-  color: white;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s;
-
-  font-family: 'DM Mono', monospace;
-  font-weight: 500;
-  font-size: 14px;
-  letter-spacing: 2.3px;
-  color: white;
-
-  height: 80%;
-  min-height: 30px;
-
-  padding: 12px;
-}
-
-.palette-generator input[type="submit"]:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-}
-
-.palette-additional-message{
-  font-family: 'DM Mono', monospace;
-  font-weight: 400;
-  font-size: 12px;
-  margin-bottom: 30px;
-}
-
-.user-message {
-  font-family: 'DM Mono', monospace;
-  font-weight: 400;
-  font-size: 12px;
-  margin-bottom: 30px;
-  color: #ffffff;
-}
-/* .spinner-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 1rem 0;
-}
-
-.spinner {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border-left-color: #09f;
-  animation: spin 1s ease infinite;
-} */
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Chat bubble style for response message */
-.palette-response-text {
-  font-family: 'DM Mono', monospace;
-  white-space: pre-wrap;
-  /* Ensures that the spacing is preserved as in the response */
-  word-wrap: break-word;
-  /* To prevent overflow */
-  text-align: left;
-  /* Aligns text to the left */
-  /* background-color: #f0f0f0; */
-  padding: 0.5rem 1rem;
-  border-radius: 15px;
-  display: inline-block;
-  margin-bottom: 5%;
-  /* border: 1px solid #ddd; */
-  text-transform: none;
-  /* Add this line to prevent uppercase transformation */
-}
-
-
-#palette p {
-  text-align: center;
-  margin: 1rem 0;
-}
-
-/* Adjustments for the chat bubble to prevent bold text */
-.palette-response-text {
-  background-color: #f0f0f0;
-  padding: 0.5rem 1rem;
-  border-radius: 15px;
-  display: inline-block;
-  margin: 0 auto;
-  border: 1px solid #ddd;
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 400;
-  /* Ensure text is not bold */
-  font-size: 1rem;
-  /* Adjust font size if needed */
-  max-width: 90%;
-  /* Ensure it does not stretch too wide */
-  word-wrap: normal;
-  /* To prevent overflow */
-  text-align: left;
-  /* Align text to the left */
-}
+/* *************************************************************************** */
+/* *************************** OVERALL PAGE STYLE **************************** */
+/* *************************************************************************** */
 
 .request-info-text {
   color: rgba(18, 18, 18, 0.75);
@@ -183,13 +49,74 @@
 }
 
 /* *************************************************************************** */
+/* ****************************** INPUT FIELD ******************************** */
+/* *************************************************************************** */
+
+
+.input-container {
+  display: flex;
+  width: 100%;
+  /* align-items: flex-start; */
+  flex-direction: row;
+}
+
+.input-container form {
+  display: flex;
+  justify-content: center;
+  /* margin-top: 12px; */
+}
+
+.input-container input[type="text"] {
+  width: 80%;
+  padding: 0.5rem;
+  border: 1.5px solid rgba(18, 18, 18, 0.15);
+  border-radius: 40px;
+  
+  margin-right: 10px;
+  font-family: 'DM Mono', monospace;
+  font-weight: 400;
+  font-size: 0.9rem;
+  letter-spacing: 1.6px;
+  color: rgba(18, 18, 18, 1);
+  transition: border-color 0.3s;
+  background-color: rgba(255, 255, 255, 0.25);
+  padding-left: 1em;
+}
+
+.input-container input[type="submit"] {
+  width: 20%;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 40px;
+  background-color: rgba(18, 18, 18, 1);
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+
+  font-family: 'DM Mono', monospace;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 2.3px;
+  color: white;
+
+  height: 80%;
+  min-height: 15px;
+
+  padding: 12px;
+}
+
+.input-container input[type="submit"]:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* *************************************************************************** */
 /* ***************************** CHAT CONTAINER ****************************** */
 /* *************************************************************************** */
 .chat-container {
   max-height: 400px;
-  height: 200px;
+  height: 150px;
   overflow-y: auto;
-  padding: 10px;
 
   /* flex: 1 1 14rem; */
   padding: 1.5em 2em;
@@ -201,6 +128,45 @@
   border: 1px solid #eceff133;
   border-radius: 15px;
 }
+
+/* Chat bubble style for response message */
+.palette-response-text {
+  font-family: 'DM Mono', monospace;
+  font-weight: 400;
+  color: #ffffff;
+
+  max-width: 90%;
+  white-space: pre-wrap;
+  /* Ensures that the spacing is preserved as in the response */
+  word-wrap: break-word;
+  /* To prevent overflow */
+  text-align: left;
+  /* Aligns text to the left */
+  /* background-color: #f0f0f0; */
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  display: inline-block;
+  margin-bottom: 5%;
+  /* border: 1px solid #ddd; */
+  text-transform: none;
+  /* Add this line to prevent uppercase transformation */
+}
+
+.palette-additional-message{
+  font-family: 'DM Mono', monospace;
+  font-weight: 400;
+  font-size: 12px;
+  margin-bottom: 30px;
+}
+
+.user-message {
+  font-family: 'DM Mono', monospace;
+  font-weight: 400;
+  font-size: 12px;
+  margin-bottom: 30px;
+  color: #ffffff;
+}
+
 
 /* *************************************************************************** */
 /* ***************************** COLOUR PALETTE ****************************** */
