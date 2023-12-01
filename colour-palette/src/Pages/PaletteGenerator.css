@@ -135,20 +135,15 @@
 
 .styled-button {
   width: 20%;
+
   /* padding: 0.5rem; */
   border: none;
   border-radius: 40px;
-  background-color: rgba(18, 18, 18, 1);
-  color: white;
   cursor: pointer;
-  font-size: 1rem;
   transition: background-color 0.3s;
-
-  font-family: 'DM Mono', monospace;
-  font-weight: 500;
-  font-size: 14px;
-  letter-spacing: 2.3px;
-  color: white;
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
 
   height: 30%;
   min-height: 15px;
