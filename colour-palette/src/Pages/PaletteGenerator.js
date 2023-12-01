@@ -10,6 +10,7 @@ import { ReactComponent as CopyIconWhiteUnfilled } from '../images/icon-copy-whi
 import { ReactComponent as CopyIconDarkUnfilled } from '../images/icon-copy-dark-unfilled.svg';
 import { ReactComponent as CopyIconWhiteFilled } from '../images/icon-copy-white-filled.svg';
 import { ReactComponent as CopyIconDarkFilled } from '../images/icon-copy-dark-filled.svg';
+import { ReactComponent as ArrowIcon } from '../images/icon-arrow.svg';
 
 function PaletteGenerator() {
   const [prompt, setPrompt] = useState('');
@@ -489,15 +490,17 @@ function PaletteGenerator() {
                     value={prompt}
                     onChange={(e) => setPrompt(e.target.value)}
                     required
-                  // style={{ width: '60%' }} // Adjust the width as needed
                   />
-                <input
+                {/* <input
                   className="col-xs-8 col-md-8"
                   type="submit"
                   value="Get"
                   disabled={isLoading}
-                // style={{ width: '20%' }} // Adjust the width as needed
-                />
+                /> */}
+
+                <button className="col-xs-8 col-md-8 styled-button" type="submit" disabled={isLoading}>
+                  <ArrowIcon />
+                </button>
               </form>
             </div>
 
