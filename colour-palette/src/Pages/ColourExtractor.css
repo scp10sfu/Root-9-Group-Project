@@ -56,7 +56,7 @@
 .upload-container {
   position: relative;
   /* background-color: rgba(18, 18, 18, 0.05); */
-  background: rgba( 255, 255, 255, 0.15 );
+  background: rgba(255, 255, 255, 0.15);
   /* border: 0.08em dashed; */
   border-radius: 0.625em;
   /* border-color: rgba(18, 18, 18, 0.55); */
@@ -64,8 +64,8 @@
 
   /* background: rgba( 255, 255, 255, 0.01 ); */
   box-shadow: 0 2px 16px 6px var(--color1);
-  backdrop-filter: blur( 10.0px );
-  -webkit-backdrop-filter: blur( 10.0px );
+  backdrop-filter: blur(10.0px);
+  -webkit-backdrop-filter: blur(10.0px);
 }
 
 
@@ -160,7 +160,7 @@
   min-width: 200px;
   width: 100%;
   height: auto;
-  border-radius: 10px;  
+  border-radius: 10px;
 }
 
 .close-button {
@@ -212,7 +212,7 @@
 .number-button {
   color: rgba(18, 18, 18, 0.75);
   /* background-color: rgba(18, 18, 18, 0.05); */
-  background: rgba( 255, 255, 255, 0.15 );
+  background: rgba(255, 255, 255, 0.15);
   /* background-color: rgba(255, 255, 255, 0.15); */
 
   height: 80%;
@@ -228,7 +228,7 @@
 
   border-radius: 38.7px;
   border: 0.05em solid rgba(18, 18, 18, 0.15);
- /*  transition: box-shadow 0.3s, transform 0.3s;
+  /*  transition: box-shadow 0.3s, transform 0.3s;
   transition: all 0.2s ease-in-out;
    */
   display: inline-block;
@@ -242,8 +242,8 @@
 
   /* background: rgba( 255, 255, 255, 0.15 ); */
   box-shadow: 0 8px 32px 0 rgba(18, 18, 18, 0.20);
-  backdrop-filter: blur( 4.0px );
-  -webkit-backdrop-filter: blur( 4.0px );
+  backdrop-filter: blur(4.0px);
+  -webkit-backdrop-filter: blur(4.0px);
 }
 
 .number-button:hover {
@@ -258,7 +258,7 @@
   transform: scale(1.1);
 
   backdrop-filter: blur(0.625em);
-  box-shadow: 1.2em 1.2em 2.45em -0.5em rgba(0,0,0,0.2);
+  box-shadow: 1.2em 1.2em 2.45em -0.5em rgba(0, 0, 0, 0.2);
   transition: all 0.2s ease-in-out;
 }
 
@@ -302,14 +302,14 @@
   --color3: #e58643;
   --color4: #e54382;
   --color5: #e5a643;
-  --color6: #cc21e3;
+  --color6: #c2e543;
   --color7: #d165b5;
   --color8: #9cbdd5;
   --color9: #e54543;
   --color10: #e3e543;
   --color11: #e54361;
   --color12: #ff9966;
-  --color13: #c2e543;
+  --color13: #cc21e3;
 }
 
 
@@ -558,22 +558,22 @@
 /* *************************************************************************** */
 
 .glassmorphic-simple {
-  background: rgba( 255, 255, 255, 0.15 );
+  background: rgba(255, 255, 255, 0.15);
   box-shadow: 0 8px 32px 0 rgba(18, 18, 18, 0.20);
 
-  backdrop-filter: blur( 4.0px );
-  -webkit-backdrop-filter: blur( 4.0px );
+  backdrop-filter: blur(4.0px);
+  -webkit-backdrop-filter: blur(4.0px);
 }
 
 .glassmorphic-with-boarder {
-  background: rgba( 255, 255, 255, 0.15 );
+  background: rgba(255, 255, 255, 0.15);
   box-shadow: 0 8px 32px 0 rgba(18, 18, 18, 0.20);
 
-  backdrop-filter: blur( 4.0px );
-  -webkit-backdrop-filter: blur( 4.0px );
+  backdrop-filter: blur(4.0px);
+  -webkit-backdrop-filter: blur(4.0px);
 
   border-radius: 10px;
-  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 /* Skeleton loader for colour blocks */
