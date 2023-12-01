@@ -489,13 +489,13 @@ const SkeletonLoader = () => (
 
 
               {/* Display chat messages */}
-              {/* 
-              {chatHistory.map((additionalMessage, index) => (
+              
+              {chatHistory.map((message, index) => (
                 <div key={index} className={"user-message"}>
-                  {additionalMessage.message}
+                  {message.message}
                 </div>
               ))}
-              */}
+             
 
               <div id="palette-additional-message">
                 {additionalMessage && <p className="user-message">{additionalMessage}</p>}

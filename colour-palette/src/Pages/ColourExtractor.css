@@ -297,32 +297,19 @@
 }
 
 :root {
-  --color1: #a5e890;
-  /* Persian Blue */
-  --color2: #dea51f;
-  /* Golden Grass */
-  --color3: #efbcd0;
-  /* Beauty Bush */
-  --color4: #dd1c28;
-  /* Alizarin Crimson */
-  --color5: #20e620;
-  /* Malachite */
+  --color1: #e56643;
+  --color2: #e5c743;
+  --color3: #e58643;
+  --color4: #e54382;
+  --color5: #e5a643;
   --color6: #cc21e3;
-  /* Electric Violet */
   --color7: #d165b5;
-  /* Hopbush */
   --color8: #9cbdd5;
-  /* Pigeon Post */
-  --color9: #f2f3c7;
-  /* Tusk */
-  --color10: #e9a762;
-  /* Porsche */
-  --color11: #cd607e;
-  /* Cinnamon Satin, a warm reddish-pink */
+  --color9: #e54543;
+  --color10: #e3e543;
+  --color11: #e54361;
   --color12: #ff9966;
-  /* Atomic Tangerine, a vibrant orange */
-  --color13: #f4a460;
-  /* Sandy Brown, a warm, light brown */
+  --color13: #c2e543;
 }
 
 
