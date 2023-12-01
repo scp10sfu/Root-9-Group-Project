@@ -25,24 +25,24 @@
 }
 
 .text_block_text {
-  margin-top: 50px;
   align-self: stretch;
   color: rgba(18, 18, 18, 1);
   font-family: 'DM Sans', sans-serif;
-  font-size: 8vh;
+  font-size: 4.2em;
   font-style: normal;
   font-weight: 700;
-  letter-spacing: -3.6px;
+  line-height: 1em;
+  letter-spacing: -0.05em;
 }
 
 .text_block_subtext {
   align-self: stretch;
   color: rgba(18, 18, 18, 0.50);
   font-family: 'DM Sans', sans-serif;
-  font-size: 20px;
+  font-size: 1.5em;
   font-style: normal;
   font-weight: 700;
-  letter-spacing: -0.4px;
+  letter-spacing: -0.05em;
 
   padding-top: 1%;
   padding-bottom: 3%;
@@ -318,9 +318,10 @@ background: rgba(255,255,255,0.3);
   justify-content: flex-end;
   /* Aligns the content to the bottom */
   align-items: left;
-  padding: 15px;
+  padding: 0.95em;
   white-space: nowrap;
-  gap: 3.5px;
+  gap: 0.22em;
+  overflow-wrap: break-word;
 }
 
 .color-top-align {
@@ -332,9 +333,10 @@ background: rgba(255,255,255,0.3);
   justify-content: flex-start;
   /* Aligns the content to the top */
   align-items: left;
-  padding: 15px;
+  padding: 0.95em;
   white-space: nowrap;
-  gap: 3.5px;
+  gap: 0.22em;
+  overflow-wrap: break-word;
 }
 
 .color-name-container {
@@ -367,12 +369,11 @@ background: rgba(255,255,255,0.3);
 
 /* Style for color name at the top */
 .color-name {
-  /* gap: 30px; */
   font-family: 'DM Mono', monospace;
   font-weight: 600;
-  font-size: 11px;
+  font-size: 0.7em;
   color: rgba(18, 18, 18, 1);
-  letter-spacing: 3px;
+  letter-spacing: 0.2em;
   text-align: left;
 }
 
@@ -382,13 +383,11 @@ background: rgba(255,255,255,0.3);
 .color-cmyk {
   font-family: 'DM Mono', monospace;
   font-weight: 400;
-
   color: rgba(18, 18, 18, 0.75);
   text-align: left;
-  font-size: 10px;
-
-  letter-spacing: 1.6px;
-  line-height: 10px;
+  font-size: 0.625em;
+  letter-spacing: 0.12em;
+  line-height: 0.7em;
   white-space: nowrap;
 }
 
@@ -399,92 +398,8 @@ background: rgba(255,255,255,0.3);
   /* font-family: 'Arial', sans-serif; */
   flex-wrap: wrap;
   justify-content: space-around;
-  gap: 5px;
+  gap: 0.3125em;
 }
-
-.chat-and-palette {
-  display: flex;
-  height: calc(100% - 50px);
-  /* Assuming send box height is 50px */
-}
-
-.chat-section {
-  flex: 1;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.past-responses,
-.new-response {
-  flex-grow: 1;
-  overflow-y: auto;
-}
-
-.new-prompt {
-  margin-top: auto;
-}
-
-.palette-section {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 20px;
-  gap: 10px;
-}
-
-.send-box {
-  height: 50px;
-  background-color: #f0f0f0;
-  padding: 10px;
-}
-
-/* Rest of the CSS ... */
-.color-choices {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  /* Adjust the gap between buttons as needed */
-  margin: 1rem 0;
-}
-
-.color-choice-button {
-  border: none;
-  background-color: #d8d8d8;
-  /* Light grey background */
-  color: rgba(18, 18, 18, 1);
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 50%;
-  /* Circular buttons */
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
-  width: 40px;
-  /* Fixed width */
-  height: 40px;
-  /* Fixed height */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.color-choice-button:hover,
-.color-choice-button:focus {
-  background-color: #a8a8a8;
-  /* Darker grey on hover/focus */
-  transform: scale(1.1);
-  /* Slightly larger on hover/focus */
-}
-
-.color-choice-button.selected {
-  background-color: rgba(18, 18, 18, 1);
-  /* Black for selected button */
-  color: #fff;
-}
-
 
 /* *************************************************************************** */
 /* **************************** NUMBER SELECTION ***************************** */
@@ -493,17 +408,17 @@ background: rgba(255,255,255,0.3);
 .number-of-colors-container {
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+  margin-top: 0.625em;
 }
 
 .number-of-colors-text {
   color: rgba(18, 18, 18, 0.75);
 
   font-family: 'DM Mono', monospace;
-  font-size: 14px;
+  font-size: 0.875em;
   font-weight: 500;
   white-space: nowrap;
-  letter-spacing: 1.6px;
+  letter-spacing: 0.1em;
 
   text-align: left;
   display: flex;
@@ -518,11 +433,13 @@ background: rgba(255,255,255,0.3);
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  
 }
 
 .number-button {
   color: rgba(18, 18, 18, 0.75);
-  background-color: rgba(18, 18, 18, 0.15);
+  /* background-color: rgba(18, 18, 18, 0.05); */
+  background-color: rgba(255, 255, 255, 0.25);
 
   height: 80%;
   min-height: 20px;
@@ -536,13 +453,19 @@ background: rgba(255,255,255,0.3);
   transition: background-color 0.3s, transform 0.3s;
 
   border-radius: 38.7px;
-  border: 1.5px solid rgba(18, 18, 18, 0.15);
+  border: 0.05em solid rgba(18, 18, 18, 0.15);
+  transition: box-shadow 0.3s, transform 0.3s;
+  
 
   display: inline-block;
   white-space: nowrap;
   text-align: center;
   align-items: center;
   justify-items: center;
+
+  backdrop-filter: blur(0.625em);
+  box-shadow: 1em 1em 2.45em -0.1em rgba(0,0,0,0.2);
+  transition: all 0.2s ease-in-out;
 }
 
 .number-button:hover {
@@ -555,11 +478,27 @@ background: rgba(255,255,255,0.3);
   background-color: rgba(18, 18, 18, 1);
   color: #ffffff;
   transform: scale(1.1);
+
+  backdrop-filter: blur(0.625em);
+  box-shadow: 1.2em 1.2em 2.45em -0.5em rgba(0,0,0,0.2);
+  transition: all 0.2s ease-in-out;
 }
 
 /* *************************************************************************** */
 /* ************************ COLOUR PALETTE - LOADER ************************** */
 /* *************************************************************************** */
+
+.glassmorphic {
+
+  background: rgba( 255, 255, 255, 0.15 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+
+  backdrop-filter: blur( 4.0px );
+  -webkit-backdrop-filter: blur( 4.0px );
+
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
 
 /* Skeleton loader for colour blocks */
 .loader-square-bottom-align {
