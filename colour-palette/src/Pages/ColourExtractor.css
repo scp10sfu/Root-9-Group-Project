@@ -61,8 +61,6 @@
   border-radius: 0.625em;
   /* border-color: rgba(18, 18, 18, 0.55); */
   /* border-color: var(--color1); */
-
-  /* background: rgba( 255, 255, 255, 0.01 ); */
   box-shadow: 0 2px 16px 6px var(--color1);
   backdrop-filter: blur(10.0px);
   -webkit-backdrop-filter: blur(10.0px);
@@ -78,7 +76,6 @@
   top: 0;
   left: 0;
   opacity: 0;
-  /* background-color: rgba(18, 18, 18, 0.85); */
 }
 
 .upload-container .upload-area {
