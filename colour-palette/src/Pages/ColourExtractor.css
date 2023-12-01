@@ -1,14 +1,24 @@
 /* ColourExtractor.css */
 
+/* *************************************************************************** */
+/* *************************** OVERALL PAGE STYLE **************************** */
+/* *************************************************************************** */
+
+
+
+/* *************************************************************************** */
+/* ******************************* UPLOAD AREA ******************************* */
+/* *************************************************************************** */
+
 .upload-container {
   position: relative;
   background-color: rgba(18, 18, 18, 0.05);
-  border: 1px dashed;
-  border-radius: 10px;
+  border: 0.08em dashed;
+  border-radius: 0.625em;
   border-color: rgba(18, 18, 18, 0.55);
 }
 
-.upload-area {
+.upload-container .upload-area {
   text-align: center;
   padding: 10px 20px;
   transition: border-color 0.3s;
@@ -17,6 +27,7 @@
   align-items: flex-start;
   align-self: stretch;
   overflow: hidden;
+  cursor: pointer;
 }
 
 /* Modify the file input styles to cover the entire container */
@@ -24,10 +35,11 @@
   width: 100%;
   height: 100%;
   position: absolute;
+  cursor: pointer;
   top: 0;
   left: 0;
   opacity: 0;
-  cursor: pointer;
+  /* background-color: rgba(18, 18, 18, 0.85); */
 }
 
 .upload-area .text {
@@ -35,24 +47,24 @@
 
   /* Body */
   font-family: 'DM Sans', sans-serif;
-  font-size: 18px;
+  font-size: 0.28em;
   font-style: normal;
   font-weight: 500;
-  letter-spacing: 1.4px;
-
+  letter-spacing: 0.1em;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-wrap: break-word;
 }
 
 .upload-area .subtext {
   color: rgba(18, 18, 18, 0.50);
   font-family: 'DM Mono', monospace;
-  font-size: 12px;
+  font-size: 0.8em;
   font-weight: regular;
   white-space: nowrap;
-  letter-spacing: 1.4px;
+  letter-spacing: 0.1em;
 
   text-align: center;
   display: flex;
