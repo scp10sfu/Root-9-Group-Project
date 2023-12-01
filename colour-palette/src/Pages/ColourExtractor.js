@@ -521,7 +521,7 @@ function ColourExtractor() {
                   <label htmlFor="fileInput">
                     <div className="text_block_text">
                       <UploadIcon className="upload-icon-dark" style={{ width: '40px', height: '40px' }} />
-                      <div className='text'>Click or drag file to this area to upload</div>
+                      <div className='upload-area-text'>Click or drag file to this area to upload</div>
                     </div>
                     <div className="subtext">
                       <InfoIcon className="info-icon-dark" style={{ width: '21px', height: '21px' }} />  Max file size: {MAX_FILE_SIZE_MB} MB
