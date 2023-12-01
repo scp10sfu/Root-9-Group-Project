@@ -55,11 +55,19 @@
 
 .upload-container {
   position: relative;
-  background-color: rgba(18, 18, 18, 0.05);
-  border: 0.08em dashed;
+  /* background-color: rgba(18, 18, 18, 0.05); */
+  background: rgba( 255, 255, 255, 0.15 );
+  /* border: 0.08em dashed; */
   border-radius: 0.625em;
-  border-color: rgba(18, 18, 18, 0.55);
+  /* border-color: rgba(18, 18, 18, 0.55); */
+  /* border-color: var(--color1); */
+
+  /* background: rgba( 255, 255, 255, 0.01 ); */
+  box-shadow: 0 2px 16px 6px var(--color1);
+  backdrop-filter: blur( 10.0px );
+  -webkit-backdrop-filter: blur( 10.0px );
 }
+
 
 /* Modify the file input styles to cover the entire container */
 .upload-container input[type="file"] {
@@ -152,7 +160,7 @@
   min-width: 200px;
   width: 100%;
   height: auto;
-  border-radius: 10px;
+  border-radius: 10px;  
 }
 
 .close-button {
@@ -204,7 +212,8 @@
 .number-button {
   color: rgba(18, 18, 18, 0.75);
   /* background-color: rgba(18, 18, 18, 0.05); */
-  background-color: rgba(255, 255, 255, 0.25);
+  background: rgba( 255, 255, 255, 0.15 );
+  /* background-color: rgba(255, 255, 255, 0.15); */
 
   height: 80%;
   min-height: 2em;
@@ -219,18 +228,22 @@
 
   border-radius: 38.7px;
   border: 0.05em solid rgba(18, 18, 18, 0.15);
-  transition: box-shadow 0.3s, transform 0.3s;
-  
-
+ /*  transition: box-shadow 0.3s, transform 0.3s;
+  transition: all 0.2s ease-in-out;
+   */
   display: inline-block;
   white-space: nowrap;
   text-align: center;
   align-items: center;
   justify-items: center;
 
-  backdrop-filter: blur(0.625em);
-  box-shadow: 1em 1em 2.45em -0.1em rgba(0,0,0,0.2);
-  transition: all 0.2s ease-in-out;
+  background-color: rgba(18, 18, 18, 0.05);
+  border-color: rgba(18, 18, 18, 0.55);
+
+  /* background: rgba( 255, 255, 255, 0.15 ); */
+  box-shadow: 0 8px 32px 0 rgba(18, 18, 18, 0.20);
+  backdrop-filter: blur( 4.0px );
+  -webkit-backdrop-filter: blur( 4.0px );
 }
 
 .number-button:hover {
