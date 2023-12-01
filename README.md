@@ -1,4 +1,4 @@
-# Paletä
+`<img src="/colour-palette/public/favicon.png" alt="favicon" style="height: 32px; width: 32px;"/>`  #Paletä
 
 [![Netlify Build Status](https://api.netlify.com/api/v1/badges/4c366889-27a9-4dd6-b40f-b30a9a022862/deploy-status)](https://root9colourpalette.netlify.app/)
 ![Uptime Robot status](https://img.shields.io/uptimerobot/status/m795784458-c193d64b3bfad2411497c863%20)
