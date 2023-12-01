@@ -497,9 +497,9 @@ function PaletteGenerator() {
               ))}
 
 
-              <div id="palette-additional-message">
+              {/* <div id="palette-additional-message">
                 {additionalMessage && <p className="user-message">{additionalMessage}</p>}
-              </div>
+              </div> */}
 
 
               {isLoading && (
