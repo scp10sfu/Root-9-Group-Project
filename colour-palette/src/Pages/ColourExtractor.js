@@ -264,69 +264,71 @@ function ColourExtractor() {
   */
   const SkeletonLoader = () => (
     <>
-      <div className="  020928
-      ">
+      <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
         {/* First dominant colour */}
         <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
-          <div className="loader-square-bottom-align" style={{ backgroundColor: defaultColor.hex }}>
+          <div className="loader-square-bottom-align">
             <div className="color-name-container">
               <p className="color-name" style={{ color: defaultColor }}>{defaultColor.name}</p>
             </div>
+
             <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
             <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
             <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
+
           </div>
         </div>
+      {/* </div> */}
         {/* Second dominant colour */}
         <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
           <div className="loader-square-bottom-align" style={{ backgroundColor: defaultColor.hex }}>
-            <div className="color-name-container">
+            {/* <div className="color-name-container">
               <p className="color-name" style={{ color: defaultColor }}>{defaultColor.name}</p>
             </div>
             <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
             <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
-            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
+            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p> */}
           </div>
         </div>
 
         <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
           <div className="loader-square-top-align" style={{ backgroundColor: defaultColor.hex }}>
-            <div className="color-name-container">
+            {/* <div className="color-name-container">
               <p className="color-name" style={{ color: defaultColor }}>{defaultColor.name}</p>
             </div>
             <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
             <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
-            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
+            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p> */}
           </div>
         </div>
         <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
           <div className="loader-square-top-align" style={{ backgroundColor: defaultColor.hex }}>
-            <div className="color-name-container">
+            {/* <div className="color-name-container">
               <p className="color-name" style={{ color: defaultColor }}>{defaultColor.name}</p>
             </div>
             <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
             <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
-            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
+            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p> */}
           </div>
         </div>
         <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
           <div className="loader-square-top-align" style={{ backgroundColor: defaultColor.hex }}>
-            <div className="color-name-container">
+            {/* <div className="color-name-container">
               <p className="color-name" style={{ color: defaultColor }}>{defaultColor.name}</p>
             </div>
             <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
             <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
-            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
+            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p> */}
           </div>
         </div>
         <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
           <div className="loader-square-top-align" style={{ backgroundColor: defaultColor.hex }}>
-            <div className="color-name-container">
+            {/* <div className="color-name-container">
               <p className="color-name" style={{ color: defaultColor }}>{defaultColor.name}</p>
             </div>
             <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
             <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
-            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
+            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p> */}
           </div>
         </div>
       </div>

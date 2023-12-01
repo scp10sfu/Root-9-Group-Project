@@ -4,7 +4,50 @@
 /* *************************** OVERALL PAGE STYLE **************************** */
 /* *************************************************************************** */
 
+/* Content block styles */
+.content-block {
+  display: flex;
+  align-items: center;
+  padding: 128px 76px 128px 96px;
+  flex-direction: column;
+  gap: 50px;
+  flex-shrink: 0;
+}
 
+.content-block .text_block {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: stretch;
+}
+
+.text_block_text {
+  margin-top: 1em;
+  align-self: stretch;
+  color: rgba(18, 18, 18, 1);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 4.2em;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1em;
+  letter-spacing: -0.05em;
+}
+
+
+.text_block_subtext {
+  align-self: stretch;
+  color: rgba(18, 18, 18, 0.50);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.5em;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+
+  padding-top: 1%;
+  padding-bottom: 3%;
+}
 
 /* *************************************************************************** */
 /* ******************************* UPLOAD AREA ******************************* */
@@ -46,7 +89,6 @@
 
 .upload-area-text {
   color: rgba(18, 18, 18, 0.85);
-  /* Body */
   font-family: 'DM Sans', sans-serif;
   font-size: 0.25em;
   font-style: normal;
@@ -89,8 +131,8 @@
 .info-icon-dark {
   padding-right: 5px;
   height: 12px;
-  position: relative;
   width: 12px;
+  position: relative;
 }
 
 /* Image preview styles */
@@ -124,25 +166,30 @@
   color: #ffffff;
 }
 
+/* *************************************************************************** */
+/* **************************** NUMBER SELECTION ***************************** */
+/* *************************************************************************** */
+
 .number-of-colors-container {
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+  margin-top: 0.625em;
 }
 
 .number-of-colors-text {
   color: rgba(18, 18, 18, 0.75);
 
   font-family: 'DM Mono', monospace;
-  font-size: 14px;
+  font-size: 0.875em;
   font-weight: 500;
   white-space: nowrap;
-  letter-spacing: 1.6px;
+  letter-spacing: 0.1em;
 
   text-align: left;
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 0.625em;
 }
 
 .number-buttons-container {
@@ -156,27 +203,34 @@
 
 .number-button {
   color: rgba(18, 18, 18, 0.75);
-  background-color: rgba(18, 18, 18, 0.15);
+  /* background-color: rgba(18, 18, 18, 0.05); */
+  background-color: rgba(255, 255, 255, 0.25);
 
   height: 80%;
-  min-height: 20px;
+  min-height: 2em;
   width: 14%;
-  min-width: 40px;
+  min-width: 2.5em;
 
   font-family: 'DM Mono', monospace;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 0.8em;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
 
   border-radius: 38.7px;
-  border: 1.5px solid rgba(18, 18, 18, 0.15);
+  border: 0.05em solid rgba(18, 18, 18, 0.15);
+  transition: box-shadow 0.3s, transform 0.3s;
+  
 
   display: inline-block;
   white-space: nowrap;
   text-align: center;
   align-items: center;
   justify-items: center;
+
+  backdrop-filter: blur(0.625em);
+  box-shadow: 1em 1em 2.45em -0.1em rgba(0,0,0,0.2);
+  transition: all 0.2s ease-in-out;
 }
 
 .number-button:hover {
@@ -186,12 +240,18 @@
 }
 
 .number-button.active {
-  /* background-color: rgba(186, 229, 13, 0.8); */
-  /* background-color: rgba(255, 153, 102, 0.4); */
   background-color: rgba(18, 18, 18, 1);
   color: #ffffff;
   transform: scale(1.1);
+
+  backdrop-filter: blur(0.625em);
+  box-shadow: 1.2em 1.2em 2.45em -0.5em rgba(0,0,0,0.2);
+  transition: all 0.2s ease-in-out;
 }
+
+/* *************************************************************************** */
+/* *************************************************************************** */
+/* *************************************************************************** */
 
 .switch {
   display: flex;
@@ -211,50 +271,6 @@
   outline: none;
   transition: background-color 0.3s, color 0.3s;
   font-family: Tahoma;
-}
-
-/* Content block styles */
-.content-block {
-  display: flex;
-  align-items: center;
-  padding: 128px 76px 128px 96px;
-  flex-direction: column;
-  gap: 50px;
-  flex-shrink: 0;
-}
-
-.content-block .text_block {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-start;
-  gap: 24px;
-  align-self: stretch;
-}
-
-.text_block_text {
-  margin-top: 50px;
-  align-self: stretch;
-  color: rgba(18, 18, 18, 1);
-  /* H2 */
-  font-family: 'DM Sans', sans-serif;
-  font-size: 8vh;
-  font-style: normal;
-  font-weight: 700;
-  letter-spacing: -3.6px;
-}
-
-.text_block_subtext {
-  align-self: stretch;
-  color: rgba(18, 18, 18, 0.50);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  letter-spacing: -0.4px;
-
-  padding-top: 1%;
-  padding-bottom: 3%;
 }
 
 /* *************************************************************************** */
@@ -462,9 +478,10 @@
   justify-content: flex-end;
   /* Aligns the content to the bottom */
   align-items: left;
-  padding: 15px;
+  padding: 0.95em;
   white-space: nowrap;
-  gap: 3.5px;
+  gap: 0.22em;
+  overflow-wrap: break-word;
 }
 
 .color-top-align {
@@ -476,9 +493,10 @@
   justify-content: flex-start;
   /* Aligns the content to the top */
   align-items: left;
-  padding: 15px;
+  padding: 0.95em;
   white-space: nowrap;
-  gap: 3.5px;
+  gap: 0.22em;
+  overflow-wrap: break-word;
 }
 
 .color-name-container {
@@ -514,9 +532,9 @@
   /* gap: 30px; */
   font-family: 'DM Mono', monospace;
   font-weight: 600;
-  font-size: 11px;
+  font-size: 0.7em;
   color: rgba(18, 18, 18, 1);
-  letter-spacing: 3px;
+  letter-spacing: 0.2em;
   text-align: left;
 }
 
@@ -529,16 +547,26 @@
 
   color: rgba(18, 18, 18, 0.75);
   text-align: left;
-  font-size: 10px;
-
-  letter-spacing: 1.6px;
-  line-height: 10px;
+  font-size: 0.625em;
+  letter-spacing: 0.12em;
+  line-height: 0.7em;
   white-space: nowrap;
 }
 
 /* *************************************************************************** */
 /* ************************ COLOUR PALETTE - LOADER ************************** */
 /* *************************************************************************** */
+
+.glassmorphic {
+  background: rgba( 255, 255, 255, 0.15 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+
+  backdrop-filter: blur( 4.0px );
+  -webkit-backdrop-filter: blur( 4.0px );
+
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
 
 /* Skeleton loader for colour blocks */
 .loader-square-bottom-align {
@@ -549,12 +577,14 @@
   flex-direction: column;
   justify-content: flex-end;
   align-items: left;
-  padding: 15px;
+  padding: 0.95em;
+  gap: 0.22em;
   white-space: nowrap;
+  overflow-wrap: break-word;
   /* -webkit- is a hack for the Webkit Browser engine */
   background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(18, 18, 18, 0.2)), color-stop(18%, rgba(18, 18, 18, 0.3)), color-stop(33%, rgba(18, 18, 18, 0.2)));
   background: linear-gradient(to right, rgba(18, 18, 18, 0.2) 8%, rgba(18, 18, 18, 0.3) 18%, rgba(18, 18, 18, 0.2) 33%);
-  background-size: 800px 100px;
+  background-size: 600% 300%;
   animation: wave-squares 2s infinite ease-out;
 }
 
@@ -566,12 +596,14 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: left;
-  padding: 15px;
+  padding: 0.95em;
+  gap: 0.22em;
   white-space: nowrap;
+  overflow-wrap: break-word;
   /* -webkit- is a hack for the Webkit Browser engine */
   background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(18, 18, 18, 0.2)), color-stop(18%, rgba(18, 18, 18, 0.3)), color-stop(33%, rgba(18, 18, 18, 0.2)));
   background: linear-gradient(to right, rgba(18, 18, 18, 0.2) 8%, rgba(18, 18, 18, 0.3) 18%, rgba(18, 18, 18, 0.2) 33%);
-  background-size: 800px 100px;
+  background-size: 600% 300%;
   animation: wave-squares 2s infinite ease-out;
 }
 

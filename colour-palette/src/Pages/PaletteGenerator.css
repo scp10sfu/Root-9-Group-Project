@@ -1,3 +1,5 @@
+/* PaletteGenerator.css */
+
 .palette-generator {
   display: flex;
   flex-wrap: wrap;
@@ -25,6 +27,7 @@
 }
 
 .text_block_text {
+  margin-top: 1em;
   align-self: stretch;
   color: rgba(18, 18, 18, 1);
   font-family: 'DM Sans', sans-serif;
@@ -77,10 +80,15 @@
   justify-content: center;
   margin-top: 4em;
   margin-bottom: 4em;
+  min-height: 2em;
+  min-width: 2.5em;
 }
 
 .input-container input[type="text"] {
   width: 100%;
+  min-height: 2em;
+  min-width: 2.5em;
+
   border: 0.05em solid rgba(18, 18, 18, 0.15);
   border-radius: 3em;
   margin-right: 1em;
@@ -156,6 +164,8 @@
 
 .styled-button {
   width: 20%;
+  min-height: 2em;
+  min-width: 2.5em;
 
   /* padding: 0.5rem; */
   border: none;
@@ -391,16 +401,6 @@ background: rgba(255,255,255,0.3);
   white-space: nowrap;
 }
 
-
-.palette-generator {
-  display: flex;
-  flex-direction: column;
-  /* font-family: 'Arial', sans-serif; */
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 0.3125em;
-}
-
 /* *************************************************************************** */
 /* **************************** NUMBER SELECTION ***************************** */
 /* *************************************************************************** */
@@ -424,6 +424,7 @@ background: rgba(255,255,255,0.3);
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 0.625em;
 }
 
 .number-buttons-container {
@@ -433,7 +434,6 @@ background: rgba(255,255,255,0.3);
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  
 }
 
 .number-button {
@@ -442,13 +442,13 @@ background: rgba(255,255,255,0.3);
   background-color: rgba(255, 255, 255, 0.25);
 
   height: 80%;
-  min-height: 20px;
+  min-height: 2em;
   width: 14%;
-  min-width: 40px;
+  min-width: 2.5em;
 
   font-family: 'DM Mono', monospace;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 0.8em;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
 
@@ -508,12 +508,14 @@ background: rgba(255,255,255,0.3);
   flex-direction: column;
   justify-content: flex-end;
   align-items: left;
-  padding: 15px;
+  padding: 0.95em;
+  gap: 0.22em;
   white-space: nowrap;
+  overflow-wrap: break-word;
   /* -webkit- is a hack for the Webkit Browser engine */
   background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(18, 18, 18, 0.2)), color-stop(18%, rgba(18, 18, 18, 0.3)), color-stop(33%, rgba(18, 18, 18, 0.2)));
   background: linear-gradient(to right, rgba(18, 18, 18, 0.2) 8%, rgba(18, 18, 18, 0.3) 18%, rgba(18, 18, 18, 0.2) 33%);
-  background-size: 800px 100px;
+  background-size: 600% 300%;
   animation: wave-squares 2s infinite ease-out;
 }
 
@@ -525,12 +527,14 @@ background: rgba(255,255,255,0.3);
   flex-direction: column;
   justify-content: flex-start;
   align-items: left;
-  padding: 15px;
+  padding: 0.95em;
+  gap: 0.22em;
   white-space: nowrap;
+  overflow-wrap: break-word;
   /* -webkit- is a hack for the Webkit Browser engine */
   background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(18, 18, 18, 0.2)), color-stop(18%, rgba(18, 18, 18, 0.3)), color-stop(33%, rgba(18, 18, 18, 0.2)));
   background: linear-gradient(to right, rgba(18, 18, 18, 0.2) 8%, rgba(18, 18, 18, 0.3) 18%, rgba(18, 18, 18, 0.2) 33%);
-  background-size: 800px 100px;
+  background-size: 600% 300%;
   animation: wave-squares 2s infinite ease-out;
 }
 
