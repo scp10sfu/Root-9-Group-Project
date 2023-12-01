@@ -1,203 +1,8 @@
 /* ColourExtractor.css */
 
-.upload-container {
-  position: relative;
-  background-color: rgba(18, 18, 18, 0.05);
-  border: 1px dashed;
-  border-radius: 10px;
-  border-color: rgba(18, 18, 18, 0.55);
-}
-
-.upload-area {
-  text-align: center;
-  padding: 10px 20px;
-  transition: border-color 0.3s;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  align-self: stretch;
-  overflow: hidden;
-}
-
-/* Modify the file input styles to cover the entire container */
-.upload-container input[type="file"] {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.upload-area .text {
-  color: rgba(18, 18, 18, 0.85);
-
-  /* Body */
-  font-family: 'DM Sans', sans-serif;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 500;
-  letter-spacing: 1.4px;
-
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.upload-area .subtext {
-  color: rgba(18, 18, 18, 0.50);
-  font-family: 'DM Mono', monospace;
-  font-size: 12px;
-  font-weight: regular;
-  white-space: nowrap;
-  letter-spacing: 1.4px;
-
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-transform: uppercase;
-}
-
-.upload-icon-dark {
-  font-size: 24px;
-  position: relative;
-  margin: 0 auto;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 16px;
-}
-
-.info-icon-dark {
-  padding-right: 5px;
-  height: 12px;
-  position: relative;
-  width: 12px;
-}
-
-/* Image preview styles */
-.image-preview {
-  text-align: center;
-  position: relative;
-  height: auto;
-  width: auto;
-  max-width: 430px;
-  min-width: 200px;
-  display: inline-block;
-}
-
-.image-preview img {
-  object-fit: cover;
-  max-width: 430px;
-  min-width: 200px;
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-size: 18px;
-  color: #ffffff;
-}
-
-.number-of-colors-container {
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-}
-
-.number-of-colors-text {
-  color: rgba(18, 18, 18, 0.75);
-
-  font-family: 'DM Mono', monospace;
-  font-size: 14px;
-  font-weight: 500;
-  white-space: nowrap;
-  letter-spacing: 1.6px;
-
-  text-align: left;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.number-buttons-container {
-  /* Center items both vertically and horizontally */
-  gap: 5%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-
-.number-button {
-  color: rgba(18, 18, 18, 0.75);
-  background-color: rgba(18, 18, 18, 0.15);
-
-  height: 80%;
-  min-height: 20px;
-  width: 14%;
-  min-width: 40px;
-
-  font-family: 'DM Mono', monospace;
-  font-weight: 400;
-  font-size: 12px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
-
-  border-radius: 38.7px;
-  border: 1.5px solid rgba(18, 18, 18, 0.15);
-
-  display: inline-block;
-  white-space: nowrap;
-  text-align: center;
-  align-items: center;
-  justify-items: center;
-}
-
-.number-button:hover {
-  background-color: var(--color1);
-  color: getTextColor(--color1);
-  transform: scale(1.1);
-}
-
-.number-button.active {
-  /* background-color: rgba(186, 229, 13, 0.8); */
-  /* background-color: rgba(255, 153, 102, 0.4); */
-  background-color: rgba(18, 18, 18, 1);
-  color: #ffffff;
-  transform: scale(1.1);
-}
-
-.switch {
-  display: flex;
-  width: 100vw;
-  height: 100px;
-  justify-content: center;
-  align-items: center;
-}
-
-.theme-switcher button {
-  background-color: var(--secondary-bg-color);
-  color: var(--primary-text-color);
-  border: none;
-  border-radius: 20px;
-  padding: 5px 10px;
-  cursor: pointer;
-  outline: none;
-  transition: background-color 0.3s, color 0.3s;
-  font-family: Tahoma;
-}
+/* *************************************************************************** */
+/* *************************** OVERALL PAGE STYLE **************************** */
+/* *************************************************************************** */
 
 /* Content block styles */
 .content-block {
@@ -219,28 +24,266 @@
 }
 
 .text_block_text {
-  margin-top: 50px;
+  margin-top: 1em;
   align-self: stretch;
   color: rgba(18, 18, 18, 1);
-  /* H2 */
   font-family: 'DM Sans', sans-serif;
-  font-size: 8vh;
+  font-size: 4.2em;
   font-style: normal;
   font-weight: 700;
-  letter-spacing: -3.6px;
+  line-height: 1em;
+  letter-spacing: -0.05em;
 }
+
 
 .text_block_subtext {
   align-self: stretch;
   color: rgba(18, 18, 18, 0.50);
   font-family: 'DM Sans', sans-serif;
-  font-size: 20px;
+  font-size: 1.5em;
   font-style: normal;
   font-weight: 700;
-  letter-spacing: -0.4px;
+  letter-spacing: -0.05em;
 
   padding-top: 1%;
   padding-bottom: 3%;
+}
+
+/* *************************************************************************** */
+/* ******************************* UPLOAD AREA ******************************* */
+/* *************************************************************************** */
+
+.upload-container {
+  position: relative;
+  /* background-color: rgba(18, 18, 18, 0.05); */
+  background: rgba( 255, 255, 255, 0.15 );
+  /* border: 0.08em dashed; */
+  border-radius: 0.625em;
+  /* border-color: rgba(18, 18, 18, 0.55); */
+  /* border-color: var(--color1); */
+
+  /* background: rgba( 255, 255, 255, 0.01 ); */
+  box-shadow: 0 2px 16px 6px var(--color1);
+  backdrop-filter: blur( 10.0px );
+  -webkit-backdrop-filter: blur( 10.0px );
+}
+
+
+/* Modify the file input styles to cover the entire container */
+.upload-container input[type="file"] {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  /* background-color: rgba(18, 18, 18, 0.85); */
+}
+
+.upload-container .upload-area {
+  text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  transition: border-color 0.3s;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  align-self: stretch;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.upload-area-text {
+  color: rgba(18, 18, 18, 0.85);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.25em;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  line-height: 1.5em;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-wrap: break-word;
+}
+
+.upload-area .subtext {
+  color: rgba(18, 18, 18, 0.50);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8em;
+  font-weight: regular;
+  white-space: nowrap;
+  letter-spacing: 0.1em;
+
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+.upload-icon-dark {
+  font-size: 1.5em;
+  position: relative;
+  margin: 0 auto;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.25em;
+}
+
+.info-icon-dark {
+  padding-right: 5px;
+  height: 12px;
+  width: 12px;
+  position: relative;
+}
+
+/* Image preview styles */
+.image-preview {
+  text-align: center;
+  position: relative;
+  height: auto;
+  width: auto;
+  max-width: 430px;
+  min-width: 200px;
+  display: inline-block;
+}
+
+.image-preview img {
+  object-fit: cover;
+  max-width: 430px;
+  min-width: 200px;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;  
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+/* *************************************************************************** */
+/* **************************** NUMBER SELECTION ***************************** */
+/* *************************************************************************** */
+
+.number-of-colors-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.625em;
+}
+
+.number-of-colors-text {
+  color: rgba(18, 18, 18, 0.75);
+
+  font-family: 'DM Mono', monospace;
+  font-size: 0.875em;
+  font-weight: 500;
+  white-space: nowrap;
+  letter-spacing: 0.1em;
+
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 0.625em;
+}
+
+.number-buttons-container {
+  /* Center items both vertically and horizontally */
+  gap: 5%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.number-button {
+  color: rgba(18, 18, 18, 0.75);
+  /* background-color: rgba(18, 18, 18, 0.05); */
+  background: rgba( 255, 255, 255, 0.15 );
+  /* background-color: rgba(255, 255, 255, 0.15); */
+
+  height: 80%;
+  min-height: 2em;
+  width: 14%;
+  min-width: 2.5em;
+
+  font-family: 'DM Mono', monospace;
+  font-weight: 400;
+  font-size: 0.8em;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+
+  border-radius: 38.7px;
+  border: 0.05em solid rgba(18, 18, 18, 0.15);
+ /*  transition: box-shadow 0.3s, transform 0.3s;
+  transition: all 0.2s ease-in-out;
+   */
+  display: inline-block;
+  white-space: nowrap;
+  text-align: center;
+  align-items: center;
+  justify-items: center;
+
+  background-color: rgba(18, 18, 18, 0.05);
+  border-color: rgba(18, 18, 18, 0.55);
+
+  /* background: rgba( 255, 255, 255, 0.15 ); */
+  box-shadow: 0 8px 32px 0 rgba(18, 18, 18, 0.20);
+  backdrop-filter: blur( 4.0px );
+  -webkit-backdrop-filter: blur( 4.0px );
+}
+
+.number-button:hover {
+  background-color: var(--color1);
+  color: getTextColor(--color1);
+  transform: scale(1.1);
+}
+
+.number-button.active {
+  background-color: rgba(18, 18, 18, 1);
+  color: #ffffff;
+  transform: scale(1.1);
+
+  backdrop-filter: blur(0.625em);
+  box-shadow: 1.2em 1.2em 2.45em -0.5em rgba(0,0,0,0.2);
+  transition: all 0.2s ease-in-out;
+}
+
+/* *************************************************************************** */
+/* *************************************************************************** */
+/* *************************************************************************** */
+
+.switch {
+  display: flex;
+  width: 100vw;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+}
+
+.theme-switcher button {
+  background-color: var(--secondary-bg-color);
+  color: var(--primary-text-color);
+  border: none;
+  border-radius: 20px;
+  padding: 5px 10px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s, color 0.3s;
+  font-family: Tahoma;
 }
 
 /* *************************************************************************** */
@@ -254,7 +297,7 @@
 }
 
 :root {
-  --color1: #361fd6;
+  --color1: #533fd3;
   /* Persian Blue */
   --color2: #dea51f;
   /* Golden Grass */
@@ -442,29 +485,31 @@
 .color-bottom-align {
   width: 100%;
   height: 100%;
-  background-color: rgba(18, 18, 18, 0.15);
+  background-color: rgba(18, 18, 18, 0.05);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   /* Aligns the content to the bottom */
   align-items: left;
-  padding: 15px;
+  padding: 0.95em;
   white-space: nowrap;
-  gap: 3.5px;
+  gap: 0.22em;
+  overflow-wrap: break-word;
 }
 
 .color-top-align {
   width: 100%;
   height: 100%;
-  background-color: rgba(18, 18, 18, 0.15);
+  background-color: rgba(18, 18, 18, 0.05);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   /* Aligns the content to the top */
   align-items: left;
-  padding: 15px;
+  padding: 0.95em;
   white-space: nowrap;
-  gap: 3.5px;
+  gap: 0.22em;
+  overflow-wrap: break-word;
 }
 
 .color-name-container {
@@ -500,9 +545,9 @@
   /* gap: 30px; */
   font-family: 'DM Mono', monospace;
   font-weight: 600;
-  font-size: 11px;
+  font-size: 0.7em;
   color: rgba(18, 18, 18, 1);
-  letter-spacing: 3px;
+  letter-spacing: 0.2em;
   text-align: left;
 }
 
@@ -515,16 +560,34 @@
 
   color: rgba(18, 18, 18, 0.75);
   text-align: left;
-  font-size: 10px;
-
-  letter-spacing: 1.6px;
-  line-height: 10px;
+  font-size: 0.625em;
+  letter-spacing: 0.12em;
+  line-height: 0.7em;
   white-space: nowrap;
 }
 
 /* *************************************************************************** */
 /* ************************ COLOUR PALETTE - LOADER ************************** */
 /* *************************************************************************** */
+
+.glassmorphic-simple {
+  background: rgba( 255, 255, 255, 0.15 );
+  box-shadow: 0 8px 32px 0 rgba(18, 18, 18, 0.20);
+
+  backdrop-filter: blur( 4.0px );
+  -webkit-backdrop-filter: blur( 4.0px );
+}
+
+.glassmorphic-with-boarder {
+  background: rgba( 255, 255, 255, 0.15 );
+  box-shadow: 0 8px 32px 0 rgba(18, 18, 18, 0.20);
+
+  backdrop-filter: blur( 4.0px );
+  -webkit-backdrop-filter: blur( 4.0px );
+
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
 
 /* Skeleton loader for colour blocks */
 .loader-square-bottom-align {
@@ -535,12 +598,14 @@
   flex-direction: column;
   justify-content: flex-end;
   align-items: left;
-  padding: 15px;
+  padding: 0.95em;
+  gap: 0.22em;
   white-space: nowrap;
+  overflow-wrap: break-word;
   /* -webkit- is a hack for the Webkit Browser engine */
   background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(18, 18, 18, 0.2)), color-stop(18%, rgba(18, 18, 18, 0.3)), color-stop(33%, rgba(18, 18, 18, 0.2)));
   background: linear-gradient(to right, rgba(18, 18, 18, 0.2) 8%, rgba(18, 18, 18, 0.3) 18%, rgba(18, 18, 18, 0.2) 33%);
-  background-size: 800px 100px;
+  background-size: 1400px 800px;
   animation: wave-squares 2s infinite ease-out;
 }
 
@@ -552,12 +617,14 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: left;
-  padding: 15px;
+  padding: 0.95em;
+  gap: 0.22em;
   white-space: nowrap;
+  overflow-wrap: break-word;
   /* -webkit- is a hack for the Webkit Browser engine */
   background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(18, 18, 18, 0.2)), color-stop(18%, rgba(18, 18, 18, 0.3)), color-stop(33%, rgba(18, 18, 18, 0.2)));
   background: linear-gradient(to right, rgba(18, 18, 18, 0.2) 8%, rgba(18, 18, 18, 0.3) 18%, rgba(18, 18, 18, 0.2) 33%);
-  background-size: 800px 100px;
+  background-size: 1400px 800px;
   animation: wave-squares 2s infinite ease-out;
 }
 

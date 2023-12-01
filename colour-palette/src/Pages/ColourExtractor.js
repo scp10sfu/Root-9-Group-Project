@@ -264,24 +264,24 @@ function ColourExtractor() {
   */
   const SkeletonLoader = () => (
     <>
-      <div className="  020928
-      ">
+      <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
         {/* First dominant colour */}
         <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
-          <div className="loader-square-bottom-align" style={{ backgroundColor: defaultColor.hex }}>
+          <div className="loader-square-bottom-align">
             <div className="color-name-container">
-              <p className="color-name" style={{ color: defaultColor }}>{defaultColor.name}</p>
+              <p className="color-name" style={{ color: defaultColor }}>Name</p>
             </div>
             <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
             <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
             <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
           </div>
         </div>
+
         {/* Second dominant colour */}
         <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
-          <div className="loader-square-bottom-align" style={{ backgroundColor: defaultColor.hex }}>
+          <div className="loader-square-bottom-align">
             <div className="color-name-container">
-              <p className="color-name" style={{ color: defaultColor }}>{defaultColor.name}</p>
+              <p className="color-name" style={{ color: defaultColor }}>Name</p>
             </div>
             <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
             <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
@@ -290,9 +290,9 @@ function ColourExtractor() {
         </div>
 
         <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-          <div className="loader-square-top-align" style={{ backgroundColor: defaultColor.hex }}>
+          <div className="loader-square-top-align">
             <div className="color-name-container">
-              <p className="color-name" style={{ color: defaultColor }}>{defaultColor.name}</p>
+              <p className="color-name" style={{ color: defaultColor }}>Name</p>
             </div>
             <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
             <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
@@ -300,9 +300,9 @@ function ColourExtractor() {
           </div>
         </div>
         <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-          <div className="loader-square-top-align" style={{ backgroundColor: defaultColor.hex }}>
+          <div className="loader-square-top-align">
             <div className="color-name-container">
-              <p className="color-name" style={{ color: defaultColor }}>{defaultColor.name}</p>
+              <p className="color-name" style={{ color: defaultColor }}>Name</p>
             </div>
             <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
             <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
@@ -310,9 +310,9 @@ function ColourExtractor() {
           </div>
         </div>
         <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-          <div className="loader-square-top-align" style={{ backgroundColor: defaultColor.hex }}>
+          <div className="loader-square-top-align">
             <div className="color-name-container">
-              <p className="color-name" style={{ color: defaultColor }}>{defaultColor.name}</p>
+              <p className="color-name" style={{ color: defaultColor }}>Name</p>
             </div>
             <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
             <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
@@ -320,9 +320,9 @@ function ColourExtractor() {
           </div>
         </div>
         <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-          <div className="loader-square-top-align" style={{ backgroundColor: defaultColor.hex }}>
+          <div className="loader-square-top-align">
             <div className="color-name-container">
-              <p className="color-name" style={{ color: defaultColor }}>{defaultColor.name}</p>
+              <p className="color-name" style={{ color: defaultColor }}>Name</p>
             </div>
             <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
             <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
@@ -521,7 +521,7 @@ function ColourExtractor() {
                   <label htmlFor="fileInput">
                     <div className="text_block_text">
                       <UploadIcon className="upload-icon-dark" style={{ width: '40px', height: '40px' }} />
-                      <div className='text'>Click or drag file to this area to upload</div>
+                      <div className='upload-area-text'>Click or drag file to this area to upload</div>
                     </div>
                     <div className="subtext">
                       <InfoIcon className="info-icon-dark" style={{ width: '21px', height: '21px' }} />  Max file size: {MAX_FILE_SIZE_MB} MB
@@ -574,88 +574,88 @@ function ColourExtractor() {
             : (<>
               {/* First dominant colour */}
               <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
-                <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-18">
                   <ColourBoxBottom color={firstColor} />
                 </div>
 
                 {/* Second dominant colour */}
-                <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-18">
                   <ColourBoxBottom color={secondColor} />
 
                 </div>
 
                 {/* 4 colours */}
                 {numberOfColors === 4 && (<>
-                  <div className="wrapper-4-col secondary-section col-xs-36 col-md-18">
+                  <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-18">
                     <ColourBoxTop color={thirdColor} />
                   </div>
-                  <div className="wrapper-4-col secondary-section col-xs-36 col-md-18">
+                  <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-18">
                     <ColourBoxTop color={fourthColor} />
                   </div>
                 </>)}
 
                 {/* 6 colours */}
                 {numberOfColors === 6 && (<>
-                  <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                  <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={thirdColor} />
                   </div>
-                  <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                  <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={fourthColor} />
                   </div>
-                  <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                  <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={fifthColor} />
                   </div>
-                  <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
+                  <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={sixthColor} />
                   </div>
                 </>)}
 
                 {/* 8 colours */}
                 {numberOfColors === 8 && (<>
-                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
                     <ColourBoxTop color={thirdColor} />
                   </div>
-                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
                     <ColourBoxTop color={fourthColor} />
                   </div>
-                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
                     <ColourBoxTop color={fifthColor} />
                   </div>
-                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
                     <ColourBoxTop color={sixthColor} />
                   </div>
-                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
                     <ColourBoxTop color={seventhColor} />
                   </div>
-                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
                     <ColourBoxTop color={eighthColor} />
                   </div>
                 </>)}
 
                 {/* 10 colours */}
                 {numberOfColors === 10 && (<>
-                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={thirdColor} />
                   </div>
-                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={fourthColor} />
                   </div>
-                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={fifthColor} />
                   </div>
-                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={sixthColor} />
                   </div>
-                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={seventhColor} />
                   </div>
-                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={eighthColor} />
                   </div>
-                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={ninthColor} />
                   </div>
-                  <div className="wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={tenthColor} />
                   </div>
 
