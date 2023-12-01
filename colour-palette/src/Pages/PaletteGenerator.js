@@ -58,12 +58,31 @@ function PaletteGenerator() {
       const lastHexCode = colorObjects[colorObjects.length - 1].hex;
       const messageStartIndex = fullResponse.lastIndexOf(lastHexCode) + lastHexCode.length;
       const additionalMessage = fullResponse.slice(messageStartIndex).trim();
-  
+
       setColors(colorObjects);
       setAdditionalMessage(additionalMessage); // Store the additional message
+
+      // Add the additional message to chat history
+      setChatHistory((prevHistory) => [
+        ...(prevHistory || []),
+        {
+          message: additionalMessage,
+          type: "user-message",
+        },
+      ]);
+
     } catch (error) {
       console.error('Error:', error);
       setFullResponse('Failed to get the color palette. Please try again.');
+
+      // Add an error message to chat history if needed
+      setChatHistory((prevHistory) => [
+        ...(prevHistory || []),
+        {
+          message: 'Failed to get the color palette. Please try again.',
+          type: "error-message", 
+        },
+      ]);
     } finally {
       setIsLoading(false);
       setPrompt('');  // Clear the input field
@@ -78,12 +97,20 @@ function PaletteGenerator() {
   const displayedColors = colors.slice(0, numberOfColors);
 
   useEffect(() => {
+     // Add a welcome message to chatHistory when component mounts
+     setChatHistory([
+      {
+        message: "Welcome to the AI Palette Generator! Type a request to get started.",
+        type: "system", // Use this type to style system messages differently
+      },
+    ]);
+
     // Scroll to the bottom of the chat when chatHistory changes
     const chatContainer = document.getElementById('chat-container');
     if (chatContainer) {
       chatContainer.scrollTop = chatContainer.scrollHeight;
     }
-  }, [chatHistory]);
+  }, []);
 
   /* ************************************************************************ */
   /* ********************* SAME AS COLOUR EXTRACTOR ************************* */
@@ -489,7 +516,9 @@ function PaletteGenerator() {
                     name="prompt"
                     value={prompt}
                     onChange={(e) => setPrompt(e.target.value)}
+                    placeholder="Enter request here"
                     required
+                    className="styled-input"
                   />
 
                 {/* <input
