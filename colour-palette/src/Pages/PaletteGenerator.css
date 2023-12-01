@@ -214,42 +214,11 @@
   align-items: start;
   gap: 0.5em;
 
-  /* background-color: rgba(18, 18, 18, 0.75); */
-  /* background: linear-gradient(135deg, #4682eb -20%, #01beff 120%); */
-  /* border: 1px solid #eceff133; */
-  
-  border-radius: 1em;
+  border-radius: 1.5em;
   background-color: transparent;
 
-  /* background: rgba(204,33,227, 0.25);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(204,33,227, 0.2);
-backdrop-filter: blur(7.4px);
--webkit-backdrop-filter: blur(7.4px);
-border: 0.05em solid rgba(204,33,227, 0.3);
-transition: .5s all;
-overflow: hidden; */
-
-background: rgba(255,255,255,0.3);
-  border-radius: 20px;
-  border-left: 1px solid rgba(255,255,255,0.3);
-  border-top: 1px solid rgba(255,255,255,0.3);
   backdrop-filter: blur(10px);
-  box-shadow: 20px 20px 40px -6px rgba(0,0,0,0.2);
   transition: all 0.2s ease-in-out;
-
-/* 
-  background: linear-gradient(135deg, rgba(18, 18, 18, 0.75) -20%, rgba(18, 18, 18, 0.15) 80%);
-      backdrop-filter: blur(20px);
-      overflow: hidden; */
-
-      /* background: linear-gradient(180deg, rgba(132, 41, 41, 0.75) 0%, rgba(240, 2, 2, 0.1) 100%); */
-      /* box-shadow: 0 7px 20px 5px rgba(18, 18, 18, 0.2); */
-      /* border-radius: .7rem; */
-      /* backdrop-filter: blur(30px);
-      -webkit-backdrop-filter: blur(30px);
-      overflow: hidden;
-      transition: .5s all; */
 }
 
 /* Chat bubble style for response message */
@@ -440,7 +409,7 @@ background: rgba(255,255,255,0.3);
 .number-button {
   color: rgba(18, 18, 18, 0.75);
   /* background-color: rgba(18, 18, 18, 0.05); */
-  background: rgba( 255, 255, 255, 0.15 );
+  
   /* background-color: rgba(255, 255, 255, 0.15); */
 
   height: 80%;
@@ -719,7 +688,7 @@ background: rgba(255,255,255,0.3);
 }
 
 :root {
-  --color1: #361fd6;
+  --color1: #533fd3;
   /* Persian Blue */
   --color2: #dea51f;
   /* Golden Grass */

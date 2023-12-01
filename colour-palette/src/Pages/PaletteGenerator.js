@@ -485,7 +485,7 @@ const SkeletonLoader = () => (
             </div>
 
             {/* FOR CHAT */}
-            <div className="chat-container col-xs-36 col-md-25">
+            <div className="chat-container glassmorphic-with-boarder col-xs-36 col-md-25">
 
 
               {/* Display chat messages */}
@@ -560,88 +560,88 @@ const SkeletonLoader = () => (
 
               {/* First dominant colour */}
               <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
-                <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-18">
                   <ColourBoxBottom color={firstColor} />
                 </div>
 
                 {/* Second dominant colour */}
-                <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-18">
                   <ColourBoxBottom color={secondColor} />
 
                 </div>
 
                 {/* 4 colours */}
                 {numberOfColors === 4 && (<>
-                  <div className="glassmorphic wrapper-4-col secondary-section col-xs-36 col-md-18">
+                  <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-18">
                     <ColourBoxTop color={thirdColor} />
                   </div>
-                  <div className="glassmorphic wrapper-4-col secondary-section col-xs-36 col-md-18">
+                  <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-18">
                     <ColourBoxTop color={fourthColor} />
                   </div>
                 </>)}
 
                 {/* 6 colours */}
                 {numberOfColors === 6 && (<>
-                  <div className="glassmorphic wrapper-4-col secondary-section col-xs-36 col-md-9">
+                  <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={thirdColor} />
                   </div>
-                  <div className="glassmorphic wrapper-4-col secondary-section col-xs-36 col-md-9">
+                  <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={fourthColor} />
                   </div>
-                  <div className="glassmorphic wrapper-4-col secondary-section col-xs-36 col-md-9">
+                  <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={fifthColor} />
                   </div>
-                  <div className="glassmorphic wrapper-4-col secondary-section col-xs-36 col-md-9">
+                  <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={sixthColor} />
                   </div>
                 </>)}
 
                 {/* 8 colours */}
                 {numberOfColors === 8 && (<>
-                  <div className="glassmorphic wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
                     <ColourBoxTop color={thirdColor} />
                   </div>
-                  <div className="glassmorphic wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
                     <ColourBoxTop color={fourthColor} />
                   </div>
-                  <div className="glassmorphic wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
                     <ColourBoxTop color={fifthColor} />
                   </div>
-                  <div className="glassmorphic wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
                     <ColourBoxTop color={sixthColor} />
                   </div>
-                  <div className="glassmorphic wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
                     <ColourBoxTop color={seventhColor} />
                   </div>
-                  <div className="glassmorphic wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
                     <ColourBoxTop color={eighthColor} />
                   </div>
                 </>)}
 
                 {/* 10 colours */}
                 {numberOfColors === 10 && (<>
-                  <div className="glassmorphic wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={thirdColor} />
                   </div>
-                  <div className="glassmorphic wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={fourthColor} />
                   </div>
-                  <div className="glassmorphic wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={fifthColor} />
                   </div>
-                  <div className="glassmorphic wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={sixthColor} />
                   </div>
-                  <div className="glassmorphic wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={seventhColor} />
                   </div>
-                  <div className="glassmorphic wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={eighthColor} />
                   </div>
-                  <div className="glassmorphic wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={ninthColor} />
                   </div>
-                  <div className="glassmorphic wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
                     <ColourBoxTop color={tenthColor} />
                   </div>
 
