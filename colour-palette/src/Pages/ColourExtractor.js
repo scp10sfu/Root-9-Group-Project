@@ -68,7 +68,7 @@ function ColourExtractor() {
     if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
       throw new Error('Invalid RGB value');
     }
-    
+
     let c = 1 - (r / 255);
     let m = 1 - (g / 255);
     let y = 1 - (b / 255);
@@ -123,11 +123,11 @@ function ColourExtractor() {
     r /= 255;
     g /= 255;
     b /= 255;
-  
+
     const max = Math.max(r, g, b);
     const min = Math.min(r, g, b);
     let h, s, l = (max + min) / 2;
-  
+
     if (max === min) {
       h = s = 0; // grayscale
     } else {
@@ -140,10 +140,10 @@ function ColourExtractor() {
       }
       h /= 6;
     }
-  
+
     return [h * 360, s * 100, l * 100];
   };
-  
+
 
 
   /**
@@ -218,12 +218,12 @@ function ColourExtractor() {
   * @effect
   */
   useEffect(() => {
-     // Check if the page is just loaded and colors are saved in localStorage
-     const savedBackground = localStorage.getItem('savedBackground');
-     if (savedBackground && !image) {
+    // Check if the page is just loaded and colors are saved in localStorage
+    const savedBackground = localStorage.getItem('savedBackground');
+    if (savedBackground && !image) {
       setBackgroundStyle(JSON.parse(savedBackground));
-      
-     } else if (image) {
+
+    } else if (image) {
       setIsLoadingAndExtracting(true);
       extractColors();                      // Perform the API call
       setIsLoadingAndExtracting(false);     // Set loading state to false once API call is complete
@@ -239,11 +239,11 @@ function ColourExtractor() {
   }, [numberOfColors, image]);
 
 
-// Function to handle beforeunload event
-const handleBeforeUnload = () => {
-  console.log('Clearing local storage on page refresh.');
-  localStorage.removeItem('savedBackground');
-};
+  // Function to handle beforeunload event
+  const handleBeforeUnload = () => {
+    console.log('Clearing local storage on page refresh.');
+    localStorage.removeItem('savedBackground');
+  };
 
   /**
   * Handles the change in the number of colors.
@@ -271,7 +271,7 @@ const handleBeforeUnload = () => {
     "image/x-icon",
     "image/tiff",
   ];
-    
+
   /**
   * Checks if the file type is valid.
   * @param {object} file - The file object.
@@ -307,13 +307,13 @@ const handleBeforeUnload = () => {
           setImage(e.target.result);                            // Set image URL to display it
           // localStorage.setItem('savedImage', e.target.result);  // Save image data to local storage
           setIsImagePreviewActive(false);                       // Set image preview active
-        
+
           // Update the background style with saved colors from localStorage
           const savedBackground = localStorage.getItem('savedBackground');
           if (savedBackground) {
             setBackgroundStyle(JSON.parse(savedBackground));
           }
-        
+
         };
         reader.readAsDataURL(file);
       }
@@ -447,7 +447,7 @@ const handleBeforeUnload = () => {
       color = defaultColor; // or display a default color, show an error, etc.
     }
     const textColor = getTextColor(color.hex);
-   
+
 
     const copyToClipboard = (text) => {
       navigator.clipboard.writeText(text).then(() => {
@@ -592,97 +592,97 @@ const handleBeforeUnload = () => {
           {/* Conditional rendering based on isLoadingAndExtracting state */}
           {/* The main content - right part */}
           {isLoadingAndExtracting ? (<SkeletonLoader />) : (<>
-              {/* First dominant colour */}
-              <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
-                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-18">
-                  <ColourBoxBottom color={colors[0]} />
-                </div>
+            {/* First dominant colour */}
+            <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
+              <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-18">
+                <ColourBoxBottom color={colors[0]} />
+              </div>
 
-                {/* Second dominant colour */}
-                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-18">
-                  <ColourBoxBottom color={colors[1]} />
-
-                </div>
-
-                {/* 4 colours */}
-                {numberOfColors === 4 && (<>
-                  <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-18">
-                    <ColourBoxTop color={colors[2]} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-18">
-                    <ColourBoxTop color={colors[3]} />
-                  </div>
-                </>)}
-
-                {/* 6 colours */}
-                {numberOfColors === 6 && (<>
-                  <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={colors[2]} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={colors[3]} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={colors[4]} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={colors[5]} />
-                  </div>
-                </>)}
-
-                {/* 8 colours */}
-                {numberOfColors === 8 && (<>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
-                    <ColourBoxTop color={colors[2]} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
-                    <ColourBoxTop color={colors[3]} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
-                    <ColourBoxTop color={colors[4]} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
-                    <ColourBoxTop color={colors[5]} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
-                    <ColourBoxTop color={colors[6]} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
-                    <ColourBoxTop color={colors[7]} />
-                  </div>
-                </>)}
-
-                {/* 10 colours */}
-                {numberOfColors === 10 && (<>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={colors[2]} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={colors[3]} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={colors[4]} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={colors[5]} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={colors[6]} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={colors[7]} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={colors[8]} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={colors[9]} />
-                  </div>
-
-                </>)}
+              {/* Second dominant colour */}
+              <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-18">
+                <ColourBoxBottom color={colors[1]} />
 
               </div>
-            </>)}
+
+              {/* 4 colours */}
+              {numberOfColors === 4 && (<>
+                <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-18">
+                  <ColourBoxTop color={colors[2]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-18">
+                  <ColourBoxTop color={colors[3]} />
+                </div>
+              </>)}
+
+              {/* 6 colours */}
+              {numberOfColors === 6 && (<>
+                <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
+                  <ColourBoxTop color={colors[2]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
+                  <ColourBoxTop color={colors[3]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
+                  <ColourBoxTop color={colors[4]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
+                  <ColourBoxTop color={colors[5]} />
+                </div>
+              </>)}
+
+              {/* 8 colours */}
+              {numberOfColors === 8 && (<>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <ColourBoxTop color={colors[2]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <ColourBoxTop color={colors[3]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <ColourBoxTop color={colors[4]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <ColourBoxTop color={colors[5]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <ColourBoxTop color={colors[6]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <ColourBoxTop color={colors[7]} />
+                </div>
+              </>)}
+
+              {/* 10 colours */}
+              {numberOfColors === 10 && (<>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <ColourBoxTop color={colors[2]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <ColourBoxTop color={colors[3]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <ColourBoxTop color={colors[4]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <ColourBoxTop color={colors[5]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <ColourBoxTop color={colors[6]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <ColourBoxTop color={colors[7]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <ColourBoxTop color={colors[8]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <ColourBoxTop color={colors[9]} />
+                </div>
+
+              </>)}
+
+            </div>
+          </>)}
 
           {/* DO NOT DELETE THIS! */}
           <div className="footer col-xs-36 col-md-36"></div>
