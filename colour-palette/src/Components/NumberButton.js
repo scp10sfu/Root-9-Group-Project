@@ -1,7 +1,7 @@
 // NumberButton.js
 
-
 import React from 'react';
+import './NumberButton.css';
 
 /**
 * NumberButton Component

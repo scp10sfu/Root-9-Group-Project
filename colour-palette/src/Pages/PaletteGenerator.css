@@ -408,61 +408,6 @@
   justify-content: center;
 }
 
-.number-button {
-  color: rgba(18, 18, 18, 0.75);
-  /* background-color: rgba(18, 18, 18, 0.05); */
-
-  /* background-color: rgba(255, 255, 255, 0.15); */
-
-  height: 80%;
-  min-height: 2em;
-  width: 14%;
-  min-width: 2.5em;
-
-  font-family: 'DM Mono', monospace;
-  font-weight: 400;
-  font-size: 0.8em;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
-
-  border-radius: 38.7px;
-  border: 0.05em solid rgba(18, 18, 18, 0.15);
-  /*  transition: box-shadow 0.3s, transform 0.3s;
-  transition: all 0.2s ease-in-out;
-   */
-  display: inline-block;
-  white-space: nowrap;
-  text-align: center;
-  align-items: center;
-  justify-items: center;
-
-  background-color: rgba(18, 18, 18, 0.05);
-  border-color: rgba(18, 18, 18, 0.55);
-
-  /* background: rgba( 255, 255, 255, 0.15 ); */
-  box-shadow: 0 8px 32px 0 rgba(18, 18, 18, 0.20);
-  backdrop-filter: blur(4.0px);
-  -webkit-backdrop-filter: blur(4.0px);
-}
-
-.number-button:hover {
-  background-color: var(--color1);
-  color: getTextColor(--color1);
-  transform: scale(1.1);
-}
-
-.number-button.active {
-  background-color: rgba(18, 18, 18, 1);
-  color: #ffffff;
-  transform: scale(1.1);
-
-  backdrop-filter: blur(0.625em);
-  box-shadow: 1.2em 1.2em 2.45em -0.5em rgba(0, 0, 0, 0.2);
-  transition: all 0.2s ease-in-out;
-}
-
-
-
 /* *************************************************************************** */
 /* ********************************** OTHER ********************************** */
 /* *************************************************************************** */

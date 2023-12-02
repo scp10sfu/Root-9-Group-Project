@@ -288,21 +288,6 @@ function ColourExtractor() {
   };
 
 
-  // /**
-  // * NumberButton Component
-  // * @param {number} number - The number to display on the button.
-  // * @param {boolean}isActive - A flag indicating whether the button is active.
-  // * @returns {JSX.Element} - The rendered NumberButton component.
-  // */
-  // const NumberButton = ({ number, isActive }) => (
-  //   <button
-  //     className={`number-button ${isActive ? 'active' : ''}`}
-  //     onClick={() => handleNumberChange(number)}>
-  //     {number}
-  //   </button>
-  // );
-
-
   /**
   * Color Variables
   * Variables representing colors based on the 'colors' array.
