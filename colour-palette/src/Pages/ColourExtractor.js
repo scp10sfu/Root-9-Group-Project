@@ -195,8 +195,22 @@ function ColourExtractor() {
       extractColors();                      // Perform the API call
       setIsLoadingAndExtracting(false);     // Set loading state to false once API call is complete
     }
+
+    // Attach event listener for beforeunload
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
   }, [numberOfColors, image]);
 
+
+// Function to handle beforeunload event
+const handleBeforeUnload = () => {
+  console.log('Clearing local storage on page refresh.');
+  localStorage.removeItem('savedBackground');
+};
 
   /**
   * Handles the change in the number of colors.
@@ -453,7 +467,7 @@ function ColourExtractor() {
 
     <div className="colour-extractor" style={backgroundStyle}>
 
-<BackgroundColour colorArray=
+      <BackgroundColour colorArray=
         {Array.from({ length: 10 }, (_, i) => (
           <span key={i} style={{ color: `var(--color${i + 1})` }}></span>
         ))}

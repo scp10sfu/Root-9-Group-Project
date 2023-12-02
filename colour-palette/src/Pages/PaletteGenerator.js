@@ -57,7 +57,7 @@ function PaletteGenerator() {
       }
       setBackgroundStyle(background);
 
-      // Save the background state to local storage
+      localStorage.removeItem('savedBackground');
       localStorage.setItem('savedBackground', JSON.stringify(background));
 
       // Find the index of the last HEX code in the full response
@@ -67,6 +67,7 @@ function PaletteGenerator() {
 
       setColors(colorObjects);
       setAdditionalMessage(additionalMessage); // Store the additional message
+
 
       // Add the additional message to chat history
       setChatHistory((prevHistory) => [
@@ -103,10 +104,10 @@ function PaletteGenerator() {
   const displayedColors = colors.slice(0, numberOfColors);
 
   useEffect(() => {
-    // Retrieve saved background state from local storage
+    // Check if the page is just loaded and colors are saved in localStorage
     const savedBackground = localStorage.getItem('savedBackground');
     if (savedBackground) {
-      setBackgroundStyle(JSON.parse(savedBackground));
+     setBackgroundStyle(JSON.parse(savedBackground));
     }
 
     // Add a welcome message to chatHistory when component mounts
@@ -122,7 +123,21 @@ function PaletteGenerator() {
     if (chatContainer) {
       chatContainer.scrollTop = chatContainer.scrollHeight;
     }
+
+    // Attach event listener for beforeunload
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
   }, []);
+
+  // Function to handle beforeunload event
+  const handleBeforeUnload = () => {
+    console.log('Clearing local storage on page refresh.');
+    localStorage.removeItem('savedBackground');
+  };
 
   /* ************************************************************************ */
   /* ********************* SAME AS COLOUR EXTRACTOR ************************* */
