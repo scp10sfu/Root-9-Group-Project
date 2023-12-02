@@ -49,11 +49,11 @@ const App = () => {
         {/* <ColorSwitcher /> */}
         <div>
           <Routes>
-            <Route path="/About" element={<About />} />
             <Route path="/" element={<ColourExtractor />} />
+            <Route path="/About" element={<About />} />
             <Route path="/ColourExtractor" element={<ColourExtractor />} />
             <Route path="/PaletteGenerator" element={<PaletteGenerator />} />
-            {/* ... other routes ... */}
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
         {/* <Footer/> */}

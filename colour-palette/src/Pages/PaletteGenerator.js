@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ColorThief from 'colorthief';
-import './PaletteGenerator.css';
-
-import Layout from '../Components/Layout';
-import Toast from '../Components/Toast';
-
 import { ReactComponent as CopyIconWhiteUnfilled } from '../images/icon-copy-white-unfilled.svg';
 import { ReactComponent as CopyIconDarkUnfilled } from '../images/icon-copy-dark-unfilled.svg';
 import { ReactComponent as CopyIconWhiteFilled } from '../images/icon-copy-white-filled.svg';
 import { ReactComponent as CopyIconDarkFilled } from '../images/icon-copy-dark-filled.svg';
 import { ReactComponent as ArrowIcon } from '../images/icon-arrow-long.svg';
+
+import Layout from '../Components/Layout';
+import Toast from '../Components/Toast';
+import NumberButton from '../Components/NumberButton';
+import SkeletonLoader from '../Components/SkeletonLoader';
+import BackgroundColour from '../Components/BackgroundColour';
+import { defaultColor } from '../Components/SkeletonLoader';
+import './PaletteGenerator.css';
 
 function PaletteGenerator() {
   const [prompt, setPrompt] = useState('');
@@ -54,6 +57,9 @@ function PaletteGenerator() {
       }
       setBackgroundStyle(background);
 
+      localStorage.removeItem('savedBackground');
+      localStorage.setItem('savedBackground', JSON.stringify(background));
+
       // Find the index of the last HEX code in the full response
       const lastHexCode = colorObjects[colorObjects.length - 1].hex;
       const messageStartIndex = fullResponse.lastIndexOf(lastHexCode) + lastHexCode.length;
@@ -61,6 +67,7 @@ function PaletteGenerator() {
 
       setColors(colorObjects);
       setAdditionalMessage(additionalMessage); // Store the additional message
+
 
       // Add the additional message to chat history
       setChatHistory((prevHistory) => [
@@ -97,6 +104,12 @@ function PaletteGenerator() {
   const displayedColors = colors.slice(0, numberOfColors);
 
   useEffect(() => {
+    // Check if the page is just loaded and colors are saved in localStorage
+    const savedBackground = localStorage.getItem('savedBackground');
+    if (savedBackground) {
+     setBackgroundStyle(JSON.parse(savedBackground));
+    }
+
     // Add a welcome message to chatHistory when component mounts
     setChatHistory([
       {
@@ -110,7 +123,21 @@ function PaletteGenerator() {
     if (chatContainer) {
       chatContainer.scrollTop = chatContainer.scrollHeight;
     }
+
+    // Attach event listener for beforeunload
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
   }, []);
+
+  // Function to handle beforeunload event
+  const handleBeforeUnload = () => {
+    console.log('Clearing local storage on page refresh.');
+    localStorage.removeItem('savedBackground');
+  };
 
   /* ************************************************************************ */
   /* ********************* SAME AS COLOUR EXTRACTOR ************************* */
@@ -200,20 +227,6 @@ function PaletteGenerator() {
 
 
   /**
-  * NumberButton Component
-  * @param {number} number - The number to display on the button.
-  * @param {boolean}isActive - A flag indicating whether the button is active.
-  * @returns {JSX.Element} - The rendered NumberButton component.
-  */
-  const NumberButton = ({ number, isActive }) => (
-    <button
-      className={`number-button ${isActive ? 'active' : ''}`}
-      onClick={() => handleNumberChange(number)}>
-      {number}
-    </button>
-  );
-
-  /**
   * Handles the change in the number of colors.
   * @param {object} event - The change event.
   */
@@ -221,95 +234,6 @@ function PaletteGenerator() {
     setNumberOfColors(number);
   };
 
-
-  /**
-    * SkeletonLoader Component
-    * A component representing a skeleton loader with color information.
-    * NOTE: keep this an empty container!
-    * @returns {JSX.Element} - The rendered SkeletonLoader component.
-    */
-  const SkeletonLoader = () => (
-    <>
-      <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
-        {/* First dominant colour */}
-        <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
-          <div className="loader-square-bottom-align">
-            <div className="color-name-container">
-              <p className="color-name" style={{ color: defaultColor }}>Name</p>
-            </div>
-            <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
-            <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
-            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
-          </div>
-        </div>
-
-        {/* Second dominant colour */}
-        <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
-          <div className="loader-square-bottom-align">
-            <div className="color-name-container">
-              <p className="color-name" style={{ color: defaultColor }}>Name</p>
-            </div>
-            <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
-            <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
-            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
-          </div>
-        </div>
-
-        <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-          <div className="loader-square-top-align">
-            <div className="color-name-container">
-              <p className="color-name" style={{ color: defaultColor }}>Name</p>
-            </div>
-            <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
-            <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
-            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
-          </div>
-        </div>
-        <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-          <div className="loader-square-top-align">
-            <div className="color-name-container">
-              <p className="color-name" style={{ color: defaultColor }}>Name</p>
-            </div>
-            <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
-            <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
-            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
-          </div>
-        </div>
-        <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-          <div className="loader-square-top-align">
-            <div className="color-name-container">
-              <p className="color-name" style={{ color: defaultColor }}>Name</p>
-            </div>
-            <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
-            <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
-            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
-          </div>
-        </div>
-        <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-          <div className="loader-square-top-align">
-            <div className="color-name-container">
-              <p className="color-name" style={{ color: defaultColor }}>Name</p>
-            </div>
-            <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
-            <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
-            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-
-  /**
-   * Default Color Object
-   * Represents a default color with optional properties.
-   */
-  const defaultColor = {
-    name: "Silver",
-    rgba: "196, 196, 196, 0.25"
-    // hex: "#C4C4C4",
-    // rgb: "196, 196, 196",
-    // cmyk: "0, 0, 0, 23.1"
-  };
 
   /**
   * Color Variables
@@ -328,11 +252,11 @@ function PaletteGenerator() {
 
 
   /**
- * ColourBoxBottom Component
- * A component representing a colour box with color information aligned to bottom.
- * @param {object} color - The color object.
- * @returns {JSX.Element} - The rendered ColourBoxBottom component.
- */
+  * ColourBoxBottom Component
+  * A component representing a colour box with color information aligned to bottom.
+  * @param {object} color - The color object.
+  * @returns {JSX.Element} - The rendered ColourBoxBottom component.
+  */
   const ColourBoxBottom = ({ color }) => {
     const textColor = getTextColor(color.hex);
     const [isCopyIconFilled, setIsCopyIconFilled] = useState(false);
@@ -448,12 +372,12 @@ function PaletteGenerator() {
   return (
     <div className="palette-generator" style={backgroundStyle}>
 
-      <div className="background">
-        {Array.from({ length: 20 }, (_, i) => (
+      <BackgroundColour colorArray=
+        {Array.from({ length: 10 }, (_, i) => (
           <span key={i} style={{ color: `var(--color${i + 1})` }}></span>
         ))}
-      </div>
-
+      />
+      
       {/* Toast message */}
       {showToast && (
         <Toast

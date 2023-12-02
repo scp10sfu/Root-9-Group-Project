@@ -1,10 +1,28 @@
+// About.js
+
 import React, { useState, useRef, useEffect } from 'react';
+
+import BackgroundColour from '../Components/BackgroundColour';
 import Layout from '../Components/Layout';
-import './About.css'; // This imports the CSS file directly, no 'styles' object is 
-import image1 from '../images/paleta2.png';
+
+import './MainStyle.css';
 
 function About() {
     const [backgroundStyle, setBackgroundStyle] = useState({});
+
+    useEffect(() => {
+        // Retrieve saved background state from local storage
+        const savedBackground = JSON.parse(localStorage.getItem('savedBackground'));
+
+        // Set default background colors
+        if (savedBackground) {
+            setBackgroundStyle(savedBackground);
+        } else {
+            setBackgroundStyle({ color1: '#000000', color2: '#000000', color3: '#000000', color4: '#000000', color5: '#000000', color6: '#000000', color7: '#000000', color8: '#000000', color9: '#000000', color10: '#000000', color11: '#000000', color12: '#000000', color13: '#000000', color14: '#000000', color15: '#000000', color16: '#000000', color17: '#000000', color18: '#000000', color19: '#000000', color20: '#000000' });
+        }
+    }, []);
+
+    
 
     return (
         <div className="ColourExtractor" style={backgroundStyle}>
@@ -56,41 +74,6 @@ function About() {
                     </div>
 
                     <div className="col-xs-36 col-md-36"></div>
-
-
-
-                    {/* <section id="about" className="about-section">
-                    <div className="section-content">
-                        <div className="section-header">
-                            <p className="section-text">Get To Know More</p>
-                            <h1 className="title">About Us</h1>
-                        </div>
-                        <div className="about-main">
-                            <div className="about-image-container">
-                                <img src={image1} alt="Paleta" className="about-pic" />
-                            </div>
-                            <div className="about-details">
-                                <div className="overview">
-                                    <h3>Overview</h3>
-                                    <p>Our project is designed to cater to visual artists and individuals seeking creative inspiration.</p>
-                                </div>
-                                <div className="features">
-                                    <ol>
-                                        <li>
-                                            <h4>Image-Based Colour Extraction</h4>
-                                            <p>Extract dominant colours from user-uploaded images, and identify and organize them into visually appealing palettes.</p>
-                                        </li>
-                                        <li>
-                                            <h4>Prompt-Driven Palette Generation</h4>
-                                            <p>Generate colour palettes based on text prompts through a chat interface for a dynamic and personalized user experience.</p>
-                                        </li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section> */}
-
 
                 </div>
             </Layout>

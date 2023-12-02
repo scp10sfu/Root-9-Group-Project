@@ -17,6 +17,10 @@ import { ReactComponent as CopyIconDarkFilled } from '../images/icon-copy-dark-f
 
 import Layout from '../Components/Layout';
 import Toast from '../Components/Toast';
+import NumberButton from '../Components/NumberButton';
+import BackgroundColour from '../Components/BackgroundColour';
+import SkeletonLoader from '../Components/SkeletonLoader';
+import { defaultColor } from '../Components/SkeletonLoader';
 import './ColourExtractor.css';
 
 /**
@@ -64,7 +68,7 @@ function ColourExtractor() {
     if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
       throw new Error('Invalid RGB value');
     }
-    
+
     let c = 1 - (r / 255);
     let m = 1 - (g / 255);
     let y = 1 - (b / 255);
@@ -107,6 +111,41 @@ function ColourExtractor() {
   };
 
 
+
+  /**
+   * Converts RGB values to HSL format.
+   * @param {number} r - The red value (0 to 255).
+   * @param {number} g - The green value (0 to 255).
+   * @param {number} b - The blue value (0 to 255).
+   * @returns {Array} The HSL representation of the RGB values.
+   */
+  const rgbToHsl = (r, g, b) => {
+    r /= 255;
+    g /= 255;
+    b /= 255;
+
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
+    let h, s, l = (max + min) / 2;
+
+    if (max === min) {
+      h = s = 0; // grayscale
+    } else {
+      const d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+        case g: h = (b - r) / d + 2; break;
+        case b: h = (r - g) / d + 4; break;
+      }
+      h /= 6;
+    }
+
+    return [h * 360, s * 100, l * 100];
+  };
+
+
+
   /**
     * Extracts colors from the loaded image using ColorThief and updates the state.
     * @returns {Promise<void>} A Promise that resolves when the extraction is complete.
@@ -132,18 +171,18 @@ function ColourExtractor() {
           background[`--color${i + 1}`] = colorObjects[i]?.hex;
         }
         setBackgroundStyle(background);
-        setIsLoadingAndExtracting(false);
+
+        localStorage.removeItem('savedBackground');
+        localStorage.setItem('savedBackground', JSON.stringify(background));
 
         // Determine whether the image is light or dark
         const dominantColor = colorThief.getColor(imgRef.current);
         const brightness = (dominantColor[0] * 299 + dominantColor[1] * 587 + dominantColor[2] * 114) / 1000;
-        setIsLightImage(brightness > 30);
-
-        const [hue, saturation, lightness] = colorThief.getHSL(imgRef.current);
+        const [hue, saturation, lightness] = rgbToHsl(dominantColor[0], dominantColor[1], dominantColor[2]);
         const isLightBackground = lightness > 70 ? true : false;
         const isHighSaturation = saturation > 50 ? true : false;
 
-        setIsLightImage(isLightBackground || isHighSaturation);
+        setIsLightImage(isLightBackground || isHighSaturation || brightness > 30);
 
       } catch (error) {
         console.error('Error extracting the colors:', error);
@@ -179,13 +218,32 @@ function ColourExtractor() {
   * @effect
   */
   useEffect(() => {
-    if (image) {
+    // Check if the page is just loaded and colors are saved in localStorage
+    const savedBackground = localStorage.getItem('savedBackground');
+    if (savedBackground && !image) {
+      setBackgroundStyle(JSON.parse(savedBackground));
+
+    } else if (image) {
       setIsLoadingAndExtracting(true);
       extractColors();                      // Perform the API call
       setIsLoadingAndExtracting(false);     // Set loading state to false once API call is complete
     }
-  }, [numberOfColors]);
 
+    // Attach event listener for beforeunload
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [numberOfColors, image]);
+
+
+  // Function to handle beforeunload event
+  const handleBeforeUnload = () => {
+    console.log('Clearing local storage on page refresh.');
+    localStorage.removeItem('savedBackground');
+  };
 
   /**
   * Handles the change in the number of colors.
@@ -213,7 +271,7 @@ function ColourExtractor() {
     "image/x-icon",
     "image/tiff",
   ];
-    
+
   /**
   * Checks if the file type is valid.
   * @param {object} file - The file object.
@@ -247,8 +305,15 @@ function ColourExtractor() {
 
         reader.onload = (e) => {
           setImage(e.target.result);                            // Set image URL to display it
-          localStorage.setItem('savedImage', e.target.result);  // Save image data to local storage
+          // localStorage.setItem('savedImage', e.target.result);  // Save image data to local storage
           setIsImagePreviewActive(false);                       // Set image preview active
+
+          // Update the background style with saved colors from localStorage
+          const savedBackground = localStorage.getItem('savedBackground');
+          if (savedBackground) {
+            setBackgroundStyle(JSON.parse(savedBackground));
+          }
+
         };
         reader.readAsDataURL(file);
       }
@@ -286,129 +351,19 @@ function ColourExtractor() {
 
 
   /**
-  * NumberButton Component
-  * @param {number} number - The number to display on the button.
-  * @param {boolean}isActive - A flag indicating whether the button is active.
-  * @returns {JSX.Element} - The rendered NumberButton component.
-  */
-  const NumberButton = ({ number, isActive }) => (
-    <button
-      className={`number-button ${isActive ? 'active' : ''}`}
-      onClick={() => handleNumberChange(number)}>
-      {number}
-    </button>
-  );
-
-
-  /**
-  * SkeletonLoader Component
-  * A component representing a skeleton loader with color information.
-  * NOTE: keep this an empty container!
-  * @returns {JSX.Element} - The rendered SkeletonLoader component.
-  */
-  const SkeletonLoader = () => (
-    <>
-      <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
-        {/* First dominant colour */}
-        <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
-          <div className="loader-square-bottom-align">
-            <div className="color-name-container">
-              <p className="color-name" style={{ color: defaultColor }}>Name</p>
-            </div>
-            <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
-            <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
-            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
-          </div>
-        </div>
-
-        {/* Second dominant colour */}
-        <div className="wrapper-2-col secondary-section col-xs-36 col-md-18">
-          <div className="loader-square-bottom-align">
-            <div className="color-name-container">
-              <p className="color-name" style={{ color: defaultColor }}>Name</p>
-            </div>
-            <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
-            <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
-            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
-          </div>
-        </div>
-
-        <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-          <div className="loader-square-top-align">
-            <div className="color-name-container">
-              <p className="color-name" style={{ color: defaultColor }}>Name</p>
-            </div>
-            <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
-            <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
-            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
-          </div>
-        </div>
-        <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-          <div className="loader-square-top-align">
-            <div className="color-name-container">
-              <p className="color-name" style={{ color: defaultColor }}>Name</p>
-            </div>
-            <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
-            <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
-            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
-          </div>
-        </div>
-        <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-          <div className="loader-square-top-align">
-            <div className="color-name-container">
-              <p className="color-name" style={{ color: defaultColor }}>Name</p>
-            </div>
-            <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
-            <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
-            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
-          </div>
-        </div>
-        <div className="wrapper-4-col secondary-section col-xs-36 col-md-9">
-          <div className="loader-square-top-align">
-            <div className="color-name-container">
-              <p className="color-name" style={{ color: defaultColor }}>Name</p>
-            </div>
-            <p className="color-hex" style={{ color: defaultColor }}>HEX: {defaultColor.hex}</p>
-            <p className="color-rgb" style={{ color: defaultColor }}>RGB: {defaultColor.rgb}</p>
-            <p className="color-cmyk" style={{ color: defaultColor }}>CMYK: {defaultColor.cmyk}</p>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-
-  /**
-  * Default Color Object
-  * Represents a default color with optional properties.
-  * @typedef {Object} DefaultColor
-  * @property {string} [hex] - The HEX representation of the color.
-  * @property {string} [rgb] - The RGB representation of the color.
-  * @property {string} [cmyk] - The CMYK representation of the color.
-  * @property {string} [name] - The name of the color.
-  */
-  const defaultColor = {
-    name: "Silver",
-    rgba: "196, 196, 196, 0.25"
-    // hex: "#C4C4C4",
-    // rgb: "196, 196, 196",
-    // cmyk: "0, 0, 0, 23.1"
-  };
-
-
-  /**
   * Color Variables
   * Variables representing colors based on the 'colors' array.
   */
-  const firstColor = colors.length >= 1 ? colors[0] : defaultColor;
-  const secondColor = colors.length >= 2 ? colors[1] : defaultColor;
-  const thirdColor = colors.length >= 3 ? colors[2] : defaultColor;
-  const fourthColor = colors.length >= 4 ? colors[3] : defaultColor;
-  const fifthColor = colors.length >= 5 ? colors[4] : defaultColor;
-  const sixthColor = colors.length >= 6 ? colors[5] : defaultColor;
-  const seventhColor = colors.length >= 7 ? colors[6] : defaultColor;
-  const eighthColor = colors.length >= 8 ? colors[7] : defaultColor;
-  const ninthColor = colors.length >= 9 ? colors[8] : defaultColor;
-  const tenthColor = colors.length >= 10 ? colors[9] : defaultColor;
+  // const firstColor = colors.length >= 1 ? colors[0] : defaultColor;
+  // const secondColor = colors.length >= 2 ? colors[1] : defaultColor;
+  // const thirdColor = colors.length >= 3 ? colors[2] : defaultColor;
+  // const fourthColor = colors.length >= 4 ? colors[3] : defaultColor;
+  // const fifthColor = colors.length >= 5 ? colors[4] : defaultColor;
+  // const sixthColor = colors.length >= 6 ? colors[5] : defaultColor;
+  // const seventhColor = colors.length >= 7 ? colors[6] : defaultColor;
+  // const eighthColor = colors.length >= 8 ? colors[7] : defaultColor;
+  // const ninthColor = colors.length >= 9 ? colors[8] : defaultColor;
+  // const tenthColor = colors.length >= 10 ? colors[9] : defaultColor;
 
   // const colorVariables = {};
   // for (let i = 0; i < colors.length; i++) {
@@ -422,8 +377,14 @@ function ColourExtractor() {
    * @returns {JSX.Element} - The rendered ColourBoxBottom component.
    */
   const ColourBoxBottom = ({ color }) => {
-    const textColor = getTextColor(color.hex);
     const [isCopyIconFilled, setIsCopyIconFilled] = useState(false);
+
+    if (!color || typeof color.hex === 'undefined') {
+      // Handle the case where color is undefined or does not have a 'hex' property
+      color = defaultColor; // or display a default color, show an error, etc.
+    }
+
+    const textColor = getTextColor(color.hex);
 
     const copyToClipboard = (text) => {
       navigator.clipboard.writeText(text).then(() => {
@@ -479,8 +440,14 @@ function ColourExtractor() {
    * @returns {JSX.Element} - The rendered ColourBoxTop component.
    */
   const ColourBoxTop = ({ color }) => {
-    const textColor = getTextColor(color.hex);
     const [isCopyIconFilled, setIsCopyIconFilled] = useState(false);
+
+    if (!color || typeof color.hex === 'undefined') {
+      // Handle the case where color is undefined or does not have a 'hex' property
+      color = defaultColor; // or display a default color, show an error, etc.
+    }
+    const textColor = getTextColor(color.hex);
+
 
     const copyToClipboard = (text) => {
       navigator.clipboard.writeText(text).then(() => {
@@ -533,11 +500,11 @@ function ColourExtractor() {
 
     <div className="colour-extractor" style={backgroundStyle}>
 
-      <div className="background">
-        {Array.from({ length: 20 }, (_, i) => (
+      <BackgroundColour colorArray=
+        {Array.from({ length: 10 }, (_, i) => (
           <span key={i} style={{ color: `var(--color${i + 1})` }}></span>
         ))}
-      </div>
+      />
 
 
       {/* Toast message */}
@@ -614,6 +581,7 @@ function ColourExtractor() {
                     key={number}
                     number={number}
                     isActive={numberOfColors === number}
+                    onClick={handleNumberChange}
                   />
                 ))}
               </div>
@@ -623,99 +591,98 @@ function ColourExtractor() {
 
           {/* Conditional rendering based on isLoadingAndExtracting state */}
           {/* The main content - right part */}
-          {isLoadingAndExtracting ? (<SkeletonLoader />)
-            : (<>
-              {/* First dominant colour */}
-              <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
-                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-18">
-                  <ColourBoxBottom color={firstColor} />
-                </div>
+          {isLoadingAndExtracting ? (<SkeletonLoader />) : (<>
+            {/* First dominant colour */}
+            <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
+              <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-18">
+                <ColourBoxBottom color={colors[0]} />
+              </div>
 
-                {/* Second dominant colour */}
-                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-18">
-                  <ColourBoxBottom color={secondColor} />
-
-                </div>
-
-                {/* 4 colours */}
-                {numberOfColors === 4 && (<>
-                  <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-18">
-                    <ColourBoxTop color={thirdColor} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-18">
-                    <ColourBoxTop color={fourthColor} />
-                  </div>
-                </>)}
-
-                {/* 6 colours */}
-                {numberOfColors === 6 && (<>
-                  <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={thirdColor} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={fourthColor} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={fifthColor} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={sixthColor} />
-                  </div>
-                </>)}
-
-                {/* 8 colours */}
-                {numberOfColors === 8 && (<>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
-                    <ColourBoxTop color={thirdColor} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
-                    <ColourBoxTop color={fourthColor} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
-                    <ColourBoxTop color={fifthColor} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
-                    <ColourBoxTop color={sixthColor} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
-                    <ColourBoxTop color={seventhColor} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
-                    <ColourBoxTop color={eighthColor} />
-                  </div>
-                </>)}
-
-                {/* 10 colours */}
-                {numberOfColors === 10 && (<>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={thirdColor} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={fourthColor} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={fifthColor} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={sixthColor} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={seventhColor} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={eighthColor} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={ninthColor} />
-                  </div>
-                  <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={tenthColor} />
-                  </div>
-
-                </>)}
+              {/* Second dominant colour */}
+              <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-18">
+                <ColourBoxBottom color={colors[1]} />
 
               </div>
-            </>)}
+
+              {/* 4 colours */}
+              {numberOfColors === 4 && (<>
+                <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-18">
+                  <ColourBoxTop color={colors[2]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-18">
+                  <ColourBoxTop color={colors[3]} />
+                </div>
+              </>)}
+
+              {/* 6 colours */}
+              {numberOfColors === 6 && (<>
+                <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
+                  <ColourBoxTop color={colors[2]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
+                  <ColourBoxTop color={colors[3]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
+                  <ColourBoxTop color={colors[4]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
+                  <ColourBoxTop color={colors[5]} />
+                </div>
+              </>)}
+
+              {/* 8 colours */}
+              {numberOfColors === 8 && (<>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <ColourBoxTop color={colors[2]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <ColourBoxTop color={colors[3]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <ColourBoxTop color={colors[4]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <ColourBoxTop color={colors[5]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <ColourBoxTop color={colors[6]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
+                  <ColourBoxTop color={colors[7]} />
+                </div>
+              </>)}
+
+              {/* 10 colours */}
+              {numberOfColors === 10 && (<>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <ColourBoxTop color={colors[2]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <ColourBoxTop color={colors[3]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <ColourBoxTop color={colors[4]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <ColourBoxTop color={colors[5]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <ColourBoxTop color={colors[6]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <ColourBoxTop color={colors[7]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <ColourBoxTop color={colors[8]} />
+                </div>
+                <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
+                  <ColourBoxTop color={colors[9]} />
+                </div>
+
+              </>)}
+
+            </div>
+          </>)}
 
           {/* DO NOT DELETE THIS! */}
           <div className="footer col-xs-36 col-md-36"></div>
