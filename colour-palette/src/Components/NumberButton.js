@@ -18,3 +18,5 @@ function NumberButton({ number, isActive, onClick }) {
         </button>
     );
 }
+
+export default NumberButton;
