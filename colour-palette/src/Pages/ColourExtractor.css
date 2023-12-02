@@ -23,7 +23,7 @@
   align-self: stretch;
 }
 
-.text_block_text {
+.text_block .text_block_text {
   margin-top: 1em;
   align-self: stretch;
   color: rgba(18, 18, 18, 1);
@@ -36,17 +36,17 @@
 }
 
 /* Media query for small screens (e.g., mobile devices) */
-/* @media only screen and (max-width: 767px) {
+@media only screen and (max-width: 767px) {
   .text_block_text {
       font-size: 2rem; 
   }
 
   .text_block_subtext {
-      font-size: 1.2rem; 
+      font-size: 1rem; 
   }
-} */
+}
 
-.text_block_subtext {
+.text_block .text_block_subtext {
   align-self: stretch;
   color: rgba(18, 18, 18, 0.50);
   font-family: 'DM Sans', sans-serif;
@@ -103,10 +103,10 @@
   cursor: pointer;
 }
 
-.upload-area .upload-area-text {
+.upload-area-text {
   color: rgba(18, 18, 18, 0.85);
   font-family: 'DM Sans', sans-serif;
-  font-size: 0.25em;
+  font-size: 17px;
   font-style: normal;
   font-weight: 400;
   letter-spacing: 0.1em;
