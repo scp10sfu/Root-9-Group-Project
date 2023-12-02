@@ -9,6 +9,7 @@ import { ReactComponent as ArrowIcon } from '../images/icon-arrow-long.svg';
 
 import Layout from '../Components/Layout';
 import Toast from '../Components/Toast';
+import NumberButton from '../Components/NumberButton';
 import SkeletonLoader from '../Components/SkeletonLoader';
 import { defaultColor } from '../Components/SkeletonLoader';
 import './PaletteGenerator.css';
@@ -201,26 +202,13 @@ function PaletteGenerator() {
 
 
   /**
-  * NumberButton Component
-  * @param {number} number - The number to display on the button.
-  * @param {boolean}isActive - A flag indicating whether the button is active.
-  * @returns {JSX.Element} - The rendered NumberButton component.
-  */
-  const NumberButton = ({ number, isActive }) => (
-    <button
-      className={`number-button ${isActive ? 'active' : ''}`}
-      onClick={() => handleNumberChange(number)}>
-      {number}
-    </button>
-  );
-
-  /**
   * Handles the change in the number of colors.
   * @param {object} event - The change event.
   */
   const handleNumberChange = (number) => {
     setNumberOfColors(number);
   };
+
 
   /**
   * Color Variables
@@ -239,11 +227,11 @@ function PaletteGenerator() {
 
 
   /**
- * ColourBoxBottom Component
- * A component representing a colour box with color information aligned to bottom.
- * @param {object} color - The color object.
- * @returns {JSX.Element} - The rendered ColourBoxBottom component.
- */
+  * ColourBoxBottom Component
+  * A component representing a colour box with color information aligned to bottom.
+  * @param {object} color - The color object.
+  * @returns {JSX.Element} - The rendered ColourBoxBottom component.
+  */
   const ColourBoxBottom = ({ color }) => {
     const textColor = getTextColor(color.hex);
     const [isCopyIconFilled, setIsCopyIconFilled] = useState(false);
