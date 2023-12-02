@@ -234,13 +234,13 @@ function ColourExtractor() {
       if (event.target.files && event.target.files.length > 0) {
         const file = event.target.files[0];
 
+        if (!validFileType(file)) {
+          throw new Error('Invalid file type! Please upload an image');
+        }
+
         // Check if file size exceeds the limit
         if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
           throw new Error(`The file exceeds the limit of ${MAX_FILE_SIZE_MB} MB`);
-        }
-
-        if (!validFileType(file)) {
-          throw new Error('Invalid file type! Please upload an image');
         }
 
         const reader = new FileReader();
@@ -380,6 +380,11 @@ function ColourExtractor() {
   /**
   * Default Color Object
   * Represents a default color with optional properties.
+  * @typedef {Object} DefaultColor
+  * @property {string} [hex] - The HEX representation of the color.
+  * @property {string} [rgb] - The RGB representation of the color.
+  * @property {string} [cmyk] - The CMYK representation of the color.
+  * @property {string} [name] - The name of the color.
   */
   const defaultColor = {
     name: "Silver",
@@ -405,6 +410,10 @@ function ColourExtractor() {
   const ninthColor = colors.length >= 9 ? colors[8] : defaultColor;
   const tenthColor = colors.length >= 10 ? colors[9] : defaultColor;
 
+  // const colorVariables = {};
+  // for (let i = 0; i < colors.length; i++) {
+  //   colorVariables[`--color${i + 1}`] = colors[i]?.hex || defaultColorObject.hex;
+  // }
 
   /**
    * ColourBoxBottom Component
