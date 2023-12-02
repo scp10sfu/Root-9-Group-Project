@@ -470,6 +470,7 @@ function PaletteGenerator() {
                     key={number}
                     number={number}
                     isActive={numberOfColors === number}
+                    onClick={handleNumberChange}
                   />
                 ))}
               </div>
