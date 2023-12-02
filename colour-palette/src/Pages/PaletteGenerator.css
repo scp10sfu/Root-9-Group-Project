@@ -1,7 +1,7 @@
 /* PaletteGenerator.css */
 
 .palette-generator {
-  display: flex;
+  /* display: flex; */
   flex-wrap: wrap;
   justify-content: space-around;
 }

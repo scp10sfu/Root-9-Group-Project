@@ -390,8 +390,8 @@ function PaletteGenerator() {
       )}
 
       <Layout>
-        <div className="grid-container general">
-          <div className="col-xs-36 col-md-36"></div>
+      <div className="grid-container general col-xs-justify-content-center col-md-justify-content-center">
+        <div className="col-xs-36 col-md-36"></div>
 
           {/* The main content - left part */}
           <div className="main-section col-xs-36 col-md-12 grid-container nested-grid">
