@@ -140,8 +140,6 @@ function ColourExtractor() {
         localStorage.removeItem('savedBackground');
         localStorage.setItem('savedBackground', JSON.stringify(background));
 
-        setIsLoadingAndExtracting(false);
-
         // Determine whether the image is light or dark
         const dominantColor = colorThief.getColor(imgRef.current);
         const brightness = (dominantColor[0] * 299 + dominantColor[1] * 587 + dominantColor[2] * 114) / 1000;
@@ -309,16 +307,16 @@ function ColourExtractor() {
   * Color Variables
   * Variables representing colors based on the 'colors' array.
   */
-  const firstColor = colors.length >= 1 ? colors[0] : defaultColor;
-  const secondColor = colors.length >= 2 ? colors[1] : defaultColor;
-  const thirdColor = colors.length >= 3 ? colors[2] : defaultColor;
-  const fourthColor = colors.length >= 4 ? colors[3] : defaultColor;
-  const fifthColor = colors.length >= 5 ? colors[4] : defaultColor;
-  const sixthColor = colors.length >= 6 ? colors[5] : defaultColor;
-  const seventhColor = colors.length >= 7 ? colors[6] : defaultColor;
-  const eighthColor = colors.length >= 8 ? colors[7] : defaultColor;
-  const ninthColor = colors.length >= 9 ? colors[8] : defaultColor;
-  const tenthColor = colors.length >= 10 ? colors[9] : defaultColor;
+  // const firstColor = colors.length >= 1 ? colors[0] : defaultColor;
+  // const secondColor = colors.length >= 2 ? colors[1] : defaultColor;
+  // const thirdColor = colors.length >= 3 ? colors[2] : defaultColor;
+  // const fourthColor = colors.length >= 4 ? colors[3] : defaultColor;
+  // const fifthColor = colors.length >= 5 ? colors[4] : defaultColor;
+  // const sixthColor = colors.length >= 6 ? colors[5] : defaultColor;
+  // const seventhColor = colors.length >= 7 ? colors[6] : defaultColor;
+  // const eighthColor = colors.length >= 8 ? colors[7] : defaultColor;
+  // const ninthColor = colors.length >= 9 ? colors[8] : defaultColor;
+  // const tenthColor = colors.length >= 10 ? colors[9] : defaultColor;
 
   // const colorVariables = {};
   // for (let i = 0; i < colors.length; i++) {
@@ -332,8 +330,14 @@ function ColourExtractor() {
    * @returns {JSX.Element} - The rendered ColourBoxBottom component.
    */
   const ColourBoxBottom = ({ color }) => {
-    const textColor = getTextColor(color.hex);
     const [isCopyIconFilled, setIsCopyIconFilled] = useState(false);
+
+    if (!color || typeof color.hex === 'undefined') {
+      // Handle the case where color is undefined or does not have a 'hex' property
+      color = defaultColor; // or display a default color, show an error, etc.
+    }
+
+    const textColor = getTextColor(color.hex);
 
     const copyToClipboard = (text) => {
       navigator.clipboard.writeText(text).then(() => {
@@ -389,8 +393,14 @@ function ColourExtractor() {
    * @returns {JSX.Element} - The rendered ColourBoxTop component.
    */
   const ColourBoxTop = ({ color }) => {
-    const textColor = getTextColor(color.hex);
     const [isCopyIconFilled, setIsCopyIconFilled] = useState(false);
+
+    if (!color || typeof color.hex === 'undefined') {
+      // Handle the case where color is undefined or does not have a 'hex' property
+      color = defaultColor; // or display a default color, show an error, etc.
+    }
+    const textColor = getTextColor(color.hex);
+   
 
     const copyToClipboard = (text) => {
       navigator.clipboard.writeText(text).then(() => {
@@ -534,93 +544,92 @@ function ColourExtractor() {
 
           {/* Conditional rendering based on isLoadingAndExtracting state */}
           {/* The main content - right part */}
-          {isLoadingAndExtracting ? (<SkeletonLoader />)
-            : (<>
+          {isLoadingAndExtracting ? (<SkeletonLoader />) : (<>
               {/* First dominant colour */}
               <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
                 <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-18">
-                  <ColourBoxBottom color={firstColor} />
+                  <ColourBoxBottom color={colors[0]} />
                 </div>
 
                 {/* Second dominant colour */}
                 <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-18">
-                  <ColourBoxBottom color={secondColor} />
+                  <ColourBoxBottom color={colors[1]} />
 
                 </div>
 
                 {/* 4 colours */}
                 {numberOfColors === 4 && (<>
                   <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-18">
-                    <ColourBoxTop color={thirdColor} />
+                    <ColourBoxTop color={colors[2]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-18">
-                    <ColourBoxTop color={fourthColor} />
+                    <ColourBoxTop color={colors[3]} />
                   </div>
                 </>)}
 
                 {/* 6 colours */}
                 {numberOfColors === 6 && (<>
                   <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={thirdColor} />
+                    <ColourBoxTop color={colors[2]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={fourthColor} />
+                    <ColourBoxTop color={colors[3]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={fifthColor} />
+                    <ColourBoxTop color={colors[4]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={sixthColor} />
+                    <ColourBoxTop color={colors[5]} />
                   </div>
                 </>)}
 
                 {/* 8 colours */}
                 {numberOfColors === 8 && (<>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
-                    <ColourBoxTop color={thirdColor} />
+                    <ColourBoxTop color={colors[2]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
-                    <ColourBoxTop color={fourthColor} />
+                    <ColourBoxTop color={colors[3]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
-                    <ColourBoxTop color={fifthColor} />
+                    <ColourBoxTop color={colors[4]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
-                    <ColourBoxTop color={sixthColor} />
+                    <ColourBoxTop color={colors[5]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
-                    <ColourBoxTop color={seventhColor} />
+                    <ColourBoxTop color={colors[6]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
-                    <ColourBoxTop color={eighthColor} />
+                    <ColourBoxTop color={colors[7]} />
                   </div>
                 </>)}
 
                 {/* 10 colours */}
                 {numberOfColors === 10 && (<>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={thirdColor} />
+                    <ColourBoxTop color={colors[2]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={fourthColor} />
+                    <ColourBoxTop color={colors[3]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={fifthColor} />
+                    <ColourBoxTop color={colors[4]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={sixthColor} />
+                    <ColourBoxTop color={colors[5]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={seventhColor} />
+                    <ColourBoxTop color={colors[6]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={eighthColor} />
+                    <ColourBoxTop color={colors[7]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={ninthColor} />
+                    <ColourBoxTop color={colors[8]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={tenthColor} />
+                    <ColourBoxTop color={colors[9]} />
                   </div>
 
                 </>)}

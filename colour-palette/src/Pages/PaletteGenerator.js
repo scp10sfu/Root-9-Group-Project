@@ -357,16 +357,12 @@ function PaletteGenerator() {
   return (
     <div className="palette-generator" style={backgroundStyle}>
 
-      {/* <div className="background">
-        {Array.from({ length: 20 }, (_, i) => (
+      <BackgroundColour colorArray=
+        {Array.from({ length: 10 }, (_, i) => (
           <span key={i} style={{ color: `var(--color${i + 1})` }}></span>
         ))}
-      </div> */}
-
-<BackgroundColour colorArray={Array.from({ length: 10 }, (_, i) => `var(--color${i + 1})`)} />
-
-{/* <BackgroundColour colorArray={Object.values(backgroundStyle)} /> */}
-
+      />
+      
       {/* Toast message */}
       {showToast && (
         <Toast
