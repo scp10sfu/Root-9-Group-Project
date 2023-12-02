@@ -16,9 +16,13 @@ import { ReactComponent as CopyIconWhiteFilled } from '../images/icon-copy-white
 import { ReactComponent as CopyIconDarkFilled } from '../images/icon-copy-dark-filled.svg';
 
 import Layout from '../Components/Layout';
-import './ColourExtractor.css';
 import Toast from '../Components/Toast';
+import './ColourExtractor.css';
 
+/**
+ * ColourExtractor Component
+ * @returns {JSX.Element} The rendered ColourExtractor component.
+ */
 function ColourExtractor() {
   const [numberOfColors, setNumberOfColors] = useState(6);  // Number of colors to extract (6 by default)
   const [image, setImage] = useState(null);                 // Holds the image URL
@@ -46,14 +50,21 @@ function ColourExtractor() {
     return hex.length === 1 ? '0' + hex : hex;
   }).join('');
 
+
   /**
   * Converts RGB values to CMYK format.
   * @param {number} r - The red value (0 to 255).
   * @param {number} g - The green value (0 to 255).
   * @param {number} b - The blue value (0 to 255).
-  * @returns {string} The CMEK representation of the RGB values.
+  * @throws {Error} Invalid RGB value.
+  * @returns {string} The CMYK representation of the RGB values.
   */
   const rgbToCmyk = (r, g, b) => {
+    // Validate the RGB values
+    if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
+      throw new Error('Invalid RGB value');
+    }
+    
     let c = 1 - (r / 255);
     let m = 1 - (g / 255);
     let y = 1 - (b / 255);
@@ -73,10 +84,10 @@ function ColourExtractor() {
 
 
   /**
-   * Determines whether the text in the colour block should be light or dark.
-   * @param {string} hexColor - The HEX color code.
-   * @returns {string} The text color.
-   */
+  * Determines whether the text in the colour block should be light or dark.
+  * @param {string} hexColor - The HEX color code.
+  * @returns {string} The text color.
+  */
   const getTextColor = (hexColor) => {
     if (!hexColor || typeof hexColor !== 'string' || !hexColor.match(/^#[0-9a-fA-F]{6}$/)) {
       // Return a default color or handle the error in a way that fits your application
@@ -146,26 +157,26 @@ function ColourExtractor() {
 
 
   /**
-    * Fetches color name from the API based on HEX code.
-    * @param {string} hex - HEX color code.
-    * @returns {Promise<string>} Resolves with the color name.
-    */
+  * Fetches color name from the API based on HEX code.
+  * @param {string} hex - HEX color code.
+  * @returns {Promise<string>} Resolves with the color name.
+  */
   const fetchColorName = async (hex) => {
     try {
       const response = await axios.get(`https://www.thecolorapi.com/id?hex=${hex.replace('#', '')}`);
-      return response.data.name.value;
+      return response.data.name.value || 'Unknown';
     } catch (error) {
       console.error('Error fetching the color name:', error);
-      return hex; // Fallback to HEX if the name can't be fetched
+      return 'Unknown'; // Fallback to HEX if the name can't be fetched
     }
   };
 
 
   /**
   * Effect hook to update the colors when numberOfColors changes.
-  * @effect
   * @param {number} numberOfColors - Number of colors to extract.
   * @returns {function} Cleanup function.
+  * @effect
   */
   useEffect(() => {
     if (image) {
@@ -178,16 +189,44 @@ function ColourExtractor() {
 
   /**
   * Handles the change in the number of colors.
-  * @param {object} event - The change event.
+  * @param {number} number - The number of colors.
+  * @returns {void}
+  * @callback
   */
   const handleNumberChange = (number) => {
     setNumberOfColors(number);
   };
 
+  /**
+   * Different file types that can be uploaded.
+   * See https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types
+   */
+  const fileTypes = [
+    "image/apng",
+    "image/avif",
+    "image/gif",
+    "image/jpeg",  // includes .jpg, .jpeg, .jfif, .pjpeg, .pjp
+    "image/png",
+    "image/svg+xml",
+    "image/webp",
+    "image/bmp",
+    "image/x-icon",
+    "image/tiff",
+  ];
+    
+  /**
+  * Checks if the file type is valid.
+  * @param {object} file - The file object.
+  * @returns {boolean} True if the file type is valid, false otherwise.
+  */
+  function validFileType(file) {
+    return fileTypes.includes(file.type);
+  }
 
   /**
-  * Handles the file upload.
+  *  Handles file upload and sets the image URL.
   * @param {object} event - The file change event.
+  * @returns {void}
   */
   const handleImageChange = (event) => {
     setIsLoadingAndExtracting(true);
@@ -198,6 +237,10 @@ function ColourExtractor() {
         // Check if file size exceeds the limit
         if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
           throw new Error(`The file exceeds the limit of ${MAX_FILE_SIZE_MB} MB`);
+        }
+
+        if (!validFileType(file)) {
+          throw new Error('Invalid file type! Please upload an image');
         }
 
         const reader = new FileReader();
@@ -231,6 +274,7 @@ function ColourExtractor() {
 
   /**
   * Handles closing the image preview.
+  * @returns {void}
   */
   const handleClosePreview = () => {
     setIsLoadingAndExtracting(false);
@@ -517,7 +561,7 @@ function ColourExtractor() {
 
               <div className="upload-container col-xs-36 col-md-25">
                 <div className="upload-area">
-                  <input type="file" accept="image/*" onChange={handleImageChange} id="fileInput" />
+                  <input type="file" accept=".apng, .avif, .gif, .jpg, .jpeg, .jfif, .pjpeg, .pjp, .png, .svg, .webp, .bmp, .ico, .cur, .tif, .tiff" onChange={handleImageChange} id="fileInput" />
                   <label htmlFor="fileInput">
                     <div className="text_block_text">
                       <UploadIcon className="upload-icon-dark" style={{ width: '40px', height: '40px' }} />
