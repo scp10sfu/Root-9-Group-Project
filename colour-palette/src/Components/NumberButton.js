@@ -1,5 +1,8 @@
 // NumberButton.js
 
+
+import React from 'react';
+
 /**
 * NumberButton Component
 * A component representing a number button.
@@ -13,7 +16,7 @@ function NumberButton({ number, isActive, onClick }) {
     return (
         <button
             className={`number-button ${isActive ? 'active' : ''}`}
-            onClick={onClick}>
+            onClick={() => onClick(number)}>
             {number}
         </button>
     );
