@@ -38,10 +38,10 @@
 .title {
   color: rgba(18, 18, 18, 1);
   font-family: 'DM Mono', monospace;
-  font-size: 1em;
-  font-weight: 600;
+  font-size: 0.9em;
+  font-weight: 500;
   /* white-space: nowrap; */
-  letter-spacing: 1.4px;
+  letter-spacing: 0.2em;
   padding-bottom: 0.4em;
 
   /* text-align: center;
@@ -59,9 +59,9 @@
 .left-title {
   color: rgba(18, 18, 18, 1);
   font-family: 'DM Mono', monospace;
-  font-size: 1em;
-  font-weight: 600;
-  letter-spacing: 1.4px;
+  font-size: 0.9em;
+  font-weight: 700;
+  letter-spacing: 0.2em;
 
   text-align: left; /* Adjusted to left alignment */
   display: flex;
@@ -76,9 +76,9 @@
 .content-text {
   color: rgba(18, 18, 18, 0.75);
   font-family: 'DM Sans', sans-serif;
-  font-size: 1em;
+  font-size: 0.9em;
   font-weight: 400;
-  letter-spacing: 1.8px;
+  letter-spacing: 0.1em;
 
   /* text-align: center;
   display: flex;

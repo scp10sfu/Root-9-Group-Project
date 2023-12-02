@@ -1,10 +1,28 @@
+// About.js
+
 import React, { useState, useRef, useEffect } from 'react';
+
+import BackgroundColour from '../Components/BackgroundColour';
 import Layout from '../Components/Layout';
+
 import './MainStyle.css';
-import image1 from '../images/paleta2.png';
 
 function About() {
     const [backgroundStyle, setBackgroundStyle] = useState({});
+
+    useEffect(() => {
+        // Retrieve saved background state from local storage
+        const savedBackground = JSON.parse(localStorage.getItem('savedBackground'));
+
+        // Set default background colors
+        if (savedBackground) {
+            setBackgroundStyle(savedBackground);
+        } else {
+            setBackgroundStyle({ color1: '#000000', color2: '#000000', color3: '#000000', color4: '#000000', color5: '#000000', color6: '#000000', color7: '#000000', color8: '#000000', color9: '#000000', color10: '#000000', color11: '#000000', color12: '#000000', color13: '#000000', color14: '#000000', color15: '#000000', color16: '#000000', color17: '#000000', color18: '#000000', color19: '#000000', color20: '#000000' });
+        }
+    }, []);
+
+    
 
     return (
         <div className="ColourExtractor" style={backgroundStyle}>
