@@ -1,5 +1,6 @@
 // SkeletonLoader.js
 import React from 'react';
+import './SkeletonLoader.css';
 
 /**
 * Default Color Object
