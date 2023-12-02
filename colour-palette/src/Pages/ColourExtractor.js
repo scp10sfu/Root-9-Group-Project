@@ -18,6 +18,7 @@ import { ReactComponent as CopyIconDarkFilled } from '../images/icon-copy-dark-f
 import Layout from '../Components/Layout';
 import Toast from '../Components/Toast';
 import NumberButton from '../Components/NumberButton';
+import BackgroundColour from '../Components/BackgroundColour';
 import SkeletonLoader from '../Components/SkeletonLoader';
 import { defaultColor } from '../Components/SkeletonLoader';
 import './ColourExtractor.css';
@@ -135,6 +136,10 @@ function ColourExtractor() {
           background[`--color${i + 1}`] = colorObjects[i]?.hex;
         }
         setBackgroundStyle(background);
+
+        localStorage.removeItem('savedBackground');
+        localStorage.setItem('savedBackground', JSON.stringify(background));
+
         setIsLoadingAndExtracting(false);
 
         // Determine whether the image is light or dark
@@ -182,12 +187,17 @@ function ColourExtractor() {
   * @effect
   */
   useEffect(() => {
-    if (image) {
+     // Check if the page is just loaded and colors are saved in localStorage
+     const savedBackground = localStorage.getItem('savedBackground');
+     if (savedBackground && !image) {
+      setBackgroundStyle(JSON.parse(savedBackground));
+      
+     } else if (image) {
       setIsLoadingAndExtracting(true);
       extractColors();                      // Perform the API call
       setIsLoadingAndExtracting(false);     // Set loading state to false once API call is complete
     }
-  }, [numberOfColors]);
+  }, [numberOfColors, image]);
 
 
   /**
@@ -250,8 +260,15 @@ function ColourExtractor() {
 
         reader.onload = (e) => {
           setImage(e.target.result);                            // Set image URL to display it
-          localStorage.setItem('savedImage', e.target.result);  // Save image data to local storage
+          // localStorage.setItem('savedImage', e.target.result);  // Save image data to local storage
           setIsImagePreviewActive(false);                       // Set image preview active
+        
+          // Update the background style with saved colors from localStorage
+          const savedBackground = localStorage.getItem('savedBackground');
+          if (savedBackground) {
+            setBackgroundStyle(JSON.parse(savedBackground));
+          }
+        
         };
         reader.readAsDataURL(file);
       }
@@ -426,11 +443,11 @@ function ColourExtractor() {
 
     <div className="colour-extractor" style={backgroundStyle}>
 
-      <div className="background">
-        {Array.from({ length: 20 }, (_, i) => (
+<BackgroundColour colorArray=
+        {Array.from({ length: 10 }, (_, i) => (
           <span key={i} style={{ color: `var(--color${i + 1})` }}></span>
         ))}
-      </div>
+      />
 
 
       {/* Toast message */}

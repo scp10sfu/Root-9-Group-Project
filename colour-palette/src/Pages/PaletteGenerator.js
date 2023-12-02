@@ -11,6 +11,7 @@ import Layout from '../Components/Layout';
 import Toast from '../Components/Toast';
 import NumberButton from '../Components/NumberButton';
 import SkeletonLoader from '../Components/SkeletonLoader';
+import BackgroundColour from '../Components/BackgroundColour';
 import { defaultColor } from '../Components/SkeletonLoader';
 import './PaletteGenerator.css';
 
@@ -56,6 +57,9 @@ function PaletteGenerator() {
       }
       setBackgroundStyle(background);
 
+      // Save the background state to local storage
+      localStorage.setItem('savedBackground', JSON.stringify(background));
+
       // Find the index of the last HEX code in the full response
       const lastHexCode = colorObjects[colorObjects.length - 1].hex;
       const messageStartIndex = fullResponse.lastIndexOf(lastHexCode) + lastHexCode.length;
@@ -99,6 +103,12 @@ function PaletteGenerator() {
   const displayedColors = colors.slice(0, numberOfColors);
 
   useEffect(() => {
+    // Retrieve saved background state from local storage
+    const savedBackground = localStorage.getItem('savedBackground');
+    if (savedBackground) {
+      setBackgroundStyle(JSON.parse(savedBackground));
+    }
+
     // Add a welcome message to chatHistory when component mounts
     setChatHistory([
       {
@@ -347,11 +357,15 @@ function PaletteGenerator() {
   return (
     <div className="palette-generator" style={backgroundStyle}>
 
-      <div className="background">
+      {/* <div className="background">
         {Array.from({ length: 20 }, (_, i) => (
           <span key={i} style={{ color: `var(--color${i + 1})` }}></span>
         ))}
-      </div>
+      </div> */}
+
+<BackgroundColour colorArray={Array.from({ length: 10 }, (_, i) => `var(--color${i + 1})`)} />
+
+{/* <BackgroundColour colorArray={Object.values(backgroundStyle)} /> */}
 
       {/* Toast message */}
       {showToast && (
