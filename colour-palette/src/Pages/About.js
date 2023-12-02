@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Layout from '../Components/Layout';
-import './About.css'; // This imports the CSS file directly, no 'styles' object is 
+import './MainStyle.css';
 import image1 from '../images/paleta2.png';
 
 function About() {

@@ -13,6 +13,19 @@
 /* ********************************* CONTENT ********************************* */
 /* *************************************************************************** */
 
+.links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+
+  color:rgba(18, 18, 18, 1);
+  font-family: 'DM Mono', monospace;
+  font-size: 1.25em;
+  font-weight: 500;
+  text-decoration: none;
+}
 
 .block {
   /* background: rgba(255, 127, 80, 0.2); */
