@@ -1,7 +1,7 @@
 # 🎨 paletä 🖌️
 
 [![Netlify Build Status](https://api.netlify.com/api/v1/badges/4c366889-27a9-4dd6-b40f-b30a9a022862/deploy-status)](https://mypaleta.netlify.app/)
-![Uptime Robot status](https://img.shields.io/uptimerobot/status/m795784458-c193d64b3bfad2411497c863%20)
+![Uptime Robot status](https://img.shields.io/uptimerobot/status/m795784458-8d1674ba3b95c4e625503e31)
 
 Paleta is a web application that allows you to obtain color palettes from user uploaded images or AI generated prompts.
 
