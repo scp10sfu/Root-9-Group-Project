@@ -24,8 +24,9 @@ function PaletteGenerator() {
   const [colors, setColors] = useState([]);
   const colorThief = new ColorThief();
   const [backgroundStyle, setBackgroundStyle] = useState({});
-  const [showToast, setShowToast] = useState(false);
+  const [toastVisible, setToastVisible] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
+  const [toastType, setToastType] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
 
   const [additionalMessage, setAdditionalMessage] = useState('');
@@ -143,6 +144,26 @@ function PaletteGenerator() {
   /* ********************* SAME AS COLOUR EXTRACTOR ************************* */
   /* ************************************************************************ */
 
+  /** 
+   * Displays a toast message.
+   * @param {string} type - The type of the toast message (e.g., 'success', 'error', 'info').
+   * @param {string} message - The message to display.
+   * @returns {void}
+  */
+  const showToast = (type, message) => {
+    setToastType(type);
+    setToastMessage(message);
+    setToastVisible(true);
+  
+    // Automatically hide the toast after a certain duration (e.g., 3000 milliseconds)
+    setTimeout(() => {
+      setToastVisible(false);
+      setToastMessage(null);
+      setToastType(null);
+    }, 1500);
+  };
+
+  
   /**
    * Converts HEX values to RGB format.
    * @param {string} hex - The HEX color code.
@@ -268,19 +289,10 @@ const ColourBox = ({ color, align }) => {
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text).then(() => {
-      setShowToast(true);
-      setToastMessage('Copied to clipboard!');
 
-      setTimeout(() => {
-        setShowToast(false);
-        setToastMessage(null);
-      }, 1500);
-
+      showToast('info', 'Copied to clipboard!');
+      
       toggleCopyIcon();
-
-      setTimeout(() => {
-        toggleCopyIcon();
-      }, 300);
     });
   };
 
@@ -328,13 +340,14 @@ const ColourBox = ({ color, align }) => {
       />
       
       {/* Toast message */}
-      {showToast && (
+      {toastVisible && (
         <Toast
-          // type={}
+          type={toastType}
           message={toastMessage}
           onClose={() => {
-            setShowToast(false);
+            setToastVisible(false);
             setToastMessage('');
+            setToastType('');
           }}
         />
       )}
@@ -430,7 +443,6 @@ const ColourBox = ({ color, align }) => {
 
           {/* Conditional rendering based on isLoading state */}
           {/* The main content - right part */}
-          export { numberOfColors };
           {isLoading ? (<SkeletonLoader />)
             : (<>
 

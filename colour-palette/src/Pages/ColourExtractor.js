@@ -38,7 +38,8 @@ function ColourExtractor() {
   const [isLightImage, setIsLightImage] = useState(false);
   const [backgroundStyle, setBackgroundStyle] = useState({});
   const [isLoadingAndExtracting, setIsLoadingAndExtracting] = useState(false);  // Add loading state for image upload
-  const [showToast, setShowToast] = useState(false);
+  const [toastVisible, setToastVisible] = useState(false);
+  const [toastType, setToastType] = useState('');
   const [toastMessage, setToastMessage] = useState('');
   const MAX_FILE_SIZE_MB = 10;
 
@@ -332,19 +333,33 @@ function ColourExtractor() {
       setNumberOfColors(6);
 
       // Display a toast message for the file size limit exceeded error
-      setToastMessage(error.message);
-      setShowToast(true);
+      showToast('error', error.message);
+      // < Toast type='error' message={error.message} />
+      // <Toast type='error' message={error.message} />
     }
-
-    // Auto-hide the toast after a certain duration (e.g., 3000 milliseconds)
-    setTimeout(() => {
-      setShowToast(false);
-      setToastMessage(null);
-    }, 3000);
-
+    
     // Note: We don't need to set isLoadingAndExtracting to false here,
     // as the extraction process (extractColors function) will handle it
   };
+
+    /** 
+   * Displays a toast message.
+   * @param {string} type - The type of the toast message (e.g., 'success', 'error', 'info').
+   * @param {string} message - The message to display.
+   * @returns {void}
+  */
+    const showToast = (type, message) => {
+      setToastType(type);
+      setToastMessage(message);
+      setToastVisible(true);
+    
+      // Automatically hide the toast after a certain duration (e.g., 3000 milliseconds)
+      setTimeout(() => {
+        setToastVisible(false);
+        setToastMessage(null);
+        setToastType(null);
+      }, 3000);
+    };
 
 
   /**
@@ -393,19 +408,10 @@ const ColourBox = ({ color, align }) => {
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text).then(() => {
-      setShowToast(true);
-      setToastMessage('Copied to clipboard!');
 
-      setTimeout(() => {
-        setShowToast(false);
-        setToastMessage(null);
-      }, 1500);
+      showToast('info', 'Copied to clipboard!');
 
       toggleCopyIcon();
-
-      setTimeout(() => {
-        toggleCopyIcon();
-      }, 300);
     });
   };
 
@@ -451,13 +457,14 @@ const ColourBox = ({ color, align }) => {
 
 
       {/* Toast message */}
-      {showToast && (
+      {toastVisible && (
         <Toast
-          type={showToast.type}
+          type={toastType}
           message={toastMessage}
           onClose={() => {
-            setShowToast(false);
+            setToastVisible(false);
             setToastMessage('');
+            setToastType('');
           }}
         />
       )}

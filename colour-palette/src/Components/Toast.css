@@ -6,7 +6,10 @@
     margin-bottom: 2em;
     left: 50%;
     transform: translateX(-50%);
+    /* background-color: rgba(18, 18, 18, 0.45); */
     background-color: rgba(186, 229, 13, 1);
+    /* background-color: rgba(255, 255, 255, 0.6); */
+    
     color: rgba(18, 18, 18, 1);
     border-radius: 85px;
     padding: 10px 25px;
@@ -15,7 +18,7 @@
     display: inline-flex;
     justify-content: center;
 
-    box-shadow: 0 8px 32px 0 rgba(18, 18, 18, 0.20);
+    box-shadow: 2px 8px 32px 2px rgba(18, 18, 18, 0.45);
 
     backdrop-filter: blur(4.0px);
     -webkit-backdrop-filter: blur(4.0px);
@@ -43,14 +46,15 @@
     justify-content: center;
 }
 
-.toast-success {
+.toast .toast-success {
     background-color: rgba(186, 229, 13, 1);
 }
 
-.toast-error {
+.toast .toast-error {
     background-color: rgba(238, 86, 34, 1);
 }
 
-.toast-info {
-    background-color: rgba(255, 255, 255, 0.9);
+.toast .toast-info {
+    /* background-color: rgba(255, 255, 255, 0.5); */
+    background-color: rgba(18, 18, 18, 0.80);
 }
