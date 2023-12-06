@@ -24,4 +24,8 @@ Toast.propTypes = {
   onClose: PropTypes.func.isRequired, // Callback function when the toast is closed
 };
 
+const ToastInfo = ({ message }) => <Toast message={message} type="info" />;
+const ToastError = ({ message }) => <Toast message={message} type="error" />;
+const ToastSuccess = ({ message }) => <Toast message={message} type="success" />;
+
 export default Toast;

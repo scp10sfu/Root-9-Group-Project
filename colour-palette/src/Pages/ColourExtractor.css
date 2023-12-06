@@ -254,34 +254,26 @@
   gap: 5px;
 }
 
-.color-bottom-align {
+.color-box {
   width: 100%;
   height: 100%;
   background-color: rgba(18, 18, 18, 0.05);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  /* Aligns the content to the bottom */
-  align-items: left;
   padding: 0.95em;
   white-space: nowrap;
-  gap: 0.22em;
+  gap: 0.3em;
   overflow-wrap: break-word;
 }
 
-.color-top-align {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(18, 18, 18, 0.05);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  /* Aligns the content to the top */
+.color-bottom-align {
+  justify-content: flex-end;
   align-items: left;
-  padding: 0.95em;
-  white-space: nowrap;
-  gap: 0.22em;
-  overflow-wrap: break-word;
+}
+
+.color-top-align {
+  justify-content: flex-start;
+  align-items: left;
 }
 
 .color-name-container {
