@@ -430,6 +430,7 @@ const ColourBox = ({ color, align }) => {
 
           {/* Conditional rendering based on isLoading state */}
           {/* The main content - right part */}
+          export { numberOfColors };
           {isLoading ? (<SkeletonLoader />)
             : (<>
 

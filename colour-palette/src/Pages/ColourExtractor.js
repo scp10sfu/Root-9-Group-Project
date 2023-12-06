@@ -23,6 +23,7 @@ import SkeletonLoader from '../Components/SkeletonLoader';
 import { defaultColor } from '../Components/SkeletonLoader';
 import './ColourExtractor.css';
 
+
 /**
  * ColourExtractor Component
  * @returns {JSX.Element} The rendered ColourExtractor component.
