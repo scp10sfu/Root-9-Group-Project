@@ -254,41 +254,35 @@
   gap: 5px;
 }
 
-.color-bottom-align {
+.color-box {
   width: 100%;
   height: 100%;
   background-color: rgba(18, 18, 18, 0.05);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  /* Aligns the content to the bottom */
-  align-items: left;
   padding: 0.95em;
   white-space: nowrap;
-  gap: 0.22em;
+  gap: 0.3em;
   overflow-wrap: break-word;
 }
 
-.color-top-align {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(18, 18, 18, 0.05);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  /* Aligns the content to the top */
+.color-bottom-align {
+  justify-content: flex-end;
   align-items: left;
-  padding: 0.95em;
-  white-space: nowrap;
-  gap: 0.22em;
-  overflow-wrap: break-word;
+}
+
+.color-top-align {
+  justify-content: flex-start;
+  align-items: left;
 }
 
 .color-name-container {
   display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  gap: 5px;
+  align-items: flex-start;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  gap: 0.1em;
+  /* word-wrap: break-word; */
 }
 
 .copy-icon {
@@ -296,6 +290,7 @@
   border: none;
   cursor: pointer;
   display: block;
+  z-index: 10000;
 }
 
 /* Styles for desktop */
@@ -314,13 +309,27 @@
 
 /* Style for color name at the top */
 .color-name {
-  /* gap: 30px; */
+  /* width: inherit; */
   font-family: 'DM Mono', monospace;
   font-weight: 600;
   font-size: 0.7em;
   color: rgba(18, 18, 18, 1);
-  letter-spacing: 0.2em;
+  letter-spacing: 0.1em;
   text-align: left;
+  word-wrap: break-word;
+  white-space: normal;
+  /* word-wrap: break-word;
+  white-space: nowrap;
+  overflow: scroll;
+  text-overflow: clip clip; */
+}
+
+@media only screen and (max-width: 767px) {
+  .color-name {
+    /* Reset styles for mobile */
+    overflow: visible;
+    white-space: normal;
+  }
 }
 
 /* Style for color codes */
@@ -329,11 +338,10 @@
 .color-cmyk {
   font-family: 'DM Mono', monospace;
   font-weight: 400;
-
   color: rgba(18, 18, 18, 0.75);
   text-align: left;
   font-size: 0.625em;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.04em;
   line-height: 0.7em;
   white-space: nowrap;
 }

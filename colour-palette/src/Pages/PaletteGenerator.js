@@ -24,8 +24,9 @@ function PaletteGenerator() {
   const [colors, setColors] = useState([]);
   const colorThief = new ColorThief();
   const [backgroundStyle, setBackgroundStyle] = useState({});
-  const [showToast, setShowToast] = useState(false);
+  const [toastVisible, setToastVisible] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
+  const [toastType, setToastType] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
 
   const [additionalMessage, setAdditionalMessage] = useState('');
@@ -143,6 +144,26 @@ function PaletteGenerator() {
   /* ********************* SAME AS COLOUR EXTRACTOR ************************* */
   /* ************************************************************************ */
 
+  /** 
+   * Displays a toast message.
+   * @param {string} type - The type of the toast message (e.g., 'success', 'error', 'info').
+   * @param {string} message - The message to display.
+   * @returns {void}
+  */
+  const showToast = (type, message) => {
+    setToastType(type);
+    setToastMessage(message);
+    setToastVisible(true);
+  
+    // Automatically hide the toast after a certain duration (e.g., 3000 milliseconds)
+    setTimeout(() => {
+      setToastVisible(false);
+      setToastMessage(null);
+      setToastType(null);
+    }, 1500);
+  };
+
+  
   /**
    * Converts HEX values to RGB format.
    * @param {string} hex - The HEX color code.
@@ -236,133 +257,73 @@ function PaletteGenerator() {
 
 
   /**
-  * Color Variables
-  * Variables representing colors based on the 'colors' array.
+  * Custom hook for handling copy icon state.
+  * @returns {[boolean, Function]} - State and function to toggle state.
   */
-  const firstColor = colors.length >= 1 ? colors[0] : defaultColor;
-  const secondColor = colors.length >= 2 ? colors[1] : defaultColor;
-  const thirdColor = colors.length >= 3 ? colors[2] : defaultColor;
-  const fourthColor = colors.length >= 4 ? colors[3] : defaultColor;
-  const fifthColor = colors.length >= 5 ? colors[4] : defaultColor;
-  const sixthColor = colors.length >= 6 ? colors[5] : defaultColor;
-  const seventhColor = colors.length >= 7 ? colors[6] : defaultColor;
-  const eighthColor = colors.length >= 8 ? colors[7] : defaultColor;
-  const ninthColor = colors.length >= 9 ? colors[8] : defaultColor;
-  const tenthColor = colors.length >= 10 ? colors[9] : defaultColor;
-
-
-  /**
-  * ColourBoxBottom Component
-  * A component representing a colour box with color information aligned to bottom.
-  * @param {object} color - The color object.
-  * @returns {JSX.Element} - The rendered ColourBoxBottom component.
-  */
-  const ColourBoxBottom = ({ color }) => {
-    const textColor = getTextColor(color.hex);
+  const useCopyIconState = () => {
     const [isCopyIconFilled, setIsCopyIconFilled] = useState(false);
-
-    const copyToClipboard = (text) => {
-      navigator.clipboard.writeText(text).then(() => {
-        // toast.success('Copied to clipboard!', { autoClose: 1500 });
-        setShowToast(true);
-        setToastMessage('Copied to clipboard!');
-
-        setTimeout(() => {
-          setShowToast(false);
-        }, 1500); // Auto-close after 2 seconds
-
-        // Change the copy icon to filled for a second
-        setIsCopyIconFilled(true);
-        setTimeout(() => {
-          setIsCopyIconFilled(false);
-        }, 300);
-      });
+  
+    const toggleCopyIcon = () => {
+      setIsCopyIconFilled((prevIsCopyIconFilled) => !prevIsCopyIconFilled);
     };
-
-    return (
-      <div className="color-bottom-align" style={{ backgroundColor: color.hex }}>
-
-        <div className="color-name-container">
-          <p className="color-name" style={{ color: textColor }}>{color.name}</p>
-
-          <button
-            className="copy-icon"
-            onClick={() => copyToClipboard(`${color.name}\nHEX: ${color.hex}\nRGB: ${color.rgb}\nCMYK: ${color.cmyk}`)}
-            aria-label="Copy to clipboard"
-          >
-            {textColor === 'rgba(18, 18, 18, 1)' ? (
-              isCopyIconFilled ? <CopyIconDarkFilled /> : <CopyIconDarkUnfilled />
-            ) : (
-              isCopyIconFilled ? <CopyIconWhiteFilled /> : <CopyIconWhiteUnfilled />
-            )}
-          </button>
-        </div>
-
-        <p className="color-hex" style={{ color: textColor }}>HEX: {color.hex}</p>
-        <p className="color-rgb" style={{ color: textColor }}>RGB: {color.rgb}</p>
-        <p className="color-cmyk" style={{ color: textColor }}>CMYK: {color.cmyk}</p>
-
-      </div>
-
-    );
+  
+    return [isCopyIconFilled, toggleCopyIcon];
   };
 
 
-  /**
-   * ColourBoxTop Component
-   * A component representing a colour box with color information aligned to top.
-   * @param {object} color - The color object.
-   * @returns {JSX.Element} - The rendered ColourBoxTop component.
-   */
-  const ColourBoxTop = ({ color }) => {
-    const textColor = getTextColor(color.hex);
-    const [isCopyIconFilled, setIsCopyIconFilled] = useState(false);
+/**
+ * ColourBox Component
+ * A component representing a colour box with color information aligned either to top or bottom.
+ * @param {object} color - The color object.
+ * @param {string} align - The alignment of color information (either 'top' or 'bottom').
+ * @returns {JSX.Element} - The rendered ColourBox component.
+ */
+const ColourBox = ({ color, align }) => {
+  const [isCopyIconFilled, toggleCopyIcon] = useCopyIconState();
 
-    const copyToClipboard = (text) => {
-      navigator.clipboard.writeText(text).then(() => {
-        // toast.success('Copied to clipboard!', { autoClose: 1500 });
-        setShowToast(true);
-        setToastMessage('Copied to clipboard!');
+  if (!color || typeof color.hex === 'undefined') {
+    color = defaultColor;
+  }
 
-        setTimeout(() => {
-          setShowToast(false);
-        }, 1500); // Auto-close after 2 seconds
+  const textColor = getTextColor(color.hex);
 
-        // Change the copy icon to filled for a second
-        setIsCopyIconFilled(true);
-        setTimeout(() => {
-          setIsCopyIconFilled(false);
-        }, 300);
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text).then(() => {
 
-      });
-    };
-
-    return (
-      <div className="color-top-align" style={{ backgroundColor: color.hex }}>
-
-        <div className="color-name-container">
-          <p className="color-name" style={{ color: textColor }}>{color.name}</p>
-
-          <button
-            className="copy-icon"
-            onClick={() => copyToClipboard(`${color.name}\nHEX: ${color.hex}\nRGB: ${color.rgb}\nCMYK: ${color.cmyk}`)}
-            aria-label="Copy to clipboard"
-          >
-            {textColor === 'rgba(18, 18, 18, 1)' ? (
-              isCopyIconFilled ? <CopyIconDarkFilled /> : <CopyIconDarkUnfilled />
-            ) : (
-              isCopyIconFilled ? <CopyIconWhiteFilled /> : <CopyIconWhiteUnfilled />
-            )}
-          </button>
-        </div>
-
-        <p className="color-hex" style={{ color: textColor }}>HEX: {color.hex}</p>
-        <p className="color-rgb" style={{ color: textColor }}>RGB: {color.rgb}</p>
-        <p className="color-cmyk" style={{ color: textColor }}>CMYK: {color.cmyk}</p>
-
-      </div>
-    );
+      showToast('info', 'Copied to clipboard!');
+      
+      toggleCopyIcon();
+    });
   };
+
+  return (
+    <div className={`color-box color-${align}-align`} style={{ backgroundColor: color.hex }}>
+      <div className="color-name-container">
+        <p className="color-name" style={{ color: textColor }}>
+          {color.name}
+        </p>
+        <button
+          className="copy-icon"
+          onClick={() => copyToClipboard(`${color.name}\nHEX: ${color.hex}\nRGB: ${color.rgb}\nCMYK: ${color.cmyk}`)}
+          aria-label="Copy to clipboard"
+        >
+          {textColor === 'rgba(18, 18, 18, 1)' ? (
+            isCopyIconFilled ? <CopyIconDarkFilled /> : <CopyIconDarkUnfilled />
+          ) : (
+            isCopyIconFilled ? <CopyIconWhiteFilled /> : <CopyIconWhiteUnfilled />
+          )}
+        </button>
+      </div>
+      <p className="color-hex" style={{ color: textColor }}>HEX: {color.hex}</p>
+      <p className="color-rgb" style={{ color: textColor }}>RGB: {color.rgb}</p>
+      <p className="color-cmyk" style={{ color: textColor }}>CMYK: {color.cmyk}</p>
+    </div>
+  );
+};
+
+  const ColourBoxBottom = ({ color }) => <ColourBox color={color} align="bottom" />;
+  const ColourBoxTop = ({ color }) => <ColourBox color={color} align="top" />;
+
 
 
   /* ************************************************************************ */
@@ -379,12 +340,14 @@ function PaletteGenerator() {
       />
       
       {/* Toast message */}
-      {showToast && (
+      {toastVisible && (
         <Toast
+          type={toastType}
           message={toastMessage}
           onClose={() => {
-            setShowToast(false);
+            setToastVisible(false);
             setToastMessage('');
+            setToastType('');
           }}
         />
       )}
@@ -486,88 +449,88 @@ function PaletteGenerator() {
               {/* First dominant colour */}
               <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
                 <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-18">
-                  <ColourBoxBottom color={firstColor} />
+                  <ColourBoxBottom color={colors[0]} />
                 </div>
 
                 {/* Second dominant colour */}
                 <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-18">
-                  <ColourBoxBottom color={secondColor} />
+                  <ColourBoxBottom color={colors[1]} />
 
                 </div>
 
                 {/* 4 colours */}
                 {numberOfColors === 4 && (<>
                   <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-18">
-                    <ColourBoxTop color={thirdColor} />
+                    <ColourBoxTop color={colors[2]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-18">
-                    <ColourBoxTop color={fourthColor} />
+                    <ColourBoxTop color={colors[3]} />
                   </div>
                 </>)}
 
                 {/* 6 colours */}
                 {numberOfColors === 6 && (<>
                   <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={thirdColor} />
+                    <ColourBoxTop color={colors[2]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={fourthColor} />
+                    <ColourBoxTop color={colors[3]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={fifthColor} />
+                    <ColourBoxTop color={colors[4]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-4-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={sixthColor} />
+                    <ColourBoxTop color={colors[5]} />
                   </div>
                 </>)}
 
                 {/* 8 colours */}
                 {numberOfColors === 8 && (<>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
-                    <ColourBoxTop color={thirdColor} />
+                    <ColourBoxTop color={colors[2]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
-                    <ColourBoxTop color={fourthColor} />
+                    <ColourBoxTop color={colors[3]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
-                    <ColourBoxTop color={fifthColor} />
+                    <ColourBoxTop color={colors[4]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
-                    <ColourBoxTop color={sixthColor} />
+                    <ColourBoxTop color={colors[5]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
-                    <ColourBoxTop color={seventhColor} />
+                    <ColourBoxTop color={colors[6]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-12">
-                    <ColourBoxTop color={eighthColor} />
+                    <ColourBoxTop color={colors[7]} />
                   </div>
                 </>)}
 
                 {/* 10 colours */}
                 {numberOfColors === 10 && (<>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={thirdColor} />
+                    <ColourBoxTop color={colors[2]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={fourthColor} />
+                    <ColourBoxTop color={colors[3]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={fifthColor} />
+                    <ColourBoxTop color={colors[4]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={sixthColor} />
+                    <ColourBoxTop color={colors[5]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={seventhColor} />
+                    <ColourBoxTop color={colors[6]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={eighthColor} />
+                    <ColourBoxTop color={colors[7]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={ninthColor} />
+                    <ColourBoxTop color={colors[8]} />
                   </div>
                   <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-9">
-                    <ColourBoxTop color={tenthColor} />
+                    <ColourBoxTop color={colors[9]} />
                   </div>
 
                 </>)}
