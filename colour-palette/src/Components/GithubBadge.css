@@ -1,79 +1,87 @@
 /* GithubBadge.css */
 
-
 /* *************************************************************************** */
 /* ******************************* GitHub Badge ****************************** */
 /* *************************************************************************** */
 
 .github-badge {
     display: flex;
-    /* align-items: center; */
-    justify-content: center;
-    gap: 10px;
-    border: 0.05em solid rgba(18, 18, 18, 1);
-    border-radius: 15px;
-    box-shadow: inset 0 0 0 0.01em rgba(18, 18, 18, 0.15);
-    transition: box-shadow 0.3s, transform 0.3s;
-    padding: 0.5rem;
+    justify-content: flex-start;
+    gap: 0.5em;
+    
     text-decoration: none;
     flex-direction: row;
     position: relative;
-    flex-wrap: wrap;
-    
-    /* overflow: hidden; */
-  justify-content: space-around;
+    align-items: center;
+
+    padding: 0.5em;
+    padding-left: 1em;
+
+    transition: box-shadow 0.3s, transform 0.3s;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(18, 18, 18, 0.20);
+    backdrop-filter: blur(4.0px);
+    -webkit-backdrop-filter: blur(4.0px);
+    border-radius: 15px;
+    border: 0.05em solid rgba(18, 18, 18, 1);
 }
-  
-  .github-column {
+
+.github-badge .github-column {
     display: flex;
     flex-direction: column;
     justify-content: center;
-  }
-  
-  .github-badge-icon {
+    align-items: center;    
+    overflow: hidden;
+    padding: 0.5em;
+}
+
+/* .github-column .github-badge-icon {
     padding: 0.5rem;
-  }
-  
-  .github-info {
-    /* display: flex; */
+} */
+
+.github-badge .github-info {
+    padding-top: 1em;
+    padding-bottom: 0.1em;
+    flex-grow: 1;
+    display: flex;
     flex-direction: column;
-    /* justify-content: flex-start; */
+    align-items: flex-start;
     gap: 0.5em;
-  }
-  
-  .github-username,
-  .github-name {
+    overflow: hidden;
+}
+
+.github-badge .github-info .github-username,
+.github-badge .github-info .github-name {
     color: rgba(18, 18, 18, 1);
-  }
-  
-  .github-username {
+}
+
+.github-badge .github-info .github-username {
     cursor: pointer;
     font-family: 'DM Mono', monospace;
     font-size: 1em;
     font-weight: 700;
-    letter-spacing: 0.1em;
-  }
-  
-  .github-name {
+    letter-spacing: 0.15em;
+    text-decoration: underline;
+}
+
+.github-badge .github-info .github-name {
     font-family: 'DM Mono', monospace;
     font-size: 1.1em;
     font-weight: 600;
     letter-spacing: 0.1em;
-  }
-  
+}
 
 /* *************************************************************************** */
 /* ********************************** OTHER ********************************** */
 /* *************************************************************************** */
 
-
-  .glassmorphic-with-boarder {
+.github-badge .glassmorphic-with-boarder {
     background: rgba(255, 255, 255, 0.15);
     box-shadow: 0 8px 32px 0 rgba(18, 18, 18, 0.20);
-  
     backdrop-filter: blur(4.0px);
     -webkit-backdrop-filter: blur(4.0px);
-  
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-  }
+    border-radius: 15px;
+    border: 0.05em solid rgba(18, 18, 18, 1);
+}
+
+/* Keep the rest of your styles as they are */

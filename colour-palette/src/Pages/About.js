@@ -79,10 +79,10 @@ function About() {
                     </div>
 
                     <div className="col-xs-36 col-md-36 grid-container nested-grid">
-                        <div className="col-xs-36 col-md-8">
-                            <div className="left-title">Contact<br />us</div>
-                        </div>
-                        <div className="block col-xs-36 col-md-28">
+                        {/* <div className="col-xs-36 col-md-8"> */}
+                            {/* <div className="left-title">Contact<br />us</div> */}
+                        {/* </div> */}
+                        <div className="block col-xs-36 col-md-36">
                             <div className="content-text">
                                 We are a team of four students from the  Simon Fraser University. If you have any questions or feedback, please feel free to reach out to us!
                                 {/* <a href="https://www.sfu.ca" target="_blank" rel="noopener noreferrer"> */}
