@@ -1,0 +1,35 @@
+/* GithubBadge.css */
+
+.github-badge {
+    display: flex;
+    align-items: center;
+    border: 2px solid black;
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 300px; /* Adjust the width as needed */
+    margin: 10px;
+  }
+  
+  .github-icon {
+    margin-right: 10px;
+  }
+  
+  .github-icon img {
+    width: 30px; /* Adjust the size of the GitHub icon */
+  }
+  
+  .github-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .github-username {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  
+  .github-name {
+    font-size: 1em;
+    color: #555; /* Adjust the color of the name */
+  }
+  

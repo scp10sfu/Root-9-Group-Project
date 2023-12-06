@@ -91,3 +91,20 @@
   justify-content: flex-start; /* Adjusted to start from the left */
   align-items: center;
 }
+
+.a {
+  display: flex;
+
+  color:rgba(18, 18, 18, 1);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9em;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+
+  text-align: left; /* Adjusted to left alignment */
+  display: flex;
+  justify-content: flex-start; /* Adjusted to start from the left */
+  align-items: center;
+
+  text-decoration: none;
+}

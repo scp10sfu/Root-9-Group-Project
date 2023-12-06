@@ -4,6 +4,8 @@ import React, { useState, useRef, useEffect } from 'react';
 
 import BackgroundColour from '../Components/BackgroundColour';
 import Layout from '../Components/Layout';
+import GithubBadge from '../Components/GithubBadge';
+import { ReactComponent as GithubIcon } from '../images/icon-github.svg';
 
 import './MainStyle.css';
 
@@ -53,7 +55,7 @@ function About() {
 
 
                     <div className="col-xs-36 col-md-36 grid-container nested-grid">
-                        <div className="wrapper-2-col col-xs-36 col-md-8">
+                        <div className="col-xs-36 col-md-8">
                             <div className="left-title">Main<br />features</div>
                         </div>
 
@@ -70,7 +72,32 @@ function About() {
                             </div>
 
                         </div>
+                    </div>
 
+                    <div className="col-xs-36-center col-md-36-center">
+                        <header className="text_block_text">Contact</header>
+                    </div>
+
+                    <div className="col-xs-36 col-md-36 grid-container nested-grid">
+                        <div className="col-xs-36 col-md-8">
+                            <div className="left-title">Contact<br />us</div>
+                        </div>
+                        <div className="block col-xs-36 col-md-28">
+                            <div className="content-text">
+                                We are a team of four students from the  Simon Fraser University
+                                {/* <a href="https://www.sfu.ca" target="_blank" rel="noopener noreferrer"> */}
+                                    
+                                    {/* </a>.  */}
+                                    . If you have any questions or feedback, please feel free to reach out to us!
+                            </div>
+                        </div>
+
+                        <div className="col-xs-18 col-md-9">
+                        <div className="col-xs-4 col-md-2">
+                            <GithubIcon/>
+                        </div>
+                        <GithubBadge username="githubUsername" name="John Doe" link="https://github.com/username" />
+                        </div>
                     </div>
 
                     <div className="col-xs-36 col-md-36"></div>
