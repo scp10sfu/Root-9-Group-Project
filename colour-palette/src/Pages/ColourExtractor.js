@@ -358,233 +358,294 @@ function ColourExtractor() {
     setNumberOfColors(6);             // Reset the number of colors to 6 (default value)
   };
 
+
   /**
-  * Color Variables
-  * Variables representing colors based on the 'colors' array.
+  * Custom hook for handling copy icon state.
+  * @returns {[boolean, Function]} - State and function to toggle state.
   */
-  // const firstColor = colors.length >= 1 ? colors[0] : defaultColor;
-  // const secondColor = colors.length >= 2 ? colors[1] : defaultColor;
-  // const thirdColor = colors.length >= 3 ? colors[2] : defaultColor;
-  // const fourthColor = colors.length >= 4 ? colors[3] : defaultColor;
-  // const fifthColor = colors.length >= 5 ? colors[4] : defaultColor;
-  // const sixthColor = colors.length >= 6 ? colors[5] : defaultColor;
-  // const seventhColor = colors.length >= 7 ? colors[6] : defaultColor;
-  // const eighthColor = colors.length >= 8 ? colors[7] : defaultColor;
-  // const ninthColor = colors.length >= 9 ? colors[8] : defaultColor;
-  // const tenthColor = colors.length >= 10 ? colors[9] : defaultColor;
-
-  // const colorVariables = {};
-  // for (let i = 0; i < colors.length; i++) {
-  //   colorVariables[`--color${i + 1}`] = colors[i]?.hex || defaultColorObject.hex;
-  // }
-
-  /**
-   * ColourBoxBottom Component
-   * A component representing a colour box with color information aligned to bottom.
-   * @param {object} color - The color object.
-   * @returns {JSX.Element} - The rendered ColourBoxBottom component.
-   */
-  const ColourBoxBottom = ({ color }) => {
+  const useCopyIconState = () => {
     const [isCopyIconFilled, setIsCopyIconFilled] = useState(false);
-    const [shouldTruncate, setShouldTruncate] = useState(false);
-
-    if (!color || typeof color.hex === 'undefined') {
-      // Handle the case where color is undefined or does not have a 'hex' property
-      color = defaultColor; // or display a default color, show an error, etc.
-    }
-
-    const textColor = getTextColor(color.hex);
-
-    const copyToClipboard = (text) => {
-      navigator.clipboard.writeText(text).then(() => {
-
-        setTimeout(() => {
-          setIsCopyIconFilled((prevIsCopyIconFilled = false) => !prevIsCopyIconFilled);
-
-          // Show toast only if it's not already showing
-          // if (!showToast) {
-            setShowToast(true);
-            setToastMessage('Copied to clipboard!');
-          // }
-
-          console.log('Copy button clicked');
-
-          setIsCopyIconFilled(true);
-
-          setShowToast(false);
-          // setToastMessage(null);
-          setIsCopyIconFilled(false);
-        }, 1500); // Auto-close after 2 seconds
-
-        // setTimeout(() => {
-        //   setShowToast(false);
-        //   setToastMessage(null);
-        // }, 1500); // Auto-close after 2 seconds
-
-        // // Change the copy icon to filled for a second
-        // setIsCopyIconFilled(true);
-
-        // setTimeout(() => {
-        //   setIsCopyIconFilled(false);
-        // }, 300);
-      });
+  
+    const toggleCopyIcon = () => {
+      setIsCopyIconFilled((prevIsCopyIconFilled) => !prevIsCopyIconFilled);
     };
-
-    // Reset toast state after it's closed
-    useEffect(() => {
-      if (!showToast && toastMessage) {
-        setToastMessage('');
-      }
-    }, [showToast, toastMessage]);
-
-    // Function to truncate text to a specified number of words
-    const truncateText = (text, maxWords) => {
-      const words = text.split(' ');
-      return words.slice(0, maxWords).join(' ');
-    };
-
-    useEffect(() => {
-      // Update the shouldTruncate state based on the screen width
-      const handleResize = () => {
-        // setShouldTruncate(window.innerWidth > 767);
-        const emWidth = window.innerWidth / parseFloat(getComputedStyle(document.documentElement).fontSize);
-      setShouldTruncate(emWidth >= 76);
-      };
   
-      // Initial check on component mount
-      handleResize();
-  
-      // Listen for window resize events
-      window.addEventListener('resize', handleResize);
-  
-      // Cleanup event listener on component unmount
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-    }, []);
+    return [isCopyIconFilled, toggleCopyIcon];
+  };
 
-    return (
-      <div className="color-bottom-align" style={{ backgroundColor: color.hex }}>
 
-        <div className="color-name-container">
-          <p className="color-name" style={{ color: textColor }}>
-          {/* Truncate to the first word if more than 10 characters */}
-          {shouldTruncate && color.name.length > 10 ? truncateText(color.name, 1) : color.name}
+/**
+ * ColourBox Component
+ * A component representing a colour box with color information aligned either to top or bottom.
+ * @param {object} color - The color object.
+ * @param {string} align - The alignment of color information (either 'top' or 'bottom').
+ * @returns {JSX.Element} - The rendered ColourBox component.
+ */
+const ColourBox = ({ color, align }) => {
+  const [isCopyIconFilled, toggleCopyIcon] = useCopyIconState();
+
+  if (!color || typeof color.hex === 'undefined') {
+    color = defaultColor;
+  }
+
+  const textColor = getTextColor(color.hex);
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setShowToast(true);
+      setToastMessage('Copied to clipboard!');
+
+      setTimeout(() => {
+        setShowToast(false);
+        setToastMessage(null);
+      }, 1500);
+
+      toggleCopyIcon();
+
+      setTimeout(() => {
+        toggleCopyIcon();
+      }, 300);
+    });
+  };
+
+  return (
+    <div className={`color-box color-${align}-align`} style={{ backgroundColor: color.hex }}>
+      <div className="color-name-container">
+        <p className="color-name" style={{ color: textColor }}>
+          {color.name}
         </p>
-
-          <button
-            className="copy-icon"
-            onClick={() => copyToClipboard(`${color.name}\nHEX: ${color.hex}\nRGB: ${color.rgb}\nCMYK: ${color.cmyk}`)}
-            aria-label="Copy to clipboard"
-          >
-            {textColor === 'rgba(18, 18, 18, 1)' ? (
-              isCopyIconFilled ?  <CopyIconDarkFilled /> : <CopyIconDarkUnfilled />
-            ) : (
-              isCopyIconFilled ? <CopyIconWhiteFilled /> : <CopyIconWhiteUnfilled />
-            )}
-          </button>
-        </div>
-        <p className="color-hex" style={{ color: textColor }}>HEX: {color.hex}</p>
-        <p className="color-rgb" style={{ color: textColor }}>RGB: {color.rgb}</p>
-        <p className="color-cmyk" style={{ color: textColor }}>CMYK: {color.cmyk}</p>
+        <button
+          className="copy-icon"
+          onClick={() => copyToClipboard(`${color.name}\nHEX: ${color.hex}\nRGB: ${color.rgb}\nCMYK: ${color.cmyk}`)}
+          aria-label="Copy to clipboard"
+        >
+          {textColor === 'rgba(18, 18, 18, 1)' ? (
+            isCopyIconFilled ? <CopyIconDarkFilled /> : <CopyIconDarkUnfilled />
+          ) : (
+            isCopyIconFilled ? <CopyIconWhiteFilled /> : <CopyIconWhiteUnfilled />
+          )}
+        </button>
       </div>
-    );
-  };
+      <p className="color-hex" style={{ color: textColor }}>HEX: {color.hex}</p>
+      <p className="color-rgb" style={{ color: textColor }}>RGB: {color.rgb}</p>
+      <p className="color-cmyk" style={{ color: textColor }}>CMYK: {color.cmyk}</p>
+    </div>
+  );
+};
 
 
-  /**
-   * ColourBoxTop Component
-   * A component representing a colour box with color information aligned to top.
-   * @param {object} color - The color object.
-   * @returns {JSX.Element} - The rendered ColourBoxTop component.
-   */
-  const ColourBoxTop = ({ color }) => {
-    const [isCopyIconFilled, setIsCopyIconFilled] = useState(false);
-    const [shouldTruncate, setShouldTruncate] = useState(false);
+  // /**
+  //  * ColourBoxBottom Component
+  //  * A component representing a colour box with color information aligned to bottom.
+  //  * @param {object} color - The color object.
+  //  * @returns {JSX.Element} - The rendered ColourBoxBottom component.
+  //  */
+  // const ColourBoxBottom = ({ color }) => {
+  //   const [isCopyIconFilled, setIsCopyIconFilled] = useState(false);
+  //   // const [shouldTruncate, setShouldTruncate] = useState(false);
 
-    if (!color || typeof color.hex === 'undefined') {
-      // Handle the case where color is undefined or does not have a 'hex' property
-      color = defaultColor; // or display a default color, show an error, etc.
-    }
-    const textColor = getTextColor(color.hex);
+  //   if (!color || typeof color.hex === 'undefined') {
+  //     // Handle the case where color is undefined or does not have a 'hex' property
+  //     color = defaultColor; // or display a default color, show an error, etc.
+  //   }
 
+  //   const textColor = getTextColor(color.hex);
 
-    const copyToClipboard = (text) => {
-      navigator.clipboard.writeText(text).then(() => {
-        // toast.success('Copied to clipboard!', { autoClose: 1500 });
-        setShowToast(true);
-        setToastMessage('Copied to clipboard!');
+  //   const copyToClipboard = (text) => {
+  //     navigator.clipboard.writeText(text).then(() => {
 
-        setTimeout(() => {
-          setShowToast(false);
-        }, 1500); // Auto-close after 2 seconds
+  //       // setTimeout(() => {
+  //         setIsCopyIconFilled((prevIsCopyIconFilled = false) => !prevIsCopyIconFilled);
 
-        // Change the copy icon to filled for a second
-        setIsCopyIconFilled(true);
-        setTimeout(() => {
-          setIsCopyIconFilled(false);
-        }, 300);
+  //         // Show toast only if it's not already showing
+  //         // if (!showToast) {
+  //           setShowToast(true);
+  //           setToastMessage('Copied to clipboard!');
+  //         // }
 
-      });
-    };
+  //         console.log('Copy button clicked');
 
-    // Function to truncate text to a specified number of words
-    const truncateText = (text, maxWords) => {
-      const words = text.split(' ');
-      return words.slice(0, maxWords).join(' ');
-    };
+  //         setIsCopyIconFilled(true);
 
-    useEffect(() => {
-      // Update the shouldTruncate state based on the screen width
-      const handleResize = () => {
-        // setShouldTruncate(window.innerWidth > 767);
-        const emWidth = window.innerWidth / parseFloat(getComputedStyle(document.documentElement).fontSize);
-      setShouldTruncate(emWidth >= 76);
-      };
+  //         // setShowToast(false);
+  //         // setToastMessage(null);
+  //         // setIsCopyIconFilled(false);
+  //       // }, 1500); // Auto-close after 2 seconds
+
+  //       setTimeout(() => {
+  //         setShowToast(false);
+  //         setToastMessage(null);
+  //       }, 1500); // Auto-close after 2 seconds
+
+  //       // Change the copy icon to filled for a second
+  //       setIsCopyIconFilled(true);
+
+  //       setTimeout(() => {
+  //         setIsCopyIconFilled(false);
+  //       }, 300);
+  //     });
+  //   };
+
+  //   // Reset toast state after it's closed
+  //   useEffect(() => {
+  //     if (!showToast && toastMessage) {
+  //       setToastMessage('');
+  //     }
+  //   }, [showToast, toastMessage]);
+
+  //   // // Function to truncate text to a specified number of words
+  //   // const truncateText = (text, maxWords) => {
+  //   //   const words = text.split(' ');
+  //   //   return words.slice(0, maxWords).join(' ');
+  //   // };
+
+  //   // useEffect(() => {
+  //   //   // Update the shouldTruncate state based on the screen width
+  //   //   const handleResize = () => {
+  //   //     // setShouldTruncate(window.innerWidth > 767);
+  //   //     const emWidth = window.innerWidth / parseFloat(getComputedStyle(document.documentElement).fontSize);
+  //   //   setShouldTruncate(emWidth >= 76);
+  //   //   };
   
-      // Initial check on component mount
-      handleResize();
+  //   //   // Initial check on component mount
+  //   //   handleResize();
   
-      // Listen for window resize events
-      window.addEventListener('resize', handleResize);
+  //   //   // Listen for window resize events
+  //   //   window.addEventListener('resize', handleResize);
   
-      // Cleanup event listener on component unmount
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-    }, []);
+  //   //   // Cleanup event listener on component unmount
+  //   //   return () => {
+  //   //     window.removeEventListener('resize', handleResize);
+  //   //   };
+  //   // }, []);
+    
 
-    return (
-      <div className="color-top-align" style={{ backgroundColor: color.hex }}>
+  //   return (
+  //     <div className="color-bottom-align" style={{ backgroundColor: color.hex }}>
 
-        <div className="color-name-container">
-          <p className="color-name" style={{ color: textColor }}>
-            {/* Truncate to the first word if more than 10 characters */}
-          {shouldTruncate && color.name.length > 10 ? truncateText(color.name, 1) : color.name}
-          </p>
+  //       <div className="color-name-container">
+  //         <p className="color-name" style={{ color: textColor }}>
+  //         {/* Truncate to the first word if more than 10 characters */}
+  //         {/* {shouldTruncate && color.name.length > 10 ? truncateText(color.name, 1) : color.name} */}
+  //         {color.name}
+  //       </p>
 
-          <button
-            className="copy-icon"
-            onClick={() => copyToClipboard(`${color.name}\nHEX: ${color.hex}\nRGB: ${color.rgb}\nCMYK: ${color.cmyk}`)}
-            aria-label="Copy to clipboard"
-          >
-            {textColor === 'rgba(18, 18, 18, 1)' ? (
-              isCopyIconFilled ? <CopyIconDarkFilled /> : <CopyIconDarkUnfilled />
-            ) : (
-              isCopyIconFilled ? <CopyIconWhiteFilled /> : <CopyIconWhiteUnfilled />
-            )}
-          </button>
-        </div>
-
-        <p className="color-hex" style={{ color: textColor }}>HEX: {color.hex}</p>
-        <p className="color-rgb" style={{ color: textColor }}>RGB: {color.rgb}</p>
-        <p className="color-cmyk" style={{ color: textColor }}>CMYK: {color.cmyk}</p>
-
-      </div>
-    );
-  };
+  //         <button
+  //           className="copy-icon"
+  //           onClick={() => copyToClipboard(`${color.name}\nHEX: ${color.hex}\nRGB: ${color.rgb}\nCMYK: ${color.cmyk}`)}
+  //           aria-label="Copy to clipboard"
+  //         >
+  //           {textColor === 'rgba(18, 18, 18, 1)' ? (
+  //             isCopyIconFilled ?  <CopyIconDarkFilled /> : <CopyIconDarkUnfilled />
+  //           ) : (
+  //             isCopyIconFilled ? <CopyIconWhiteFilled /> : <CopyIconWhiteUnfilled />
+  //           )}
+  //         </button>
+  //       </div>
+  //       <p className="color-hex" style={{ color: textColor }}>HEX: {color.hex}</p>
+  //       <p className="color-rgb" style={{ color: textColor }}>RGB: {color.rgb}</p>
+  //       <p className="color-cmyk" style={{ color: textColor }}>CMYK: {color.cmyk}</p>
+  //     </div>
+  //   );
+  // };
 
 
+  // /**
+  //  * ColourBoxTop Component
+  //  * A component representing a colour box with color information aligned to top.
+  //  * @param {object} color - The color object.
+  //  * @returns {JSX.Element} - The rendered ColourBoxTop component.
+  //  */
+  // const ColourBoxTop = ({ color }) => {
+  //   const [isCopyIconFilled, setIsCopyIconFilled] = useState(false);
+  //   // const [shouldTruncate, setShouldTruncate] = useState(false);
+
+  //   if (!color || typeof color.hex === 'undefined') {
+  //     // Handle the case where color is undefined or does not have a 'hex' property
+  //     color = defaultColor; // or display a default color, show an error, etc.
+  //   }
+  //   const textColor = getTextColor(color.hex);
+
+  //   const copyToClipboard = (text) => {
+  //     navigator.clipboard.writeText(text).then(() => {
+  //       setShowToast(true);
+  //       setToastMessage('Copied to clipboard!');
+
+  //       setTimeout(() => {
+  //         setShowToast(false);
+  //       }, 1500); // Auto-close after 2 seconds
+
+  //       // Change the copy icon to filled for a second
+  //       setIsCopyIconFilled(true);
+  //       setTimeout(() => {
+  //         setIsCopyIconFilled(false);
+  //       }, 300);
+
+  //     });
+  //   };
+
+  //   // // Function to truncate text to a specified number of words
+  //   // const truncateText = (text, maxWords) => {
+  //   //   const words = text.split(' ');
+  //   //   return words.slice(0, maxWords).join(' ');
+  //   // };
+
+  //   // useEffect(() => {
+  //   //   // Update the shouldTruncate state based on the screen width
+  //   //   const handleResize = () => {
+  //   //     // setShouldTruncate(window.innerWidth > 767);
+  //   //     const emWidth = window.innerWidth / parseFloat(getComputedStyle(document.documentElement).fontSize);
+  //   //   setShouldTruncate(emWidth >= 76);
+  //   //   };
+  
+  //   //   // Initial check on component mount
+  //   //   handleResize();
+  
+  //   //   // Listen for window resize events
+  //   //   window.addEventListener('resize', handleResize);
+  
+  //   //   // Cleanup event listener on component unmount
+  //   //   return () => {
+  //   //     window.removeEventListener('resize', handleResize);
+  //   //   };
+  //   // }, []);
+
+  //   return (
+  //     <div className="color-top-align" style={{ backgroundColor: color.hex }}>
+
+  //       <div className="color-name-container">
+  //         <p className="color-name" style={{ color: textColor }}>
+  //           {/* Truncate to the first word if more than 10 characters */}
+  //         {/* {shouldTruncate && color.name.length > 10 ? truncateText(color.name, 1) : color.name} */}
+  //         {color.name}
+  //         </p>
+
+  //         <button
+  //           className="copy-icon"
+  //           onClick={() => copyToClipboard(`${color.name}\nHEX: ${color.hex}\nRGB: ${color.rgb}\nCMYK: ${color.cmyk}`)}
+  //           aria-label="Copy to clipboard"
+  //         >
+  //           {textColor === 'rgba(18, 18, 18, 1)' ? (
+  //             isCopyIconFilled ? <CopyIconDarkFilled /> : <CopyIconDarkUnfilled />
+  //           ) : (
+  //             isCopyIconFilled ? <CopyIconWhiteFilled /> : <CopyIconWhiteUnfilled />
+  //           )}
+  //         </button>
+  //       </div>
+
+  //       <p className="color-hex" style={{ color: textColor }}>HEX: {color.hex}</p>
+  //       <p className="color-rgb" style={{ color: textColor }}>RGB: {color.rgb}</p>
+  //       <p className="color-cmyk" style={{ color: textColor }}>CMYK: {color.cmyk}</p>
+
+  //     </div>
+  //   );
+  // };
+
+  const ColourBoxBottom = ({ color }) => <ColourBox color={color} align="bottom" />;
+  const ColourBoxTop = ({ color }) => <ColourBox color={color} align="top" />;
+
+
+  // Return the rendered component
   return (
 
     <div className="colour-extractor" style={backgroundStyle}>

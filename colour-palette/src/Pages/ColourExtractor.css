@@ -286,11 +286,11 @@
 
 .color-name-container {
   display: flex;
-  align-items: center;
-  margin-bottom: 20px;
+  align-items: flex-start;
+  margin-top: 20px;
+  margin-bottom: 10px;
   gap: 0.1em;
-  word-wrap: break-word;
-  padding-right: 20px;
+  /* word-wrap: break-word; */
 }
 
 .copy-icon {
@@ -298,6 +298,7 @@
   border: none;
   cursor: pointer;
   display: block;
+  z-index: 10000;
 }
 
 /* Styles for desktop */
@@ -324,9 +325,19 @@
   letter-spacing: 0.1em;
   text-align: left;
   word-wrap: break-word;
+  white-space: normal;
+  /* word-wrap: break-word;
   white-space: nowrap;
   overflow: scroll;
-  text-overflow: clip clip;
+  text-overflow: clip clip; */
+}
+
+@media only screen and (max-width: 767px) {
+  .color-name {
+    /* Reset styles for mobile */
+    overflow: visible;
+    white-space: normal;
+  }
 }
 
 /* Style for color codes */
@@ -338,7 +349,7 @@
   color: rgba(18, 18, 18, 0.75);
   text-align: left;
   font-size: 0.625em;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   line-height: 0.7em;
   white-space: nowrap;
 }

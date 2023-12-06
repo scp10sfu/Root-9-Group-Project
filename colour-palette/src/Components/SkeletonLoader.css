@@ -43,6 +43,81 @@
     animation: wave-squares 2s infinite ease-out;
 }
 
+.color-name-container {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    gap: 0.1em;
+      /* word-wrap: break-word; */
+    /* display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 0.1em;
+    padding-right: 20px; */
+  }
+  
+  .copy-icon {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: block;
+  }
+  
+  /* Styles for desktop */
+  @media only screen and (min-width: 76em) {
+    .copy-icon {
+      display: none;
+      /* Hide the icon by default on desktop */
+    }
+  
+    /* Show the icon only when the parent block is hovered on desktop */
+    .color-bottom-align:hover .copy-icon,
+    .color-top-align:hover .copy-icon {
+      display: block;
+    }
+  }
+  
+  /* Style for color name at the top */
+  .color-name {
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    font-size: 0.75em;
+    color: rgba(18, 18, 18, 1);
+    letter-spacing: 0.15em;
+    text-align: left;
+    word-wrap: break-word;
+    white-space: normal;
+    transition: font-size 0.5s ease;
+    /* word-wrap: break-word; */
+    /* white-space: normal; */
+    /* white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip clip; */
+  }
+  
+  @media only screen and (max-width: 767px) {
+    .color-name {
+      /* Reset styles for mobile */
+      overflow: visible;
+      white-space: normal;
+    }
+  }
+  
+  /* Style for color codes */
+  .color-hex,
+  .color-rgb,
+  .color-cmyk {
+    font-family: 'DM Mono', monospace;
+    font-weight: 400;
+    color: rgba(18, 18, 18, 0.75);
+    text-align: left;
+    font-size: 0.625em;
+    letter-spacing: 0.04em;
+    line-height: 0.7em;
+    white-space: nowrap;
+  }
+
 
 @keyframes wave-lines {
     0% {
