@@ -84,20 +84,17 @@ function About() {
                         </div>
                         <div className="block col-xs-36 col-md-28">
                             <div className="content-text">
-                                We are a team of four students from the  Simon Fraser University
+                                We are a team of four students from the  Simon Fraser University. If you have any questions or feedback, please feel free to reach out to us!
                                 {/* <a href="https://www.sfu.ca" target="_blank" rel="noopener noreferrer"> */}
-                                    
-                                    {/* </a>.  */}
-                                    . If you have any questions or feedback, please feel free to reach out to us!
+                                {/* </a>.  */}
                             </div>
                         </div>
 
-                        <div className="col-xs-18 col-md-9">
-                        <div className="col-xs-4 col-md-2">
-                            <GithubIcon/>
-                        </div>
-                        <GithubBadge username="githubUsername" name="John Doe" link="https://github.com/username" />
-                        </div>
+                        <GithubBadge username="arusinova" name="Anna Rusinova" link="https://github.com/arusinova" />
+                        <GithubBadge username="SunIsDark" name="Taiga Okuma" link="https://github.com/SunIsDark" />
+                        <GithubBadge username="CindyXiao1" name="Cindy Xiao" link="https://github.com/CindyXiao1" />
+                        <GithubBadge username="scp10sfu" name="Stefan Pricope" link="https://github.com/scp10sfu" />
+                        
                     </div>
 
                     <div className="col-xs-36 col-md-36"></div>

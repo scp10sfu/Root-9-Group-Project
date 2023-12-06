@@ -1,35 +1,79 @@
 /* GithubBadge.css */
 
+
+/* *************************************************************************** */
+/* ******************************* GitHub Badge ****************************** */
+/* *************************************************************************** */
+
 .github-badge {
     display: flex;
-    align-items: center;
-    border: 2px solid black;
-    padding: 10px;
-    border-radius: 8px;
-    max-width: 300px; /* Adjust the width as needed */
-    margin: 10px;
+    /* align-items: center; */
+    justify-content: center;
+    gap: 10px;
+    border: 0.05em solid rgba(18, 18, 18, 1);
+    border-radius: 15px;
+    box-shadow: inset 0 0 0 0.01em rgba(18, 18, 18, 0.15);
+    transition: box-shadow 0.3s, transform 0.3s;
+    padding: 0.5rem;
+    text-decoration: none;
+    flex-direction: row;
+    position: relative;
+    flex-wrap: wrap;
+    
+    /* overflow: hidden; */
+  justify-content: space-around;
+}
+  
+  .github-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   
-  .github-icon {
-    margin-right: 10px;
-  }
-  
-  .github-icon img {
-    width: 30px; /* Adjust the size of the GitHub icon */
+  .github-badge-icon {
+    padding: 0.5rem;
   }
   
   .github-info {
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
+    /* justify-content: flex-start; */
+    gap: 0.5em;
+  }
+  
+  .github-username,
+  .github-name {
+    color: rgba(18, 18, 18, 1);
   }
   
   .github-username {
-    font-size: 1.2em;
-    font-weight: bold;
+    cursor: pointer;
+    font-family: 'DM Mono', monospace;
+    font-size: 1em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
   }
   
   .github-name {
-    font-size: 1em;
-    color: #555; /* Adjust the color of the name */
+    font-family: 'DM Mono', monospace;
+    font-size: 1.1em;
+    font-weight: 600;
+    letter-spacing: 0.1em;
   }
   
+
+/* *************************************************************************** */
+/* ********************************** OTHER ********************************** */
+/* *************************************************************************** */
+
+
+  .glassmorphic-with-boarder {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(18, 18, 18, 0.20);
+  
+    backdrop-filter: blur(4.0px);
+    -webkit-backdrop-filter: blur(4.0px);
+  
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
