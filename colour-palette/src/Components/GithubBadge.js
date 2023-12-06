@@ -20,8 +20,6 @@ const GitHubBadge = ({ username, name, link }) => {
                 <div className='github-username' target="_blank" rel="noopener noreferrer">
                     @{username}
                 </div>
-                {/* <div className="github-username">@{username}</div> */}
-                
             </div>
         </a>
     );

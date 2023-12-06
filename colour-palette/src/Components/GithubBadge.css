@@ -14,7 +14,6 @@
     position: relative;
     align-items: center;
 
-    padding: 0.5em;
     padding-left: 1em;
 
     transition: box-shadow 0.3s, transform 0.3s;
@@ -32,7 +31,7 @@
     justify-content: center;
     align-items: center;    
     overflow: hidden;
-    padding: 0.5em;
+    padding: 0.2em;
 }
 
 /* .github-column .github-badge-icon {
@@ -42,33 +41,31 @@
 .github-badge .github-info {
     padding-top: 1em;
     padding-bottom: 0.1em;
-    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.5em;
+    justify-content: center;
+    gap: 0.2em;
     overflow: hidden;
-}
-
-.github-badge .github-info .github-username,
-.github-badge .github-info .github-name {
-    color: rgba(18, 18, 18, 1);
+    /* padding: 0.5em; */
 }
 
 .github-badge .github-info .github-username {
-    cursor: pointer;
+    color: rgba(18, 18, 18, 0.5);
     font-family: 'DM Mono', monospace;
     font-size: 1em;
     font-weight: 700;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.1em;
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .github-badge .github-info .github-name {
+    color: rgba(18, 18, 18, 1);
     font-family: 'DM Mono', monospace;
     font-size: 1.1em;
     font-weight: 600;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
 }
 
 /* *************************************************************************** */
