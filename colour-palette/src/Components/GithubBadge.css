@@ -22,7 +22,7 @@
     backdrop-filter: blur(4.0px);
     -webkit-backdrop-filter: blur(4.0px);
     border-radius: 15px;
-    border: 0.05em solid rgba(18, 18, 18, 1);
+    border: 0.05em solid rgba(18, 18, 18, 0.75);
 }
 
 .github-badge .github-column {
