@@ -152,8 +152,9 @@ function ColourExtractor() {
     */
   const extractColors = async () => {
     setIsLoadingAndExtracting(true);
-    if (imgRef.current && imgRef.current.complete) {
+    // if (imgRef.current && imgRef.current.complete) {
       try {
+        console.log('Extracting colors...');
         // NOTE: The value is set to 10, so we do not make multiple requests to the API
         const palette = colorThief.getPalette(imgRef.current, 10);
         const colorPromises = palette.map(async (rgb) => {
@@ -174,6 +175,7 @@ function ColourExtractor() {
 
         localStorage.removeItem('savedBackground');
         localStorage.setItem('savedBackground', JSON.stringify(background));
+        console.log('Saved background colours to local storage');
 
         // Determine whether the image is light or dark
         const dominantColor = colorThief.getColor(imgRef.current);
@@ -191,7 +193,7 @@ function ColourExtractor() {
         // Set loading state to false after extraction is complete (whether successful or not)
         setIsLoadingAndExtracting(false);
       }
-    }
+    // }
   };
 
 
@@ -253,6 +255,7 @@ function ColourExtractor() {
   */
   const handleNumberChange = (number) => {
     setNumberOfColors(number);
+    console.log('Number of colors changed to', number);
   };
 
   /**
@@ -278,6 +281,7 @@ function ColourExtractor() {
   * @returns {boolean} True if the file type is valid, false otherwise.
   */
   function validFileType(file) {
+    console.log('File type is', file.type);
     return fileTypes.includes(file.type);
   }
 
@@ -313,7 +317,6 @@ function ColourExtractor() {
           if (savedBackground) {
             setBackgroundStyle(JSON.parse(savedBackground));
           }
-
         };
         reader.readAsDataURL(file);
       }
@@ -332,6 +335,12 @@ function ColourExtractor() {
       setShowToast(true);
     }
 
+    // Auto-hide the toast after a certain duration (e.g., 3000 milliseconds)
+    setTimeout(() => {
+      setShowToast(false);
+      setToastMessage(null);
+    }, 3000);
+
     // Note: We don't need to set isLoadingAndExtracting to false here,
     // as the extraction process (extractColors function) will handle it
   };
@@ -348,7 +357,6 @@ function ColourExtractor() {
     setIsImagePreviewActive(true);    // Set image preview inactive
     setNumberOfColors(6);             // Reset the number of colors to 6 (default value)
   };
-
 
   /**
   * Color Variables
@@ -388,21 +396,45 @@ function ColourExtractor() {
 
     const copyToClipboard = (text) => {
       navigator.clipboard.writeText(text).then(() => {
-        // toast.success('Copied to clipboard!', { autoClose: 1500 });
-        setShowToast(true);
-        setToastMessage('Copied to clipboard!');
 
         setTimeout(() => {
+          setIsCopyIconFilled((prevIsCopyIconFilled = false) => !prevIsCopyIconFilled);
+
+          // Show toast only if it's not already showing
+          // if (!showToast) {
+            setShowToast(true);
+            setToastMessage('Copied to clipboard!');
+          // }
+
+          console.log('Copy button clicked');
+
+          setIsCopyIconFilled(true);
+
           setShowToast(false);
+          // setToastMessage(null);
+          setIsCopyIconFilled(false);
         }, 1500); // Auto-close after 2 seconds
 
-        // Change the copy icon to filled for a second
-        setIsCopyIconFilled(true);
-        setTimeout(() => {
-          setIsCopyIconFilled(false);
-        }, 300);
+        // setTimeout(() => {
+        //   setShowToast(false);
+        //   setToastMessage(null);
+        // }, 1500); // Auto-close after 2 seconds
+
+        // // Change the copy icon to filled for a second
+        // setIsCopyIconFilled(true);
+
+        // setTimeout(() => {
+        //   setIsCopyIconFilled(false);
+        // }, 300);
       });
     };
+
+    // Reset toast state after it's closed
+    useEffect(() => {
+      if (!showToast && toastMessage) {
+        setToastMessage('');
+      }
+    }, [showToast, toastMessage]);
 
     return (
       <div className="color-bottom-align" style={{ backgroundColor: color.hex }}>
@@ -416,7 +448,7 @@ function ColourExtractor() {
             aria-label="Copy to clipboard"
           >
             {textColor === 'rgba(18, 18, 18, 1)' ? (
-              isCopyIconFilled ? <CopyIconDarkFilled /> : <CopyIconDarkUnfilled />
+              isCopyIconFilled ?  <CopyIconDarkFilled /> : <CopyIconDarkUnfilled />
             ) : (
               isCopyIconFilled ? <CopyIconWhiteFilled /> : <CopyIconWhiteUnfilled />
             )}
@@ -510,6 +542,7 @@ function ColourExtractor() {
       {/* Toast message */}
       {showToast && (
         <Toast
+          type={showToast.type}
           message={toastMessage}
           onClose={() => {
             setShowToast(false);

@@ -381,6 +381,7 @@ function PaletteGenerator() {
       {/* Toast message */}
       {showToast && (
         <Toast
+          // type={}
           message={toastMessage}
           onClose={() => {
             setShowToast(false);
