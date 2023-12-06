@@ -17,7 +17,7 @@ p {
 }
 
 .grid-container div {
-    min-width: 100%;
+    /* min-width: 100%; */
     /* DO NOT DELETE THIS! */
     /* background-color: #4a4e69; */
     min-height: 1vmax;
@@ -33,7 +33,7 @@ p {
 }
 
 .nested-grid div {
-    min-width: 100%;
+    /* min-width: 100%; */
     min-height: 1vmax;
     /* DO NOT DELETE THIS! */
     /* background-color: #9a8c98; */
@@ -362,7 +362,7 @@ body {
 }
 
 .col-xs-36 {
-    text-align: center;
+    /* text-align: center; */
     -ms-grid-column-end: span 36;
     grid-column-end: span 36;
 }
