@@ -40,7 +40,7 @@ const SkeletonLoader = () => (
         <div className="main-section col-xs-36 col-md-24 grid-container nested-grid">
             {/* First dominant colour */}
             <div className="glassmorphic-simple wrapper-2-col secondary-section col-xs-36 col-md-18">
-                <div className="loader-square loader-square-bottom-alignn">
+                <div className="loader-square loader-square-bottom-align">
                     <div className="color-name-container">
                         <p className="color-name" style={{ color: defaultColor }}>Name</p>
                     </div>

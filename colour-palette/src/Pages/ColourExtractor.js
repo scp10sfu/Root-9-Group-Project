@@ -153,7 +153,7 @@ function ColourExtractor() {
     */
   const extractColors = async () => {
     setIsLoadingAndExtracting(true);
-    // if (imgRef.current && imgRef.current.complete) {
+    if (imgRef.current && imgRef.current.complete) {
       try {
         console.log('Extracting colors...');
         // NOTE: The value is set to 10, so we do not make multiple requests to the API
@@ -194,7 +194,7 @@ function ColourExtractor() {
         // Set loading state to false after extraction is complete (whether successful or not)
         setIsLoadingAndExtracting(false);
       }
-    // }
+    }
   };
 
 
