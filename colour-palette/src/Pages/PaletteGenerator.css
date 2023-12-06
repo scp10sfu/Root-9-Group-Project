@@ -336,7 +336,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  gap: 5px;
+  gap: 0.15em;
 }
 
 .copy-icon {
@@ -366,8 +366,20 @@
   font-weight: 600;
   font-size: 0.7em;
   color: rgba(18, 18, 18, 1);
-  letter-spacing: 0.2em;
+  letter-spacing: 0.1em;
   text-align: left;
+  word-wrap: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip clip;
+}
+
+@media only screen and (max-width: 767px) {
+  .color-name {
+    /* Reset styles for mobile */
+    overflow: visible;
+    white-space: normal;
+  }
 }
 
 /* Style for color codes */
@@ -379,7 +391,7 @@
   color: rgba(18, 18, 18, 0.75);
   text-align: left;
   font-size: 0.625em;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   line-height: 0.7em;
   white-space: nowrap;
 }

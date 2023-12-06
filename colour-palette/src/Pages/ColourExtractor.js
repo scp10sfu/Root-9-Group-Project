@@ -386,6 +386,7 @@ function ColourExtractor() {
    */
   const ColourBoxBottom = ({ color }) => {
     const [isCopyIconFilled, setIsCopyIconFilled] = useState(false);
+    const [shouldTruncate, setShouldTruncate] = useState(false);
 
     if (!color || typeof color.hex === 'undefined') {
       // Handle the case where color is undefined or does not have a 'hex' property
@@ -436,11 +437,40 @@ function ColourExtractor() {
       }
     }, [showToast, toastMessage]);
 
+    // Function to truncate text to a specified number of words
+    const truncateText = (text, maxWords) => {
+      const words = text.split(' ');
+      return words.slice(0, maxWords).join(' ');
+    };
+
+    useEffect(() => {
+      // Update the shouldTruncate state based on the screen width
+      const handleResize = () => {
+        // setShouldTruncate(window.innerWidth > 767);
+        const emWidth = window.innerWidth / parseFloat(getComputedStyle(document.documentElement).fontSize);
+      setShouldTruncate(emWidth >= 76);
+      };
+  
+      // Initial check on component mount
+      handleResize();
+  
+      // Listen for window resize events
+      window.addEventListener('resize', handleResize);
+  
+      // Cleanup event listener on component unmount
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, []);
+
     return (
       <div className="color-bottom-align" style={{ backgroundColor: color.hex }}>
 
         <div className="color-name-container">
-          <p className="color-name" style={{ color: textColor }}>{color.name}</p>
+          <p className="color-name" style={{ color: textColor }}>
+          {/* Truncate to the first word if more than 10 characters */}
+          {shouldTruncate && color.name.length > 10 ? truncateText(color.name, 1) : color.name}
+        </p>
 
           <button
             className="copy-icon"
@@ -454,13 +484,10 @@ function ColourExtractor() {
             )}
           </button>
         </div>
-
         <p className="color-hex" style={{ color: textColor }}>HEX: {color.hex}</p>
         <p className="color-rgb" style={{ color: textColor }}>RGB: {color.rgb}</p>
         <p className="color-cmyk" style={{ color: textColor }}>CMYK: {color.cmyk}</p>
-
       </div>
-
     );
   };
 
@@ -473,6 +500,7 @@ function ColourExtractor() {
    */
   const ColourBoxTop = ({ color }) => {
     const [isCopyIconFilled, setIsCopyIconFilled] = useState(false);
+    const [shouldTruncate, setShouldTruncate] = useState(false);
 
     if (!color || typeof color.hex === 'undefined') {
       // Handle the case where color is undefined or does not have a 'hex' property
@@ -500,11 +528,40 @@ function ColourExtractor() {
       });
     };
 
+    // Function to truncate text to a specified number of words
+    const truncateText = (text, maxWords) => {
+      const words = text.split(' ');
+      return words.slice(0, maxWords).join(' ');
+    };
+
+    useEffect(() => {
+      // Update the shouldTruncate state based on the screen width
+      const handleResize = () => {
+        // setShouldTruncate(window.innerWidth > 767);
+        const emWidth = window.innerWidth / parseFloat(getComputedStyle(document.documentElement).fontSize);
+      setShouldTruncate(emWidth >= 76);
+      };
+  
+      // Initial check on component mount
+      handleResize();
+  
+      // Listen for window resize events
+      window.addEventListener('resize', handleResize);
+  
+      // Cleanup event listener on component unmount
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, []);
+
     return (
       <div className="color-top-align" style={{ backgroundColor: color.hex }}>
 
         <div className="color-name-container">
-          <p className="color-name" style={{ color: textColor }}>{color.name}</p>
+          <p className="color-name" style={{ color: textColor }}>
+            {/* Truncate to the first word if more than 10 characters */}
+          {shouldTruncate && color.name.length > 10 ? truncateText(color.name, 1) : color.name}
+          </p>
 
           <button
             className="copy-icon"

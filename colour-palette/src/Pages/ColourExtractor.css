@@ -288,7 +288,9 @@
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  gap: 5px;
+  gap: 0.1em;
+  word-wrap: break-word;
+  padding-right: 20px;
 }
 
 .copy-icon {
@@ -314,13 +316,17 @@
 
 /* Style for color name at the top */
 .color-name {
-  /* gap: 30px; */
+  /* width: inherit; */
   font-family: 'DM Mono', monospace;
   font-weight: 600;
   font-size: 0.7em;
   color: rgba(18, 18, 18, 1);
-  letter-spacing: 0.2em;
+  letter-spacing: 0.1em;
   text-align: left;
+  word-wrap: break-word;
+  white-space: nowrap;
+  overflow: scroll;
+  text-overflow: clip clip;
 }
 
 /* Style for color codes */
@@ -329,11 +335,10 @@
 .color-cmyk {
   font-family: 'DM Mono', monospace;
   font-weight: 400;
-
   color: rgba(18, 18, 18, 0.75);
   text-align: left;
   font-size: 0.625em;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   line-height: 0.7em;
   white-space: nowrap;
 }
