@@ -5,12 +5,12 @@ import '@testing-library/jest-dom';
 
 test('Test for color extractor text', ()=>{
     render(<PaletteGenerator />)
-    const title = screen.getByText("AI Palette Generator").closest('p');
+    const title = screen.getByText("AI Palette Generator");
     expect(title).toBeInTheDocument();
 })
 
 test('Test for color extractor text', ()=>{
     render(<PaletteGenerator />)
-    const description = screen.getByText("Generate wonderful palettes.").closest('p');
+    const description = screen.getByText("Generate wonderful palettes.");
     expect(description).toBeInTheDocument();
 })
