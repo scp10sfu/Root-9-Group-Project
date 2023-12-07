@@ -121,8 +121,13 @@ Files associated with the server (AI parts) of the website are found in the gith
 - OpenAI
 
 ## Usage
+This usage will describe a setup process for the static elements of our web application. Usage of the AI components is unavaliable on local machines.
 
-[The usage should be here]
+Once Node.js is installed, run these two commands in the colour-palette directory with your terminal.
+```
+npm ci
+npm run build
+```
 
 ## 💡 Contributors
 
