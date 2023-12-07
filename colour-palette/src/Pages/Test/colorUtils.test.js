@@ -1,4 +1,4 @@
-import { rgbToHex, rgbToCmyk, getTextColor, rgbToHsl } from './colorUtils';
+import { rgbToHex, hexToRgb, rgbToCmyk, getTextColor, rgbToHsl } from './colorUtils';
 
 describe('Color Utilities', () => {
 
@@ -49,4 +49,37 @@ describe('Color Utilities', () => {
     });
   });
 
+  // Test suite for hexToRgb function
+  describe('hexToRgb', () => {
+    // Test case 1: Convert a valid hex code to RGB
+    it('converts valid hex code to RGB', () => {
+      const hexCode = '#00ff00';
+      const expectedRgb = { r: 0, g: 255, b: 0 };
+      const result = hexToRgb(hexCode);
+      expect(result).toEqual(expectedRgb);
+    });
+
+    // Test case 2: Convert a hex code without a hash to RGB
+    it('converts hex code without hash to RGB', () => {
+      const hexCode = 'ff0000';
+      const expectedRgb = { r: 255, g: 0, b: 0 };
+      const result = hexToRgb(hexCode);
+      expect(result).toEqual(expectedRgb);
+    });
+
+    // Test case 3: Convert a black hex code to RGB
+    it('converts black hex code to RGB', () => {
+      const hexCode = '#000000';
+      const expectedRgb = { r: 0, g: 0, b: 0 };
+      const result = hexToRgb(hexCode);
+      expect(result).toEqual(expectedRgb);
+    });
+
+    // You can also add negative cases, e.g., testing with an invalid hex code
+    it('returns null for invalid hex code', () => {
+      const hexCode = 'invalidHex';
+      const result = hexToRgb(hexCode);
+      expect(result).toBeNull();
+    });
+  });
 });
