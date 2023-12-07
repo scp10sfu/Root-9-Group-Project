@@ -7,6 +7,10 @@ import '@testing-library/jest-dom';
 // Mocking axios to prevent actual API calls during testing
 jest.mock('axios');
 
+jest.mock('colorthief', () => {
+    return function fn() {return [[1,1,1]];}
+});
+
 test('Test for color extractor text # 1', ()=>{
     render(<ColourExtractor />)
     const title = screen.getByText("Colour Extractor");
