@@ -26,12 +26,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "jest": {
-    "preset": "react-app",
-    "transform": {
-      "^.+\\.js$": "babel-jest"
-    }
-  },
   "eslintConfig": {
     "extends": [
       "react-app",
