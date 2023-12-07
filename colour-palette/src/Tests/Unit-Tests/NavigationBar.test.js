@@ -3,24 +3,65 @@ import {render, screen, fireEvent, act} from "@testing-library/react";
 import {BrowserRouter} from 'react-router-dom';
 import NavigationBar from "../../Components/NavigationBar";
 import '@testing-library/jest-dom';
+import { act } from 'react-dom/test-utils';
 
-test('Checks about button',()=>{
-    render(<BrowserRouter><NavigationBar/></BrowserRouter>);
-    const linkElement = screen.getByText(/About/i);
-    expect(linkElement).toHaveAttribute("href", "/About");
+test('Checks about button navigation', () => {
+  render(
+    <BrowserRouter>
+      <NavigationBar />
+    </BrowserRouter>
+  );
+
+  // Mock the useNavigate hook
+  const mockNavigate = jest.fn();
+  jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'),
+    useNavigate: () => mockNavigate,
+  }));
+
+  // Click the "About" button
+  fireEvent.click(screen.getByText(/About/i));
+
+  // Ensure useNavigate was called with the correct route
+  expect(mockNavigate).toHaveBeenCalledWith('/About');
 });
 
-test('Checks color extractor button',()=>{
-    render(<BrowserRouter><NavigationBar/></BrowserRouter>);
-    const linkElement = screen.getByText(/ColourExtractor/i);;
-    expect(linkElement).toHaveAttribute("href", "/ColourExtractor");
+test('Checks color extractor button navigation', () => {
+  render(
+    <BrowserRouter>
+      <NavigationBar />
+    </BrowserRouter>
+  );
+
+  const mockNavigate = jest.fn();
+  jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'),
+    useNavigate: () => mockNavigate,
+  }));
+
+  fireEvent.click(screen.getByText(/Colour Extractor/i));
+
+  expect(mockNavigate).toHaveBeenCalledWith('/ColourExtractor');
 });
 
-test('Checks AI generator button',()=>{
-    render(<BrowserRouter><NavigationBar/></BrowserRouter>);
-    const linkElement = screen.getByText(/PaletteGenerator/i);
-    expect(linkElement).toHaveAttribute("href", "/PaletteGenerator");
+test('Checks AI generator button navigation', () => {
+  render(
+    <BrowserRouter>
+      <NavigationBar />
+    </BrowserRouter>
+  );
+
+  const mockNavigate = jest.fn();
+  jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'),
+    useNavigate: () => mockNavigate,
+  }));
+
+  fireEvent.click(screen.getByText(/AI Palette Generator/i));
+
+  expect(mockNavigate).toHaveBeenCalledWith('/PaletteGenerator');
 });
+
 
 
 // describe('NavigationBar component', () => {
