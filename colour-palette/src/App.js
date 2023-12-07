@@ -6,7 +6,7 @@
 import React, { createContext, useState } from 'react';
  // import './App.css';
 // TODO: import css file for App component
-import { Routes, Route, useNavigate} from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation} from 'react-router-dom';
 import About from './Pages/About';
 import ColourExtractor from './Pages/ColourExtractor';
 import PaletteGenerator from './Pages/PaletteGenerator';
@@ -57,11 +57,16 @@ const App = () => {
           </Routes>
         </div>
         {/* <Footer/> */}
+        <LocationDisplay />
       </div> 
     </ColorContext.Provider>
   );
 };
 
 
+export const LocationDisplay = () => {
+  const location = useLocation()
 
+  return <div data-testid="location-display">{location.pathname}</div>
+}
 export default App;
