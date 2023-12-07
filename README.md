@@ -72,6 +72,14 @@ The project-plan-files folder will have all the files related to milestone 1, wh
 - **Root_9 Final Timeline.xlsx** is the excel format of the timeline/schedule of our project.
 - **Milestone_1_AI_Disclosure_Root_9_Taiga_Okuma_301594583.pdf** is a pdf file for AI use disclosure.
 
+The final-submission-files folder will have all the files related to milstone 2, which is the final submission phase. Each file's purpose/meaning is as follows:
+
+- **DFD.png** is an image which shows the Data Flow Diagram created to represent a potential users process through using our web application.
+- **Root9_Presentation_Slides.pdf** is a pdf with the slides used in the final presentation.
+- **Root9_Presentation_Slides.pptx** is the powerpoint format of the final presentation of our project.
+- **Root9_Project_Report.pdf** is a pdf with the final report.
+- **Project_Milestone_2_Stefan_Pricope_301462068_AI Use Disclosure.pdf** is a pdf file for AI use disclosure.
+
 Files associated with the server (AI parts) of the website are found in the github repository mentioned at the start of the README
 
 `<H3>` Project Structure `</H3>`
@@ -81,12 +89,18 @@ Files associated with the server (AI parts) of the website are found in the gith
 │
 └── colour-palette
     ├── README.md
+    ├── package-lock.json
+    ├── package.json
     ├── public
     │   └── ...
     ├── src
     │   ├── images
-    │   └── pages
-    │   └── components
+    │   └── Pages
+    │   └── Components
+    │   └── Tests
+    │        ├── Unit-Tests
+    │        └── Integration-Tests
+    │
     └── docs
         └── ...
 </pre>
