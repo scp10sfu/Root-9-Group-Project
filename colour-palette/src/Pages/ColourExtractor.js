@@ -5,7 +5,7 @@
  */
 import React, { useState, useRef, useEffect } from 'react';
 import ColorThief from 'colorthief';
-import axios from 'axios';
+import axios from './lib/axios.js';
 import { ReactComponent as UploadIcon } from '../images/icon-upload-dark.svg';
 import { ReactComponent as InfoIcon } from '../images/icon-info-dark.svg';
 import { ReactComponent as CloseIconWhite } from '../images/icon-close-white.svg';
