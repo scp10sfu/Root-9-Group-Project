@@ -2,7 +2,7 @@ import React from 'react'
 import {render, screen} from "@testing-library/react";
 import PaletteGenerator from "../../Pages/PaletteGenerator";
 import '@testing-library/jest-dom';
-import {Toast} from '../toastutils';
+import {fetchColorName} from '../colorutils';
 
 jest.mock('colorthief', () => {
     return function fn() {return [[1,1,1]];}
@@ -20,10 +20,9 @@ test('Test for color extractor text' , ()=>{
     expect(description).toBeInTheDocument();
 })
 
-test('Check the toast message function', () => {
-        const Toastmsg = 'info';
-        const Toasttype = 'Copied to clipboard!';
-        const Toastclose = 'tempclose'
-        const result = Toast(Toastmsg,Toasttype,Toastclose);
-        expect(result).stringContaining("Copied to clipboard!");
+test('Check if the fetched color name is correct', () => {
+        const hex = '#C1DE32';
+        const expectedname = 'PEAR';
+        const result = fetchColorName(hex);
+        expect(result).toBe(expectedname);
 })
