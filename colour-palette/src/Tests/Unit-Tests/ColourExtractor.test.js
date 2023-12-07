@@ -7,13 +7,13 @@ import '@testing-library/jest-dom';
 // Mocking axios to prevent actual API calls during testing
 jest.mock('axios');
 
-test('Test for color extractor text', ()=>{
+test('Test for color extractor text # 1', ()=>{
     render(<ColourExtractor />)
     const title = screen.getByText("Colour Extractor");
     expect(title).toBeInTheDocument();
 })
 
-test('Test for color extractor text', ()=>{
+test('Test for color extractor text # 2', ()=>{
     render(<ColourExtractor />)
     const description = screen.getByText("Extract wonderful palettes from your image.");
     expect(description).toBeInTheDocument();
