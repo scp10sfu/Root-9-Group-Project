@@ -6,12 +6,12 @@ import '@testing-library/jest-dom';
 
 test('Test for color extractor text', ()=>{
     render(<ColourExtractor />)
-    const title = screen.getByText("Colour Extractor").closest('p');
+    const title = screen.getByText("Colour Extractor");
     expect(title).toBeInTheDocument();
 })
 
 test('Test for color extractor text', ()=>{
     render(<ColourExtractor />)
-    const description = screen.getByText("Extract wonderful palettes from your image.").closest('p');
+    const description = screen.getByText("Extract wonderful palettes from your image.");
     expect(description).toBeInTheDocument();
 })
