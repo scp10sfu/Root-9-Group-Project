@@ -1,0 +1,125 @@
+/* SkeletonLoader.css */
+
+/* *************************************************************************** */
+/* ************************ COLOUR PALETTE - LOADER ************************** */
+/* *************************************************************************** */
+
+/* Skeleton loader for colour blocks */
+.loader-square {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(18, 18, 18, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    padding: 0.95em;
+    gap: 0.22em;
+    white-space: nowrap;
+    overflow-wrap: break-word;
+    /* -webkit- is a hack for the Webkit Browser engine */
+    background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(18, 18, 18, 0.2)), color-stop(18%, rgba(18, 18, 18, 0.3)), color-stop(33%, rgba(18, 18, 18, 0.2)));
+    background: linear-gradient(to right, rgba(18, 18, 18, 0.2) 8%, rgba(18, 18, 18, 0.3) 18%, rgba(18, 18, 18, 0.2) 33%);
+    background-size: 1400px 800px;
+    animation: wave-squares 2s infinite ease-out;
+}
+
+/* Bottom-aligned loader square */
+.loader-square-bottom-align {
+    justify-content: flex-end;
+}
+
+/* Top-aligned loader square */
+.loader-square-top-align {
+    justify-content: flex-start;
+}
+
+.color-name-container {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    gap: 0.1em;
+}
+
+.copy-icon {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: block;
+    z-index: 10000;
+}
+
+/* Styles for desktop */
+@media only screen and (min-width: 76em) {
+    .copy-icon {
+        display: none;
+        /* Hide the icon by default on desktop */
+    }
+
+    /* Show the icon only when the parent block is hovered on desktop */
+    .color-bottom-align:hover .copy-icon,
+    .color-top-align:hover .copy-icon {
+        display: block;
+    }
+}
+
+/* Style for color name at the top */
+.color-name {
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    font-size: 0.75em;
+    color: rgba(18, 18, 18, 1);
+    letter-spacing: 0.15em;
+    text-align: left;
+    word-wrap: break-word;
+    white-space: normal;
+    transition: font-size 0.5s ease;
+    /* word-wrap: break-word; */
+    /* white-space: normal; */
+    /* white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip clip; */
+}
+
+@media only screen and (max-width: 767px) {
+    .color-name {
+        /* Reset styles for mobile */
+        overflow: visible;
+        white-space: normal;
+    }
+}
+
+/* Style for color codes */
+.color-hex,
+.color-rgb,
+.color-cmyk {
+    font-family: 'DM Mono', monospace;
+    font-weight: 400;
+    color: rgba(18, 18, 18, 0.75);
+    text-align: left;
+    font-size: 0.625em;
+    letter-spacing: 0.04em;
+    line-height: 0.7em;
+    white-space: nowrap;
+}
+
+
+@keyframes wave-lines {
+    0% {
+        background-position: -468px 0;
+    }
+
+    100% {
+        background-position: 468px 0;
+    }
+}
+
+@keyframes wave-squares {
+    0% {
+        background-position: -468px 0;
+    }
+
+    100% {
+        background-position: 468px 0;
+    }
+}

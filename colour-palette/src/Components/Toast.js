@@ -1,6 +1,6 @@
 // Toast.js
 
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './Toast.css';
 
@@ -23,5 +23,9 @@ Toast.propTypes = {
   message: PropTypes.string.isRequired, // Message to display in the toast
   onClose: PropTypes.func.isRequired, // Callback function when the toast is closed
 };
+
+const ToastInfo = ({ message }) => <Toast message={message} type="info" />;
+const ToastError = ({ message }) => <Toast message={message} type="error" />;
+const ToastSuccess = ({ message }) => <Toast message={message} type="success" />;
 
 export default Toast;

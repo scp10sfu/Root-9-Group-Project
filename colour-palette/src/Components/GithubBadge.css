@@ -1,0 +1,84 @@
+/* GithubBadge.css */
+
+/* *************************************************************************** */
+/* ******************************* GitHub Badge ****************************** */
+/* *************************************************************************** */
+
+.github-badge {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5em;
+    
+    text-decoration: none;
+    flex-direction: row;
+    position: relative;
+    align-items: center;
+
+    padding-left: 1em;
+
+    transition: box-shadow 0.3s, transform 0.3s;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(18, 18, 18, 0.20);
+    backdrop-filter: blur(4.0px);
+    -webkit-backdrop-filter: blur(4.0px);
+    border-radius: 15px;
+    border: 0.05em solid rgba(18, 18, 18, 0.75);
+}
+
+.github-badge .github-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+    overflow: hidden;
+    padding: 0.2em;
+}
+
+/* .github-column .github-badge-icon {
+    padding: 0.5rem;
+} */
+
+.github-badge .github-info {
+    padding-top: 1em;
+    padding-bottom: 0.1em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.2em;
+    overflow: hidden;
+    /* padding: 0.5em; */
+}
+
+.github-badge .github-info .github-username {
+    color: rgba(18, 18, 18, 0.5);
+    font-family: 'DM Mono', monospace;
+    font-size: 1em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.github-badge .github-info .github-name {
+    color: rgba(18, 18, 18, 1);
+    font-family: 'DM Mono', monospace;
+    font-size: 1.1em;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+/* *************************************************************************** */
+/* ********************************** OTHER ********************************** */
+/* *************************************************************************** */
+
+.github-badge .glassmorphic-with-boarder {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(18, 18, 18, 0.20);
+    backdrop-filter: blur(4.0px);
+    -webkit-backdrop-filter: blur(4.0px);
+    border-radius: 15px;
+    border: 0.05em solid rgba(18, 18, 18, 1);
+}
+
+/* Keep the rest of your styles as they are */

@@ -1,4 +1,4 @@
-# 🎨 paletä 🖌️
+# Paletä
 
 [![Netlify Build Status](https://api.netlify.com/api/v1/badges/4c366889-27a9-4dd6-b40f-b30a9a022862/deploy-status)](https://mypaleta.netlify.app/)
 ![Uptime Robot status](https://img.shields.io/uptimerobot/status/m795784458-8d1674ba3b95c4e625503e31)
@@ -71,21 +71,35 @@ The project-plan-files folder will have all the files related to milestone 1, wh
 - **Root_9 Final Timeline.xlsx** is the excel format of the timeline/schedule of our project.
 - **Milestone_1_AI_Disclosure_Root_9_Taiga_Okuma_301594583.pdf** is a pdf file for AI use disclosure.
 
+The final-submission-files folder will have all the files related to milstone 2, which is the final submission phase. Each file's purpose/meaning is as follows:
+
+- **DFD.png** is an image which shows the Data Flow Diagram created to represent a potential users process through using our web application.
+- **Root9_Presentation_Slides.pdf** is a pdf with the slides used in the final presentation.
+- **Root9_Presentation_Slides.pptx** is the powerpoint format of the final presentation of our project.
+- **Root9_Project_Report.pdf** is a pdf with the final report.
+- **Project_Milestone_2_Stefan_Pricope_301462068_AI Use Disclosure.pdf** is a pdf file for AI use disclosure.
+
 Files associated with the server (AI parts) of the website are found in the github repository mentioned at the start of the README
 
-<H3> Project Structure </H3>
+`<H3>` Project Structure `</H3>`
 
 <pre>
 .
 │
 └── colour-palette
     ├── README.md
+    ├── package-lock.json
+    ├── package.json
     ├── public
     │   └── ...
     ├── src
     │   ├── images
-    │   └── pages
-    │   └── components
+    │   └── Pages
+    │   └── Components
+    │   └── Tests
+    │        ├── Unit-Tests
+    │        └── Integration-Tests
+    │
     └── docs
         └── ...
 </pre>
@@ -108,6 +122,15 @@ Files associated with the server (AI parts) of the website are found in the gith
 The `setup.sh` file will install the npm packages, Python and a virtual environment for it, as well as installing Python packages that are necessary for the running.
 
 Other dependencies include a variety of packages used for the program, and the major API dependencies are `openai` and `colorapi`.
+
+## Usage
+This usage will describe a setup process for the static elements of our web application. Usage of the AI components is unavaliable on local machines.
+
+Once Node.js is installed, run these two commands in the colour-palette directory with your terminal.
+```
+npm ci
+npm run build
+```
 
 ## 💡 Contributors
 

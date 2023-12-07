@@ -1,58 +1,130 @@
 /* ColourExtractor.css */
 
-.upload-container {
-  position: relative;
-  background-color: rgba(18, 18, 18, 0.05);
-  border: 1px dashed;
-  border-radius: 10px;
-  border-color: rgba(18, 18, 18, 0.55);
+/* *************************************************************************** */
+/* *************************** OVERALL PAGE STYLE **************************** */
+/* *************************************************************************** */
+
+/* Content block styles */
+.content-block {
+  display: flex;
+  align-items: center;
+  padding: 128px 76px 128px 96px;
+  flex-direction: column;
+  gap: 50px;
+  flex-shrink: 0;
 }
 
-.upload-area {
-  text-align: center;
-  padding: 10px 20px;
-  transition: border-color 0.3s;
+.content-block .text_block {
+  display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: flex-start;
+  gap: 24px;
   align-self: stretch;
-  overflow: hidden;
 }
+
+.text_block .text_block_text {
+  margin-top: 1em;
+  align-self: stretch;
+  color: rgba(18, 18, 18, 1);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 4.2em;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1em;
+  letter-spacing: -0.05em;
+}
+
+/* Media query for small screens (e.g., mobile devices) */
+@media only screen and (max-width: 767px) {
+  .text_block_text {
+      font-size: 2rem; 
+  }
+
+  .text_block_subtext {
+      font-size: 1rem; 
+  }
+}
+
+.text_block .text_block_subtext {
+  align-self: stretch;
+  color: rgba(18, 18, 18, 0.50);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.5em;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+
+  padding-top: 1%;
+  padding-bottom: 3%;
+  margin-bottom: 0.5em;
+}
+
+/* *************************************************************************** */
+/* ******************************* UPLOAD AREA ******************************* */
+/* *************************************************************************** */
+
+.upload-container {
+  position: relative;
+  /* background-color: rgba(18, 18, 18, 0.05); */
+  background: rgba(255, 255, 255, 0.15);
+  /* border: 0.08em dashed; */
+  border-radius: 0.625em;
+  /* border-color: rgba(18, 18, 18, 0.55); */
+  /* border-color: var(--color1); */
+  box-shadow: 0 2px 16px 6px var(--color1);
+  backdrop-filter: blur(10.0px);
+  -webkit-backdrop-filter: blur(10.0px);
+}
+
 
 /* Modify the file input styles to cover the entire container */
 .upload-container input[type="file"] {
   width: 100%;
   height: 100%;
   position: absolute;
+  cursor: pointer;
   top: 0;
   left: 0;
   opacity: 0;
+}
+
+.upload-container .upload-area {
+  text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  transition: border-color 0.3s;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  align-self: stretch;
+  overflow: hidden;
   cursor: pointer;
 }
 
-.upload-area .text {
+.upload-area-text {
   color: rgba(18, 18, 18, 0.85);
-
-  /* Body */
   font-family: 'DM Sans', sans-serif;
-  font-size: 18px;
+  font-size: 17px;
   font-style: normal;
-  font-weight: 500;
-  letter-spacing: 1.4px;
-
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  line-height: 1.5em;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-wrap: break-word;
 }
 
 .upload-area .subtext {
   color: rgba(18, 18, 18, 0.50);
   font-family: 'DM Mono', monospace;
-  font-size: 12px;
+  font-size: 0.7em;
   font-weight: regular;
   white-space: nowrap;
-  letter-spacing: 1.4px;
+  letter-spacing: 0.1em;
 
   text-align: center;
   display: flex;
@@ -62,21 +134,21 @@
 }
 
 .upload-icon-dark {
-  font-size: 24px;
+  font-size: 1.5em;
   position: relative;
   margin: 0 auto;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
+  margin-bottom: 0.25em;
 }
 
 .info-icon-dark {
   padding-right: 5px;
   height: 12px;
-  position: relative;
   width: 12px;
+  position: relative;
 }
 
 /* Image preview styles */
@@ -110,25 +182,30 @@
   color: #ffffff;
 }
 
+/* *************************************************************************** */
+/* **************************** NUMBER SELECTION ***************************** */
+/* *************************************************************************** */
+
 .number-of-colors-container {
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+  margin-top: 0.625em;
 }
 
 .number-of-colors-text {
   color: rgba(18, 18, 18, 0.75);
 
   font-family: 'DM Mono', monospace;
-  font-size: 14px;
+  font-size: 0.875em;
   font-weight: 500;
   white-space: nowrap;
-  letter-spacing: 1.6px;
+  letter-spacing: 0.1em;
 
   text-align: left;
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 0.625em;
 }
 
 .number-buttons-container {
@@ -140,44 +217,9 @@
   justify-content: center;
 }
 
-.number-button {
-  color: rgba(18, 18, 18, 0.75);
-  background-color: rgba(18, 18, 18, 0.15);
-
-  height: 80%;
-  min-height: 20px;
-  width: 14%;
-  min-width: 40px;
-
-  font-family: 'DM Mono', monospace;
-  font-weight: 400;
-  font-size: 12px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
-
-  border-radius: 38.7px;
-  border: 1.5px solid rgba(18, 18, 18, 0.15);
-
-  display: inline-block;
-  white-space: nowrap;
-  text-align: center;
-  align-items: center;
-  justify-items: center;
-}
-
-.number-button:hover {
-  background-color: var(--color1);
-  color: getTextColor(--color1);
-  transform: scale(1.1);
-}
-
-.number-button.active {
-  /* background-color: rgba(186, 229, 13, 0.8); */
-  /* background-color: rgba(255, 153, 102, 0.4); */
-  background-color: rgba(18, 18, 18, 1);
-  color: #ffffff;
-  transform: scale(1.1);
-}
+/* *************************************************************************** */
+/* *************************************************************************** */
+/* *************************************************************************** */
 
 .switch {
   display: flex;
@@ -199,233 +241,6 @@
   font-family: Tahoma;
 }
 
-/* Content block styles */
-.content-block {
-  display: flex;
-  align-items: center;
-  padding: 128px 76px 128px 96px;
-  flex-direction: column;
-  gap: 50px;
-  flex-shrink: 0;
-}
-
-.content-block .text_block {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-start;
-  gap: 24px;
-  align-self: stretch;
-}
-
-.text_block_text {
-  margin-top: 50px;
-  align-self: stretch;
-  color: rgba(18, 18, 18, 1);
-  /* H2 */
-  font-family: 'DM Sans', sans-serif;
-  font-size: 8vh;
-  font-style: normal;
-  font-weight: 700;
-  letter-spacing: -3.6px;
-}
-
-.text_block_subtext {
-  align-self: stretch;
-  color: rgba(18, 18, 18, 0.50);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  letter-spacing: -0.4px;
-
-  padding-top: 1%;
-  padding-bottom: 3%;
-}
-
-/* *************************************************************************** */
-/* ******************************* BACKGROUND ******************************** */
-/* *************************************************************************** */
-
-@keyframes move {
-  100% {
-    transform: translate3d(0, 0, 1px) rotate(360deg);
-  }
-}
-
-:root {
-  --color1: #361fd6;
-  /* Persian Blue */
-  --color2: #dea51f;
-  /* Golden Grass */
-  --color3: #efbcd0;
-  /* Beauty Bush */
-  --color4: #dd1c28;
-  /* Alizarin Crimson */
-  --color5: #20e620;
-  /* Malachite */
-  --color6: #cc21e3;
-  /* Electric Violet */
-  --color7: #d165b5;
-  /* Hopbush */
-  --color8: #9cbdd5;
-  /* Pigeon Post */
-  --color9: #f2f3c7;
-  /* Tusk */
-  --color10: #e9a762;
-  /* Porsche */
-  --color11: #cd607e;
-  /* Cinnamon Satin, a warm reddish-pink */
-  --color12: #ff9966;
-  /* Atomic Tangerine, a vibrant orange */
-  --color13: #f4a460;
-  /* Sandy Brown, a warm, light brown */
-}
-
-
-.background {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  background: rgba(255, 255, 255, 1);
-  overflow: hidden;
-  z-index: -1;
-}
-
-.background span {
-  width: 20vmin;
-  height: 20vmin;
-  border-radius: 50%;
-  position: absolute;
-  /* Use a large blur radius to create a soft, glowing effect */
-  filter: blur(40px);
-  /* Animate the element's position and rotation */
-  animation: move 20s infinite linear;
-}
-
-@keyframes move {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-
-  to {
-    transform: translate(50vw, 50vh) rotate(360deg);
-  }
-}
-
-/* Now use the variables for each span */
-.background span:nth-child(0) {
-  background-color: var(--color1);
-  top: 96%;
-  left: 9%;
-  animation-duration: 39s;
-  animation-delay: -50s;
-  transform-origin: 14vw 20vh;
-  box-shadow: -40vmin 0 5.125340703195078vmin currentColor;
-}
-
-.background span:nth-child(1) {
-  background-color: var(--color2);
-  top: 7%;
-  left: 10%;
-  animation-duration: 16s;
-  animation-delay: -37s;
-  transform-origin: -12vw -7vh;
-  box-shadow: -40vmin 0 5.147146375625605vmin currentColor;
-}
-
-.background span:nth-child(2) {
-  background-color: var(--color3);
-  top: 83%;
-  left: 1%;
-  animation-duration: 26s;
-  animation-delay: -29s;
-  transform-origin: 10vw 4vh;
-  box-shadow: -40vmin 0 5.125434756506663vmin currentColor;
-}
-
-.background span:nth-child(3) {
-  background-color: var(--color4);
-  top: 6%;
-  left: 45%;
-  animation-duration: 25s;
-  animation-delay: -50s;
-  transform-origin: 21vw -11vh;
-  box-shadow: -40vmin 0 5.2121301416587436vmin currentColor;
-}
-
-.background span:nth-child(4) {
-  background-color: var(--color5);
-  top: 11%;
-  left: 26%;
-  animation-duration: 16s;
-  animation-delay: -22s;
-  transform-origin: -8vw 9vh;
-  box-shadow: 40vmin 0 5.619158909650866vmin currentColor;
-}
-
-.background span:nth-child(5) {
-  background-color: var(--color6);
-  top: 33%;
-  left: 7%;
-  animation-duration: 52s;
-  animation-delay: -23s;
-  transform-origin: 15vw -13vh;
-  box-shadow: 40vmin 0 5.271578872594347vmin currentColor;
-}
-
-.background span:nth-child(6) {
-  color: #583C87;
-  top: 81%;
-  left: 31%;
-  animation-duration: 13s;
-  animation-delay: -19s;
-  transform-origin: 12vw 0vh;
-  box-shadow: -40vmin 0 5.16780273632795vmin currentColor;
-}
-
-.background span:nth-child(7) {
-  background-color: var(--color8);
-  top: 81%;
-  left: 85%;
-  animation-duration: 19s;
-  animation-delay: -39s;
-  transform-origin: 13vw 21vh;
-  box-shadow: 40vmin 0 5.644889348082606vmin currentColor;
-}
-
-.background span:nth-child(8) {
-  background-color: var(--color9);
-  top: 75%;
-  left: 85%;
-  animation-duration: 49s;
-  animation-delay: -18s;
-  transform-origin: -6vw 0vh;
-  box-shadow: -40vmin 0 5.6390822541236405vmin currentColor;
-}
-
-.background span:nth-child(9) {
-  background-color: var(--color10);
-  top: 93%;
-  left: 65%;
-  animation-duration: 26s;
-  animation-delay: -7s;
-  transform-origin: 9vw 19vh;
-  box-shadow: 40vmin 0 5.16053049175409vmin currentColor;
-}
-
-.background span:nth-child(10) {
-  background-color: var(--color11);
-  top: 62%;
-  left: 86%;
-  animation-duration: 50s;
-  animation-delay: -45s;
-  transform-origin: -21vw 16vh;
-  box-shadow: -40vmin 0 5.054376341805417vmin currentColor;
-}
-
 
 /* *************************************************************************** */
 /* ***************************** COLOUR PALETTE ****************************** */
@@ -439,39 +254,35 @@
   gap: 5px;
 }
 
-.color-bottom-align {
+.color-box {
   width: 100%;
   height: 100%;
-  background-color: rgba(18, 18, 18, 0.15);
+  background-color: rgba(18, 18, 18, 0.05);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  /* Aligns the content to the bottom */
-  align-items: left;
-  padding: 15px;
+  padding: 0.95em;
   white-space: nowrap;
-  gap: 3.5px;
+  gap: 0.3em;
+  overflow-wrap: break-word;
+}
+
+.color-bottom-align {
+  justify-content: flex-end;
+  align-items: left;
 }
 
 .color-top-align {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(18, 18, 18, 0.15);
-  display: flex;
-  flex-direction: column;
   justify-content: flex-start;
-  /* Aligns the content to the top */
   align-items: left;
-  padding: 15px;
-  white-space: nowrap;
-  gap: 3.5px;
 }
 
 .color-name-container {
   display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  gap: 5px;
+  align-items: flex-start;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  gap: 0.1em;
+  /* word-wrap: break-word; */
 }
 
 .copy-icon {
@@ -479,6 +290,7 @@
   border: none;
   cursor: pointer;
   display: block;
+  z-index: 10000;
 }
 
 /* Styles for desktop */
@@ -497,13 +309,27 @@
 
 /* Style for color name at the top */
 .color-name {
-  /* gap: 30px; */
+  /* width: inherit; */
   font-family: 'DM Mono', monospace;
   font-weight: 600;
-  font-size: 11px;
+  font-size: 0.7em;
   color: rgba(18, 18, 18, 1);
-  letter-spacing: 3px;
+  letter-spacing: 0.1em;
   text-align: left;
+  word-wrap: break-word;
+  white-space: normal;
+  /* word-wrap: break-word;
+  white-space: nowrap;
+  overflow: scroll;
+  text-overflow: clip clip; */
+}
+
+@media only screen and (max-width: 767px) {
+  .color-name {
+    /* Reset styles for mobile */
+    overflow: visible;
+    white-space: normal;
+  }
 }
 
 /* Style for color codes */
@@ -512,72 +338,33 @@
 .color-cmyk {
   font-family: 'DM Mono', monospace;
   font-weight: 400;
-
   color: rgba(18, 18, 18, 0.75);
   text-align: left;
-  font-size: 10px;
-
-  letter-spacing: 1.6px;
-  line-height: 10px;
+  font-size: 0.625em;
+  letter-spacing: 0.04em;
+  line-height: 0.7em;
   white-space: nowrap;
 }
 
 /* *************************************************************************** */
-/* ************************ COLOUR PALETTE - LOADER ************************** */
+/* ********************************** OTHER ********************************** */
 /* *************************************************************************** */
 
-/* Skeleton loader for colour blocks */
-.loader-square-bottom-align {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(18, 18, 18, 0.15);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: left;
-  padding: 15px;
-  white-space: nowrap;
-  /* -webkit- is a hack for the Webkit Browser engine */
-  background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(18, 18, 18, 0.2)), color-stop(18%, rgba(18, 18, 18, 0.3)), color-stop(33%, rgba(18, 18, 18, 0.2)));
-  background: linear-gradient(to right, rgba(18, 18, 18, 0.2) 8%, rgba(18, 18, 18, 0.3) 18%, rgba(18, 18, 18, 0.2) 33%);
-  background-size: 800px 100px;
-  animation: wave-squares 2s infinite ease-out;
+.glassmorphic-simple {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(18, 18, 18, 0.20);
+
+  backdrop-filter: blur(4.0px);
+  -webkit-backdrop-filter: blur(4.0px);
 }
 
-.loader-square-top-align {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(18, 18, 18, 0.15);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: left;
-  padding: 15px;
-  white-space: nowrap;
-  /* -webkit- is a hack for the Webkit Browser engine */
-  background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(18, 18, 18, 0.2)), color-stop(18%, rgba(18, 18, 18, 0.3)), color-stop(33%, rgba(18, 18, 18, 0.2)));
-  background: linear-gradient(to right, rgba(18, 18, 18, 0.2) 8%, rgba(18, 18, 18, 0.3) 18%, rgba(18, 18, 18, 0.2) 33%);
-  background-size: 800px 100px;
-  animation: wave-squares 2s infinite ease-out;
-}
+.glassmorphic-with-boarder {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(18, 18, 18, 0.20);
 
+  backdrop-filter: blur(4.0px);
+  -webkit-backdrop-filter: blur(4.0px);
 
-@keyframes wave-lines {
-  0% {
-    background-position: -468px 0;
-  }
-
-  100% {
-    background-position: 468px 0;
-  }
-}
-
-@keyframes wave-squares {
-  0% {
-    background-position: -468px 0;
-  }
-
-  100% {
-    background-position: 468px 0;
-  }
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
