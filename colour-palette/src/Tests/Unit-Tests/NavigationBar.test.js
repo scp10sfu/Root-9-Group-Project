@@ -1,5 +1,5 @@
 import React from 'react'
-import {render, screen, fireEvent, act} from "@testing-library/react";
+import {render, screen, fireEvent} from "@testing-library/react";
 import {BrowserRouter} from 'react-router-dom';
 import NavigationBar from "../../Components/NavigationBar";
 import '@testing-library/jest-dom';
