@@ -82,6 +82,4 @@ describe('Color Utilities', () => {
       expect(result).toBeNull();
     });
   });
-
-
 });
