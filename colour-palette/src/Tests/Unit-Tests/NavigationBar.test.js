@@ -3,7 +3,7 @@ import {render, screen, fireEvent, act} from "@testing-library/react";
 import {BrowserRouter} from 'react-router-dom';
 import NavigationBar from "../../Components/NavigationBar";
 import '@testing-library/jest-dom';
-
+import { act } from 'react-dom/test-utils';
 
 test('Checks about button navigation', () => {
   render(
