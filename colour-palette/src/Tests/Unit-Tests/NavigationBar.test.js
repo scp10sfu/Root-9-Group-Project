@@ -23,7 +23,7 @@ test('Checks about button navigation', () => {
   fireEvent.click(screen.getByText(/About/i));
 
   // Ensure useNavigate was called with the correct route
-  expect(mockNavigate).toHaveBeenCalledWith('/About');
+  expect(mockNavigate.mock.instances[0]).toHaveBeenCalledWith('/About');
 });
 
 test('Checks color extractor button navigation', () => {
