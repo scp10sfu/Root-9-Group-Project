@@ -17,7 +17,6 @@ Github Server Repository: https://github.com/scp10sfu/Paleta-Server
 - [Explanation of files and folders](https://github.com/scp10sfu/Root-9-Group-Project#-explanation-of-files-and-folders)
 - [Tech stack](https://github.com/scp10sfu/Root-9-Group-Project#-tech-stack)
 - [Dependencies](https://github.com/scp10sfu/Root-9-Group-Project#-dependencies)
-- [Usage](https://github.com/scp10sfu/Root-9-Group-Project#usage)
 - [Contributors](https://github.com/scp10sfu/Root-9-Group-Project#-contributors)
 
 ## 🚀 Description
@@ -116,9 +115,13 @@ Files associated with the server (AI parts) of the website are found in the gith
 - REACT
 
 #### External APIs:
+  - ColorAPI
+  - OpenAI
 
-- ColorAPI
-- OpenAI
+## 💻 Dependencies
+The `setup.sh` file will install the npm packages, Python and a virtual environment for it, as well as installing Python packages that are necessary for the running.
+
+Other dependencies include a variety of packages used for the program, and the major API dependencies are `openai` and `colorapi`.
 
 ## Usage
 This usage will describe a setup process for the static elements of our web application. Usage of the AI components is unavaliable on local machines.
@@ -136,4 +139,3 @@ npm run build
 - Taiga Okuma ([@SunIsDark](https://github.com/SunIsDark))
 - Cindy Xiao ([@CindyXiao1](https://github.com/CindyXiao1))
 
-Commits done on github are visible in #github-changelog on discord.

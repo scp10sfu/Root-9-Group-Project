@@ -52,7 +52,7 @@
 
 .title-page:hover {
   /* color: #ec4e32; */
-  color: var(--color1, #ec4e32);
+  color: var(--color1);
   /* #ec4e32 for an older browser */
   cursor: pointer;
 }
