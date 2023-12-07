@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import ColourExtractor from "../../Pages/ColourExtractor";
 import '@testing-library/jest-dom';
 
+// TODO: check it later
 
 const comparators = {
     imgname: "cat5.png",
