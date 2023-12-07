@@ -6,8 +6,8 @@
  */
 import React, { useState, useRef, useEffect } from 'react';
 import { rgbToHex, rgbToCmyk, getTextColor, rgbToHsl } from './Test/colorUtils';
+import { fetchColorName } from './Test/fetchColor';
 import ColorThief from 'colorthief';
-import axios from 'axios';
 import { ReactComponent as UploadIcon } from '../images/icon-upload-dark.svg';
 import { ReactComponent as InfoIcon } from '../images/icon-info-dark.svg';
 import { ReactComponent as CloseIconWhite } from '../images/icon-close-white.svg';
@@ -97,20 +97,7 @@ function ColourExtractor() {
   };
 
 
-  /**
-  * Fetches color name from the API based on HEX code.
-  * @param {string} hex - HEX color code.
-  * @returns {Promise<string>} Resolves with the color name.
-  */
-  const fetchColorName = async (hex) => {
-    try {
-      const response = await axios.get(`https://www.thecolorapi.com/id?hex=${hex.replace('#', '')}`);
-      return response.data.name.value || 'Unknown';
-    } catch (error) {
-      console.error('Error fetching the color name:', error);
-      return 'Unknown'; // Fallback to HEX if the name can't be fetched
-    }
-  };
+
 
 
   /**
