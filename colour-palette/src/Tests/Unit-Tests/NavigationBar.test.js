@@ -8,7 +8,7 @@ import '@testing-library/jest-dom';
 test('Checks about button navigation', () => {
   render(
     <BrowserRouter>
-      <NavigationBar />
+      <App />
     </BrowserRouter>
   );
   const route = '/About'
@@ -37,7 +37,7 @@ test('Checks about button navigation', () => {
 test('Checks color extractor button navigation', () => {
   render(
     <BrowserRouter>
-      <NavigationBar />
+      <App />
     </BrowserRouter>
   );
   const route = '/ColourExtractor'
@@ -60,6 +60,11 @@ test('Checks color extractor button navigation', () => {
 });
 
 test('Checks AI generator button navigation', () => {
+  render(
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
   const route = '/PaletteGenerator'
 
   render(
@@ -68,11 +73,7 @@ test('Checks AI generator button navigation', () => {
     </MemoryRouter>,
   )
   expect(screen.getByTestId('location-display')).toHaveTextContent(route)
-//  render(
-//    <BrowserRouter>
-//      <NavigationBar />
-//    </BrowserRouter>
-//  );
+
 
 //  const mockNavigate = jest.fn();
 //  jest.mock('react-router-dom', () => ({
