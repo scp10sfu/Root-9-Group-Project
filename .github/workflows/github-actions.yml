@@ -1,8 +1,35 @@
-name: GitHub Actions Alawys passing
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: CI process
+
 on: [push]
+
 jobs:
-  Explore-GitHub-Actions:
+  build:
+    name: Build
     runs-on: ubuntu-latest
+    defaults: 
+      run: 
+        working-directory: ./colour-palette
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      
+      - name: Install required packages
+        run: npm ci
+
+      - name: Make the build
+        run: npm run build --if-present
+
+      - name: Run Tests
+        run: npm test -- --verbose
+        env: 
+          CI: false
