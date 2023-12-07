@@ -1,15 +1,39 @@
 /**
-  * Converts RGB values to HEX format.
-  * @param {number} r - The red value (0 to 255).
-  * @param {number} g - The green value (0 to 255).
-  * @param {number} b - The blue value (0 to 255).
-  * @returns {string} The HEX representation of the RGB values.
-  */
- export const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
+* Converts RGB values to HEX format.
+* @param {number} r - The red value (0 to 255).
+* @param {number} g - The green value (0 to 255).
+* @param {number} b - The blue value (0 to 255).
+* @returns {string} The HEX representation of the RGB values.
+*/
+export const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
   const hex = x.toString(16);
   return hex.length === 1 ? '0' + hex : hex;
 }).join('');
 
+
+/**
+* Converts HEX values to RGB format.
+* @param {string} hex - The HEX color code.
+* @returns {object} The RGB representation of the HEX value.
+*/
+export const hexToRgb = (hex) => {
+  // Remove the hash if it's included
+  hex = hex.replace(/^#/, '');
+
+  // check if hex is valid (numbers and length of 3 or 6)
+  if (!/^[0-9a-f]{3}([0-9a-f]{3})?$/i.test(hex)) {
+    return null;
+  }
+
+  // Parse the hex values to separate R, G, B components
+  let bigint = parseInt(hex, 16);
+  let r = (bigint >> 16) & 255;
+  let g = (bigint >> 8) & 255;
+  let b = bigint & 255;
+
+  // Return an object with the R, G, B values
+  return { r, g, b };
+}
 
 /**
 * Converts RGB values to CMYK format.
@@ -69,13 +93,13 @@ export const getTextColor = (hexColor) => {
 
 
 /**
- * Converts RGB values to HSL format.
- * @param {number} r - The red value (0 to 255).
- * @param {number} g - The green value (0 to 255).
- * @param {number} b - The blue value (0 to 255).
- * @returns {Array} The HSL representation of the RGB values.
- */
- export const rgbToHsl = (r, g, b) => {
+* Converts RGB values to HSL format.
+* @param {number} r - The red value (0 to 255).
+* @param {number} g - The green value (0 to 255).
+* @param {number} b - The blue value (0 to 255).
+* @returns {Array} The HSL representation of the RGB values.
+*/
+export const rgbToHsl = (r, g, b) => {
   r /= 255;
   g /= 255;
   b /= 255;
