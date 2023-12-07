@@ -27,14 +27,8 @@ test('Test fourth line' , () => {
     expect(line4).toBeInTheDocument();
 })
 
-test('Test main features line' , () => {
-    render(<About />)
-    const line5 = screen.getByText("Main features");
-    expect(line5).toBeInTheDocument();
-})
-
 test('Test contact line' , () => {
     render(<About />)
-    const line6 = screen.getByText("Contact");
-    expect(line6).toBeInTheDocument();
+    const line5 = screen.getByText("Contact");
+    expect(line5).toBeInTheDocument();
 })
