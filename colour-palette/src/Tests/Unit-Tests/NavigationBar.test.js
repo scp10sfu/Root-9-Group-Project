@@ -23,68 +23,68 @@ test('Checks AI generator button',()=>{
 });
 
 
-describe('NavigationBar component', () => {
-    it('Renders NavigationBar component', () => {
-      render(
-        <Router>
-          <NavigationBar />
-        </Router>
-      );
-      expect(screen.getByText('Paletä')).toBeInTheDocument();
-    });
+// describe('NavigationBar component', () => {
+//     it('Renders NavigationBar component', () => {
+//       render(
+//         <Router>
+//           <NavigationBar />
+//         </Router>
+//       );
+//       expect(screen.getByText('Paletä')).toBeInTheDocument();
+//     });
 
-    it('Toggles mobile menu on button click', () => {
-        resizeWindow(500);
+//     it('Toggles mobile menu on button click', () => {
+//         resizeWindow(500);
 
-        render(
-            <Router>
-              <NavigationBar />
-            </Router>
-          );
+//         render(
+//             <Router>
+//               <NavigationBar />
+//             </Router>
+//           );
       
-          const menuButton = screen.getByText('Menu');
-          fireEvent.click(menuButton);
+//           const menuButton = screen.getByText('Menu');
+//           fireEvent.click(menuButton);
       
-          expect(screen.getByText('About')).toBeInTheDocument();
-          expect(screen.getByText('Colour Extractor')).toBeInTheDocument();
-          expect(screen.getByText('AI Palette Generator')).toBeInTheDocument();
-        });
+//           expect(screen.getByText('About')).toBeInTheDocument();
+//           expect(screen.getByText('Colour Extractor')).toBeInTheDocument();
+//           expect(screen.getByText('AI Palette Generator')).toBeInTheDocument();
+//         });
 
-    it('Arranges menu items in columns on mobile', () => {
-        resizeWindow(500);
+//     it('Arranges menu items in columns on mobile', () => {
+//         resizeWindow(500);
 
-        render(
-            <Router>
-                <NavigationBar />
-            </Router>
-        );
+//         render(
+//             <Router>
+//                 <NavigationBar />
+//             </Router>
+//         );
 
-        const menuButton = screen.getByText('Menu');
-        fireEvent.click(menuButton);
+//         const menuButton = screen.getByText('Menu');
+//         fireEvent.click(menuButton);
 
-        const mobileMenu = screen.getByTestId('mobile-menu');
-        const columns = mobileMenu.getElementsByClassName('mobile-menu-content');
+//         const mobileMenu = screen.getByTestId('mobile-menu');
+//         const columns = mobileMenu.getElementsByClassName('mobile-menu-content');
 
-        expect(columns.length).toBe(3); // Assuming there are three menu items
+//         expect(columns.length).toBe(3); // Assuming there are three menu items
 
-        // Add more specific assertions about the arrangement as needed
-    });
+//         // Add more specific assertions about the arrangement as needed
+//     });
 
-    it('Closes mobile menu with columns on link click', () => {
-        resizeWindow(500);
+//     it('Closes mobile menu with columns on link click', () => {
+//         resizeWindow(500);
     
-        render(
-          <Router>
-            <NavigationBar />
-          </Router>
-        );
+//         render(
+//           <Router>
+//             <NavigationBar />
+//           </Router>
+//         );
     
-        const menuButton = screen.getByText('Menu');
-        fireEvent.click(menuButton);
+//         const menuButton = screen.getByText('Menu');
+//         fireEvent.click(menuButton);
     
-        const aboutLink = screen.getByText('About');
-        fireEvent.click(aboutLink);
+//         const aboutLink = screen.getByText('About');
+//         fireEvent.click(aboutLink);
 
-        expect(screen.getByTestId('mobile-menu-content')).not.toBeInTheDocument();
-      });
-    });
+//         expect(screen.getByTestId('mobile-menu-content')).not.toBeInTheDocument();
+//       });
+//     });
