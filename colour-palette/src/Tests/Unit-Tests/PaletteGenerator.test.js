@@ -24,6 +24,6 @@ test('Check the toast message function', () => {
         const Toastmsg = 'info';
         const Toasttype = 'Copied to clipboard!';
         const Toastclose = 'tempclose'
-        const result = Toast(Toastmsg,Toasttype,Toastclose);
+        const result = Toast({Toastmsg,Toasttype,Toastclose});
         expect(result).stringContaining("Copied to clipboard!");
 })
