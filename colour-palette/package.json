@@ -28,7 +28,10 @@
     "eject": "react-scripts eject"
   },
   "jest": {
-    "preset": "react-app"
+    "preset": "react-app",
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    }
   },
   "eslintConfig": {
     "extends": [
