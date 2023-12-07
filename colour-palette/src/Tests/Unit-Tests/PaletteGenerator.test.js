@@ -3,6 +3,10 @@ import {render, screen} from "@testing-library/react";
 import PaletteGenerator from "../../Pages/PaletteGenerator";
 import '@testing-library/jest-dom';
 
+jest.mock('colorthief', () => {
+    return function fn() {return [[1,1,1]];}
+});
+
 test('Test for color extractor text' , ()=>{
     render(<PaletteGenerator />)
     const title = screen.getByText("AI Palette Generator");
