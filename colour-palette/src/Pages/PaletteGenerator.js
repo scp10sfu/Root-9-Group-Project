@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from './lib/axios.js';
+import axios from 'axios';
 import ColorThief from 'colorthief';
 import { ReactComponent as CopyIconWhiteUnfilled } from '../images/icon-copy-white-unfilled.svg';
 import { ReactComponent as CopyIconDarkUnfilled } from '../images/icon-copy-dark-unfilled.svg';
