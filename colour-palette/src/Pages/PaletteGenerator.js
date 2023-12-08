@@ -45,11 +45,17 @@ function PaletteGenerator() {
 
       // Extracting colors and converting them to the desired format
       const colorPromises = response.data.colors.map(async (hex) => {
-        const rgb = hexToRgb(hex);
-        const cmyk = rgbToCmyk(...rgb);
+        const rgb = hexToRgb(hex); // Assuming this returns { r, g, b }
+        const cmyk = rgbToCmyk(rgb.r, rgb.g, rgb.b); // Assuming this returns [c, m, y, k]
         const name = await fetchColorName(hex);
-        console.log(hex,rgb,cmyk);
-        return { hex, rgb: `${rgb.r}, ${rgb.g}, ${rgb.b}`, cmyk: `${cmyk.c}, ${cmyk.m}, ${cmyk.y}, ${cmyk.k}`, name };
+      
+        console.log(hex, rgb, cmyk);
+        return { 
+          hex, 
+          rgb: `${rgb.r}, ${rgb.g}, ${rgb.b}`, 
+          cmyk: `${cmyk[0]}, ${cmyk[1]}, ${cmyk[2]}, ${cmyk[3]}`, 
+          name 
+        };
       });
       const colorObjects = await Promise.all(colorPromises);
 
