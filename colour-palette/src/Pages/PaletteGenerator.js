@@ -48,6 +48,7 @@ function PaletteGenerator() {
         const rgb = hexToRgb(hex);
         const cmyk = rgbToCmyk(...rgb);
         const name = await fetchColorName(hex);
+        console.log(hex,rgb,cmyk);
         return { hex, rgb: `${rgb.r}, ${rgb.g}, ${rgb.b}`, cmyk: `${cmyk.c}, ${cmyk.m}, ${cmyk.y}, ${cmyk.k}`, name };
       });
       const colorObjects = await Promise.all(colorPromises);

@@ -62,7 +62,7 @@ export const rgbToCmyk = (r, g, b) => {
   m = Math.round(m * 100);
   y = Math.round(y * 100);
   k = Math.round(k * 100);
-
+  console.log(c, m, y, k);
   return [c, m, y, k];
 };
 
