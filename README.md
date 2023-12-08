@@ -9,8 +9,6 @@
 
 🔗 **Contribute on GitHub**: [Paleta Server Repository](https://github.com/scp10sfu/Paleta-Server)
 
----
-
 ## 📚 Table of Contents 📚
 
 - 🌟 Description
@@ -19,8 +17,6 @@
 - 📦 Dependencies
 - 🚀 How to Use
 - 👥 Meet the Team
-
----
 
 ## 🌟 Description
 
@@ -34,8 +30,6 @@ Welcome to **Paletä**, where colors come to life! Whether you're a design enthu
 ### For Everyone, Everywhere
 
 Paletä is crafted for all - from beginners taking their first steps in color theory to professionals seeking the perfect shade for their next masterpiece. It's more than a tool; it's a gateway to a world where colors bring ideas to life.
-
----
 
 Eager to start your color journey? Jump right into Paletä and let your creativity flow in a spectrum of colors!
 
