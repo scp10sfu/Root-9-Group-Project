@@ -179,6 +179,36 @@ function PaletteGenerator() {
     }
   };
 
+  /**
+* Converts RGB values to CMYK format.
+* @param {number} r - The red value (0 to 255).
+* @param {number} g - The green value (0 to 255).
+* @param {number} b - The blue value (0 to 255).
+* @throws {Error} Invalid RGB value.
+* @returns {string} The CMYK representation of the RGB values.
+*/
+const rgbToCmyk = (r, g, b) => {
+  // Validate the RGB values
+  if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
+    throw new Error('Invalid RGB value');
+  }
+
+  let c = 1 - (r / 255);
+  let m = 1 - (g / 255);
+  let y = 1 - (b / 255);
+  let k = Math.min(c, Math.min(m, y));
+
+  c = ((c - k) / (1 - k)) || 0;
+  m = ((m - k) / (1 - k)) || 0;
+  y = ((y - k) / (1 - k)) || 0;
+
+  c = Math.round(c * 100);
+  m = Math.round(m * 100);
+  y = Math.round(y * 100);
+  k = Math.round(k * 100);
+
+  return [c, m, y, k];
+};
 
   /**
   * Handles the change in the number of colors.
