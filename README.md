@@ -90,7 +90,30 @@ In the `colour-palette` directory:
 npm ci
 npm run build
 ```
+### Project Structure
 
+<pre>
+.
+│
+└── colour-palette
+    ├── README.md
+    ├── package-lock.json
+    ├── package.json
+    ├── public
+    │   └── ...
+    ├── src
+    │   ├── images
+    │   ├── Pages
+    │   │   └── Tests
+    │   └── Components
+    │       └── Tests
+    │  
+    │  
+    │
+    └── docs
+        └── ...
+</pre>
+  
 ## 👥 Meet the Team
 
 - Anna Rusinova ([@arusinova](https://github.com/arusinova))
