@@ -32,7 +32,7 @@ import './ColourExtractor.css';
  * ColourExtractor Component
  * @returns {JSX.Element} The rendered ColourExtractor component.
  */
-function ColourExtractor() {
+export const ColourExtractor = () => {
   const [numberOfColors, setNumberOfColors] = useState(6);  // Number of colors to extract (6 by default)
   const [image, setImage] = useState(null);                 // Holds the image URL
   const [colors, setColors] = useState([]);                 // Stores an array of the extracted colors
@@ -529,6 +529,6 @@ const ColourBox = ({ color, align }) => {
 
     </div>
   );
-}
+};
 
-export default ColourExtractor;
+//export default ColourExtractor;

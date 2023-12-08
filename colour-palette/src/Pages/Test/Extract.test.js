@@ -1,6 +1,7 @@
 // Inte1.test.js
-import { extractColors } from './Inte1';
+
 import axios from 'axios';
+import { fetchColorName } from './fetchColor'; // Adjust the path to point to fetchColor.js
 
 // Revised mock implementation in your test file
 // jest.mock('colorthief', () => {
@@ -57,7 +58,6 @@ import axios from 'axios';
 //   // Add more tests as needed
 // });
 
-import { fetchColorName } from './fetchColor'; // Adjust the path to point to fetchColor.js
 
 jest.mock('axios');
 
