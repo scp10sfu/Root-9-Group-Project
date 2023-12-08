@@ -6,7 +6,8 @@ import { ReactComponent as CopyIconDarkUnfilled } from '../images/icon-copy-dark
 import { ReactComponent as CopyIconWhiteFilled } from '../images/icon-copy-white-filled.svg';
 import { ReactComponent as CopyIconDarkFilled } from '../images/icon-copy-dark-filled.svg';
 import { ReactComponent as ArrowIcon } from '../images/icon-arrow-long.svg';
-import { rgbToHex, hexToRgb, rgbToCmyk, getTextColor, rgbToHsl } from './Test/colorUtils';
+import { hexToRgb, getTextColor,rgbToCmyk} from './Test/colorUtils';
+import { fetchColorName } from './Test/fetchColor';
 
 import Layout from '../Components/Layout';
 import Toast from '../Components/Toast';
@@ -45,7 +46,7 @@ function PaletteGenerator() {
       // Extracting colors and converting them to the desired format
       const colorPromises = response.data.colors.map(async (hex) => {
         const rgb = hexToRgb(hex);
-        const cmyk = rgbToCmyk(rgb.r, rgb.g, rgb.b);
+        const cmyk = rgbToCmyk(...rgb);
         const name = await fetchColorName(hex);
         return { hex, rgb: `${rgb.r}, ${rgb.g}, ${rgb.b}`, cmyk: `${cmyk.c}, ${cmyk.m}, ${cmyk.y}, ${cmyk.k}`, name };
       });
@@ -164,51 +165,7 @@ function PaletteGenerator() {
   };
 
 
-  /**
-  * Fetches color name from the API based on HEX code.
-  * @param {string} hex - HEX color code.
-  * @returns {Promise<string>} Resolves with the color name.
-  */
-  const fetchColorName = async (hex) => {
-    try {
-      const response = await axios.get(`https://www.thecolorapi.com/id?hex=${hex.replace('#', '')}`);
-      return response.data.name.value;
-    } catch (error) {
-      console.error('Error fetching the color name:', error);
-      return hex; // Fallback to HEX if the name can't be fetched
-    }
-  };
 
-  /**
-* Converts RGB values to CMYK format.
-* @param {number} r - The red value (0 to 255).
-* @param {number} g - The green value (0 to 255).
-* @param {number} b - The blue value (0 to 255).
-* @throws {Error} Invalid RGB value.
-* @returns {string} The CMYK representation of the RGB values.
-*/
-const rgbToCmyk = (r, g, b) => {
-  // Validate the RGB values
-  if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
-    throw new Error('Invalid RGB value');
-  }
-
-  let c = 1 - (r / 255);
-  let m = 1 - (g / 255);
-  let y = 1 - (b / 255);
-  let k = Math.min(c, Math.min(m, y));
-
-  c = ((c - k) / (1 - k)) || 0;
-  m = ((m - k) / (1 - k)) || 0;
-  y = ((y - k) / (1 - k)) || 0;
-
-  c = Math.round(c * 100);
-  m = Math.round(m * 100);
-  y = Math.round(y * 100);
-  k = Math.round(k * 100);
-
-  return [c, m, y, k];
-};
 
   /**
   * Handles the change in the number of colors.
