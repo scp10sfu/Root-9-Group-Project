@@ -5,7 +5,8 @@
 
 **Dive into Paletä**: [Visit Our Website](https://mypaleta.netlify.app/)<br>
 **Check Out Our Debut**: [Watch Our First Presentation](https://drive.google.com/file/d/1D5xowmShwgpPiy_jJseGULDg8wyn9yxM/view?usp=sharing)<br>
-**Contribute on GitHub**: [Paleta Server Repository](https://github.com/scp10sfu/Paleta-Server)
+**Server GitHub Repository**: [Paleta Server Repository](https://github.com/scp10sfu/Paleta-Server)
+**See Paletä in Action**: [Demo Video on YouTube](https://www.youtube.com/watch?v=yhZiRMkjtFk)
 
 ## 📚 Table of Contents 📚
 
