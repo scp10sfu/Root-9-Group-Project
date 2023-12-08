@@ -46,21 +46,17 @@ Workflows simply houses the workflow used for testing and with Github Actions. T
 
 Colour-palette has all of the main web application files. Each of the folders and files have purposes as follows:
 
-- **/docs** is a folder housing nothing?
 - **/public** is a folder holding some static images and other static files which are used throughout the program. These files are able to be referenced starting from the base url, making them simple and easy to reference.
 - **/src** is a folder storing almost all of the code of the web application.
 - **package-lock.json** is a json file specifiying the package requirements, more specifically the dependices and locking the versions of the packages.
 - **package.json** is a json file specifying the package requirements, more specifically the package names and the desired version of the package.
-- **setup.sh** is a script to install all the dependencies needed to run the web application your your local computer.
 
 The src folder is one of the more important folders in this web application, so further specification on the files in src will be given here:
 
 - **/Components** is a folder holding main components that have the functionality of the code.
 - **/Pages** is a folder holding the main pages you can navigate around on the web application.
-- **/Tests** is a folder holding the files used specifically for testing.
 - **/images** is a folder holding various images used throughout the project.
-- **App.js / App.cs** is the code for the main web application file and the styling file that is used for it's user interface.
-- **index.css / index.js** is a script to install all the dependencies needed to run the web application your your local computer.
+- **App.js / App.css** is the code for the main web application file and the styling file that is used for it's user interface.
 
 The project-plan-files folder will have all the files related to milestone 1, which is the initial project planning phase. Each file's purpose/meaning is as follows:
 
@@ -79,10 +75,11 @@ The final-submission-files folder will have all the files related to milstone 2,
 - **Root9_Presentation_Slides.pptx** is the powerpoint format of the final presentation of our project.
 - **Root9_Project_Report.pdf** is a pdf with the final report.
 - **Project_Milestone_2_Stefan_Pricope_301462068_AI Use Disclosure.pdf** is a pdf file for AI use disclosure.
+- **Milestone_2_AI_Disclosure_Root_9_Taiga_Okuma_301594583.pdf** is a pdf file for AI use disclosure.
 
 Files associated with the server (AI parts) of the website are found in the github repository mentioned at the start of the README
 
-`<H3>` Project Structure `</H3>`
+### Project Structure
 
 <pre>
 .
@@ -95,11 +92,12 @@ Files associated with the server (AI parts) of the website are found in the gith
     │   └── ...
     ├── src
     │   ├── images
-    │   └── Pages
+    │   ├── Pages
+    │   │   └── Tests
     │   └── Components
-    │   └── Tests
-    │        ├── Unit-Tests
-    │        └── Integration-Tests
+    │       └── Tests
+    │  
+    │  
     │
     └── docs
         └── ...
@@ -118,12 +116,14 @@ Files associated with the server (AI parts) of the website are found in the gith
 #### External APIs:
 
 - ColorAPI
-- OpenAI
+- OpenAIAPI
 
 ## Usage
+
 This usage will describe a setup process for the static elements of our web application. Usage of the AI components is unavaliable on local machines.
 
 Once Node.js is installed, run these two commands in the colour-palette directory with your terminal.
+
 ```
 npm ci
 npm run build

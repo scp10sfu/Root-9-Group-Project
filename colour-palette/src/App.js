@@ -4,26 +4,13 @@
  * @component
  */
 import React, { createContext, useState } from 'react';
- // import './App.css';
-// TODO: import css file for App component
 import { Routes, Route, useNavigate} from 'react-router-dom';
 import About from './Pages/About';
 import {ColourExtractor} from './Pages/ColourExtractor';
 import PaletteGenerator from './Pages/PaletteGenerator';
 import NotFoundPage from './Pages/NotFoundPage';
-// import Header from './Components/Header';
-// import Footer from './Components/Footer';
-import ColorSwitcher from './Components/ColorSwitcher';
 import NavigationBar from './Components/NavigationBar';
 
-// TODO: add theme switcher to nav bar component
-
-/*  navigation bar
- *  | Home (icon + title) | About | Colour Picker | Palette Generator | Moodboard Generator |
- *  
- *  tech menu
- *  | Color Switcher (icon) | Export (icon) |
- */
 
 export const ColorContext = createContext(); // Create ColorContext
 
@@ -44,9 +31,6 @@ const App = () => {
     <ColorContext.Provider value={{ theme, setTheme }}>
       <div className={`App ${theme}`}>
         <NavigationBar />
-
-        {/* Uncomment ColorSwitcher if you want it outside NavigationBar */}
-        {/* <ColorSwitcher /> */}
         <div>
           <Routes>
             <Route path="/" element={<ColourExtractor />} />
@@ -56,7 +40,6 @@ const App = () => {
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
-        {/* <Footer/> */}
       </div> 
     </ColorContext.Provider>
   );
