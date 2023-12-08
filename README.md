@@ -1,13 +1,11 @@
-# 🎨 Paletä: Unleash Color Creativity! 🌈
+# 🎨 Paletä: Unleash Your Color Creativity! 🌈
 
 [![Netlify Build Status](https://api.netlify.com/api/v1/badges/4c366889-27a9-4dd6-b40f-b30a9a022862/deploy-status)](https://mypaleta.netlify.app/)
 ![Uptime Robot status](https://img.shields.io/uptimerobot/status/m795784458-8d1674ba3b95c4e625503e31)
 
-🔗 **Dive into Paletä**: [Visit Our Website](https://mypaleta.netlify.app/)
-
-📹 **Check Out Our Debut**: [Watch Our First Presentation](https://drive.google.com/file/d/1D5xowmShwgpPiy_jJseGULDg8wyn9yxM/view?usp=sharing)
-
-🔗 **Contribute on GitHub**: [Paleta Server Repository](https://github.com/scp10sfu/Paleta-Server)
+**Dive into Paletä**: [Visit Our Website](https://mypaleta.netlify.app/)<br>
+**Check Out Our Debut**: [Watch Our First Presentation](https://drive.google.com/file/d/1D5xowmShwgpPiy_jJseGULDg8wyn9yxM/view?usp=sharing)<br>
+**Contribute on GitHub**: [Paleta Server Repository](https://github.com/scp10sfu/Paleta-Server)
 
 ## 📚 Table of Contents 📚
 
@@ -20,90 +18,52 @@
 
 ## 🌟 Description
 
-Welcome to **Paletä**, where colors come to life! Whether you're a design enthusiast, a digital artist, or just someone who loves playing with colors, Paletä is your perfect companion for exploring and creating stunning color palettes.
+Welcome to **Paletä**, your go-to playground for all things color! Whether you're crafting digital masterpieces, spicing up design projects, or just obsessed with colors, Paletä is here to transform your visions into vibrant realities.
 
 ### What Makes Paletä Special?
 
-- **Image-Based Palette Magic**: Upload your favorite image and watch as Paletä transforms it into a mesmerizing color palette. Tailor the palette to your taste by adjusting the number of colors and exploring different formats like RGB, Hex, and CMYK. It's like having a color wizard at your fingertips!
-- **AI-Powered Palette Adventures**: Have an idea but no image? No problem! Type in your concept, and our AI, powered by the magic of OPENAI, will conjure a palette that's uniquely yours. It's like a color journey guided by your imagination!
+- **Image-Based Palette Magic**: Simply upload an image and behold as Paletä weaves it into a colorful tapestry of shades. Personalize your palette, play with colors, and explore formats like RGB, Hex, and CMYK. It's your creative lab!
+- **AI-Powered Palette Adventures**: Got a concept but no picture? No worries! Describe your vision, and our AI, powered by OPENAI's magic, will craft a custom palette just for you. Your imagination is the only limit!
 
-### For Everyone, Everywhere
+### For Every Creator
 
-Paletä is crafted for all - from beginners taking their first steps in color theory to professionals seeking the perfect shade for their next masterpiece. It's more than a tool; it's a gateway to a world where colors bring ideas to life.
+Paletä is built for everyone - from budding artists dipping their toes in color theory to seasoned pros hunting for that perfect hue. More than just a tool, Paletä is your gateway to a world where color breathes life into ideas.
 
-Eager to start your color journey? Jump right into Paletä and let your creativity flow in a spectrum of colors!
+🎨 Ready to embark on a color adventure? Dive into Paletä and let the hues flow!
 
-There you have it! A more vibrant and exciting README to match the energy of Paletä. Feel free to adjust any section to better fit your project's personality and details.
+## 📖 Explanation of Files and Folders
 
-## 📖 Explanation of files and folders
+Here's a quick guide through our project's structure:
 
-The main folders for this project thus far are
+### Main Folders
 
-- workflows
-- colour-palette
-- node_modules
-- project-plan-files
+- **workflows**: Contains our GitHub Actions workflow for automated testing.
+- **colour-palette**: The heart of our web application, housing all crucial files.
+- **node_modules**: Generated folder with all the npm dependencies.
+- **project-plan-files**: Documentation related to project planning and initial stages.
 
-Workflows simply houses the workflow used for testing and with Github Actions. The workflow file consists of installing dependencies, and running the testing command we use, which is npm test, running all test files of the format .test.js. The actual test files are stored in colour-palette/src/Tests.
+### Key Highlights in `colour-palette`
 
-Colour-palette has all of the main web application files. Each of the folders and files have purposes as follows:
+- **/public**: Static assets like images, referenced from the base URL.
+- **/src**: The core of our application's code.
+  - **/Components**: Reusable components powering our app's functionality.
+  - **/Pages**: Different pages you can navigate within our web app.
+  - **/images**: A collection of images used across the project.
+  - **App.js / App.css**: The main JavaScript and CSS files for the app's UI.
 
-- **/public** is a folder holding some static images and other static files which are used throughout the program. These files are able to be referenced starting from the base url, making them simple and easy to reference.
-- **/src** is a folder storing almost all of the code of the web application.
-- **package-lock.json** is a json file specifiying the package requirements, more specifically the dependices and locking the versions of the packages.
-- **package.json** is a json file specifying the package requirements, more specifically the package names and the desired version of the package.
+### Project Planning Files (`project-plan-files`)
 
-The src folder is one of the more important folders in this web application, so further specification on the files in src will be given here:
+- **DFD.png**: Data Flow Diagram for user interaction.
+- **Root9_Presentation_Slides.pdf**: Slide deck from our first presentation.
+- **Root9_Project_Report.pdf**: Detailed report of our initial project phase.
+- **Root_9 Final Timeline.pdf & .xlsx**: Project timeline and schedule.
+- **Milestone_1_AI_Disclosure_Root_9_Taiga_Okuma_301594583.pdf**: AI use disclosure document.
 
-- **/Components** is a folder holding main components that have the functionality of the code.
-- **/Pages** is a folder holding the main pages you can navigate around on the web application.
-- **/images** is a folder holding various images used throughout the project.
-- **App.js / App.css** is the code for the main web application file and the styling file that is used for it's user interface.
+### Final Submission Files (`final-submission-files`)
 
-The project-plan-files folder will have all the files related to milestone 1, which is the initial project planning phase. Each file's purpose/meaning is as follows:
+- Includes final presentation slides, report, and AI disclosure documents.
 
-- **DFD.png** is an image which shows the Data Flow Diagram created to represent a potential users process through using our web application.
-- **Root9_Presentation_Slides.pdf** is a pdf with the slides used in the first presentation.
-- **Root9_Project_Report.pdf** is a pdf with the first report for milestone one.
-- **Root9_WBS.xlsx** is an excel file with the Work Breakdown Structure.
-- **Root_9 Final Timeline.pdf** is a pdf file with the timeline/schedule of our project.
-- **Root_9 Final Timeline.xlsx** is the excel format of the timeline/schedule of our project.
-- **Milestone_1_AI_Disclosure_Root_9_Taiga_Okuma_301594583.pdf** is a pdf file for AI use disclosure.
-
-The final-submission-files folder will have all the files related to milstone 2, which is the final submission phase. Each file's purpose/meaning is as follows:
-
-- **DFD.png** is an image which shows the Data Flow Diagram created to represent a potential users process through using our web application.
-- **Root9_Presentation_Slides.pdf** is a pdf with the slides used in the final presentation.
-- **Root9_Presentation_Slides.pptx** is the powerpoint format of the final presentation of our project.
-- **Root9_Project_Report.pdf** is a pdf with the final report.
-- **Project_Milestone_2_Stefan_Pricope_301462068_AI Use Disclosure.pdf** is a pdf file for AI use disclosure.
-- **Milestone_2_AI_Disclosure_Root_9_Taiga_Okuma_301594583.pdf** is a pdf file for AI use disclosure.
-
-Files associated with the server (AI parts) of the website are found in the github repository mentioned at the start of the README
-
-### Project Structure
-
-<pre>
-.
-│
-└── colour-palette
-    ├── README.md
-    ├── package-lock.json
-    ├── package.json
-    ├── public
-    │   └── ...
-    ├── src
-    │   ├── images
-    │   ├── Pages
-    │   │   └── Tests
-    │   └── Components
-    │       └── Tests
-    │  
-    │  
-    │
-    └── docs
-        └── ...
-</pre>
+Files related to the server side of our website can be found in the GitHub repository linked above.
 
 ## 🔧 Tech stack
 
@@ -113,25 +73,25 @@ Files associated with the server (AI parts) of the website are found in the gith
 
 #### Framework:
 
-- REACT
+- React
 
 #### External APIs:
 
 - ColorAPI
 - OpenAIAPI
 
-## Usage
+## 🚀 How to Use
 
-This usage will describe a setup process for the static elements of our web application. Usage of the AI components is unavaliable on local machines.
+Set up the static elements of our web application with these steps. Note: AI components are not available for local setup.
 
-Once Node.js is installed, run these two commands in the colour-palette directory with your terminal.
+In the `colour-palette` directory:
 
-```
+```bash
 npm ci
 npm run build
 ```
 
-## 💡 Contributors
+## 👥 Meet the Team
 
 - Anna Rusinova ([@arusinova](https://github.com/arusinova))
 - Stefan Pricope ([@scp10sfu](https://github.com/scp10sfu))
