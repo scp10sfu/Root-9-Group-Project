@@ -6,7 +6,8 @@ import { ReactComponent as CopyIconDarkUnfilled } from '../images/icon-copy-dark
 import { ReactComponent as CopyIconWhiteFilled } from '../images/icon-copy-white-filled.svg';
 import { ReactComponent as CopyIconDarkFilled } from '../images/icon-copy-dark-filled.svg';
 import { ReactComponent as ArrowIcon } from '../images/icon-arrow-long.svg';
-import { rgbToHex, hexToRgb, rgbToCmyk, getTextColor, rgbToHsl } from './Test/colorUtils';
+import { hexToRgb, getTextColor,rgbToCmyk} from './Test/colorUtils';
+import { fetchColorName } from './Test/fetchColor';
 
 import Layout from '../Components/Layout';
 import Toast from '../Components/Toast';
@@ -45,7 +46,7 @@ function PaletteGenerator() {
       // Extracting colors and converting them to the desired format
       const colorPromises = response.data.colors.map(async (hex) => {
         const rgb = hexToRgb(hex);
-        const cmyk = rgbToCmyk(rgb.r, rgb.g, rgb.b);
+        const cmyk = rgbToCmyk(...rgb);
         const name = await fetchColorName(hex);
         return { hex, rgb: `${rgb.r}, ${rgb.g}, ${rgb.b}`, cmyk: `${cmyk.c}, ${cmyk.m}, ${cmyk.y}, ${cmyk.k}`, name };
       });
@@ -164,20 +165,6 @@ function PaletteGenerator() {
   };
 
 
-  /**
-  * Fetches color name from the API based on HEX code.
-  * @param {string} hex - HEX color code.
-  * @returns {Promise<string>} Resolves with the color name.
-  */
-  const fetchColorName = async (hex) => {
-    try {
-      const response = await axios.get(`https://www.thecolorapi.com/id?hex=${hex.replace('#', '')}`);
-      return response.data.name.value;
-    } catch (error) {
-      console.error('Error fetching the color name:', error);
-      return hex; // Fallback to HEX if the name can't be fetched
-    }
-  };
 
 
   /**
