@@ -11,12 +11,12 @@
 
 ## 📚 Table of Contents 📚
 
-- 🌟 Description
-- 📁 File and Folder Explanations
-- 💻 Tech Stack
-- 📦 Dependencies
-- 🚀 How to Use
-- 👥 Meet the Team
+- [🌟 Description](#-description)
+- [📁 Explanation of Files and Folders](#-explanation-of-files-and-folders)
+- [💻 Tech Stack](#-tech-stack)
+- [📦 Dependencies](#-dependencies)
+- [🚀 How to Use](#-how-to-use)
+- [👥 Meet the Team](#-meet-the-team)
 
 ## 🌟 Description
 
