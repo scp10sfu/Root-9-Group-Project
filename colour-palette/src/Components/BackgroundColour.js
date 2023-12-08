@@ -37,7 +37,7 @@ const BackgroundColour = ({ colorArray }) => {
     return (
         <div className="background">
             {colorArray.map((color, index) => (
-                <span key={index} style={{ color: `var(--color${index + 1})` }}></span>
+                <span key={index} style={{ color: `var(--color${index + 1})` }} data-testid="background-color"></span>
             ))}
         </div>
     );

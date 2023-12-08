@@ -5,7 +5,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import BackgroundColour from '../Components/BackgroundColour';
 import Layout from '../Components/Layout';
 import GithubBadge from '../Components/GithubBadge';
-import { ReactComponent as GithubIcon } from '../images/icon-github.svg';
 
 import './MainStyle.css';
 

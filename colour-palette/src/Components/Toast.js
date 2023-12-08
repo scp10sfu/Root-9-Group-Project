@@ -10,7 +10,7 @@ const Toast = ({ type, message, onClose }) => {
       <div className="toast-content">
         {/* Add your icon component here */}
         <span className="toast-message">{message}</span>
-        <span className="toast-close" onClick={onClose}>
+        <span className="toast-close" data-testid="toast-close" onClick={onClose}>
           &#x2715;
         </span>
       </div>

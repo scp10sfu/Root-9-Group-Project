@@ -6,6 +6,7 @@ import { ReactComponent as CopyIconDarkUnfilled } from '../images/icon-copy-dark
 import { ReactComponent as CopyIconWhiteFilled } from '../images/icon-copy-white-filled.svg';
 import { ReactComponent as CopyIconDarkFilled } from '../images/icon-copy-dark-filled.svg';
 import { ReactComponent as ArrowIcon } from '../images/icon-arrow-long.svg';
+import { rgbToHex, hexToRgb, rgbToCmyk, getTextColor, rgbToHsl } from './Test/colorUtils';
 
 import Layout from '../Components/Layout';
 import Toast from '../Components/Toast';
@@ -28,7 +29,6 @@ function PaletteGenerator() {
   const [toastMessage, setToastMessage] = useState('');
   const [toastType, setToastType] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
-
   const [additionalMessage, setAdditionalMessage] = useState('');
 
   const handleSubmit = async (e) => {
@@ -163,73 +163,6 @@ function PaletteGenerator() {
     }, 1500);
   };
 
-  
-  /**
-   * Converts HEX values to RGB format.
-   * @param {string} hex - The HEX color code.
-   * @returns {object} The RGB representation of the HEX value.
-   */
-  const hexToRgb = (hex) => {
-    // Remove the hash if it's included
-    hex = hex.replace(/^#/, '');
-
-    // Parse the hex values to separate R, G, B components
-    let bigint = parseInt(hex, 16);
-    let r = (bigint >> 16) & 255;
-    let g = (bigint >> 8) & 255;
-    let b = bigint & 255;
-
-    // Return an object with the R, G, B values
-    return { r, g, b };
-  }
-
-  /**
-  * Converts RGB values to CMYK format.
-  * @param {number} r - The red value (0 to 255).
-  * @param {number} g - The green value (0 to 255).
-  * @param {number} b - The blue value (0 to 255).
-  * @returns {string} The CMEK representation of the RGB values.
-  */
-  const rgbToCmyk = (r, g, b) => {
-    let c = 1 - (r / 255);
-    let m = 1 - (g / 255);
-    let y = 1 - (b / 255);
-    let k = Math.min(c, Math.min(m, y));
-
-    c = ((c - k) / (1 - k)) || 0;
-    m = ((m - k) / (1 - k)) || 0;
-    y = ((y - k) / (1 - k)) || 0;
-
-    c = Math.round(c * 100);
-    m = Math.round(m * 100);
-    y = Math.round(y * 100);
-    k = Math.round(k * 100);
-
-    return { c, m, y, k };
-  };
-
-  /**
-  * Determines whether the text in the colour block should be light or dark.
-  * @param {string} hexColor - The HEX color code.
-  * @returns {string} The text color.
-  */
-  const getTextColor = (hexColor) => {
-    if (!hexColor || typeof hexColor !== 'string' || !hexColor.match(/^#[0-9a-fA-F]{6}$/)) {
-      // Return a default color or handle the error in a way that fits your application
-      return 'rgba(18, 18, 18, 1)';
-    }
-
-    // Convert hex to RGB
-    const r = parseInt(hexColor.slice(1, 3), 16);
-    const g = parseInt(hexColor.slice(3, 5), 16);
-    const b = parseInt(hexColor.slice(5, 7), 16);
-
-    // Calculate relative luminance
-    const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
-
-    // Choose the text color based on luminance
-    return luminance > 128 ? 'rgba(18, 18, 18, 1)' : 'rgba(255, 255, 255, 1)';
-  };
 
   /**
   * Fetches color name from the API based on HEX code.

@@ -8,7 +8,7 @@ import React, { createContext, useState } from 'react';
 // TODO: import css file for App component
 import { Routes, Route, useNavigate} from 'react-router-dom';
 import About from './Pages/About';
-import ColourExtractor from './Pages/ColourExtractor';
+import {ColourExtractor} from './Pages/ColourExtractor';
 import PaletteGenerator from './Pages/PaletteGenerator';
 import NotFoundPage from './Pages/NotFoundPage';
 // import Header from './Components/Header';
