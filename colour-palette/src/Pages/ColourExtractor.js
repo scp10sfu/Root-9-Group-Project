@@ -5,9 +5,11 @@
  * @component
  */
 import React, { useState, useRef, useEffect } from 'react';
+import ColorThief from 'colorthief';
+
 import { rgbToHex, rgbToCmyk, getTextColor, rgbToHsl } from './Test/colorUtils';
 import { fetchColorName } from './Test/fetchColor';
-import ColorThief from 'colorthief';
+
 import { ReactComponent as UploadIcon } from '../images/icon-upload-dark.svg';
 import { ReactComponent as InfoIcon } from '../images/icon-info-dark.svg';
 import { ReactComponent as CloseIconWhite } from '../images/icon-close-white.svg';
@@ -98,8 +100,6 @@ function ColourExtractor() {
 
 
 
-
-
   /**
   * Effect hook to update the colors when numberOfColors changes.
   * @param {number} numberOfColors - Number of colors to extract.
@@ -142,6 +142,7 @@ function ColourExtractor() {
   */
   const handleNumberChange = (number) => {
     setNumberOfColors(number);
+    console.log('Number of colors changed to', number);
     console.log('Number of colors changed to', number);
   };
 
