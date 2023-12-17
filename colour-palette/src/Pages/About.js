@@ -90,7 +90,7 @@ function About() {
                         </div>
 
                         <GithubBadge username="arusinova" name="Anna Rusinova" link="https://github.com/arusinova" />
-                        <GithubBadge username="SunIsDark" name="Taiga Okuma" link="https://github.com/SunIsDark" />
+                        <GithubBadge username="tigerokuma" name="Taiga Okuma" link="https://github.com/tigerokuma" />
                         <GithubBadge username="CindyXiao1" name="Cindy Xiao" link="https://github.com/CindyXiao1" />
                         <GithubBadge username="scp10sfu" name="Stefan Pricope" link="https://github.com/scp10sfu" />
                         
